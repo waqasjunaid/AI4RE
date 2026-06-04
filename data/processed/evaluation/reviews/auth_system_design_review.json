@@ -1,0 +1,90 @@
+{
+  "source_id": "auth_system_design",
+  "total_trs": 46,
+  "dimensions": {
+    "coverage": {
+      "score": 1.0,
+      "covered": 23,
+      "uncovered": [],
+      "total": 23
+    },
+    "constraints": {
+      "covered": 6,
+      "total": 6,
+      "uncovered": []
+    },
+    "traceability": {
+      "score": 1.0,
+      "traced": 46,
+      "untraceable": [],
+      "total": 46
+    },
+    "quality": {
+      "duplicate_count": 4,
+      "duplicate_pairs": [
+        [
+          "AUTH_S-FUNC-001",
+          "AUTH_S-FUNC-002"
+        ],
+        [
+          "AUTH_S-FUNC-007",
+          "AUTH_S-FUNC-009"
+        ],
+        [
+          "AUTH_S-NFR_-015",
+          "AUTH_S-NFR_-021"
+        ],
+        [
+          "AUTH_S-NFR_-018",
+          "AUTH_S-NFR_-024"
+        ]
+      ],
+      "untestable_count": 0,
+      "untestable_ids": [],
+      "flagged_ids": [
+        "AUTH_S-NFR_-024",
+        "AUTH_S-FUNC-002",
+        "AUTH_S-NFR_-021",
+        "AUTH_S-FUNC-009"
+      ]
+    },
+    "schema": {
+      "score": 1.0,
+      "valid": 46,
+      "invalid_ids": [],
+      "total": 46
+    },
+    "ears": {
+      "score": 0.9782608695652174,
+      "compliant": 45,
+      "non_compliant": 1,
+      "non_compliant_ids": [
+        "AUTH_S-NFR_-016"
+      ],
+      "top_issues": [
+        "vague expected output",
+        "no measurable threshold or specific interface"
+      ],
+      "issue_detail": {
+        "vague expected output": 1,
+        "no measurable threshold or specific interface": 1
+      },
+      "total": 46
+    }
+  },
+  "flagged_tr_ids": [
+    "AUTH_S-FUNC-002",
+    "AUTH_S-FUNC-009",
+    "AUTH_S-NFR_-016",
+    "AUTH_S-NFR_-021",
+    "AUTH_S-NFR_-024"
+  ],
+  "correction_notes": [],
+  "metrics": {
+    "q_h": 0.9782608695652174,
+    "q_a": 1.0,
+    "traceability": 1.0,
+    "coverage": 1.0
+  },
+  "passed": true
+}

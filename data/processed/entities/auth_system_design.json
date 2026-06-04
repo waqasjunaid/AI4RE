@@ -1,0 +1,650 @@
+[
+  {
+    "source_id": "auth_system_design",
+    "artifact_type": "design",
+    "entity_type": "actor_role",
+    "content": "User",
+    "page_ref": "puml:@startuml AuthSystemDesign",
+    "confidence_score": 0.9
+  },
+  {
+    "source_id": "auth_system_design",
+    "artifact_type": "design",
+    "entity_type": "interface_name",
+    "content": "Authentication API",
+    "page_ref": "puml:@startuml AuthSystemDesign",
+    "confidence_score": 0.8
+  },
+  {
+    "source_id": "auth_system_design",
+    "artifact_type": "design",
+    "entity_type": "interface_name",
+    "content": "Authentication Service",
+    "page_ref": "puml:title Authentication Service — System Design Document",
+    "confidence_score": 0.9
+  },
+  {
+    "source_id": "auth_system_design",
+    "artifact_type": "design",
+    "entity_type": "actor_role",
+    "content": "Web Browser Client",
+    "page_ref": "puml:package \"Frontend Layer\" {",
+    "confidence_score": 0.9
+  },
+  {
+    "source_id": "auth_system_design",
+    "artifact_type": "design",
+    "entity_type": "actor_role",
+    "content": "Mobile App Client",
+    "page_ref": "puml:package \"Frontend Layer\" {",
+    "confidence_score": 0.9
+  },
+  {
+    "source_id": "auth_system_design",
+    "artifact_type": "design",
+    "entity_type": "interface_name",
+    "content": "HTTPS :443",
+    "page_ref": "puml:package \"API Gateway\" {",
+    "confidence_score": 0.9
+  },
+  {
+    "source_id": "auth_system_design",
+    "artifact_type": "design",
+    "entity_type": "actor_role",
+    "content": "Rate Limiter",
+    "page_ref": "puml:package \"API Gateway\" {",
+    "confidence_score": 0.8
+  },
+  {
+    "source_id": "auth_system_design",
+    "artifact_type": "design",
+    "entity_type": "actor_role",
+    "content": "Request Router",
+    "page_ref": "puml:package \"API Gateway\" {",
+    "confidence_score": 0.8
+  },
+  {
+    "source_id": "auth_system_design",
+    "artifact_type": "design",
+    "entity_type": "interface_name",
+    "content": "REST API",
+    "page_ref": "puml:package \"Authentication Service\" {",
+    "confidence_score": 0.9
+  },
+  {
+    "source_id": "auth_system_design",
+    "artifact_type": "design",
+    "entity_type": "actor_role",
+    "content": "AuthController",
+    "page_ref": "puml:package \"Authentication Service\" {",
+    "confidence_score": 0.8
+  },
+  {
+    "source_id": "auth_system_design",
+    "artifact_type": "design",
+    "entity_type": "actor_role",
+    "content": "TokenService",
+    "page_ref": "puml:package \"Authentication Service\" {",
+    "confidence_score": 0.8
+  },
+  {
+    "source_id": "auth_system_design",
+    "artifact_type": "design",
+    "entity_type": "actor_role",
+    "content": "PasswordHasher",
+    "page_ref": "puml:package \"Authentication Service\" {",
+    "confidence_score": 0.8
+  },
+  {
+    "source_id": "auth_system_design",
+    "artifact_type": "design",
+    "entity_type": "actor_role",
+    "content": "SessionManager",
+    "page_ref": "puml:package \"Authentication Service\" {",
+    "confidence_score": 0.8
+  },
+  {
+    "source_id": "auth_system_design",
+    "artifact_type": "design",
+    "entity_type": "interface_name",
+    "content": "UserDB",
+    "page_ref": "puml:package \"Data Layer\" {",
+    "confidence_score": 0.9
+  },
+  {
+    "source_id": "auth_system_design",
+    "artifact_type": "design",
+    "entity_type": "interface_name",
+    "content": "SessionStore",
+    "page_ref": "puml:package \"Data Layer\" {",
+    "confidence_score": 0.9
+  },
+  {
+    "source_id": "auth_system_design",
+    "artifact_type": "design",
+    "entity_type": "interface_name",
+    "content": "AuditDB",
+    "page_ref": "puml:package \"Data Layer\" {",
+    "confidence_score": 0.9
+  },
+  {
+    "source_id": "auth_system_design",
+    "artifact_type": "design",
+    "entity_type": "actor_role",
+    "content": "Browser",
+    "page_ref": "puml:package \"External Services\" {",
+    "confidence_score": 0.9
+  },
+  {
+    "source_id": "auth_system_design",
+    "artifact_type": "design",
+    "entity_type": "actor_role",
+    "content": "Mobile",
+    "page_ref": "puml:package \"External Services\" {",
+    "confidence_score": 0.9
+  },
+  {
+    "source_id": "auth_system_design",
+    "artifact_type": "design",
+    "entity_type": "interface_name",
+    "content": "HTTPS",
+    "page_ref": "puml:package \"External Services\" {",
+    "confidence_score": 0.8
+  },
+  {
+    "source_id": "auth_system_design",
+    "artifact_type": "design",
+    "entity_type": "interface_name",
+    "content": "RestAPI",
+    "page_ref": "puml:package \"External Services\" {",
+    "confidence_score": 0.8
+  },
+  {
+    "source_id": "auth_system_design",
+    "artifact_type": "design",
+    "entity_type": "actor_role",
+    "content": "AuthCtrl",
+    "page_ref": "puml:package \"External Services\" {",
+    "confidence_score": 0.9
+  },
+  {
+    "source_id": "auth_system_design",
+    "artifact_type": "design",
+    "entity_type": "interface_name",
+    "content": "EmailService (SMTP)",
+    "page_ref": "puml:package \"External Services\" {",
+    "confidence_score": 0.8
+  },
+  {
+    "source_id": "auth_system_design",
+    "artifact_type": "design",
+    "entity_type": "interface_name",
+    "content": "OTPProvider (TOTP)",
+    "page_ref": "puml:package \"External Services\" {",
+    "confidence_score": 0.8
+  },
+  {
+    "source_id": "auth_system_design",
+    "artifact_type": "design",
+    "entity_type": "actor_role",
+    "content": "User",
+    "page_ref": "puml:class User {",
+    "confidence_score": 0.9
+  },
+  {
+    "source_id": "auth_system_design",
+    "artifact_type": "design",
+    "entity_type": "function_point",
+    "content": "validateCredentials",
+    "page_ref": "puml:class User {",
+    "confidence_score": 0.8
+  },
+  {
+    "source_id": "auth_system_design",
+    "artifact_type": "design",
+    "entity_type": "function_point",
+    "content": "enableMFA",
+    "page_ref": "puml:class User {",
+    "confidence_score": 0.8
+  },
+  {
+    "source_id": "auth_system_design",
+    "artifact_type": "design",
+    "entity_type": "function_point",
+    "content": "lockAccount",
+    "page_ref": "puml:class User {",
+    "confidence_score": 0.8
+  },
+  {
+    "source_id": "auth_system_design",
+    "artifact_type": "design",
+    "entity_type": "actor_role",
+    "content": "Session",
+    "page_ref": "puml:class Session {",
+    "confidence_score": 0.8
+  },
+  {
+    "source_id": "auth_system_design",
+    "artifact_type": "design",
+    "entity_type": "function_point",
+    "content": "isExpired()",
+    "page_ref": "puml:class Session {",
+    "confidence_score": 0.9
+  },
+  {
+    "source_id": "auth_system_design",
+    "artifact_type": "design",
+    "entity_type": "function_point",
+    "content": "refresh()",
+    "page_ref": "puml:class Session {",
+    "confidence_score": 0.9
+  },
+  {
+    "source_id": "auth_system_design",
+    "artifact_type": "design",
+    "entity_type": "function_point",
+    "content": "invalidate()",
+    "page_ref": "puml:class Session {",
+    "confidence_score": 0.9
+  },
+  {
+    "source_id": "auth_system_design",
+    "artifact_type": "design",
+    "entity_type": "interface_name",
+    "content": "AuthRequest",
+    "page_ref": "puml:class AuthRequest {",
+    "confidence_score": 0.9
+  },
+  {
+    "source_id": "auth_system_design",
+    "artifact_type": "design",
+    "entity_type": "function_point",
+    "content": "validate AuthRequest",
+    "page_ref": "puml:class AuthRequest {",
+    "confidence_score": 0.8
+  },
+  {
+    "source_id": "auth_system_design",
+    "artifact_type": "design",
+    "entity_type": "interface_name",
+    "content": "AuthResponse",
+    "page_ref": "puml:class AuthResponse {",
+    "confidence_score": 0.9
+  },
+  {
+    "source_id": "auth_system_design",
+    "artifact_type": "design",
+    "entity_type": "glossary_term",
+    "content": "accessToken",
+    "page_ref": "puml:class AuthResponse {",
+    "confidence_score": 0.8
+  },
+  {
+    "source_id": "auth_system_design",
+    "artifact_type": "design",
+    "entity_type": "glossary_term",
+    "content": "refreshToken",
+    "page_ref": "puml:class AuthResponse {",
+    "confidence_score": 0.8
+  },
+  {
+    "source_id": "auth_system_design",
+    "artifact_type": "design",
+    "entity_type": "glossary_term",
+    "content": "expiresIn",
+    "page_ref": "puml:class AuthResponse {",
+    "confidence_score": 0.8
+  },
+  {
+    "source_id": "auth_system_design",
+    "artifact_type": "design",
+    "entity_type": "glossary_term",
+    "content": "tokenType",
+    "page_ref": "puml:class AuthResponse {",
+    "confidence_score": 0.8
+  },
+  {
+    "source_id": "auth_system_design",
+    "artifact_type": "design",
+    "entity_type": "interface_name",
+    "content": "AuditEvent",
+    "page_ref": "puml:class AuditEvent {",
+    "confidence_score": 0.9
+  },
+  {
+    "source_id": "auth_system_design",
+    "artifact_type": "design",
+    "entity_type": "actor_role",
+    "content": "userId",
+    "page_ref": "puml:class AuditEvent {",
+    "confidence_score": 0.8
+  },
+  {
+    "source_id": "auth_system_design",
+    "artifact_type": "design",
+    "entity_type": "function_point",
+    "content": "eventId",
+    "page_ref": "puml:class AuditEvent {",
+    "confidence_score": 0.7
+  },
+  {
+    "source_id": "auth_system_design",
+    "artifact_type": "design",
+    "entity_type": "glossary_term",
+    "content": "AccountStatus",
+    "page_ref": "puml:enum AccountStatus {",
+    "confidence_score": 0.9
+  },
+  {
+    "source_id": "auth_system_design",
+    "artifact_type": "design",
+    "entity_type": "glossary_term",
+    "content": "ACTIVE",
+    "page_ref": "puml:enum AccountStatus {",
+    "confidence_score": 0.8
+  },
+  {
+    "source_id": "auth_system_design",
+    "artifact_type": "design",
+    "entity_type": "glossary_term",
+    "content": "LOCKED",
+    "page_ref": "puml:enum AccountStatus {",
+    "confidence_score": 0.8
+  },
+  {
+    "source_id": "auth_system_design",
+    "artifact_type": "design",
+    "entity_type": "glossary_term",
+    "content": "SUSPENDED",
+    "page_ref": "puml:enum AccountStatus {",
+    "confidence_score": 0.8
+  },
+  {
+    "source_id": "auth_system_design",
+    "artifact_type": "design",
+    "entity_type": "glossary_term",
+    "content": "PENDING_VERIFICATION",
+    "page_ref": "puml:enum AccountStatus {",
+    "confidence_score": 0.8
+  },
+  {
+    "source_id": "auth_system_design",
+    "artifact_type": "design",
+    "entity_type": "glossary_term",
+    "content": "EventType",
+    "page_ref": "puml:enum EventType {",
+    "confidence_score": 0.9
+  },
+  {
+    "source_id": "auth_system_design",
+    "artifact_type": "design",
+    "entity_type": "function_point",
+    "content": "LOGIN_SUCCESS",
+    "page_ref": "puml:enum EventType {",
+    "confidence_score": 0.8
+  },
+  {
+    "source_id": "auth_system_design",
+    "artifact_type": "design",
+    "entity_type": "function_point",
+    "content": "LOGIN_FAILURE",
+    "page_ref": "puml:enum EventType {",
+    "confidence_score": 0.8
+  },
+  {
+    "source_id": "auth_system_design",
+    "artifact_type": "design",
+    "entity_type": "function_point",
+    "content": "PASSWORD_CHANGE",
+    "page_ref": "puml:enum EventType {",
+    "confidence_score": 0.8
+  },
+  {
+    "source_id": "auth_system_design",
+    "artifact_type": "design",
+    "entity_type": "function_point",
+    "content": "MFA_ENABLED",
+    "page_ref": "puml:enum EventType {",
+    "confidence_score": 0.8
+  },
+  {
+    "source_id": "auth_system_design",
+    "artifact_type": "design",
+    "entity_type": "function_point",
+    "content": "ACCOUNT_LOCKED",
+    "page_ref": "puml:enum EventType {",
+    "confidence_score": 0.8
+  },
+  {
+    "source_id": "auth_system_design",
+    "artifact_type": "design",
+    "entity_type": "function_point",
+    "content": "TOKEN_REFRESH",
+    "page_ref": "puml:enum EventType {",
+    "confidence_score": 0.8
+  },
+  {
+    "source_id": "auth_system_design",
+    "artifact_type": "design",
+    "entity_type": "function_point",
+    "content": "LOGOUT",
+    "page_ref": "puml:enum EventType {",
+    "confidence_score": 0.8
+  },
+  {
+    "source_id": "auth_system_design",
+    "artifact_type": "design",
+    "entity_type": "actor_role",
+    "content": "User",
+    "page_ref": "puml:enum EventType {",
+    "confidence_score": 0.9
+  },
+  {
+    "source_id": "auth_system_design",
+    "artifact_type": "design",
+    "entity_type": "interface_name",
+    "content": "Session",
+    "page_ref": "puml:enum EventType {",
+    "confidence_score": 0.8
+  },
+  {
+    "source_id": "auth_system_design",
+    "artifact_type": "design",
+    "entity_type": "interface_name",
+    "content": "AuditEvent",
+    "page_ref": "puml:enum EventType {",
+    "confidence_score": 0.8
+  },
+  {
+    "source_id": "auth_system_design",
+    "artifact_type": "design",
+    "entity_type": "actor_role",
+    "content": "AuthRequest",
+    "page_ref": "puml:enum EventType {",
+    "confidence_score": 0.7
+  },
+  {
+    "source_id": "auth_system_design",
+    "artifact_type": "design",
+    "entity_type": "interface_name",
+    "content": "AuthResponse",
+    "page_ref": "puml:enum EventType {",
+    "confidence_score": 0.8
+  },
+  {
+    "source_id": "auth_system_design",
+    "artifact_type": "design",
+    "entity_type": "glossary_term",
+    "content": "LoginFlow",
+    "page_ref": "puml:sequence LoginFlow",
+    "confidence_score": 0.8
+  },
+  {
+    "source_id": "auth_system_design",
+    "artifact_type": "design",
+    "entity_type": "actor_role",
+    "content": "Client",
+    "page_ref": "puml:actor Client",
+    "confidence_score": 1.0
+  },
+  {
+    "source_id": "auth_system_design",
+    "artifact_type": "design",
+    "entity_type": "interface_name",
+    "content": "AuthController",
+    "page_ref": "puml:actor Client",
+    "confidence_score": 1.0
+  },
+  {
+    "source_id": "auth_system_design",
+    "artifact_type": "design",
+    "entity_type": "function_point",
+    "content": "POST /auth/login",
+    "page_ref": "puml:actor Client",
+    "confidence_score": 1.0
+  },
+  {
+    "source_id": "auth_system_design",
+    "artifact_type": "design",
+    "entity_type": "actor_role",
+    "content": "PasswordHasher",
+    "page_ref": "puml:actor Client",
+    "confidence_score": 1.0
+  },
+  {
+    "source_id": "auth_system_design",
+    "artifact_type": "design",
+    "entity_type": "interface_name",
+    "content": "UserDB",
+    "page_ref": "puml:actor Client",
+    "confidence_score": 1.0
+  },
+  {
+    "source_id": "auth_system_design",
+    "artifact_type": "design",
+    "entity_type": "function_point",
+    "content": "findByEmail(email)",
+    "page_ref": "puml:actor Client",
+    "confidence_score": 1.0
+  },
+  {
+    "source_id": "auth_system_design",
+    "artifact_type": "design",
+    "entity_type": "actor_role",
+    "content": "TokenService",
+    "page_ref": "puml:actor Client",
+    "confidence_score": 1.0
+  },
+  {
+    "source_id": "auth_system_design",
+    "artifact_type": "design",
+    "entity_type": "interface_name",
+    "content": "SessionStore",
+    "page_ref": "puml:actor Client",
+    "confidence_score": 1.0
+  },
+  {
+    "source_id": "auth_system_design",
+    "artifact_type": "design",
+    "entity_type": "function_point",
+    "content": "validate(AuthRequest)",
+    "page_ref": "puml:actor Client",
+    "confidence_score": 1.0
+  },
+  {
+    "source_id": "auth_system_design",
+    "artifact_type": "design",
+    "entity_type": "glossary_term",
+    "content": "AuthRequest",
+    "page_ref": "puml:actor Client",
+    "confidence_score": 0.8
+  },
+  {
+    "source_id": "auth_system_design",
+    "artifact_type": "design",
+    "entity_type": "constraint",
+    "content": "Access token TTL: 15 minutes",
+    "page_ref": "puml:note as Constraints",
+    "confidence_score": 0.9
+  },
+  {
+    "source_id": "auth_system_design",
+    "artifact_type": "design",
+    "entity_type": "constraint",
+    "content": "Refresh token TTL: 7 days",
+    "page_ref": "puml:note as Constraints",
+    "confidence_score": 0.9
+  },
+  {
+    "source_id": "auth_system_design",
+    "artifact_type": "design",
+    "entity_type": "constraint",
+    "content": "Max failed login attempts: 5 before lock",
+    "page_ref": "puml:note as Constraints",
+    "confidence_score": 0.9
+  },
+  {
+    "source_id": "auth_system_design",
+    "artifact_type": "design",
+    "entity_type": "constraint",
+    "content": "Account lock duration: 30 minutes",
+    "page_ref": "puml:note as Constraints",
+    "confidence_score": 0.9
+  },
+  {
+    "source_id": "auth_system_design",
+    "artifact_type": "design",
+    "entity_type": "constraint",
+    "content": "Password minimum length: 12 characters",
+    "page_ref": "puml:note as Constraints",
+    "confidence_score": 0.9
+  },
+  {
+    "source_id": "auth_system_design",
+    "artifact_type": "design",
+    "entity_type": "constraint",
+    "content": "Password must contain: uppercase, lowercase, digit, symbol",
+    "page_ref": "puml:note as Constraints",
+    "confidence_score": 0.9
+  },
+  {
+    "source_id": "auth_system_design",
+    "artifact_type": "design",
+    "entity_type": "constraint",
+    "content": "Rate limit: 10 login attempts per minute per IP",
+    "page_ref": "puml:note as Constraints",
+    "confidence_score": 0.9
+  },
+  {
+    "source_id": "auth_system_design",
+    "artifact_type": "design",
+    "entity_type": "constraint",
+    "content": "Session store TTL: aligned with refresh token TTL",
+    "page_ref": "puml:note as Constraints",
+    "confidence_score": 0.8
+  },
+  {
+    "source_id": "auth_system_design",
+    "artifact_type": "design",
+    "entity_type": "constraint",
+    "content": "All tokens must be signed with RS256 (asymmetric)",
+    "page_ref": "puml:note as Constraints",
+    "confidence_score": 0.9
+  },
+  {
+    "source_id": "auth_system_design",
+    "artifact_type": "design",
+    "entity_type": "constraint",
+    "content": "Audit log retention: 90 days",
+    "page_ref": "puml:note as Constraints",
+    "confidence_score": 0.9
+  },
+  {
+    "source_id": "auth_system_design",
+    "artifact_type": "design",
+    "entity_type": "constraint",
+    "content": "TLS 1.2 minimum for all connections",
+    "page_ref": "puml:note as Constraints",
+    "confidence_score": 0.9
+  }
+]

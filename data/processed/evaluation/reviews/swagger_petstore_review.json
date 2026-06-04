@@ -1,0 +1,111 @@
+{
+  "source_id": "swagger_petstore",
+  "total_trs": 57,
+  "dimensions": {
+    "coverage": {
+      "score": 1.0,
+      "covered": 22,
+      "uncovered": [],
+      "total": 22
+    },
+    "constraints": {
+      "covered": 10,
+      "total": 10,
+      "uncovered": []
+    },
+    "traceability": {
+      "score": 1.0,
+      "traced": 57,
+      "untraceable": [],
+      "total": 57
+    },
+    "quality": {
+      "duplicate_count": 18,
+      "duplicate_pairs": [
+        [
+          "SWAGGE-FUNC-006",
+          "SWAGGE-FUNC-009"
+        ],
+        [
+          "SWAGGE-FUNC-006",
+          "SWAGGE-FUNC-011"
+        ],
+        [
+          "SWAGGE-FUNC-006",
+          "SWAGGE-FUNC-013"
+        ],
+        [
+          "SWAGGE-FUNC-006",
+          "SWAGGE-FUNC-015"
+        ],
+        [
+          "SWAGGE-FUNC-009",
+          "SWAGGE-FUNC-011"
+        ]
+      ],
+      "untestable_count": 0,
+      "untestable_ids": [],
+      "flagged_ids": [
+        "SWAGGE-FUNC-013",
+        "SWAGGE-NFR_-025",
+        "SWAGGE-NFR_-017",
+        "SWAGGE-INTE-048",
+        "SWAGGE-NFR_-027",
+        "SWAGGE-RUNT-033",
+        "SWAGGE-FUNC-009",
+        "SWAGGE-INTE-045",
+        "SWAGGE-FUNC-014",
+        "SWAGGE-FUNC-015"
+      ]
+    },
+    "schema": {
+      "score": 1.0,
+      "valid": 57,
+      "invalid_ids": [],
+      "total": 57
+    },
+    "ears": {
+      "score": 0.9298245614035088,
+      "compliant": 53,
+      "non_compliant": 4,
+      "non_compliant_ids": [
+        "SWAGGE-RUNT-029",
+        "SWAGGE-RUNT-031",
+        "SWAGGE-RUNT-032",
+        "SWAGGE-RUNT-033"
+      ],
+      "top_issues": [
+        "vague expected output",
+        "no measurable threshold or specific interface"
+      ],
+      "issue_detail": {
+        "vague expected output": 4,
+        "no measurable threshold or specific interface": 4
+      },
+      "total": 57
+    }
+  },
+  "flagged_tr_ids": [
+    "SWAGGE-FUNC-009",
+    "SWAGGE-FUNC-013",
+    "SWAGGE-FUNC-014",
+    "SWAGGE-FUNC-015",
+    "SWAGGE-INTE-045",
+    "SWAGGE-INTE-048",
+    "SWAGGE-NFR_-017",
+    "SWAGGE-NFR_-025",
+    "SWAGGE-NFR_-027",
+    "SWAGGE-RUNT-029",
+    "SWAGGE-RUNT-031",
+    "SWAGGE-RUNT-032",
+    "SWAGGE-RUNT-033"
+  ],
+  "correction_notes": [],
+  "metrics": {
+    "q_h": 0.9298245614035088,
+    "q_a": 1.0,
+    "traceability": 1.0,
+    "coverage": 1.0
+  },
+  "passed": true
+}

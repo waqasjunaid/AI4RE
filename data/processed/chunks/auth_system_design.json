@@ -1,0 +1,223 @@
+[
+  {
+    "chunk_id": "auth_system_design__s0001__c0001",
+    "source_id": "auth_system_design",
+    "artifact_type": "design",
+    "content": "@startuml AuthSystemDesign",
+    "page_ref": "puml:@startuml AuthSystemDesign",
+    "metadata": {
+      "section_id": 1,
+      "chunk_index": 1,
+      "token_count": 6,
+      "overlap": false
+    }
+  },
+  {
+    "chunk_id": "auth_system_design__s0002__c0001",
+    "source_id": "auth_system_design",
+    "artifact_type": "design",
+    "content": "title Authentication Service — System Design Document\n' Source: AI4RE-Test sample design document\n' Artifact type: design\n\n' ─── COMPONENT DIAGRAM ────────────────────────────────────────────────────",
+    "page_ref": "puml:title Authentication Service — System Design Document",
+    "metadata": {
+      "section_id": 2,
+      "chunk_index": 1,
+      "token_count": 43,
+      "overlap": false
+    }
+  },
+  {
+    "chunk_id": "auth_system_design__s0003__c0001",
+    "source_id": "auth_system_design",
+    "artifact_type": "design",
+    "content": "package \"Frontend Layer\" {\n  component [Web Browser Client] as Browser\n  component [Mobile App Client] as Mobile\n}",
+    "page_ref": "puml:package \"Frontend Layer\" {",
+    "metadata": {
+      "section_id": 3,
+      "chunk_index": 1,
+      "token_count": 28,
+      "overlap": false
+    }
+  },
+  {
+    "chunk_id": "auth_system_design__s0004__c0001",
+    "source_id": "auth_system_design",
+    "artifact_type": "design",
+    "content": "package \"API Gateway\" {\n  component [Rate Limiter] as RateLimiter\n  component [Request Router] as Router\n  interface \"HTTPS :443\" as HTTPS\n}",
+    "page_ref": "puml:package \"API Gateway\" {",
+    "metadata": {
+      "section_id": 4,
+      "chunk_index": 1,
+      "token_count": 38,
+      "overlap": false
+    }
+  },
+  {
+    "chunk_id": "auth_system_design__s0005__c0001",
+    "source_id": "auth_system_design",
+    "artifact_type": "design",
+    "content": "package \"Authentication Service\" {\n  component [AuthController] as AuthCtrl\n  component [TokenService] as TokenSvc\n  component [PasswordHasher] as Hasher\n  component [SessionManager] as SessionMgr\n  interface \"REST API\" as RestAPI\n}",
+    "page_ref": "puml:package \"Authentication Service\" {",
+    "metadata": {
+      "section_id": 5,
+      "chunk_index": 1,
+      "token_count": 58,
+      "overlap": false
+    }
+  },
+  {
+    "chunk_id": "auth_system_design__s0006__c0001",
+    "source_id": "auth_system_design",
+    "artifact_type": "design",
+    "content": "package \"Data Layer\" {\n  database \"UserDB\\n(PostgreSQL)\" as UserDB\n  database \"SessionStore\\n(Redis)\" as SessionStore\n  database \"AuditLog\\n(PostgreSQL)\" as AuditDB\n}",
+    "page_ref": "puml:package \"Data Layer\" {",
+    "metadata": {
+      "section_id": 6,
+      "chunk_index": 1,
+      "token_count": 46,
+      "overlap": false
+    }
+  },
+  {
+    "chunk_id": "auth_system_design__s0007__c0001",
+    "source_id": "auth_system_design",
+    "artifact_type": "design",
+    "content": "package \"External Services\" {\n  component [EmailService\\n(SMTP)] as Email\n  component [OTPProvider\\n(TOTP)] as OTP\n}\n\nBrowser --> HTTPS\nMobile --> HTTPS\nHTTPS --> RateLimiter\nRateLimiter --> Router\nRouter --> RestAPI\nRestAPI --> AuthCtrl\nAuthCtrl --> TokenSvc\nAuthCtrl --> Hasher\nAuthCtrl --> SessionMgr\nAuthCtrl --> Email\nAuthCtrl --> OTP\nTokenSvc --> SessionStore\nSessionMgr --> SessionStore\nHasher --> UserDB\nAuthCtrl --> AuditDB\n\n' ─── CLASS DIAGRAM ────────────────────────────────────────────────────────",
+    "page_ref": "puml:package \"External Services\" {",
+    "metadata": {
+      "section_id": 7,
+      "chunk_index": 1,
+      "token_count": 133,
+      "overlap": false
+    }
+  },
+  {
+    "chunk_id": "auth_system_design__s0008__c0001",
+    "source_id": "auth_system_design",
+    "artifact_type": "design",
+    "content": "class User {\n  - userId: UUID\n  - email: String\n  - passwordHash: String\n  - salt: String\n  - mfaEnabled: Boolean\n  - accountStatus: AccountStatus\n  - createdAt: Timestamp\n  - lastLoginAt: Timestamp\n  + validateCredentials(password: String): Boolean\n  + enableMFA(): void\n  + lockAccount(): void\n}",
+    "page_ref": "puml:class User {",
+    "metadata": {
+      "section_id": 8,
+      "chunk_index": 1,
+      "token_count": 84,
+      "overlap": false
+    }
+  },
+  {
+    "chunk_id": "auth_system_design__s0009__c0001",
+    "source_id": "auth_system_design",
+    "artifact_type": "design",
+    "content": "class Session {\n  - sessionId: UUID\n  - userId: UUID\n  - accessToken: String\n  - refreshToken: String\n  - expiresAt: Timestamp\n  - ipAddress: String\n  - userAgent: String\n  + isExpired(): Boolean\n  + refresh(): Session\n  + invalidate(): void\n}",
+    "page_ref": "puml:class Session {",
+    "metadata": {
+      "section_id": 9,
+      "chunk_index": 1,
+      "token_count": 66,
+      "overlap": false
+    }
+  },
+  {
+    "chunk_id": "auth_system_design__s0010__c0001",
+    "source_id": "auth_system_design",
+    "artifact_type": "design",
+    "content": "class AuthRequest {\n  - email: String\n  - password: String\n  - mfaCode: Optional<String>\n  - clientIp: String\n  + validate(): ValidationResult\n}",
+    "page_ref": "puml:class AuthRequest {",
+    "metadata": {
+      "section_id": 10,
+      "chunk_index": 1,
+      "token_count": 39,
+      "overlap": false
+    }
+  },
+  {
+    "chunk_id": "auth_system_design__s0011__c0001",
+    "source_id": "auth_system_design",
+    "artifact_type": "design",
+    "content": "class AuthResponse {\n  - accessToken: String\n  - refreshToken: String\n  - expiresIn: Integer\n  - tokenType: String\n}",
+    "page_ref": "puml:class AuthResponse {",
+    "metadata": {
+      "section_id": 11,
+      "chunk_index": 1,
+      "token_count": 30,
+      "overlap": false
+    }
+  },
+  {
+    "chunk_id": "auth_system_design__s0012__c0001",
+    "source_id": "auth_system_design",
+    "artifact_type": "design",
+    "content": "class AuditEvent {\n  - eventId: UUID\n  - userId: UUID\n  - eventType: EventType\n  - timestamp: Timestamp\n  - ipAddress: String\n  - success: Boolean\n  - failureReason: Optional<String>\n}",
+    "page_ref": "puml:class AuditEvent {",
+    "metadata": {
+      "section_id": 12,
+      "chunk_index": 1,
+      "token_count": 49,
+      "overlap": false
+    }
+  },
+  {
+    "chunk_id": "auth_system_design__s0013__c0001",
+    "source_id": "auth_system_design",
+    "artifact_type": "design",
+    "content": "enum AccountStatus {\n  ACTIVE\n  LOCKED\n  SUSPENDED\n  PENDING_VERIFICATION\n}",
+    "page_ref": "puml:enum AccountStatus {",
+    "metadata": {
+      "section_id": 13,
+      "chunk_index": 1,
+      "token_count": 23,
+      "overlap": false
+    }
+  },
+  {
+    "chunk_id": "auth_system_design__s0014__c0001",
+    "source_id": "auth_system_design",
+    "artifact_type": "design",
+    "content": "enum EventType {\n  LOGIN_SUCCESS\n  LOGIN_FAILURE\n  PASSWORD_CHANGE\n  MFA_ENABLED\n  ACCOUNT_LOCKED\n  TOKEN_REFRESH\n  LOGOUT\n}\n\nUser \"1\" --> \"0..*\" Session : has\nUser \"1\" --> \"0..*\" AuditEvent : generates\nAuthRequest --> AuthResponse : produces\nSession --> AuditEvent : logged by\n\n' ─── SEQUENCE DIAGRAM — Login Flow ─────────────────────────────────────────",
+    "page_ref": "puml:enum EventType {",
+    "metadata": {
+      "section_id": 14,
+      "chunk_index": 1,
+      "token_count": 95,
+      "overlap": false
+    }
+  },
+  {
+    "chunk_id": "auth_system_design__s0015__c0001",
+    "source_id": "auth_system_design",
+    "artifact_type": "design",
+    "content": "sequence LoginFlow",
+    "page_ref": "puml:sequence LoginFlow",
+    "metadata": {
+      "section_id": 15,
+      "chunk_index": 1,
+      "token_count": 3,
+      "overlap": false
+    }
+  },
+  {
+    "chunk_id": "auth_system_design__s0016__c0001",
+    "source_id": "auth_system_design",
+    "artifact_type": "design",
+    "content": "actor Client\nparticipant AuthController\nparticipant PasswordHasher\nparticipant UserDB\nparticipant TokenService\nparticipant SessionStore\nparticipant AuditLog\n\nClient -> AuthController : POST /auth/login {email, password}\nAuthController -> AuthController : validate(AuthRequest)\nAuthController -> UserDB : findByEmail(email)\nUserDB --> AuthController : User | null\n\nalt User not found\n  AuthController -> AuditLog : log(LOGIN_FAILURE, \"user_not_found\")\n  AuthController --> Client : 401 Unauthorized\nelse User found\n  AuthController -> PasswordHasher : verify(password, user.passwordHash)\n  PasswordHasher --> AuthController : Boolean\n\n  alt Password invalid\n    AuthController -> AuditLog : log(LOGIN_FAILURE, \"invalid_password\")\n    AuthController -> UserDB : incrementFailedAttempts(userId)\n    AuthController --> Client : 401 Unauthorized\n  else Password valid\n    opt MFA enabled\n      AuthController -> Client : 200 {mfa_required: true}\n      Client -> AuthController : POST /auth/mfa {mfaCode}\n      AuthController -> AuthController : verifyTOTP(mfaCode)\n    end\n    AuthController -> TokenService : generateTokenPair(userId)\n    TokenService --> AuthController : {accessToken, refreshToken}\n    AuthController -> SessionStore : store(Session)\n    AuthController -> AuditLog : log(LOGIN_SUCCESS)\n    AuthController --> Client : 200 AuthResponse\n  end\nend\n\n' ─── CONSTRAINTS ──────────────────────────────────────────────────────────",
+    "page_ref": "puml:actor Client",
+    "metadata": {
+      "section_id": 16,
+      "chunk_index": 1,
+      "token_count": 313,
+      "overlap": false
+    }
+  },
+  {
+    "chunk_id": "auth_system_design__s0017__c0001",
+    "source_id": "auth_system_design",
+    "artifact_type": "design",
+    "content": "note as Constraints\n  NFR Constraints:\n  - Access token TTL: 15 minutes\n  - Refresh token TTL: 7 days\n  - Max failed login attempts: 5 before lock\n  - Account lock duration: 30 minutes\n  - Password minimum length: 12 characters\n  - Password must contain: uppercase, lowercase, digit, symbol\n  - Rate limit: 10 login attempts per minute per IP\n  - Session store TTL: aligned with refresh token TTL\n  - All tokens must be signed with RS256 (asymmetric)\n  - Audit log retention: 90 days\n  - TLS 1.2 minimum for all connections\nend note\n\n@enduml",
+    "page_ref": "puml:note as Constraints",
+    "metadata": {
+      "section_id": 17,
+      "chunk_index": 1,
+      "token_count": 142,
+      "overlap": false
+    }
+  }
+]

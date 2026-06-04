@@ -1,0 +1,386 @@
+{
+  "source_id": "bash_user_manual",
+  "system_objectives": [
+    "Metafy next character typed",
+    "Perform tilde expansion on current word",
+    "compiled translations installation",
+    "waitpid function",
+    "return exit status of last command executed",
+    "set value of NAME to selected word",
+    "Evaluate conditional expression EXPRESSION",
+    "defines a shell function named FNAME"
+  ],
+  "user_roles": [
+    "User",
+    "Translator",
+    "Shell",
+    "Bash",
+    "gettext tools"
+  ],
+  "use_cases": [
+    {
+      "use_case_id": "UC-001",
+      "actor": "User",
+      "goal": "Execute a command",
+      "preconditions": [
+        "User is logged in",
+        "Shell is running"
+      ],
+      "steps": [
+        "User types command and presses enter",
+        "Shell reads input and divides into words and operators",
+        "Shell executes command"
+      ],
+      "postconditions": [
+        "Command is executed successfully"
+      ],
+      "exceptions": [
+        "Invalid command syntax"
+      ]
+    },
+    {
+      "use_case_id": "UC-002",
+      "actor": "Translator",
+      "goal": "Translate a string",
+      "preconditions": [
+        "PO file exists",
+        "gettext tools are installed"
+      ],
+      "steps": [
+        "Translator marks strings in script that need translation",
+        "Translator translates strings in PO files into appropriate languages",
+        "msgfmt program compiles PO files into MO files"
+      ],
+      "postconditions": [
+        "MO file is generated"
+      ],
+      "exceptions": [
+        "Translation error"
+      ]
+    },
+    {
+      "use_case_id": "UC-003",
+      "actor": "Shell",
+      "goal": "Provide command history expansion facilities",
+      "preconditions": [
+        "User has executed previous commands",
+        "Command history is enabled"
+      ],
+      "steps": [
+        "User presses up arrow key to recall previous command",
+        "Shell displays previous command",
+        "User edits and executes recalled command"
+      ],
+      "postconditions": [
+        "Previous command is executed successfully"
+      ],
+      "exceptions": [
+        "No previous commands in history"
+      ]
+    },
+    {
+      "use_case_id": "UC-004",
+      "actor": "Bash",
+      "goal": "Parse tokens into commands",
+      "preconditions": [
+        "User input is provided",
+        "Shell is running"
+      ],
+      "steps": [
+        "Bash reads user input and divides into words and operators",
+        "Bash parses tokens into commands",
+        "Bash executes parsed command"
+      ],
+      "postconditions": [
+        "Command is executed successfully"
+      ],
+      "exceptions": [
+        "Invalid token syntax"
+      ]
+    },
+    {
+      "use_case_id": "UC-005",
+      "actor": "gettext tools",
+      "goal": "Produce MO file",
+      "preconditions": [
+        "PO file exists",
+        "msgfmt program is installed"
+      ],
+      "steps": [
+        "gettext tools compile PO files into MO files using msgfmt program",
+        "MO file is generated"
+      ],
+      "postconditions": [
+        "MO file is produced"
+      ],
+      "exceptions": [
+        "Compilation error"
+      ]
+    },
+    {
+      "use_case_id": "UC-006",
+      "actor": "User",
+      "goal": "Use command line editing",
+      "preconditions": [
+        "User input is provided",
+        "Shell is running"
+      ],
+      "steps": [
+        "User edits current command line",
+        "User presses enter to execute edited command",
+        "Shell executes edited command"
+      ],
+      "postconditions": [
+        "Edited command is executed successfully"
+      ],
+      "exceptions": [
+        "Invalid edit operation"
+      ]
+    },
+    {
+      "use_case_id": "UC-007",
+      "actor": "Translator",
+      "goal": "Copy template file to separate file for each target language",
+      "preconditions": [
+        "Template file exists",
+        "Target languages are defined"
+      ],
+      "steps": [
+        "Translator copies template file to separate file for each target language",
+        "Copied files are ready for translation"
+      ],
+      "postconditions": [
+        "Copied files exist"
+      ],
+      "exceptions": [
+        "Copy error"
+      ]
+    },
+    {
+      "use_case_id": "UC-008",
+      "actor": "Shell",
+      "goal": "Preserve literal value of next character",
+      "preconditions": [
+        "User input is provided",
+        "Shell is running"
+      ],
+      "steps": [
+        "User uses backslash escape sequence to preserve literal value",
+        "Shell preserves literal value of next character",
+        "Shell executes command with preserved literal value"
+      ],
+      "postconditions": [
+        "Literal value is preserved successfully"
+      ],
+      "exceptions": [
+        "Invalid escape sequence"
+      ]
+    },
+    {
+      "use_case_id": "UC-009",
+      "actor": "gettext tools",
+      "goal": "Install MO files",
+      "preconditions": [
+        "MO file exists",
+        "Installation directory is defined"
+      ],
+      "steps": [
+        "gettext tools install MO files in installation directory",
+        "MO file is installed successfully"
+      ],
+      "postconditions": [
+        "MO file is installed"
+      ],
+      "exceptions": [
+        "Installation error"
+      ]
+    },
+    {
+      "use_case_id": "UC-010",
+      "actor": "User",
+      "goal": "Set environment variables",
+      "preconditions": [
+        "Shell is running",
+        "Environment variable name and value are defined"
+      ],
+      "steps": [
+        "User sets environment variable using shell command",
+        "Shell sets environment variable",
+        "Environment variable is set successfully"
+      ],
+      "postconditions": [
+        "Environment variable is set"
+      ],
+      "exceptions": [
+        "Invalid variable syntax"
+      ]
+    }
+  ],
+  "functional_reqs": [
+    {
+      "req_id": "FR-001",
+      "description": "The system shall provide a Bash shell for executing commands.",
+      "source_ids": [
+        "bash_user_manual"
+      ],
+      "priority": "high"
+    },
+    {
+      "req_id": "FR-002",
+      "description": "The system shall execute commands entered by the user through the command line interface.",
+      "source_ids": [
+        "bash_user_manual"
+      ],
+      "priority": "high"
+    },
+    {
+      "req_id": "FR-003",
+      "description": "The system shall provide a user interface to access GNU utilities.",
+      "source_ids": [
+        "bash_user_manual"
+      ],
+      "priority": "medium"
+    },
+    {
+      "req_id": "FR-004",
+      "description": "The system shall execute commands read from a file or string input.",
+      "source_ids": [
+        "bash_user_manual"
+      ],
+      "priority": "high"
+    },
+    {
+      "req_id": "FR-005",
+      "description": "The system shall support job control for managing multiple processes.",
+      "source_ids": [
+        "bash_user_manual"
+      ],
+      "priority": "medium"
+    },
+    {
+      "req_id": "FR-006",
+      "description": "The system shall provide command line editing capabilities.",
+      "source_ids": [
+        "bash_user_manual"
+      ],
+      "priority": "low"
+    },
+    {
+      "req_id": "FR-007",
+      "description": "The system shall maintain a command history for user reference.",
+      "source_ids": [
+        "bash_user_manual"
+      ],
+      "priority": "low"
+    },
+    {
+      "req_id": "FR-008",
+      "description": "The system shall support aliasing for shortcutting commands.",
+      "source_ids": [
+        "bash_user_manual"
+      ],
+      "priority": "medium"
+    },
+    {
+      "req_id": "FR-009",
+      "description": "The system shall parse tokens into executable commands.",
+      "source_ids": [
+        "bash_user_manual"
+      ],
+      "priority": "high"
+    },
+    {
+      "req_id": "FR-010",
+      "description": "The system shall provide command history expansion facilities for user convenience.",
+      "source_ids": [
+        "bash_user_manual"
+      ],
+      "priority": "low"
+    }
+  ],
+  "nfr_constraints": [],
+  "runtime_constraints": [],
+  "glossary": {
+    "GNU operating system": "GNU operating system",
+    "macro processor": "macro processor",
+    "redirection": "redirection",
+    "POSIX": "POSIX",
+    "blank": "blank",
+    "whitespace": "whitespace",
+    "builtin": "builtin",
+    "control operator": "control operator",
+    "exit status": "exit status",
+    "field": "field",
+    "filename": "filename",
+    "metacharacter": "metacharacter",
+    "name": "name",
+    "operator": "operator",
+    "process group": "process group",
+    "process group ID": "process group ID",
+    "reserved word": "reserved word",
+    "return status": "return status",
+    "signal": "signal",
+    "token": "token",
+    "word": "word",
+    "metacharacters": "metacharacters",
+    "Bash": "Bash",
+    "Bourne shell": "Bourne shell",
+    "shell metacharacters": "shell metacharacters",
+    "history expansion character": "history expansion character",
+    "escape character": "escape character",
+    "Bash escape character": "Bash escape character",
+    "line continuation": "line continuation",
+    "Shell Expansions": "Shell Expansions",
+    "Shell Parameter Expansion": "Shell Parameter Expansion",
+    "ANSI C standard": "ANSI C standard",
+    "gettext documentation": "gettext documentation",
+    "PO file": "PO file",
+    "MO file": "MO file",
+    "message domain": "message domain",
+    "message catalog files": "message catalog files",
+    "reserved words": "reserved words",
+    "simple command": "simple command",
+    "pipeline operator": "pipeline operator",
+    "background": "background",
+    "TEST-COMMANDS": "TEST-COMMANDS",
+    "CONSEQUENT-COMMANDS": "CONSEQUENT-COMMANDS",
+    "Pattern Matching": "Pattern Matching",
+    "REPLY variable": "REPLY variable",
+    "Bash Conditional Expressions": "Bash Conditional Expressions",
+    "nocasematch shell option": "nocasematch shell option",
+    "regular expression parser": "regular expression parser",
+    "bracket expressions": "bracket expressions"
+  },
+  "exception_handlers": [
+    "single quote may not occur between single quotes",
+    "non-zero exit status",
+    "job control not active",
+    "EXPR2 evaluates to zero",
+    "no PATTERN matches",
+    "EOF is read",
+    "unescaped double quote characters result in empty strings",
+    "regular expression is syntactically incorrect",
+    "syntax error occurs or a readonly function with the same name already exists",
+    "exceed maximum function nesting level",
+    "variable is unset",
+    "positional parameter not assigned with assignment statements",
+    "incorrectly formed brace expansion",
+    "parameter is null or unset",
+    "expansion error if LENGTH evaluates to a number less than zero",
+    "invalid expression",
+    "null arguments",
+    "no matching filenames are found",
+    "filenames beginning with a . are ignored",
+    "Redirection fails if file exists and is regular",
+    "redirection error",
+    "command substitution error",
+    "fatal signal",
+    "receipt of SIGHUP",
+    "older Unix versions limit interpreter name and argument length",
+    "N is not greater than or equal to 1",
+    "non-zero status",
+    "COMMAND cannot be executed",
+    "invalid option supplied",
+    "invalid options or missing option arguments"
+  ]
+}

@@ -1,0 +1,91 @@
+{
+  "source_id": "nasa_srs_v1",
+  "total_trs": 43,
+  "dimensions": {
+    "coverage": {
+      "score": 1.0,
+      "covered": 22,
+      "uncovered": [],
+      "total": 22
+    },
+    "constraints": {
+      "covered": 2,
+      "total": 2,
+      "uncovered": []
+    },
+    "traceability": {
+      "score": 1.0,
+      "traced": 43,
+      "untraceable": [],
+      "total": 43
+    },
+    "quality": {
+      "duplicate_count": 0,
+      "duplicate_pairs": [],
+      "untestable_count": 0,
+      "untestable_ids": [],
+      "flagged_ids": []
+    },
+    "schema": {
+      "score": 0.8604651162790697,
+      "valid": 37,
+      "invalid_ids": [
+        "NASA_S-CONS-036",
+        "NASA_S-CONS-037",
+        "NASA_S-CONS-038",
+        "NASA_S-CONS-041",
+        "NASA_S-CONS-042",
+        "NASA_S-CONS-043"
+      ],
+      "total": 43
+    },
+    "ears": {
+      "score": 0.7906976744186046,
+      "compliant": 34,
+      "non_compliant": 9,
+      "non_compliant_ids": [
+        "NASA_S-FUNC-003",
+        "NASA_S-FUNC-006",
+        "NASA_S-FUNC-009",
+        "NASA_S-INTE-029",
+        "NASA_S-INTE-032",
+        "NASA_S-INTE-033",
+        "NASA_S-CONS-037",
+        "NASA_S-CONS-042",
+        "NASA_S-CONS-043"
+      ],
+      "top_issues": [
+        "no measurable threshold or specific interface",
+        "vague expected output",
+        "no stimuli"
+      ],
+      "issue_detail": {
+        "vague expected output": 6,
+        "no measurable threshold or specific interface": 9,
+        "no stimuli": 3
+      },
+      "total": 43
+    }
+  },
+  "flagged_tr_ids": [
+    "NASA_S-CONS-036",
+    "NASA_S-CONS-037",
+    "NASA_S-CONS-038",
+    "NASA_S-CONS-041",
+    "NASA_S-CONS-042",
+    "NASA_S-CONS-043",
+    "NASA_S-FUNC-003",
+    "NASA_S-FUNC-006",
+    "NASA_S-FUNC-009",
+    "NASA_S-INTE-029",
+    "NASA_S-INTE-032"
+  ],
+  "correction_notes": [],
+  "metrics": {
+    "q_h": 0.7906976744186046,
+    "q_a": 0.8604651162790697,
+    "traceability": 1.0,
+    "coverage": 1.0
+  },
+  "passed": true
+}

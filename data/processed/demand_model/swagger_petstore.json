@@ -1,0 +1,419 @@
+{
+  "source_id": "swagger_petstore",
+  "system_objectives": [
+    "Finds Pets by tags",
+    "Find pet by ID",
+    "Updates a pet in the store with form data",
+    "Deletes a pet",
+    "Find purchase order by ID",
+    "Delete purchase order by ID",
+    "Get user by user name",
+    "Updated user"
+  ],
+  "user_roles": [
+    "Petstore API",
+    "User"
+  ],
+  "use_cases": [
+    {
+      "use_case_id": "UC-001",
+      "actor": "Petstore API",
+      "goal": "Add a new pet to the store",
+      "preconditions": [
+        "User is logged in",
+        "Pet information is available"
+      ],
+      "steps": [
+        "Upload an image",
+        "Enter pet details",
+        "Submit request"
+      ],
+      "postconditions": [
+        "New pet is added to the store",
+        "Pet ID is generated"
+      ],
+      "exceptions": [
+        "Invalid pet information",
+        "Image upload failed"
+      ]
+    },
+    {
+      "use_case_id": "UC-002",
+      "actor": "User",
+      "goal": "Find a pet by ID",
+      "preconditions": [
+        "User is logged in",
+        "Pet ID is known"
+      ],
+      "steps": [
+        "Enter pet ID",
+        "Submit request",
+        "View pet details"
+      ],
+      "postconditions": [
+        "Pet details are displayed",
+        "Pet status is shown"
+      ],
+      "exceptions": [
+        "Invalid pet ID",
+        "Pet not found"
+      ]
+    },
+    {
+      "use_case_id": "UC-003",
+      "actor": "User",
+      "goal": "Update an existing pet",
+      "preconditions": [
+        "User is logged in",
+        "Pet ID is known",
+        "Updated pet information is available"
+      ],
+      "steps": [
+        "Enter updated pet details",
+        "Submit request",
+        "Confirm update"
+      ],
+      "postconditions": [
+        "Pet is updated successfully",
+        "New pet status is shown"
+      ],
+      "exceptions": [
+        "Invalid updated pet information",
+        "Update failed"
+      ]
+    },
+    {
+      "use_case_id": "UC-004",
+      "actor": "User",
+      "goal": "Place an order for a pet",
+      "preconditions": [
+        "User is logged in",
+        "Pet ID is known"
+      ],
+      "steps": [
+        "Select pet to order",
+        "Enter order details",
+        "Submit request"
+      ],
+      "postconditions": [
+        "Order is placed successfully",
+        "Order ID is generated"
+      ],
+      "exceptions": [
+        "Invalid order information",
+        "Order failed"
+      ]
+    },
+    {
+      "use_case_id": "UC-005",
+      "actor": "User",
+      "goal": "Find purchase order by ID",
+      "preconditions": [
+        "User is logged in",
+        "Order ID is known"
+      ],
+      "steps": [
+        "Enter order ID",
+        "Submit request",
+        "View order details"
+      ],
+      "postconditions": [
+        "Order details are displayed",
+        "Order status is shown"
+      ],
+      "exceptions": [
+        "Invalid order ID",
+        "Order not found"
+      ]
+    },
+    {
+      "use_case_id": "UC-006",
+      "actor": "User",
+      "goal": "Delete a pet",
+      "preconditions": [
+        "User is logged in",
+        "Pet ID is known"
+      ],
+      "steps": [
+        "Enter pet ID",
+        "Confirm deletion",
+        "Submit request"
+      ],
+      "postconditions": [
+        "Pet is deleted successfully",
+        "Pet status is updated"
+      ],
+      "exceptions": [
+        "Invalid pet ID",
+        "Deletion failed"
+      ]
+    },
+    {
+      "use_case_id": "UC-007",
+      "actor": "User",
+      "goal": "Logs user into the system",
+      "preconditions": [
+        "User credentials are available"
+      ],
+      "steps": [
+        "Enter username and password",
+        "Submit request",
+        "Authenticate user"
+      ],
+      "postconditions": [
+        "User is logged in successfully",
+        "Session is created"
+      ],
+      "exceptions": [
+        "Invalid username or password",
+        "Login failed"
+      ]
+    },
+    {
+      "use_case_id": "UC-008",
+      "actor": "User",
+      "goal": "Logs out current logged in user session",
+      "preconditions": [
+        "User is logged in"
+      ],
+      "steps": [
+        "Submit logout request",
+        "Invalidate session"
+      ],
+      "postconditions": [
+        "User is logged out successfully",
+        "Session is closed"
+      ],
+      "exceptions": [
+        "Logout failed"
+      ]
+    },
+    {
+      "use_case_id": "UC-009",
+      "actor": "Petstore API",
+      "goal": "Returns pet inventories by status",
+      "preconditions": [
+        "User is logged in"
+      ],
+      "steps": [
+        "Submit request",
+        "Retrieve inventory data",
+        "Return inventory list"
+      ],
+      "postconditions": [
+        "Inventory list is displayed",
+        "Inventory status is shown"
+      ],
+      "exceptions": [
+        "Invalid status",
+        "Inventory not found"
+      ]
+    },
+    {
+      "use_case_id": "UC-010",
+      "actor": "User",
+      "goal": "Get user by user name",
+      "preconditions": [
+        "User is logged in",
+        "Username is known"
+      ],
+      "steps": [
+        "Enter username",
+        "Submit request",
+        "Retrieve user data"
+      ],
+      "postconditions": [
+        "User details are displayed",
+        "User status is shown"
+      ],
+      "exceptions": [
+        "Invalid username",
+        "User not found"
+      ]
+    }
+  ],
+  "functional_reqs": [
+    {
+      "req_id": "FR-001",
+      "description": "The system shall filter incoming requests using authorization filters.",
+      "source_ids": [
+        "swagger_petstore"
+      ],
+      "priority": "high"
+    },
+    {
+      "req_id": "FR-002",
+      "description": "The system shall upload an image to the server.",
+      "source_ids": [
+        "swagger_petstore"
+      ],
+      "priority": "medium"
+    },
+    {
+      "req_id": "FR-003",
+      "description": "The system shall add a new pet to the store with provided information.",
+      "source_ids": [
+        "swagger_petstore"
+      ],
+      "priority": "high"
+    },
+    {
+      "req_id": "FR-004",
+      "description": "The system shall update an existing pet in the store with new information.",
+      "source_ids": [
+        "swagger_petstore"
+      ],
+      "priority": "medium"
+    },
+    {
+      "req_id": "FR-005",
+      "description": "The system shall find and return pets by their status.",
+      "source_ids": [
+        "swagger_petstore"
+      ],
+      "priority": "high"
+    },
+    {
+      "req_id": "FR-006",
+      "description": "The system shall find and return pets by their tags.",
+      "source_ids": [
+        "swagger_petstore"
+      ],
+      "priority": "medium"
+    },
+    {
+      "req_id": "FR-007",
+      "description": "The system shall find and return a pet by its ID.",
+      "source_ids": [
+        "swagger_petstore"
+      ],
+      "priority": "high"
+    },
+    {
+      "req_id": "FR-008",
+      "description": "The system shall update a pet in the store using form data.",
+      "source_ids": [
+        "swagger_petstore"
+      ],
+      "priority": "medium"
+    },
+    {
+      "req_id": "FR-009",
+      "description": "The system shall delete a pet from the store by its ID.",
+      "source_ids": [
+        "swagger_petstore"
+      ],
+      "priority": "high"
+    },
+    {
+      "req_id": "FR-010",
+      "description": "The system shall return pet inventories by their status.",
+      "source_ids": [
+        "swagger_petstore"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "nfr_constraints": [
+    {
+      "constraint_id": "NFR-001",
+      "category": "usability",
+      "description": "Multiple status values can be provided with comma separated strings",
+      "threshold": null,
+      "source_ids": [
+        "swagger_petstore"
+      ]
+    },
+    {
+      "constraint_id": "NFR-002",
+      "category": "usability",
+      "description": "Multiple tags can be provided with comma separated strings",
+      "threshold": null,
+      "source_ids": [
+        "swagger_petstore"
+      ]
+    }
+  ],
+  "runtime_constraints": [
+    {
+      "constraint_id": "RT-001",
+      "description": "Invalid ID supplied",
+      "affects_reqs": [],
+      "source_ids": [
+        "swagger_petstore"
+      ]
+    },
+    {
+      "constraint_id": "RT-002",
+      "description": "Invalid input",
+      "affects_reqs": [],
+      "source_ids": [
+        "swagger_petstore"
+      ]
+    },
+    {
+      "constraint_id": "RT-003",
+      "description": "integer IDs with value >= 1 and <= 10",
+      "affects_reqs": [],
+      "source_ids": [
+        "swagger_petstore"
+      ]
+    },
+    {
+      "constraint_id": "RT-004",
+      "description": "integer IDs with positive integer value",
+      "affects_reqs": [],
+      "source_ids": [
+        "swagger_petstore"
+      ]
+    },
+    {
+      "constraint_id": "RT-005",
+      "description": "logged in user only",
+      "affects_reqs": [],
+      "source_ids": [
+        "swagger_petstore"
+      ]
+    },
+    {
+      "constraint_id": "RT-006",
+      "description": "id is integer",
+      "affects_reqs": [],
+      "source_ids": [
+        "swagger_petstore"
+      ]
+    },
+    {
+      "constraint_id": "RT-007",
+      "description": "petId is integer",
+      "affects_reqs": [],
+      "source_ids": [
+        "swagger_petstore"
+      ]
+    },
+    {
+      "constraint_id": "RT-008",
+      "description": "quantity is integer",
+      "affects_reqs": [],
+      "source_ids": [
+        "swagger_petstore"
+      ]
+    }
+  ],
+  "glossary": {
+    "Order Status": "Order Status"
+  },
+  "exception_handlers": [
+    "Invalid input",
+    "Invalid ID supplied",
+    "Pet not found",
+    "Validation exception",
+    "Invalid status value",
+    "Invalid tag value",
+    "Pet not found",
+    "Invalid ID supplied",
+    "Invalid username supplied",
+    "User not found",
+    "Invalid user supplied"
+  ]
+}

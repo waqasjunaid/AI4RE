@@ -1,0 +1,42 @@
+[
+  {
+    "source_id": "auth_system_design",
+    "artifact_type": "design",
+    "entity_type": "actor_role",
+    "content": "User",
+    "page_ref": "puml:@startuml AuthSystemDesign",
+    "confidence_score": 0.9
+  },
+  {
+    "source_id": "auth_system_design",
+    "artifact_type": "design",
+    "entity_type": "interface_name",
+    "content": "Auth API",
+    "page_ref": "puml:@startuml AuthSystemDesign",
+    "confidence_score": 0.8
+  },
+  {
+    "source_id": "auth_system_design",
+    "artifact_type": "design",
+    "entity_type": "actor_role",
+    "content": "Authentication Service",
+    "page_ref": "puml:title Authentication Service — System Design Document",
+    "confidence_score": 0.9
+  },
+  {
+    "source_id": "auth_system_design",
+    "artifact_type": "design",
+    "entity_type": "actor_role",
+    "content": "Web Browser Client",
+    "page_ref": "puml:package \"Frontend Layer\" {",
+    "confidence_score": 0.9
+  },
+  {
+    "source_id": "auth_system_design",
+    "artifact_type": "design",
+    "entity_type": "actor_role",
+    "content": "Mobile App Client",
+    "page_ref": "puml:package \"Frontend Layer\" {",
+    "confidence_score": 0.9
+  }
+]

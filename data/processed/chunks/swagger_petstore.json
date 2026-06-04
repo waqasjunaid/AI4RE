@@ -1,0 +1,275 @@
+[
+  {
+    "chunk_id": "swagger_petstore__s0001__c0001",
+    "source_id": "swagger_petstore",
+    "artifact_type": "runtime",
+    "content": "API: Swagger Petstore\nVersion: 1.0.7\nDescription: This is a sample server Petstore server.  You can find out more about Swagger at [http://swagger.io](http://swagger.io) or on [irc.freenode.net, #swagger](http://swagger.io/irc/).  For this sample, you can use the api key `special-key` to test the authorization filters.\nBase path: /v2\nHost: petstore.swagger.io",
+    "page_ref": "openapi:info",
+    "metadata": {
+      "section_id": 1,
+      "chunk_index": 1,
+      "token_count": 100,
+      "overlap": false
+    }
+  },
+  {
+    "chunk_id": "swagger_petstore__s0002__c0001",
+    "source_id": "swagger_petstore",
+    "artifact_type": "runtime",
+    "content": "Endpoint: /pet/{petId}/uploadImage\n  Method: POST\n  Summary: uploads an image\n  Description:\n  Tags: pet\n  Parameters:\n    - petId (path, integer, required=True)\n    - additionalMetadata (formData, string, required=False)\n    - file (formData, file, required=False)\n  Responses:\n    - 200: successful operation",
+    "page_ref": "openapi:path:/pet/{petId}/uploadImage",
+    "metadata": {
+      "section_id": 2,
+      "chunk_index": 1,
+      "token_count": 79,
+      "overlap": false
+    }
+  },
+  {
+    "chunk_id": "swagger_petstore__s0003__c0001",
+    "source_id": "swagger_petstore",
+    "artifact_type": "runtime",
+    "content": "Endpoint: /pet\n  Method: POST\n  Summary: Add a new pet to the store\n  Description:\n  Tags: pet\n  Parameters:\n    - body (body, , required=True)\n  Responses:\n    - 405: Invalid input\n  Method: PUT\n  Summary: Update an existing pet\n  Description:\n  Tags: pet\n  Parameters:\n    - body (body, , required=True)\n  Responses:\n    - 400: Invalid ID supplied\n    - 404: Pet not found\n    - 405: Validation exception",
+    "page_ref": "openapi:path:/pet",
+    "metadata": {
+      "section_id": 3,
+      "chunk_index": 1,
+      "token_count": 115,
+      "overlap": false
+    }
+  },
+  {
+    "chunk_id": "swagger_petstore__s0004__c0001",
+    "source_id": "swagger_petstore",
+    "artifact_type": "runtime",
+    "content": "Endpoint: /pet/findByStatus\n  Method: GET\n  Summary: Finds Pets by status\n  Description: Multiple status values can be provided with comma separated strings\n  Tags: pet\n  Parameters:\n    - status (query, array, required=True)\n  Responses:\n    - 200: successful operation\n    - 400: Invalid status value",
+    "page_ref": "openapi:path:/pet/findByStatus",
+    "metadata": {
+      "section_id": 4,
+      "chunk_index": 1,
+      "token_count": 73,
+      "overlap": false
+    }
+  },
+  {
+    "chunk_id": "swagger_petstore__s0005__c0001",
+    "source_id": "swagger_petstore",
+    "artifact_type": "runtime",
+    "content": "Endpoint: /pet/findByTags\n  Method: GET\n  Summary: Finds Pets by tags\n  Description: Multiple tags can be provided with comma separated strings. Use tag1, tag2, tag3 for testing.\n  Tags: pet\n  Parameters:\n    - tags (query, array, required=True)\n  Responses:\n    - 200: successful operation\n    - 400: Invalid tag value",
+    "page_ref": "openapi:path:/pet/findByTags",
+    "metadata": {
+      "section_id": 5,
+      "chunk_index": 1,
+      "token_count": 84,
+      "overlap": false
+    }
+  },
+  {
+    "chunk_id": "swagger_petstore__s0006__c0001",
+    "source_id": "swagger_petstore",
+    "artifact_type": "runtime",
+    "content": "Endpoint: /pet/{petId}\n  Method: GET\n  Summary: Find pet by ID\n  Description: Returns a single pet\n  Tags: pet\n  Parameters:\n    - petId (path, integer, required=True)\n  Responses:\n    - 200: successful operation\n    - 400: Invalid ID supplied\n    - 404: Pet not found\n  Method: POST\n  Summary: Updates a pet in the store with form data\n  Description:\n  Tags: pet\n  Parameters:\n    - petId (path, integer, required=True)\n    - name (formData, string, required=False)\n    - status (formData, string, required=False)\n  Responses:\n    - 405: Invalid input\n  Method: DELETE\n  Summary: Deletes a pet\n  Description:\n  Tags: pet\n  Parameters:\n    - api_key (header, string, required=False)\n    - petId (path, integer, required=True)\n  Responses:\n    - 400: Invalid ID supplied\n    - 404: Pet not found",
+    "page_ref": "openapi:path:/pet/{petId}",
+    "metadata": {
+      "section_id": 6,
+      "chunk_index": 1,
+      "token_count": 219,
+      "overlap": false
+    }
+  },
+  {
+    "chunk_id": "swagger_petstore__s0007__c0001",
+    "source_id": "swagger_petstore",
+    "artifact_type": "runtime",
+    "content": "Endpoint: /store/inventory\n  Method: GET\n  Summary: Returns pet inventories by status\n  Description: Returns a map of status codes to quantities\n  Tags: store\n  Responses:\n    - 200: successful operation",
+    "page_ref": "openapi:path:/store/inventory",
+    "metadata": {
+      "section_id": 7,
+      "chunk_index": 1,
+      "token_count": 49,
+      "overlap": false
+    }
+  },
+  {
+    "chunk_id": "swagger_petstore__s0008__c0001",
+    "source_id": "swagger_petstore",
+    "artifact_type": "runtime",
+    "content": "Endpoint: /store/order\n  Method: POST\n  Summary: Place an order for a pet\n  Description:\n  Tags: store\n  Parameters:\n    - body (body, , required=True)\n  Responses:\n    - 200: successful operation\n    - 400: Invalid Order",
+    "page_ref": "openapi:path:/store/order",
+    "metadata": {
+      "section_id": 8,
+      "chunk_index": 1,
+      "token_count": 60,
+      "overlap": false
+    }
+  },
+  {
+    "chunk_id": "swagger_petstore__s0009__c0001",
+    "source_id": "swagger_petstore",
+    "artifact_type": "runtime",
+    "content": "Endpoint: /store/order/{orderId}\n  Method: GET\n  Summary: Find purchase order by ID\n  Description: For valid response try integer IDs with value >= 1 and <= 10. Other values will generated exceptions\n  Tags: store\n  Parameters:\n    - orderId (path, integer, required=True)\n  Responses:\n    - 200: successful operation\n    - 400: Invalid ID supplied\n    - 404: Order not found\n  Method: DELETE\n  Summary: Delete purchase order by ID\n  Description: For valid response try integer IDs with positive integer value. Negative or non-integer values will generate API errors\n  Tags: store\n  Parameters:\n    - orderId (path, integer, required=True)\n  Responses:\n    - 400: Invalid ID supplied\n    - 404: Order not found",
+    "page_ref": "openapi:path:/store/order/{orderId}",
+    "metadata": {
+      "section_id": 9,
+      "chunk_index": 1,
+      "token_count": 173,
+      "overlap": false
+    }
+  },
+  {
+    "chunk_id": "swagger_petstore__s0010__c0001",
+    "source_id": "swagger_petstore",
+    "artifact_type": "runtime",
+    "content": "Endpoint: /user/createWithList\n  Method: POST\n  Summary: Creates list of users with given input array\n  Description:\n  Tags: user\n  Parameters:\n    - body (body, array, required=True)\n  Responses:\n    - default: successful operation",
+    "page_ref": "openapi:path:/user/createWithList",
+    "metadata": {
+      "section_id": 10,
+      "chunk_index": 1,
+      "token_count": 56,
+      "overlap": false
+    }
+  },
+  {
+    "chunk_id": "swagger_petstore__s0011__c0001",
+    "source_id": "swagger_petstore",
+    "artifact_type": "runtime",
+    "content": "Endpoint: /user/{username}\n  Method: GET\n  Summary: Get user by user name\n  Description:\n  Tags: user\n  Parameters:\n    - username (path, string, required=True)\n  Responses:\n    - 200: successful operation\n    - 400: Invalid username supplied\n    - 404: User not found\n  Method: PUT\n  Summary: Updated user\n  Description: This can only be done by the logged in user.\n  Tags: user\n  Parameters:\n    - username (path, string, required=True)\n    - body (body, , required=True)\n  Responses:\n    - 400: Invalid user supplied\n    - 404: User not found\n  Method: DELETE\n  Summary: Delete user\n  Description: This can only be done by the logged in user.\n  Tags: user\n  Parameters:\n    - username (path, string, required=True)\n  Responses:\n    - 400: Invalid username supplied\n    - 404: User not found",
+    "page_ref": "openapi:path:/user/{username}",
+    "metadata": {
+      "section_id": 11,
+      "chunk_index": 1,
+      "token_count": 211,
+      "overlap": false
+    }
+  },
+  {
+    "chunk_id": "swagger_petstore__s0012__c0001",
+    "source_id": "swagger_petstore",
+    "artifact_type": "runtime",
+    "content": "Endpoint: /user/login\n  Method: GET\n  Summary: Logs user into the system\n  Description:\n  Tags: user\n  Parameters:\n    - username (query, string, required=True)\n    - password (query, string, required=True)\n  Responses:\n    - 200: successful operation\n    - 400: Invalid username/password supplied",
+    "page_ref": "openapi:path:/user/login",
+    "metadata": {
+      "section_id": 12,
+      "chunk_index": 1,
+      "token_count": 73,
+      "overlap": false
+    }
+  },
+  {
+    "chunk_id": "swagger_petstore__s0013__c0001",
+    "source_id": "swagger_petstore",
+    "artifact_type": "runtime",
+    "content": "Endpoint: /user/logout\n  Method: GET\n  Summary: Logs out current logged in user session\n  Description:\n  Tags: user\n  Responses:\n    - default: successful operation",
+    "page_ref": "openapi:path:/user/logout",
+    "metadata": {
+      "section_id": 13,
+      "chunk_index": 1,
+      "token_count": 39,
+      "overlap": false
+    }
+  },
+  {
+    "chunk_id": "swagger_petstore__s0014__c0001",
+    "source_id": "swagger_petstore",
+    "artifact_type": "runtime",
+    "content": "Endpoint: /user/createWithArray\n  Method: POST\n  Summary: Creates list of users with given input array\n  Description:\n  Tags: user\n  Parameters:\n    - body (body, array, required=True)\n  Responses:\n    - default: successful operation",
+    "page_ref": "openapi:path:/user/createWithArray",
+    "metadata": {
+      "section_id": 14,
+      "chunk_index": 1,
+      "token_count": 56,
+      "overlap": false
+    }
+  },
+  {
+    "chunk_id": "swagger_petstore__s0015__c0001",
+    "source_id": "swagger_petstore",
+    "artifact_type": "runtime",
+    "content": "Endpoint: /user\n  Method: POST\n  Summary: Create user\n  Description: This can only be done by the logged in user.\n  Tags: user\n  Parameters:\n    - body (body, , required=True)\n  Responses:\n    - default: successful operation",
+    "page_ref": "openapi:path:/user",
+    "metadata": {
+      "section_id": 15,
+      "chunk_index": 1,
+      "token_count": 57,
+      "overlap": false
+    }
+  },
+  {
+    "chunk_id": "swagger_petstore__s0016__c0001",
+    "source_id": "swagger_petstore",
+    "artifact_type": "runtime",
+    "content": "Schema: ApiResponse\nDescription:\n  - code (integer):\n  - type (string):\n  - message (string):",
+    "page_ref": "openapi:schema:ApiResponse",
+    "metadata": {
+      "section_id": 16,
+      "chunk_index": 1,
+      "token_count": 24,
+      "overlap": false
+    }
+  },
+  {
+    "chunk_id": "swagger_petstore__s0017__c0001",
+    "source_id": "swagger_petstore",
+    "artifact_type": "runtime",
+    "content": "Schema: Category\nDescription:\n  - id (integer):\n  - name (string):",
+    "page_ref": "openapi:schema:Category",
+    "metadata": {
+      "section_id": 17,
+      "chunk_index": 1,
+      "token_count": 18,
+      "overlap": false
+    }
+  },
+  {
+    "chunk_id": "swagger_petstore__s0018__c0001",
+    "source_id": "swagger_petstore",
+    "artifact_type": "runtime",
+    "content": "Schema: Pet\nDescription:\n  - id (integer):\n  - category ():\n  - name (string):\n  - photoUrls (array):\n  - tags (array):\n  - status (string): pet status in the store",
+    "page_ref": "openapi:schema:Pet",
+    "metadata": {
+      "section_id": 18,
+      "chunk_index": 1,
+      "token_count": 47,
+      "overlap": false
+    }
+  },
+  {
+    "chunk_id": "swagger_petstore__s0019__c0001",
+    "source_id": "swagger_petstore",
+    "artifact_type": "runtime",
+    "content": "Schema: Tag\nDescription:\n  - id (integer):\n  - name (string):",
+    "page_ref": "openapi:schema:Tag",
+    "metadata": {
+      "section_id": 19,
+      "chunk_index": 1,
+      "token_count": 18,
+      "overlap": false
+    }
+  },
+  {
+    "chunk_id": "swagger_petstore__s0020__c0001",
+    "source_id": "swagger_petstore",
+    "artifact_type": "runtime",
+    "content": "Schema: Order\nDescription:\n  - id (integer):\n  - petId (integer):\n  - quantity (integer):\n  - shipDate (string):\n  - status (string): Order Status\n  - complete (boolean):",
+    "page_ref": "openapi:schema:Order",
+    "metadata": {
+      "section_id": 20,
+      "chunk_index": 1,
+      "token_count": 47,
+      "overlap": false
+    }
+  },
+  {
+    "chunk_id": "swagger_petstore__s0021__c0001",
+    "source_id": "swagger_petstore",
+    "artifact_type": "runtime",
+    "content": "Schema: User\nDescription:\n  - id (integer):\n  - username (string):\n  - firstName (string):\n  - lastName (string):\n  - email (string):\n  - password (string):\n  - phone (string):\n  - userStatus (integer): User Status",
+    "page_ref": "openapi:schema:User",
+    "metadata": {
+      "section_id": 21,
+      "chunk_index": 1,
+      "token_count": 57,
+      "overlap": false
+    }
+  }
+]

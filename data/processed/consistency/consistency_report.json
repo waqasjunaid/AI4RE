@@ -1,0 +1,93 @@
+[
+  {
+    "comparison_id": "intra_swagger_petstore",
+    "source_a": "swagger_petstore",
+    "source_b": "swagger_petstore",
+    "issues": [
+      {
+        "issue_id": "FR-1",
+        "issue_type": "conflict",
+        "source_a_id": "swagger_petstore",
+        "source_b_id": "swagger_petstore",
+        "description": "Functional requirement 'The system shall find and return pets by their status' may violate NFR constraint 'Multiple status values can be provided with comma separated strings' if it does not support multiple status values.",
+        "severity": "major",
+        "affected_req_ids": [],
+        "suggested_fix": "Update functional requirement to explicitly state support for multiple status values."
+      },
+      {
+        "issue_id": "UC-1",
+        "issue_type": "omission",
+        "source_a_id": "swagger_petstore",
+        "source_b_id": "swagger_petstore",
+        "description": "Use case goal 'Place an order for a pet' has no matching functional requirement.",
+        "severity": "blocker",
+        "affected_req_ids": [],
+        "suggested_fix": "Add functional requirement to support placing orders for pets."
+      },
+      {
+        "issue_id": "EX-1",
+        "issue_type": "omission",
+        "source_a_id": "swagger_petstore",
+        "source_b_id": "swagger_petstore",
+        "description": "Exception condition 'Invalid username supplied' is not covered by any functional requirement.",
+        "severity": "major",
+        "affected_req_ids": [],
+        "suggested_fix": "Add functional requirement to handle invalid usernames."
+      },
+      {
+        "issue_id": "FR-2",
+        "issue_type": "ambiguity",
+        "source_a_id": "swagger_petstore",
+        "source_b_id": "swagger_petstore",
+        "description": "Functional requirement 'The system shall update a pet in the store using form data' is ambiguous and does not specify what form data is required.",
+        "severity": "minor",
+        "affected_req_ids": [],
+        "suggested_fix": "Update functional requirement to explicitly state what form data is required."
+      },
+      {
+        "issue_id": "FR-3",
+        "issue_type": "to_confirm",
+        "source_a_id": "swagger_petstore",
+        "source_b_id": "swagger_petstore",
+        "description": "Functional requirement 'The system shall return pet inventories by their status' is missing measurable acceptance criteria.",
+        "severity": "minor",
+        "affected_req_ids": [],
+        "suggested_fix": "Add measurable acceptance criteria to functional requirement."
+      },
+      {
+        "issue_id": "UC-2",
+        "issue_type": "omission",
+        "source_a_id": "swagger_petstore",
+        "source_b_id": "swagger_petstore",
+        "description": "Use case goal 'Find purchase order by ID' has no matching functional requirement.",
+        "severity": "blocker",
+        "affected_req_ids": [],
+        "suggested_fix": "Add functional requirement to support finding purchase orders by ID."
+      },
+      {
+        "issue_id": "UC-3",
+        "issue_type": "omission",
+        "source_a_id": "swagger_petstore",
+        "source_b_id": "swagger_petstore",
+        "description": "Use case goal 'Logs user into the system' has no matching functional requirement.",
+        "severity": "blocker",
+        "affected_req_ids": [],
+        "suggested_fix": "Add functional requirement to support logging users into the system."
+      },
+      {
+        "issue_id": "UC-4",
+        "issue_type": "omission",
+        "source_a_id": "swagger_petstore",
+        "source_b_id": "swagger_petstore",
+        "description": "Use case goal 'Logs out current logged in user session' has no matching functional requirement.",
+        "severity": "blocker",
+        "affected_req_ids": [],
+        "suggested_fix": "Add functional requirement to support logging out users."
+      }
+    ],
+    "total_conflicts": 1,
+    "total_omissions": 5,
+    "total_ambiguities": 1,
+    "total_to_confirm": 1
+  }
+]

@@ -1,0 +1,650 @@
+[
+  {
+    "source_id": "swagger_petstore",
+    "artifact_type": "runtime",
+    "entity_type": "interface_name",
+    "content": "Swagger Petstore API",
+    "page_ref": "openapi:info",
+    "confidence_score": 0.9
+  },
+  {
+    "source_id": "swagger_petstore",
+    "artifact_type": "runtime",
+    "entity_type": "function_point",
+    "content": "authorization filters",
+    "page_ref": "openapi:info",
+    "confidence_score": 0.8
+  },
+  {
+    "source_id": "swagger_petstore",
+    "artifact_type": "runtime",
+    "entity_type": "interface_name",
+    "content": "/pet/{petId}/uploadImage",
+    "page_ref": "openapi:path:/pet/{petId}/uploadImage",
+    "confidence_score": 0.9
+  },
+  {
+    "source_id": "swagger_petstore",
+    "artifact_type": "runtime",
+    "entity_type": "function_point",
+    "content": "uploads an image",
+    "page_ref": "openapi:path:/pet/{petId}/uploadImage",
+    "confidence_score": 0.8
+  },
+  {
+    "source_id": "swagger_petstore",
+    "artifact_type": "runtime",
+    "entity_type": "interface_name",
+    "content": "/pet endpoint",
+    "page_ref": "openapi:path:/pet",
+    "confidence_score": 0.9
+  },
+  {
+    "source_id": "swagger_petstore",
+    "artifact_type": "runtime",
+    "entity_type": "function_point",
+    "content": "Add a new pet to the store",
+    "page_ref": "openapi:path:/pet",
+    "confidence_score": 0.8
+  },
+  {
+    "source_id": "swagger_petstore",
+    "artifact_type": "runtime",
+    "entity_type": "exception_condition",
+    "content": "Invalid input",
+    "page_ref": "openapi:path:/pet",
+    "confidence_score": 0.7
+  },
+  {
+    "source_id": "swagger_petstore",
+    "artifact_type": "runtime",
+    "entity_type": "function_point",
+    "content": "Update an existing pet",
+    "page_ref": "openapi:path:/pet",
+    "confidence_score": 0.8
+  },
+  {
+    "source_id": "swagger_petstore",
+    "artifact_type": "runtime",
+    "entity_type": "exception_condition",
+    "content": "Invalid ID supplied",
+    "page_ref": "openapi:path:/pet",
+    "confidence_score": 0.7
+  },
+  {
+    "source_id": "swagger_petstore",
+    "artifact_type": "runtime",
+    "entity_type": "exception_condition",
+    "content": "Pet not found",
+    "page_ref": "openapi:path:/pet",
+    "confidence_score": 0.7
+  },
+  {
+    "source_id": "swagger_petstore",
+    "artifact_type": "runtime",
+    "entity_type": "exception_condition",
+    "content": "Validation exception",
+    "page_ref": "openapi:path:/pet",
+    "confidence_score": 0.7
+  },
+  {
+    "source_id": "swagger_petstore",
+    "artifact_type": "runtime",
+    "entity_type": "interface_name",
+    "content": "/pet/findByStatus",
+    "page_ref": "openapi:path:/pet/findByStatus",
+    "confidence_score": 0.9
+  },
+  {
+    "source_id": "swagger_petstore",
+    "artifact_type": "runtime",
+    "entity_type": "function_point",
+    "content": "Finds Pets by status",
+    "page_ref": "openapi:path:/pet/findByStatus",
+    "confidence_score": 0.8
+  },
+  {
+    "source_id": "swagger_petstore",
+    "artifact_type": "runtime",
+    "entity_type": "constraint",
+    "content": "Multiple status values can be provided with comma separated strings",
+    "page_ref": "openapi:path:/pet/findByStatus",
+    "confidence_score": 0.7
+  },
+  {
+    "source_id": "swagger_petstore",
+    "artifact_type": "runtime",
+    "entity_type": "exception_condition",
+    "content": "Invalid status value",
+    "page_ref": "openapi:path:/pet/findByStatus",
+    "confidence_score": 0.8
+  },
+  {
+    "source_id": "swagger_petstore",
+    "artifact_type": "runtime",
+    "entity_type": "interface_name",
+    "content": "/pet/findByTags",
+    "page_ref": "openapi:path:/pet/findByTags",
+    "confidence_score": 1.0
+  },
+  {
+    "source_id": "swagger_petstore",
+    "artifact_type": "runtime",
+    "entity_type": "function_point",
+    "content": "Finds Pets by tags",
+    "page_ref": "openapi:path:/pet/findByTags",
+    "confidence_score": 0.9
+  },
+  {
+    "source_id": "swagger_petstore",
+    "artifact_type": "runtime",
+    "entity_type": "constraint",
+    "content": "Multiple tags can be provided with comma separated strings",
+    "page_ref": "openapi:path:/pet/findByTags",
+    "confidence_score": 0.8
+  },
+  {
+    "source_id": "swagger_petstore",
+    "artifact_type": "runtime",
+    "entity_type": "exception_condition",
+    "content": "Invalid tag value",
+    "page_ref": "openapi:path:/pet/findByTags",
+    "confidence_score": 0.9
+  },
+  {
+    "source_id": "swagger_petstore",
+    "artifact_type": "runtime",
+    "entity_type": "interface_name",
+    "content": "/pet/{petId}",
+    "page_ref": "openapi:path:/pet/{petId}",
+    "confidence_score": 1.0
+  },
+  {
+    "source_id": "swagger_petstore",
+    "artifact_type": "runtime",
+    "entity_type": "function_point",
+    "content": "Find pet by ID",
+    "page_ref": "openapi:path:/pet/{petId}",
+    "confidence_score": 0.9
+  },
+  {
+    "source_id": "swagger_petstore",
+    "artifact_type": "runtime",
+    "entity_type": "constraint",
+    "content": "Invalid ID supplied",
+    "page_ref": "openapi:path:/pet/{petId}",
+    "confidence_score": 0.8
+  },
+  {
+    "source_id": "swagger_petstore",
+    "artifact_type": "runtime",
+    "entity_type": "exception_condition",
+    "content": "Pet not found",
+    "page_ref": "openapi:path:/pet/{petId}",
+    "confidence_score": 0.7
+  },
+  {
+    "source_id": "swagger_petstore",
+    "artifact_type": "runtime",
+    "entity_type": "function_point",
+    "content": "Updates a pet in the store with form data",
+    "page_ref": "openapi:path:/pet/{petId}",
+    "confidence_score": 0.9
+  },
+  {
+    "source_id": "swagger_petstore",
+    "artifact_type": "runtime",
+    "entity_type": "constraint",
+    "content": "Invalid input",
+    "page_ref": "openapi:path:/pet/{petId}",
+    "confidence_score": 0.8
+  },
+  {
+    "source_id": "swagger_petstore",
+    "artifact_type": "runtime",
+    "entity_type": "function_point",
+    "content": "Deletes a pet",
+    "page_ref": "openapi:path:/pet/{petId}",
+    "confidence_score": 0.9
+  },
+  {
+    "source_id": "swagger_petstore",
+    "artifact_type": "runtime",
+    "entity_type": "interface_name",
+    "content": "/store/inventory",
+    "page_ref": "openapi:path:/store/inventory",
+    "confidence_score": 0.9
+  },
+  {
+    "source_id": "swagger_petstore",
+    "artifact_type": "runtime",
+    "entity_type": "function_point",
+    "content": "Returns pet inventories by status",
+    "page_ref": "openapi:path:/store/inventory",
+    "confidence_score": 0.8
+  },
+  {
+    "source_id": "swagger_petstore",
+    "artifact_type": "runtime",
+    "entity_type": "interface_name",
+    "content": "/store/order",
+    "page_ref": "openapi:path:/store/order",
+    "confidence_score": 0.9
+  },
+  {
+    "source_id": "swagger_petstore",
+    "artifact_type": "runtime",
+    "entity_type": "function_point",
+    "content": "Place an order for a pet",
+    "page_ref": "openapi:path:/store/order",
+    "confidence_score": 0.8
+  },
+  {
+    "source_id": "swagger_petstore",
+    "artifact_type": "runtime",
+    "entity_type": "interface_name",
+    "content": "/store/order/{orderId}",
+    "page_ref": "openapi:path:/store/order/{orderId}",
+    "confidence_score": 1.0
+  },
+  {
+    "source_id": "swagger_petstore",
+    "artifact_type": "runtime",
+    "entity_type": "function_point",
+    "content": "Find purchase order by ID",
+    "page_ref": "openapi:path:/store/order/{orderId}",
+    "confidence_score": 0.9
+  },
+  {
+    "source_id": "swagger_petstore",
+    "artifact_type": "runtime",
+    "entity_type": "constraint",
+    "content": "integer IDs with value >= 1 and <= 10",
+    "page_ref": "openapi:path:/store/order/{orderId}",
+    "confidence_score": 0.8
+  },
+  {
+    "source_id": "swagger_petstore",
+    "artifact_type": "runtime",
+    "entity_type": "exception_condition",
+    "content": "Invalid ID supplied",
+    "page_ref": "openapi:path:/store/order/{orderId}",
+    "confidence_score": 0.9
+  },
+  {
+    "source_id": "swagger_petstore",
+    "artifact_type": "runtime",
+    "entity_type": "function_point",
+    "content": "Delete purchase order by ID",
+    "page_ref": "openapi:path:/store/order/{orderId}",
+    "confidence_score": 0.9
+  },
+  {
+    "source_id": "swagger_petstore",
+    "artifact_type": "runtime",
+    "entity_type": "constraint",
+    "content": "integer IDs with positive integer value",
+    "page_ref": "openapi:path:/store/order/{orderId}",
+    "confidence_score": 0.8
+  },
+  {
+    "source_id": "swagger_petstore",
+    "artifact_type": "runtime",
+    "entity_type": "interface_name",
+    "content": "/user/createWithList",
+    "page_ref": "openapi:path:/user/createWithList",
+    "confidence_score": 0.9
+  },
+  {
+    "source_id": "swagger_petstore",
+    "artifact_type": "runtime",
+    "entity_type": "function_point",
+    "content": "Creates list of users with given input array",
+    "page_ref": "openapi:path:/user/createWithList",
+    "confidence_score": 0.8
+  },
+  {
+    "source_id": "swagger_petstore",
+    "artifact_type": "runtime",
+    "entity_type": "interface_name",
+    "content": "/user/{username}",
+    "page_ref": "openapi:path:/user/{username}",
+    "confidence_score": 1.0
+  },
+  {
+    "source_id": "swagger_petstore",
+    "artifact_type": "runtime",
+    "entity_type": "function_point",
+    "content": "Get user by user name",
+    "page_ref": "openapi:path:/user/{username}",
+    "confidence_score": 0.9
+  },
+  {
+    "source_id": "swagger_petstore",
+    "artifact_type": "runtime",
+    "entity_type": "exception_condition",
+    "content": "Invalid username supplied",
+    "page_ref": "openapi:path:/user/{username}",
+    "confidence_score": 0.8
+  },
+  {
+    "source_id": "swagger_petstore",
+    "artifact_type": "runtime",
+    "entity_type": "exception_condition",
+    "content": "User not found",
+    "page_ref": "openapi:path:/user/{username}",
+    "confidence_score": 0.8
+  },
+  {
+    "source_id": "swagger_petstore",
+    "artifact_type": "runtime",
+    "entity_type": "function_point",
+    "content": "Updated user",
+    "page_ref": "openapi:path:/user/{username}",
+    "confidence_score": 0.9
+  },
+  {
+    "source_id": "swagger_petstore",
+    "artifact_type": "runtime",
+    "entity_type": "constraint",
+    "content": "logged in user only",
+    "page_ref": "openapi:path:/user/{username}",
+    "confidence_score": 0.7
+  },
+  {
+    "source_id": "swagger_petstore",
+    "artifact_type": "runtime",
+    "entity_type": "exception_condition",
+    "content": "Invalid user supplied",
+    "page_ref": "openapi:path:/user/{username}",
+    "confidence_score": 0.8
+  },
+  {
+    "source_id": "swagger_petstore",
+    "artifact_type": "runtime",
+    "entity_type": "function_point",
+    "content": "Delete user",
+    "page_ref": "openapi:path:/user/{username}",
+    "confidence_score": 0.9
+  },
+  {
+    "source_id": "swagger_petstore",
+    "artifact_type": "runtime",
+    "entity_type": "interface_name",
+    "content": "/user/login",
+    "page_ref": "openapi:path:/user/login",
+    "confidence_score": 1.0
+  },
+  {
+    "source_id": "swagger_petstore",
+    "artifact_type": "runtime",
+    "entity_type": "function_point",
+    "content": "Logs user into the system",
+    "page_ref": "openapi:path:/user/login",
+    "confidence_score": 0.9
+  },
+  {
+    "source_id": "swagger_petstore",
+    "artifact_type": "runtime",
+    "entity_type": "interface_name",
+    "content": "/user/logout",
+    "page_ref": "openapi:path:/user/logout",
+    "confidence_score": 0.9
+  },
+  {
+    "source_id": "swagger_petstore",
+    "artifact_type": "runtime",
+    "entity_type": "function_point",
+    "content": "Logs out current logged in user session",
+    "page_ref": "openapi:path:/user/logout",
+    "confidence_score": 0.8
+  },
+  {
+    "source_id": "swagger_petstore",
+    "artifact_type": "runtime",
+    "entity_type": "interface_name",
+    "content": "/user/createWithArray",
+    "page_ref": "openapi:path:/user/createWithArray",
+    "confidence_score": 0.9
+  },
+  {
+    "source_id": "swagger_petstore",
+    "artifact_type": "runtime",
+    "entity_type": "function_point",
+    "content": "Creates list of users with given input array",
+    "page_ref": "openapi:path:/user/createWithArray",
+    "confidence_score": 0.8
+  },
+  {
+    "source_id": "swagger_petstore",
+    "artifact_type": "runtime",
+    "entity_type": "interface_name",
+    "content": "/user POST endpoint",
+    "page_ref": "openapi:path:/user",
+    "confidence_score": 0.9
+  },
+  {
+    "source_id": "swagger_petstore",
+    "artifact_type": "runtime",
+    "entity_type": "function_point",
+    "content": "Create user capability",
+    "page_ref": "openapi:path:/user",
+    "confidence_score": 0.8
+  },
+  {
+    "source_id": "swagger_petstore",
+    "artifact_type": "runtime",
+    "entity_type": "interface_name",
+    "content": "ApiResponse",
+    "page_ref": "openapi:schema:ApiResponse",
+    "confidence_score": 0.9
+  },
+  {
+    "source_id": "swagger_petstore",
+    "artifact_type": "runtime",
+    "entity_type": "function_point",
+    "content": "code integer",
+    "page_ref": "openapi:schema:ApiResponse",
+    "confidence_score": 0.8
+  },
+  {
+    "source_id": "swagger_petstore",
+    "artifact_type": "runtime",
+    "entity_type": "function_point",
+    "content": "type string",
+    "page_ref": "openapi:schema:ApiResponse",
+    "confidence_score": 0.8
+  },
+  {
+    "source_id": "swagger_petstore",
+    "artifact_type": "runtime",
+    "entity_type": "function_point",
+    "content": "message string",
+    "page_ref": "openapi:schema:ApiResponse",
+    "confidence_score": 0.8
+  },
+  {
+    "source_id": "swagger_petstore",
+    "artifact_type": "runtime",
+    "entity_type": "interface_name",
+    "content": "Category Schema",
+    "page_ref": "openapi:schema:Category",
+    "confidence_score": 0.9
+  },
+  {
+    "source_id": "swagger_petstore",
+    "artifact_type": "runtime",
+    "entity_type": "function_point",
+    "content": "id integer",
+    "page_ref": "openapi:schema:Category",
+    "confidence_score": 0.8
+  },
+  {
+    "source_id": "swagger_petstore",
+    "artifact_type": "runtime",
+    "entity_type": "function_point",
+    "content": "name string",
+    "page_ref": "openapi:schema:Category",
+    "confidence_score": 0.8
+  },
+  {
+    "source_id": "swagger_petstore",
+    "artifact_type": "runtime",
+    "entity_type": "interface_name",
+    "content": "Pet",
+    "page_ref": "openapi:schema:Pet",
+    "confidence_score": 0.9
+  },
+  {
+    "source_id": "swagger_petstore",
+    "artifact_type": "runtime",
+    "entity_type": "function_point",
+    "content": "pet status in the store",
+    "page_ref": "openapi:schema:Pet",
+    "confidence_score": 0.8
+  },
+  {
+    "source_id": "swagger_petstore",
+    "artifact_type": "runtime",
+    "entity_type": "interface_name",
+    "content": "Tag",
+    "page_ref": "openapi:schema:Tag",
+    "confidence_score": 0.9
+  },
+  {
+    "source_id": "swagger_petstore",
+    "artifact_type": "runtime",
+    "entity_type": "function_point",
+    "content": "id integer",
+    "page_ref": "openapi:schema:Tag",
+    "confidence_score": 0.8
+  },
+  {
+    "source_id": "swagger_petstore",
+    "artifact_type": "runtime",
+    "entity_type": "function_point",
+    "content": "name string",
+    "page_ref": "openapi:schema:Tag",
+    "confidence_score": 0.8
+  },
+  {
+    "source_id": "swagger_petstore",
+    "artifact_type": "runtime",
+    "entity_type": "interface_name",
+    "content": "Order",
+    "page_ref": "openapi:schema:Order",
+    "confidence_score": 0.9
+  },
+  {
+    "source_id": "swagger_petstore",
+    "artifact_type": "runtime",
+    "entity_type": "function_point",
+    "content": "place order",
+    "page_ref": "openapi:schema:Order",
+    "confidence_score": 0.8
+  },
+  {
+    "source_id": "swagger_petstore",
+    "artifact_type": "runtime",
+    "entity_type": "constraint",
+    "content": "id is integer",
+    "page_ref": "openapi:schema:Order",
+    "confidence_score": 0.7
+  },
+  {
+    "source_id": "swagger_petstore",
+    "artifact_type": "runtime",
+    "entity_type": "constraint",
+    "content": "petId is integer",
+    "page_ref": "openapi:schema:Order",
+    "confidence_score": 0.7
+  },
+  {
+    "source_id": "swagger_petstore",
+    "artifact_type": "runtime",
+    "entity_type": "constraint",
+    "content": "quantity is integer",
+    "page_ref": "openapi:schema:Order",
+    "confidence_score": 0.7
+  },
+  {
+    "source_id": "swagger_petstore",
+    "artifact_type": "runtime",
+    "entity_type": "glossary_term",
+    "content": "Order Status",
+    "page_ref": "openapi:schema:Order",
+    "confidence_score": 0.6
+  },
+  {
+    "source_id": "swagger_petstore",
+    "artifact_type": "runtime",
+    "entity_type": "interface_name",
+    "content": "User",
+    "page_ref": "openapi:schema:User",
+    "confidence_score": 0.9
+  },
+  {
+    "source_id": "swagger_petstore",
+    "artifact_type": "runtime",
+    "entity_type": "function_point",
+    "content": "id integer",
+    "page_ref": "openapi:schema:User",
+    "confidence_score": 0.8
+  },
+  {
+    "source_id": "swagger_petstore",
+    "artifact_type": "runtime",
+    "entity_type": "function_point",
+    "content": "username string",
+    "page_ref": "openapi:schema:User",
+    "confidence_score": 0.8
+  },
+  {
+    "source_id": "swagger_petstore",
+    "artifact_type": "runtime",
+    "entity_type": "function_point",
+    "content": "firstName string",
+    "page_ref": "openapi:schema:User",
+    "confidence_score": 0.8
+  },
+  {
+    "source_id": "swagger_petstore",
+    "artifact_type": "runtime",
+    "entity_type": "function_point",
+    "content": "lastName string",
+    "page_ref": "openapi:schema:User",
+    "confidence_score": 0.8
+  },
+  {
+    "source_id": "swagger_petstore",
+    "artifact_type": "runtime",
+    "entity_type": "function_point",
+    "content": "email string",
+    "page_ref": "openapi:schema:User",
+    "confidence_score": 0.8
+  },
+  {
+    "source_id": "swagger_petstore",
+    "artifact_type": "runtime",
+    "entity_type": "function_point",
+    "content": "password string",
+    "page_ref": "openapi:schema:User",
+    "confidence_score": 0.8
+  },
+  {
+    "source_id": "swagger_petstore",
+    "artifact_type": "runtime",
+    "entity_type": "function_point",
+    "content": "phone string",
+    "page_ref": "openapi:schema:User",
+    "confidence_score": 0.8
+  },
+  {
+    "source_id": "swagger_petstore",
+    "artifact_type": "runtime",
+    "entity_type": "function_point",
+    "content": "userStatus integer",
+    "page_ref": "openapi:schema:User",
+    "confidence_score": 0.8
+  }
+]

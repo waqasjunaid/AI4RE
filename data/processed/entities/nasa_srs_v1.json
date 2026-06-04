@@ -1,0 +1,578 @@
+[
+  {
+    "source_id": "nasa_srs_v1",
+    "artifact_type": "srs",
+    "entity_type": "function_point",
+    "content": "Support protocol interoperability",
+    "page_ref": "page 2",
+    "confidence_score": 0.8
+  },
+  {
+    "source_id": "nasa_srs_v1",
+    "artifact_type": "srs",
+    "entity_type": "process_step",
+    "content": "Streamline development process and implementation",
+    "page_ref": "page 2",
+    "confidence_score": 0.7
+  },
+  {
+    "source_id": "nasa_srs_v1",
+    "artifact_type": "srs",
+    "entity_type": "function_point",
+    "content": "Easier to verify an implementation",
+    "page_ref": "page 2",
+    "confidence_score": 0.8
+  },
+  {
+    "source_id": "nasa_srs_v1",
+    "artifact_type": "srs",
+    "entity_type": "function_point",
+    "content": "Facilitate technology transfer",
+    "page_ref": "page 2",
+    "confidence_score": 0.7
+  },
+  {
+    "source_id": "nasa_srs_v1",
+    "artifact_type": "srs",
+    "entity_type": "constraint",
+    "content": "RFCs use consistent language",
+    "page_ref": "page 3",
+    "confidence_score": 0.8
+  },
+  {
+    "source_id": "nasa_srs_v1",
+    "artifact_type": "srs",
+    "entity_type": "function_point",
+    "content": "CCSDS reports cross-reference RFC sections correctly",
+    "page_ref": "page 3",
+    "confidence_score": 0.7
+  },
+  {
+    "source_id": "nasa_srs_v1",
+    "artifact_type": "srs",
+    "entity_type": "actor_role",
+    "content": "CCSDS documents",
+    "page_ref": "page 3",
+    "confidence_score": 0.9
+  },
+  {
+    "source_id": "nasa_srs_v1",
+    "artifact_type": "srs",
+    "entity_type": "function_point",
+    "content": "Provides a set of requirements for software acquisition",
+    "page_ref": "page 4",
+    "confidence_score": 0.8
+  },
+  {
+    "source_id": "nasa_srs_v1",
+    "artifact_type": "srs",
+    "entity_type": "actor_role",
+    "content": "NASA programs and projects",
+    "page_ref": "page 4",
+    "confidence_score": 0.9
+  },
+  {
+    "source_id": "nasa_srs_v1",
+    "artifact_type": "srs",
+    "entity_type": "function_point",
+    "content": "Supports NASA programs in accomplishing planned goals",
+    "page_ref": "page 4",
+    "confidence_score": 0.8
+  },
+  {
+    "source_id": "nasa_srs_v1",
+    "artifact_type": "srs",
+    "entity_type": "constraint",
+    "content": "Level of compliance and rigor is associated with software class",
+    "page_ref": "page 4",
+    "confidence_score": 0.7
+  },
+  {
+    "source_id": "nasa_srs_v1",
+    "artifact_type": "srs",
+    "entity_type": "function_point",
+    "content": "Bundle Protocol",
+    "page_ref": "page 5",
+    "confidence_score": 0.8
+  },
+  {
+    "source_id": "nasa_srs_v1",
+    "artifact_type": "srs",
+    "entity_type": "interface_name",
+    "content": "BPv6",
+    "page_ref": "page 5",
+    "confidence_score": 0.9
+  },
+  {
+    "source_id": "nasa_srs_v1",
+    "artifact_type": "srs",
+    "entity_type": "interface_name",
+    "content": "BPv7",
+    "page_ref": "page 5",
+    "confidence_score": 0.9
+  },
+  {
+    "source_id": "nasa_srs_v1",
+    "artifact_type": "srs",
+    "entity_type": "interface_name",
+    "content": "BPSec",
+    "page_ref": "page 5",
+    "confidence_score": 0.9
+  },
+  {
+    "source_id": "nasa_srs_v1",
+    "artifact_type": "srs",
+    "entity_type": "interface_name",
+    "content": "RTP",
+    "page_ref": "page 5",
+    "confidence_score": 0.9
+  },
+  {
+    "source_id": "nasa_srs_v1",
+    "artifact_type": "srs",
+    "entity_type": "function_point",
+    "content": "Convergence Layer",
+    "page_ref": "page 5",
+    "confidence_score": 0.8
+  },
+  {
+    "source_id": "nasa_srs_v1",
+    "artifact_type": "srs",
+    "entity_type": "interface_name",
+    "content": "TCPCL",
+    "page_ref": "page 5",
+    "confidence_score": 0.9
+  },
+  {
+    "source_id": "nasa_srs_v1",
+    "artifact_type": "srs",
+    "entity_type": "interface_name",
+    "content": "STCP",
+    "page_ref": "page 5",
+    "confidence_score": 0.9
+  },
+  {
+    "source_id": "nasa_srs_v1",
+    "artifact_type": "srs",
+    "entity_type": "interface_name",
+    "content": "UDP",
+    "page_ref": "page 5",
+    "confidence_score": 0.9
+  },
+  {
+    "source_id": "nasa_srs_v1",
+    "artifact_type": "srs",
+    "entity_type": "interface_name",
+    "content": "LTP",
+    "page_ref": "page 5",
+    "confidence_score": 0.9
+  },
+  {
+    "source_id": "nasa_srs_v1",
+    "artifact_type": "srs",
+    "entity_type": "function_point",
+    "content": "Application Requirements",
+    "page_ref": "page 5",
+    "confidence_score": 0.8
+  },
+  {
+    "source_id": "nasa_srs_v1",
+    "artifact_type": "srs",
+    "entity_type": "actor_role",
+    "content": "BPGen",
+    "page_ref": "page 5",
+    "confidence_score": 0.7
+  },
+  {
+    "source_id": "nasa_srs_v1",
+    "artifact_type": "srs",
+    "entity_type": "actor_role",
+    "content": "BPSink",
+    "page_ref": "page 5",
+    "confidence_score": 0.7
+  },
+  {
+    "source_id": "nasa_srs_v1",
+    "artifact_type": "srs",
+    "entity_type": "actor_role",
+    "content": "BPing",
+    "page_ref": "page 5",
+    "confidence_score": 0.7
+  },
+  {
+    "source_id": "nasa_srs_v1",
+    "artifact_type": "srs",
+    "entity_type": "actor_role",
+    "content": "BPSendFile",
+    "page_ref": "page 5",
+    "confidence_score": 0.7
+  },
+  {
+    "source_id": "nasa_srs_v1",
+    "artifact_type": "srs",
+    "entity_type": "actor_role",
+    "content": "BPReceiveFile",
+    "page_ref": "page 5",
+    "confidence_score": 0.7
+  },
+  {
+    "source_id": "nasa_srs_v1",
+    "artifact_type": "srs",
+    "entity_type": "actor_role",
+    "content": "BPSendPacket",
+    "page_ref": "page 5",
+    "confidence_score": 0.7
+  },
+  {
+    "source_id": "nasa_srs_v1",
+    "artifact_type": "srs",
+    "entity_type": "actor_role",
+    "content": "BPReceivePacket",
+    "page_ref": "page 5",
+    "confidence_score": 0.7
+  },
+  {
+    "source_id": "nasa_srs_v1",
+    "artifact_type": "srs",
+    "entity_type": "actor_role",
+    "content": "BPSendStream",
+    "page_ref": "page 5",
+    "confidence_score": 0.7
+  },
+  {
+    "source_id": "nasa_srs_v1",
+    "artifact_type": "srs",
+    "entity_type": "actor_role",
+    "content": "BPReceiveStream",
+    "page_ref": "page 5",
+    "confidence_score": 0.7
+  },
+  {
+    "source_id": "nasa_srs_v1",
+    "artifact_type": "srs",
+    "entity_type": "function_point",
+    "content": "HDTN Requirements",
+    "page_ref": "page 5",
+    "confidence_score": 0.8
+  },
+  {
+    "source_id": "nasa_srs_v1",
+    "artifact_type": "srs",
+    "entity_type": "interface_name",
+    "content": "HDTN API",
+    "page_ref": "page 5",
+    "confidence_score": 0.9
+  },
+  {
+    "source_id": "nasa_srs_v1",
+    "artifact_type": "srs",
+    "entity_type": "actor_role",
+    "content": "HDTN GUI",
+    "page_ref": "page 5",
+    "confidence_score": 0.7
+  },
+  {
+    "source_id": "nasa_srs_v1",
+    "artifact_type": "srs",
+    "entity_type": "function_point",
+    "content": "Describes structure and content of HDTN data elements",
+    "page_ref": "page 6",
+    "confidence_score": 0.8
+  },
+  {
+    "source_id": "nasa_srs_v1",
+    "artifact_type": "srs",
+    "entity_type": "interface_name",
+    "content": "HDTN data elements",
+    "page_ref": "page 6",
+    "confidence_score": 0.7
+  },
+  {
+    "source_id": "nasa_srs_v1",
+    "artifact_type": "srs",
+    "entity_type": "function_point",
+    "content": "Provides information for developers and maintainers about software high level architecture",
+    "page_ref": "page 6",
+    "confidence_score": 0.8
+  },
+  {
+    "source_id": "nasa_srs_v1",
+    "artifact_type": "srs",
+    "entity_type": "actor_role",
+    "content": "developers and maintainers",
+    "page_ref": "page 6",
+    "confidence_score": 0.9
+  },
+  {
+    "source_id": "nasa_srs_v1",
+    "artifact_type": "srs",
+    "entity_type": "function_point",
+    "content": "Describes software design and implementation for HDTN project",
+    "page_ref": "page 6",
+    "confidence_score": 0.8
+  },
+  {
+    "source_id": "nasa_srs_v1",
+    "artifact_type": "srs",
+    "entity_type": "interface_name",
+    "content": "High-rate Delay Tolerant Networking (HDTN) project",
+    "page_ref": "page 6",
+    "confidence_score": 0.7
+  },
+  {
+    "source_id": "nasa_srs_v1",
+    "artifact_type": "srs",
+    "entity_type": "function_point",
+    "content": "Describes process for development and management of requirements during software life cycle",
+    "page_ref": "page 6",
+    "confidence_score": 0.8
+  },
+  {
+    "source_id": "nasa_srs_v1",
+    "artifact_type": "srs",
+    "entity_type": "process_step",
+    "content": "derive requirements from each specification",
+    "page_ref": "page 8",
+    "confidence_score": 0.8
+  },
+  {
+    "source_id": "nasa_srs_v1",
+    "artifact_type": "srs",
+    "entity_type": "actor_role",
+    "content": "CCSDS",
+    "page_ref": "page 8",
+    "confidence_score": 0.9
+  },
+  {
+    "source_id": "nasa_srs_v1",
+    "artifact_type": "srs",
+    "entity_type": "interface_name",
+    "content": "RFCs",
+    "page_ref": "page 8",
+    "confidence_score": 0.7
+  },
+  {
+    "source_id": "nasa_srs_v1",
+    "artifact_type": "srs",
+    "entity_type": "function_point",
+    "content": "Develop candidate requirements",
+    "page_ref": "page 9",
+    "confidence_score": 0.8
+  },
+  {
+    "source_id": "nasa_srs_v1",
+    "artifact_type": "srs",
+    "entity_type": "process_step",
+    "content": "Refine language",
+    "page_ref": "page 9",
+    "confidence_score": 0.9
+  },
+  {
+    "source_id": "nasa_srs_v1",
+    "artifact_type": "srs",
+    "entity_type": "interface_name",
+    "content": "MagicDraw model-based system engineering model",
+    "page_ref": "page 9",
+    "confidence_score": 0.7
+  },
+  {
+    "source_id": "nasa_srs_v1",
+    "artifact_type": "srs",
+    "entity_type": "process_step",
+    "content": "Conduct formal review of completed draft SRS",
+    "page_ref": "page 9",
+    "confidence_score": 0.9
+  },
+  {
+    "source_id": "nasa_srs_v1",
+    "artifact_type": "srs",
+    "entity_type": "function_point",
+    "content": "sort through each requirement sentence",
+    "page_ref": "page 10",
+    "confidence_score": 0.9
+  },
+  {
+    "source_id": "nasa_srs_v1",
+    "artifact_type": "srs",
+    "entity_type": "actor_role",
+    "content": "Design Document",
+    "page_ref": "page 10",
+    "confidence_score": 0.8
+  },
+  {
+    "source_id": "nasa_srs_v1",
+    "artifact_type": "srs",
+    "entity_type": "interface_name",
+    "content": "Data Dictionary",
+    "page_ref": "page 10",
+    "confidence_score": 0.85
+  },
+  {
+    "source_id": "nasa_srs_v1",
+    "artifact_type": "srs",
+    "entity_type": "function_point",
+    "content": "contain design, functionality, and other information",
+    "page_ref": "page 10",
+    "confidence_score": 0.9
+  },
+  {
+    "source_id": "nasa_srs_v1",
+    "artifact_type": "srs",
+    "entity_type": "actor_role",
+    "content": "Requirements Document",
+    "page_ref": "page 10",
+    "confidence_score": 0.8
+  },
+  {
+    "source_id": "nasa_srs_v1",
+    "artifact_type": "srs",
+    "entity_type": "actor_role",
+    "content": "PICS",
+    "page_ref": "page 11",
+    "confidence_score": 0.8
+  },
+  {
+    "source_id": "nasa_srs_v1",
+    "artifact_type": "srs",
+    "entity_type": "interface_name",
+    "content": "HDTN",
+    "page_ref": "page 11",
+    "confidence_score": 0.7
+  },
+  {
+    "source_id": "nasa_srs_v1",
+    "artifact_type": "srs",
+    "entity_type": "function_point",
+    "content": "Local Bundle Delivery",
+    "page_ref": "page 11",
+    "confidence_score": 0.9
+  },
+  {
+    "source_id": "nasa_srs_v1",
+    "artifact_type": "srs",
+    "entity_type": "actor_role",
+    "content": "CCSDS",
+    "page_ref": "page 11",
+    "confidence_score": 0.8
+  },
+  {
+    "source_id": "nasa_srs_v1",
+    "artifact_type": "srs",
+    "entity_type": "interface_name",
+    "content": "BP v6",
+    "page_ref": "page 11",
+    "confidence_score": 0.7
+  },
+  {
+    "source_id": "nasa_srs_v1",
+    "artifact_type": "srs",
+    "entity_type": "interface_name",
+    "content": "BP v7",
+    "page_ref": "page 11",
+    "confidence_score": 0.7
+  },
+  {
+    "source_id": "nasa_srs_v1",
+    "artifact_type": "srs",
+    "entity_type": "interface_name",
+    "content": "LTP",
+    "page_ref": "page 11",
+    "confidence_score": 0.7
+  },
+  {
+    "source_id": "nasa_srs_v1",
+    "artifact_type": "srs",
+    "entity_type": "interface_name",
+    "content": "BPSec",
+    "page_ref": "page 11",
+    "confidence_score": 0.7
+  },
+  {
+    "source_id": "nasa_srs_v1",
+    "artifact_type": "srs",
+    "entity_type": "interface_name",
+    "content": "SABR",
+    "page_ref": "page 11",
+    "confidence_score": 0.7
+  },
+  {
+    "source_id": "nasa_srs_v1",
+    "artifact_type": "srs",
+    "entity_type": "interface_name",
+    "content": "TCPCLv4",
+    "page_ref": "page 11",
+    "confidence_score": 0.7
+  },
+  {
+    "source_id": "nasa_srs_v1",
+    "artifact_type": "srs",
+    "entity_type": "interface_name",
+    "content": "UDP",
+    "page_ref": "page 11",
+    "confidence_score": 0.7
+  },
+  {
+    "source_id": "nasa_srs_v1",
+    "artifact_type": "srs",
+    "entity_type": "interface_name",
+    "content": "STCP",
+    "page_ref": "page 11",
+    "confidence_score": 0.7
+  },
+  {
+    "source_id": "nasa_srs_v1",
+    "artifact_type": "srs",
+    "entity_type": "interface_name",
+    "content": "RTP",
+    "page_ref": "page 11",
+    "confidence_score": 0.7
+  },
+  {
+    "source_id": "nasa_srs_v1",
+    "artifact_type": "srs",
+    "entity_type": "function_point",
+    "content": "Generation of BPv6, BPv7, LTP, and TCPCL test data",
+    "page_ref": "page 12",
+    "confidence_score": 0.9
+  },
+  {
+    "source_id": "nasa_srs_v1",
+    "artifact_type": "srs",
+    "entity_type": "interface_name",
+    "content": "HDTN Test Framework",
+    "page_ref": "page 12",
+    "confidence_score": 0.8
+  },
+  {
+    "source_id": "nasa_srs_v1",
+    "artifact_type": "srs",
+    "entity_type": "actor_role",
+    "content": "unit under test",
+    "page_ref": "page 12",
+    "confidence_score": 0.7
+  },
+  {
+    "source_id": "nasa_srs_v1",
+    "artifact_type": "srs",
+    "entity_type": "actor_role",
+    "content": "implementations",
+    "page_ref": "page 13",
+    "confidence_score": 0.8
+  },
+  {
+    "source_id": "nasa_srs_v1",
+    "artifact_type": "srs",
+    "entity_type": "interface_name",
+    "content": "BPSec PICS",
+    "page_ref": "page 13",
+    "confidence_score": 0.9
+  },
+  {
+    "source_id": "nasa_srs_v1",
+    "artifact_type": "srs",
+    "entity_type": "interface_name",
+    "content": "LTP PICS",
+    "page_ref": "page 13",
+    "confidence_score": 0.9
+  }
+]

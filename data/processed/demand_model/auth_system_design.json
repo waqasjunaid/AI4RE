@@ -1,0 +1,352 @@
+{
+  "source_id": "auth_system_design",
+  "system_objectives": [
+    "POST /auth/login",
+    "findByEmail(email)",
+    "validate(AuthRequest)",
+    "isExpired()",
+    "refresh()",
+    "invalidate()",
+    "validateCredentials",
+    "enableMFA"
+  ],
+  "user_roles": [
+    "User",
+    "Client",
+    "Rate Limiter",
+    "Request Router",
+    "AuthController",
+    "TokenService",
+    "PasswordHasher",
+    "SessionManager",
+    "Authentication API",
+    "EmailService"
+  ],
+  "use_cases": [
+    {
+      "use_case_id": "UC-001",
+      "actor": "User",
+      "goal": "Login to the system",
+      "preconditions": [
+        "User has a valid email and password"
+      ],
+      "steps": [
+        "User sends AuthRequest to Request Router",
+        "AuthController calls validateCredentials()",
+        "TokenService generates token if credentials are valid"
+      ],
+      "postconditions": [
+        "User is logged in",
+        "Token is generated"
+      ],
+      "exceptions": [
+        "LOGIN_FAILURE"
+      ]
+    },
+    {
+      "use_case_id": "UC-002",
+      "actor": "User",
+      "goal": "Change password",
+      "preconditions": [
+        "User is logged in"
+      ],
+      "steps": [
+        "User sends new password to AuthController",
+        "PasswordHasher hashes the new password",
+        "AuthController updates user's password"
+      ],
+      "postconditions": [
+        "User's password is updated"
+      ],
+      "exceptions": []
+    },
+    {
+      "use_case_id": "UC-003",
+      "actor": "Client",
+      "goal": "Refresh token",
+      "preconditions": [
+        "Token is expired"
+      ],
+      "steps": [
+        "Client sends refresh request to Request Router",
+        "AuthController calls refresh()",
+        "TokenService generates new token"
+      ],
+      "postconditions": [
+        "New token is generated"
+      ],
+      "exceptions": []
+    },
+    {
+      "use_case_id": "UC-004",
+      "actor": "Rate Limiter",
+      "goal": "Lock account due to excessive login attempts",
+      "preconditions": [
+        "Multiple failed login attempts"
+      ],
+      "steps": [
+        "Rate Limiter detects excessive attempts",
+        "AuthController calls lockAccount()"
+      ],
+      "postconditions": [
+        "User's account is locked"
+      ],
+      "exceptions": []
+    },
+    {
+      "use_case_id": "UC-005",
+      "actor": "User",
+      "goal": "Enable MFA",
+      "preconditions": [
+        "User is logged in"
+      ],
+      "steps": [
+        "User sends request to enable MFA",
+        "AuthController calls enableMFA()"
+      ],
+      "postconditions": [
+        "MFA is enabled for user"
+      ],
+      "exceptions": []
+    },
+    {
+      "use_case_id": "UC-006",
+      "actor": "Request Router",
+      "goal": "Route AuthRequest to AuthController",
+      "preconditions": [
+        "AuthRequest received"
+      ],
+      "steps": [
+        "Request Router receives AuthRequest",
+        "Request Router routes request to AuthController"
+      ],
+      "postconditions": [
+        "AuthRequest is routed to AuthController"
+      ],
+      "exceptions": []
+    },
+    {
+      "use_case_id": "UC-007",
+      "actor": "User",
+      "goal": "Logout from the system",
+      "preconditions": [
+        "User is logged in"
+      ],
+      "steps": [
+        "User sends logout request to Request Router",
+        "AuthController calls invalidate()"
+      ],
+      "postconditions": [
+        "User's session is invalidated"
+      ],
+      "exceptions": []
+    },
+    {
+      "use_case_id": "UC-008",
+      "actor": "TokenService",
+      "goal": "Invalidate token",
+      "preconditions": [
+        "Token is no longer valid"
+      ],
+      "steps": [
+        "TokenService receives invalidate request",
+        "TokenService invalidates token"
+      ],
+      "postconditions": [
+        "Token is invalidated"
+      ],
+      "exceptions": []
+    },
+    {
+      "use_case_id": "UC-009",
+      "actor": "AuthController",
+      "goal": "Validate AuthRequest",
+      "preconditions": [
+        "AuthRequest received"
+      ],
+      "steps": [
+        "AuthController receives AuthRequest",
+        "AuthController calls validate(AuthRequest)"
+      ],
+      "postconditions": [
+        "AuthRequest is validated"
+      ],
+      "exceptions": []
+    },
+    {
+      "use_case_id": "UC-010",
+      "actor": "SessionManager",
+      "goal": "Find user by email",
+      "preconditions": [
+        "Email address provided"
+      ],
+      "steps": [
+        "SessionManager receives email address",
+        "SessionManager calls findByEmail(email)"
+      ],
+      "postconditions": [
+        "User is found by email"
+      ],
+      "exceptions": []
+    }
+  ],
+  "functional_reqs": [
+    {
+      "req_id": "FR-001",
+      "description": "The system shall validate user credentials to ensure authenticity.",
+      "source_ids": [
+        "auth_system_design"
+      ],
+      "priority": "high"
+    },
+    {
+      "req_id": "FR-002",
+      "description": "The system shall enable multi-factor authentication (MFA) for users upon request.",
+      "source_ids": [
+        "auth_system_design"
+      ],
+      "priority": "medium"
+    },
+    {
+      "req_id": "FR-003",
+      "description": "The system shall lock a user's account after a specified number of failed login attempts.",
+      "source_ids": [
+        "auth_system_design"
+      ],
+      "priority": "high"
+    },
+    {
+      "req_id": "FR-004",
+      "description": "The system shall check if a token or session has expired and require re-authentication.",
+      "source_ids": [
+        "auth_system_design"
+      ],
+      "priority": "medium"
+    },
+    {
+      "req_id": "FR-005",
+      "description": "The system shall refresh a user's authentication token upon request.",
+      "source_ids": [
+        "auth_system_design"
+      ],
+      "priority": "low"
+    },
+    {
+      "req_id": "FR-006",
+      "description": "The system shall invalidate a user's authentication token when the user logs out or the session expires.",
+      "source_ids": [
+        "auth_system_design"
+      ],
+      "priority": "medium"
+    },
+    {
+      "req_id": "FR-007",
+      "description": "The system shall validate an authentication request to ensure it conforms to expected formats and protocols.",
+      "source_ids": [
+        "auth_system_design"
+      ],
+      "priority": "high"
+    },
+    {
+      "req_id": "FR-008",
+      "description": "The system shall generate a unique event ID for each login attempt.",
+      "source_ids": [
+        "auth_system_design"
+      ],
+      "priority": "low"
+    },
+    {
+      "req_id": "FR-009",
+      "description": "The system shall return a 'LOGIN_SUCCESS' event upon successful user authentication.",
+      "source_ids": [
+        "auth_system_design"
+      ],
+      "priority": "medium"
+    },
+    {
+      "req_id": "FR-010",
+      "description": "The system shall return a 'LOGIN_FAILURE' event upon failed user authentication.",
+      "source_ids": [
+        "auth_system_design"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "nfr_constraints": [
+    {
+      "constraint_id": "NFR-004",
+      "category": "security",
+      "description": "Password must contain uppercase, lowercase, digit, symbol",
+      "threshold": null,
+      "source_ids": [
+        "auth_system_design"
+      ]
+    },
+    {
+      "constraint_id": "NFR-006",
+      "category": "security",
+      "description": "All tokens must be signed with RS256 (asymmetric)",
+      "threshold": null,
+      "source_ids": [
+        "auth_system_design"
+      ]
+    },
+    {
+      "constraint_id": "NFR-008",
+      "category": "compatibility",
+      "description": "TLS 1.2 minimum for all connections",
+      "threshold": null,
+      "source_ids": [
+        "auth_system_design"
+      ]
+    }
+  ],
+  "runtime_constraints": [
+    {
+      "constraint_id": "RT-001",
+      "description": "Max failed login attempts: 5 before lock",
+      "affects_reqs": [
+        "login"
+      ],
+      "source_ids": [
+        "auth_system_design"
+      ]
+    },
+    {
+      "constraint_id": "RT-002",
+      "description": "Account lock duration: 30 minutes",
+      "affects_reqs": [
+        "login",
+        "account management"
+      ],
+      "source_ids": [
+        "auth_system_design"
+      ]
+    },
+    {
+      "constraint_id": "RT-003",
+      "description": "Session store TTL: aligned with refresh token TTL",
+      "affects_reqs": [
+        "session management"
+      ],
+      "source_ids": [
+        "auth_system_design"
+      ]
+    }
+  ],
+  "glossary": {
+    "accessToken": "accessToken",
+    "refreshToken": "refreshToken",
+    "expiresIn": "expiresIn",
+    "tokenType": "tokenType",
+    "AccountStatus": "AccountStatus",
+    "ACTIVE": "ACTIVE",
+    "LOCKED": "LOCKED",
+    "SUSPENDED": "SUSPENDED",
+    "PENDING_VERIFICATION": "PENDING_VERIFICATION",
+    "EventType": "EventType",
+    "LoginFlow": "LoginFlow",
+    "AuthRequest": "AuthRequest"
+  },
+  "exception_handlers": []
+}

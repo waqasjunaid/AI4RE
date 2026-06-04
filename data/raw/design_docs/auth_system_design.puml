@@ -1,0 +1,185 @@
+@startuml AuthSystemDesign
+
+title Authentication Service — System Design Document
+' Source: AI4RE-Test sample design document
+' Artifact type: design
+
+' ─── COMPONENT DIAGRAM ────────────────────────────────────────────────────
+package "Frontend Layer" {
+  component [Web Browser Client] as Browser
+  component [Mobile App Client] as Mobile
+}
+
+package "API Gateway" {
+  component [Rate Limiter] as RateLimiter
+  component [Request Router] as Router
+  interface "HTTPS :443" as HTTPS
+}
+
+package "Authentication Service" {
+  component [AuthController] as AuthCtrl
+  component [TokenService] as TokenSvc
+  component [PasswordHasher] as Hasher
+  component [SessionManager] as SessionMgr
+  interface "REST API" as RestAPI
+}
+
+package "Data Layer" {
+  database "UserDB\n(PostgreSQL)" as UserDB
+  database "SessionStore\n(Redis)" as SessionStore
+  database "AuditLog\n(PostgreSQL)" as AuditDB
+}
+
+package "External Services" {
+  component [EmailService\n(SMTP)] as Email
+  component [OTPProvider\n(TOTP)] as OTP
+}
+
+Browser --> HTTPS
+Mobile --> HTTPS
+HTTPS --> RateLimiter
+RateLimiter --> Router
+Router --> RestAPI
+RestAPI --> AuthCtrl
+AuthCtrl --> TokenSvc
+AuthCtrl --> Hasher
+AuthCtrl --> SessionMgr
+AuthCtrl --> Email
+AuthCtrl --> OTP
+TokenSvc --> SessionStore
+SessionMgr --> SessionStore
+Hasher --> UserDB
+AuthCtrl --> AuditDB
+
+' ─── CLASS DIAGRAM ────────────────────────────────────────────────────────
+class User {
+  - userId: UUID
+  - email: String
+  - passwordHash: String
+  - salt: String
+  - mfaEnabled: Boolean
+  - accountStatus: AccountStatus
+  - createdAt: Timestamp
+  - lastLoginAt: Timestamp
+  + validateCredentials(password: String): Boolean
+  + enableMFA(): void
+  + lockAccount(): void
+}
+
+class Session {
+  - sessionId: UUID
+  - userId: UUID
+  - accessToken: String
+  - refreshToken: String
+  - expiresAt: Timestamp
+  - ipAddress: String
+  - userAgent: String
+  + isExpired(): Boolean
+  + refresh(): Session
+  + invalidate(): void
+}
+
+class AuthRequest {
+  - email: String
+  - password: String
+  - mfaCode: Optional<String>
+  - clientIp: String
+  + validate(): ValidationResult
+}
+
+class AuthResponse {
+  - accessToken: String
+  - refreshToken: String
+  - expiresIn: Integer
+  - tokenType: String
+}
+
+class AuditEvent {
+  - eventId: UUID
+  - userId: UUID
+  - eventType: EventType
+  - timestamp: Timestamp
+  - ipAddress: String
+  - success: Boolean
+  - failureReason: Optional<String>
+}
+
+enum AccountStatus {
+  ACTIVE
+  LOCKED
+  SUSPENDED
+  PENDING_VERIFICATION
+}
+
+enum EventType {
+  LOGIN_SUCCESS
+  LOGIN_FAILURE
+  PASSWORD_CHANGE
+  MFA_ENABLED
+  ACCOUNT_LOCKED
+  TOKEN_REFRESH
+  LOGOUT
+}
+
+User "1" --> "0..*" Session : has
+User "1" --> "0..*" AuditEvent : generates
+AuthRequest --> AuthResponse : produces
+Session --> AuditEvent : logged by
+
+' ─── SEQUENCE DIAGRAM — Login Flow ─────────────────────────────────────────
+sequence LoginFlow
+actor Client
+participant AuthController
+participant PasswordHasher
+participant UserDB
+participant TokenService
+participant SessionStore
+participant AuditLog
+
+Client -> AuthController : POST /auth/login {email, password}
+AuthController -> AuthController : validate(AuthRequest)
+AuthController -> UserDB : findByEmail(email)
+UserDB --> AuthController : User | null
+
+alt User not found
+  AuthController -> AuditLog : log(LOGIN_FAILURE, "user_not_found")
+  AuthController --> Client : 401 Unauthorized
+else User found
+  AuthController -> PasswordHasher : verify(password, user.passwordHash)
+  PasswordHasher --> AuthController : Boolean
+
+  alt Password invalid
+    AuthController -> AuditLog : log(LOGIN_FAILURE, "invalid_password")
+    AuthController -> UserDB : incrementFailedAttempts(userId)
+    AuthController --> Client : 401 Unauthorized
+  else Password valid
+    opt MFA enabled
+      AuthController -> Client : 200 {mfa_required: true}
+      Client -> AuthController : POST /auth/mfa {mfaCode}
+      AuthController -> AuthController : verifyTOTP(mfaCode)
+    end
+    AuthController -> TokenService : generateTokenPair(userId)
+    TokenService --> AuthController : {accessToken, refreshToken}
+    AuthController -> SessionStore : store(Session)
+    AuthController -> AuditLog : log(LOGIN_SUCCESS)
+    AuthController --> Client : 200 AuthResponse
+  end
+end
+
+' ─── CONSTRAINTS ──────────────────────────────────────────────────────────
+note as Constraints
+  NFR Constraints:
+  - Access token TTL: 15 minutes
+  - Refresh token TTL: 7 days
+  - Max failed login attempts: 5 before lock
+  - Account lock duration: 30 minutes
+  - Password minimum length: 12 characters
+  - Password must contain: uppercase, lowercase, digit, symbol
+  - Rate limit: 10 login attempts per minute per IP
+  - Session store TTL: aligned with refresh token TTL
+  - All tokens must be signed with RS256 (asymmetric)
+  - Audit log retention: 90 days
+  - TLS 1.2 minimum for all connections
+end note
+
+@enduml

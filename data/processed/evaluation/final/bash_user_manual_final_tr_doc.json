@@ -1,0 +1,2150 @@
+{
+  "source_id": "bash_user_manual",
+  "tr_h_list": [
+    "When a user enters a command, the system shall execute it through the Bash shell.",
+    "When a user enters an invalid command, the system shall display an error message.",
+    "When a user enters a command with insufficient privileges, the system shall deny execution.",
+    "When a file containing commands is provided, the system shall execute them.",
+    "When an empty file is provided, the system shall not execute any commands.",
+    "When a non-existent file is provided, the system shall display an error message.",
+    "When multiple processes are running, the system shall allow job control.",
+    "When only one process is running, the system shall not allow job control.",
+    "When a user attempts to access a non-existent GNU utility, the system shall display an error message.",
+    "When a single quote occurs between single quotes, the system shall report an error.",
+    "When a non-zero exit status occurs, the system shall terminate with an error code.",
+    "When job control is not active, the system shall not attempt to use job control features.",
+    "When EXPR2 evaluates to zero, the system shall not perform the associated action.",
+    "When no PATTERN matches, the system shall report an error or take alternative action.",
+    "When EOF is read, the system shall handle end-of-file condition correctly.",
+    "When unescaped double quote characters result in empty strings, the system shall report an error.",
+    "When a regular expression is syntactically incorrect, the system shall report an error.",
+    "When a syntax error occurs or a readonly function with the same name already exists, the system shall report an error.",
+    "When maximum function nesting level is exceeded, the system shall report an error.",
+    "When User executes a command, the Shell shall provide command history expansion facilities.",
+    "When Translator translates a string, the gettext tools shall produce an MO file.",
+    "When single quote may not occur between single quotes, the Shell shall raise an error.",
+    "When non-zero exit status occurs, the Bash shall display an error message.",
+    "When job control is not active, the Shell shall disable job control features.",
+    "When EXPR2 evaluates to zero, the Shell shall raise an error.",
+    "When no PATTERN matches, the Shell shall display a warning message.",
+    "When EOF is read, the Shell shall exit.",
+    "When regular expression is syntactically incorrect, the Shell shall raise an error.",
+    "The Shell shall preserve the literal value of the next character when a backslash is encountered.",
+    "The Translator shall copy the template file to a separate file for each target language.",
+    "When a user enables 'Metafy next character typed', the system shall display the metafied character.",
+    "When a user performs tilde expansion on current word, the system shall expand the tilde to the user's home directory.",
+    "When a user installs compiled translations, the system shall make the translations available for use.",
+    "When a user calls the waitpid function, the system shall return the process ID of the child process.",
+    "When a user requests the exit status of the last command executed, the system shall return the exit status.",
+    "When a user sets the value of NAME to selected word, the system shall store the selected word as the value of NAME.",
+    "When a user evaluates a conditional expression EXPRESSION, the system shall return the result of the evaluation.",
+    "When a user defines a shell function named FNAME, the system shall store the function definition.",
+    "The system shall provide a clear and concise structure to facilitate easier verification of implementation within 1 minute.",
+    "The system shall enable technology transfer by providing accessible documentation and resources within 1 hour.",
+    "When a user attempts to configure the system, the system shall set environment variables with valid values.",
+    "When a user attempts to set an invalid value for an environment variable, the system shall prevent the change and display an error message.",
+    "When a user attempts to set an environment variable with a value exceeding the maximum allowed length, the system shall truncate the value and display a warning message.",
+    "When a command line argument contains an unescaped double quote character, the Shell shall raise a 'syntax error' exception with a non-zero exit code (1) and display an error message indicating the syntax error.",
+    "When a user attempts to configure the system, the system shall set environment variables with valid values.",
+    "When a user attempts to set an invalid value for an environment variable, the system shall prevent the change and display an error message.",
+    "When the system is restarted, the previously set environment variables shall be retained."
+  ],
+  "tr_a_list": [
+    {
+      "tr_id": "BASH_U-FUNC-001",
+      "preconditions": [
+        "User is logged in",
+        "Bash shell is available"
+      ],
+      "stimuli": [
+        "Valid command entered by user"
+      ],
+      "expected_outputs": [
+        "Command executed successfully"
+      ],
+      "coverage_criterion": "Normal path",
+      "priority": "high",
+      "source_req_ids": [
+        "The system shall execute commands entered by the user through the command line interface."
+      ]
+    },
+    {
+      "tr_id": "BASH_U-FUNC-002",
+      "preconditions": [
+        "User is logged in",
+        "Bash shell is available"
+      ],
+      "stimuli": [
+        "Invalid command entered by user"
+      ],
+      "expected_outputs": [
+        "Error message displayed"
+      ],
+      "coverage_criterion": "Boundary condition",
+      "priority": "medium",
+      "source_req_ids": [
+        "The system shall execute commands entered by the user through the command line interface."
+      ]
+    },
+    {
+      "tr_id": "BASH_U-FUNC-003",
+      "preconditions": [
+        "User is logged in",
+        "Bash shell is available"
+      ],
+      "stimuli": [
+        "Command requiring elevated privileges entered by user"
+      ],
+      "expected_outputs": [
+        "Execution denied due to insufficient privileges"
+      ],
+      "coverage_criterion": "Negative path",
+      "priority": "high",
+      "source_req_ids": [
+        "The system shall execute commands entered by the user through the command line interface."
+      ]
+    },
+    {
+      "tr_id": "BASH_U-FUNC-004",
+      "preconditions": [
+        "File exists",
+        "Bash shell is available"
+      ],
+      "stimuli": [
+        "Valid file with commands"
+      ],
+      "expected_outputs": [
+        "Commands executed successfully"
+      ],
+      "coverage_criterion": "Normal path",
+      "priority": "medium",
+      "source_req_ids": [
+        "The system shall execute commands read from a file or string input."
+      ]
+    },
+    {
+      "tr_id": "BASH_U-FUNC-005",
+      "preconditions": [
+        "File exists",
+        "Bash shell is available"
+      ],
+      "stimuli": [
+        "Empty file"
+      ],
+      "expected_outputs": [
+        "No commands executed"
+      ],
+      "coverage_criterion": "Boundary condition",
+      "priority": "low",
+      "source_req_ids": [
+        "The system shall execute commands read from a file or string input."
+      ]
+    },
+    {
+      "tr_id": "BASH_U-FUNC-006",
+      "preconditions": [
+        "Bash shell is available"
+      ],
+      "stimuli": [
+        "Non-existent file"
+      ],
+      "expected_outputs": [
+        "Error message displayed"
+      ],
+      "coverage_criterion": "Negative path",
+      "priority": "medium",
+      "source_req_ids": [
+        "The system shall execute commands read from a file or string input."
+      ]
+    },
+    {
+      "tr_id": "BASH_U-FUNC-007",
+      "preconditions": [
+        "Multiple processes running",
+        "Bash shell is available"
+      ],
+      "stimuli": [
+        "Job control command entered by user"
+      ],
+      "expected_outputs": [
+        "Job control functionality available"
+      ],
+      "coverage_criterion": "Normal path",
+      "priority": "high",
+      "source_req_ids": [
+        "The system shall support job control for managing multiple processes."
+      ]
+    },
+    {
+      "tr_id": "BASH_U-FUNC-008",
+      "preconditions": [
+        "Single process running",
+        "Bash shell is available"
+      ],
+      "stimuli": [
+        "Job control command entered by user"
+      ],
+      "expected_outputs": [
+        "Job control functionality not available"
+      ],
+      "coverage_criterion": "Boundary condition",
+      "priority": "low",
+      "source_req_ids": [
+        "The system shall support job control for managing multiple processes."
+      ]
+    },
+    {
+      "tr_id": "BASH_U-FUNC-009",
+      "preconditions": [
+        "User is logged in",
+        "Bash shell is available"
+      ],
+      "stimuli": [
+        "Non-existent GNU utility accessed by user"
+      ],
+      "expected_outputs": [
+        "Error message displayed"
+      ],
+      "coverage_criterion": "Negative path",
+      "priority": "medium",
+      "source_req_ids": [
+        "The system shall provide a user interface to access GNU utilities."
+      ]
+    },
+    {
+      "tr_id": "BASH_U-RUNT-010",
+      "preconditions": [
+        "single quoted string is being processed"
+      ],
+      "stimuli": [
+        "input containing single quote within single quotes"
+      ],
+      "expected_outputs": [
+        "error message indicating invalid syntax"
+      ],
+      "coverage_criterion": "Error handling",
+      "priority": "high",
+      "source_req_ids": [
+        "single quote may not occur between single quotes"
+      ]
+    },
+    {
+      "tr_id": "BASH_U-RUNT-011",
+      "preconditions": [
+        "command or function has completed execution"
+      ],
+      "stimuli": [
+        "non-zero exit status from command or function"
+      ],
+      "expected_outputs": [
+        "error message indicating non-zero exit status",
+        "termination with non-zero exit code"
+      ],
+      "coverage_criterion": "Error handling",
+      "priority": "high",
+      "source_req_ids": [
+        "non-zero exit status"
+      ]
+    },
+    {
+      "tr_id": "BASH_U-RUNT-012",
+      "preconditions": [
+        "job control is disabled or unavailable"
+      ],
+      "stimuli": [
+        "attempt to use job control feature"
+      ],
+      "expected_outputs": [
+        "error message indicating job control is not available",
+        "alternative behavior without using job control"
+      ],
+      "coverage_criterion": "Feature interaction",
+      "priority": "medium",
+      "source_req_ids": [
+        "job control not active"
+      ]
+    },
+    {
+      "tr_id": "BASH_U-RUNT-013",
+      "preconditions": [
+        "EXPR2 is being evaluated as a condition"
+      ],
+      "stimuli": [
+        "EXPR2 evaluates to zero"
+      ],
+      "expected_outputs": [
+        "no action taken",
+        "alternative behavior or error message"
+      ],
+      "coverage_criterion": "Conditional logic",
+      "priority": "medium",
+      "source_req_ids": [
+        "EXPR2 evaluates to zero"
+      ]
+    },
+    {
+      "tr_id": "BASH_U-RUNT-014",
+      "preconditions": [
+        "PATTERN is being searched for in input"
+      ],
+      "stimuli": [
+        "no match found for PATTERN"
+      ],
+      "expected_outputs": [
+        "error message indicating no match",
+        "alternative behavior without match"
+      ],
+      "coverage_criterion": "Pattern matching",
+      "priority": "medium",
+      "source_req_ids": [
+        "no PATTERN matches"
+      ]
+    },
+    {
+      "tr_id": "BASH_U-RUNT-015",
+      "preconditions": [
+        "input file or stream is being processed"
+      ],
+      "stimuli": [
+        "EOF encountered in input"
+      ],
+      "expected_outputs": [
+        "correct handling of EOF",
+        "error message or alternative behavior if necessary"
+      ],
+      "coverage_criterion": "Input/Output",
+      "priority": "medium",
+      "source_req_ids": [
+        "EOF is read"
+      ]
+    },
+    {
+      "tr_id": "BASH_U-RUNT-016",
+      "preconditions": [
+        "double quoted string is being processed"
+      ],
+      "stimuli": [
+        "unescaped double quotes resulting in empty string"
+      ],
+      "expected_outputs": [
+        "error message indicating invalid syntax",
+        "correct handling of empty string"
+      ],
+      "coverage_criterion": "Error handling",
+      "priority": "high",
+      "source_req_ids": [
+        "unescaped double quote characters result in empty strings"
+      ]
+    },
+    {
+      "tr_id": "BASH_U-RUNT-017",
+      "preconditions": [
+        "regular expression is being compiled or executed"
+      ],
+      "stimuli": [
+        "syntactically incorrect regular expression"
+      ],
+      "expected_outputs": [
+        "error message indicating syntax error",
+        "correct handling of invalid regex"
+      ],
+      "coverage_criterion": "Error handling",
+      "priority": "high",
+      "source_req_ids": [
+        "regular expression is syntactically incorrect"
+      ]
+    },
+    {
+      "tr_id": "BASH_U-RUNT-018",
+      "preconditions": [
+        "function definition is being processed"
+      ],
+      "stimuli": [
+        "syntax error in function definition",
+        "readonly function with same name already exists"
+      ],
+      "expected_outputs": [
+        "error message indicating syntax error or existing readonly function",
+        "correct handling of invalid function definition"
+      ],
+      "coverage_criterion": "Error handling",
+      "priority": "high",
+      "source_req_ids": [
+        "syntax error occurs or a readonly function with the same name already exists"
+      ]
+    },
+    {
+      "tr_id": "BASH_U-RUNT-019",
+      "preconditions": [
+        "function calls are being nested"
+      ],
+      "stimuli": [
+        "exceeding maximum allowed function nesting level"
+      ],
+      "expected_outputs": [
+        "error message indicating excessive nesting",
+        "correct handling of invalid function call"
+      ],
+      "coverage_criterion": "Error handling",
+      "priority": "high",
+      "source_req_ids": [
+        "exceed maximum function nesting level"
+      ]
+    },
+    {
+      "tr_id": "BASH_U-INTE-020",
+      "preconditions": [
+        "User is logged in",
+        "Shell is active"
+      ],
+      "stimuli": [
+        "User enters a command"
+      ],
+      "expected_outputs": [
+        "Command history expansion options are displayed"
+      ],
+      "coverage_criterion": "Interface interaction",
+      "priority": "high",
+      "source_req_ids": [
+        "Use case: User -> Execute a command"
+      ]
+    },
+    {
+      "tr_id": "BASH_U-INTE-021",
+      "preconditions": [
+        "Translator is active",
+        "Input string is valid"
+      ],
+      "stimuli": [
+        "Translator initiates translation"
+      ],
+      "expected_outputs": [
+        "MO file is generated"
+      ],
+      "coverage_criterion": "Interface interaction",
+      "priority": "high",
+      "source_req_ids": [
+        "Use case: Translator -> Translate a string"
+      ]
+    },
+    {
+      "tr_id": "BASH_U-INTE-022",
+      "preconditions": [
+        "Single quote is entered between single quotes"
+      ],
+      "stimuli": [
+        "User enters a command with invalid single quotes"
+      ],
+      "expected_outputs": [
+        "Error message is displayed"
+      ],
+      "coverage_criterion": "Exception handling",
+      "priority": "medium",
+      "source_req_ids": [
+        "Exception condition: single quote may not occur between single quotes"
+      ]
+    },
+    {
+      "tr_id": "BASH_U-INTE-023",
+      "preconditions": [
+        "Non-zero exit status is encountered"
+      ],
+      "stimuli": [
+        "Bash encounters a non-zero exit status"
+      ],
+      "expected_outputs": [
+        "Error message is displayed"
+      ],
+      "coverage_criterion": "Exception handling",
+      "priority": "medium",
+      "source_req_ids": [
+        "Exception condition: non-zero exit status"
+      ]
+    },
+    {
+      "tr_id": "BASH_U-INTE-024",
+      "preconditions": [
+        "Job control is not active"
+      ],
+      "stimuli": [
+        "User attempts to use job control feature"
+      ],
+      "expected_outputs": [
+        "Job control feature is disabled"
+      ],
+      "coverage_criterion": "Exception handling",
+      "priority": "low",
+      "source_req_ids": [
+        "Exception condition: job control not active"
+      ]
+    },
+    {
+      "tr_id": "BASH_U-INTE-025",
+      "preconditions": [
+        "EXPR2 evaluates to zero"
+      ],
+      "stimuli": [
+        "User enters a command with invalid EXPR2"
+      ],
+      "expected_outputs": [
+        "Error message is displayed"
+      ],
+      "coverage_criterion": "Exception handling",
+      "priority": "medium",
+      "source_req_ids": [
+        "Exception condition: EXPR2 evaluates to zero"
+      ]
+    },
+    {
+      "tr_id": "BASH_U-INTE-026",
+      "preconditions": [
+        "No PATTERN matches"
+      ],
+      "stimuli": [
+        "User enters a command with invalid PATTERN"
+      ],
+      "expected_outputs": [
+        "Warning message is displayed"
+      ],
+      "coverage_criterion": "Exception handling",
+      "priority": "low",
+      "source_req_ids": [
+        "Exception condition: no PATTERN matches"
+      ]
+    },
+    {
+      "tr_id": "BASH_U-INTE-027",
+      "preconditions": [
+        "EOF is encountered"
+      ],
+      "stimuli": [
+        "User enters a command with EOF"
+      ],
+      "expected_outputs": [
+        "Shell exits"
+      ],
+      "coverage_criterion": "Exception handling",
+      "priority": "high",
+      "source_req_ids": [
+        "Exception condition: EOF is read"
+      ]
+    },
+    {
+      "tr_id": "BASH_U-INTE-029",
+      "preconditions": [
+        "Regular expression is syntactically incorrect"
+      ],
+      "stimuli": [
+        "User enters a command with invalid regular expression"
+      ],
+      "expected_outputs": [
+        "Error message is displayed"
+      ],
+      "coverage_criterion": "Exception handling",
+      "priority": "medium",
+      "source_req_ids": [
+        "Exception condition: regular expression is syntactically incorrect"
+      ]
+    },
+    {
+      "tr_id": "BASH_U-INTE-030",
+      "preconditions": [
+        "Backslash is encountered"
+      ],
+      "stimuli": [
+        "User enters a command with a backslash"
+      ],
+      "expected_outputs": [
+        "Literal value of next character is preserved"
+      ],
+      "coverage_criterion": "Process flow verification",
+      "priority": "high",
+      "source_req_ids": [
+        "Use case: Shell -> Preserve literal value of next character"
+      ]
+    },
+    {
+      "tr_id": "BASH_U-INTE-031",
+      "preconditions": [
+        "Template file is available",
+        "Target languages are specified"
+      ],
+      "stimuli": [
+        "Translator initiates translation"
+      ],
+      "expected_outputs": [
+        "Template file is copied for each target language"
+      ],
+      "coverage_criterion": "Process flow verification",
+      "priority": "high",
+      "source_req_ids": [
+        "Use case: Translator -> Copy template file to separate file for each target language"
+      ]
+    },
+    {
+      "tr_id": "BASH_U-CONS-032",
+      "preconditions": [
+        "User has enabled 'Metafy next character typed' feature"
+      ],
+      "stimuli": [
+        "User types a character"
+      ],
+      "expected_outputs": [
+        "System displays the metafied character"
+      ],
+      "coverage_criterion": "Feature coverage",
+      "priority": "high",
+      "source_req_ids": [
+        "ISSUE-1"
+      ]
+    },
+    {
+      "tr_id": "BASH_U-CONS-033",
+      "preconditions": [
+        "User has entered a word with a tilde"
+      ],
+      "stimuli": [
+        "User requests tilde expansion"
+      ],
+      "expected_outputs": [
+        "System expands the tilde to the user's home directory"
+      ],
+      "coverage_criterion": "Feature coverage",
+      "priority": "high",
+      "source_req_ids": [
+        "ISSUE-2"
+      ]
+    },
+    {
+      "tr_id": "BASH_U-CONS-034",
+      "preconditions": [
+        "User has selected compiled translations for installation"
+      ],
+      "stimuli": [
+        "User initiates installation"
+      ],
+      "expected_outputs": [
+        "System makes the translations available for use"
+      ],
+      "coverage_criterion": "Feature coverage",
+      "priority": "high",
+      "source_req_ids": [
+        "ISSUE-3"
+      ]
+    },
+    {
+      "tr_id": "BASH_U-CONS-035",
+      "preconditions": [
+        "User has called the waitpid function"
+      ],
+      "stimuli": [
+        "System executes the waitpid function"
+      ],
+      "expected_outputs": [
+        "System returns the process ID of the child process"
+      ],
+      "coverage_criterion": "Feature coverage",
+      "priority": "high",
+      "source_req_ids": [
+        "ISSUE-4"
+      ]
+    },
+    {
+      "tr_id": "BASH_U-CONS-036",
+      "preconditions": [
+        "User has executed a command"
+      ],
+      "stimuli": [
+        "User requests the exit status"
+      ],
+      "expected_outputs": [
+        "System returns the exit status"
+      ],
+      "coverage_criterion": "Feature coverage",
+      "priority": "high",
+      "source_req_ids": [
+        "ISSUE-5"
+      ]
+    },
+    {
+      "tr_id": "BASH_U-CONS-037",
+      "preconditions": [
+        "User has selected a word"
+      ],
+      "stimuli": [
+        "User sets the value of NAME"
+      ],
+      "expected_outputs": [
+        "System stores the selected word as the value of NAME"
+      ],
+      "coverage_criterion": "Feature coverage",
+      "priority": "high",
+      "source_req_ids": [
+        "ISSUE-6"
+      ]
+    },
+    {
+      "tr_id": "BASH_U-CONS-038",
+      "preconditions": [
+        "User has entered a conditional expression"
+      ],
+      "stimuli": [
+        "User requests evaluation"
+      ],
+      "expected_outputs": [
+        "System returns the result of the evaluation"
+      ],
+      "coverage_criterion": "Feature coverage",
+      "priority": "high",
+      "source_req_ids": [
+        "ISSUE-7"
+      ]
+    },
+    {
+      "tr_id": "BASH_U-CONS-039",
+      "preconditions": [
+        "User has entered a function definition"
+      ],
+      "stimuli": [
+        "User defines the function"
+      ],
+      "expected_outputs": [
+        "System stores the function definition"
+      ],
+      "coverage_criterion": "Feature coverage",
+      "priority": "high",
+      "source_req_ids": [
+        "ISSUE-8"
+      ]
+    },
+    {
+      "tr_id": "BASH_U-CONS-040",
+      "preconditions": [
+        "User has accessed the system documentation"
+      ],
+      "stimuli": [
+        "User attempts to verify implementation"
+      ],
+      "expected_outputs": [
+        "System provides a clear and concise structure"
+      ],
+      "coverage_criterion": "Requirement coverage",
+      "priority": "medium",
+      "source_req_ids": [
+        "ISSUE-9"
+      ]
+    },
+    {
+      "tr_id": "BASH_U-CONS-041",
+      "preconditions": [
+        "User has accessed the system documentation"
+      ],
+      "stimuli": [
+        "User attempts to access documentation and resources"
+      ],
+      "expected_outputs": [
+        "System provides accessible documentation and resources"
+      ],
+      "coverage_criterion": "Requirement coverage",
+      "priority": "medium",
+      "source_req_ids": [
+        "ISSUE-10"
+      ]
+    },
+    {
+      "tr_id": "BASH_U-FIXD-1001",
+      "preconditions": [
+        "The system is in a configurable state",
+        "The user has necessary permissions"
+      ],
+      "stimuli": [
+        "User input for environment variable configuration"
+      ],
+      "expected_outputs": [
+        "Environment variables are set correctly",
+        "System logs indicate successful configuration"
+      ],
+      "coverage_criterion": "Valid values for environment variables",
+      "priority": "high",
+      "source_req_ids": [
+        "Set environment variables"
+      ]
+    },
+    {
+      "tr_id": "BASH_U-FIXD-1002",
+      "preconditions": [
+        "The system is in a configurable state",
+        "The user has necessary permissions"
+      ],
+      "stimuli": [
+        "User input with invalid value for environment variable configuration"
+      ],
+      "expected_outputs": [
+        "Environment variable remains unchanged",
+        "Error message is displayed to the user"
+      ],
+      "coverage_criterion": "Invalid values for environment variables",
+      "priority": "medium",
+      "source_req_ids": [
+        "Set environment variables"
+      ]
+    },
+    {
+      "tr_id": "BASH_U-FIXD-1003",
+      "preconditions": [
+        "The system is in a configurable state",
+        "The user has necessary permissions"
+      ],
+      "stimuli": [
+        "User input with value exceeding maximum allowed length for environment variable configuration"
+      ],
+      "expected_outputs": [
+        "Environment variable is set with truncated value",
+        "Warning message is displayed to the user"
+      ],
+      "coverage_criterion": "Value length limits for environment variables",
+      "priority": "low",
+      "source_req_ids": [
+        "Set environment variables"
+      ]
+    },
+    {
+      "tr_id": "BASH_U-INTE-028",
+      "preconditions": [
+        "The Shell is in a valid state",
+        "A command line argument is provided"
+      ],
+      "stimuli": [
+        "A command line argument containing an unescaped double quote character is entered"
+      ],
+      "expected_outputs": [
+        "A 'syntax error' exception is raised",
+        "A non-zero exit code (1) is returned",
+        "An error message indicating the syntax error is displayed"
+      ],
+      "coverage_criterion": "Command line argument validation",
+      "priority": "high",
+      "source_req_ids": [
+        "BASH_U-INTE-028"
+      ]
+    },
+    {
+      "tr_id": "BASH_U-FIXD-1001",
+      "preconditions": [
+        "The system is in a configurable state",
+        "The user has necessary permissions"
+      ],
+      "stimuli": [
+        "User input for environment variable configuration"
+      ],
+      "expected_outputs": [
+        "Environment variables are set correctly",
+        "System logs indicate successful configuration"
+      ],
+      "coverage_criterion": "Valid values for environment variables",
+      "priority": "high",
+      "source_req_ids": [
+        "Set environment variables"
+      ]
+    },
+    {
+      "tr_id": "BASH_U-FIXD-1002",
+      "preconditions": [
+        "The system is in a configurable state",
+        "The user has necessary permissions"
+      ],
+      "stimuli": [
+        "User input with invalid value for environment variable configuration"
+      ],
+      "expected_outputs": [
+        "Environment variable remains unchanged",
+        "Error message indicates invalid value"
+      ],
+      "coverage_criterion": "Invalid values for environment variables",
+      "priority": "medium",
+      "source_req_ids": [
+        "Set environment variables"
+      ]
+    },
+    {
+      "tr_id": "BASH_U-FIXD-1003",
+      "preconditions": [
+        "The system has been configured with environment variables",
+        "System restart is initiated"
+      ],
+      "stimuli": [
+        "System restart"
+      ],
+      "expected_outputs": [
+        "Environment variables are preserved after restart",
+        "System logs indicate successful retention of configuration"
+      ],
+      "coverage_criterion": "Persistence of environment variable settings",
+      "priority": "medium",
+      "source_req_ids": [
+        "Set environment variables"
+      ]
+    }
+  ],
+  "trs": [
+    {
+      "tr_id": "BASH_U-FUNC-001",
+      "category": "functional",
+      "source_id": "bash_user_manual",
+      "tr_h": "When a user enters a command, the system shall execute it through the Bash shell.",
+      "tr_a": {
+        "tr_id": "BASH_U-FUNC-001",
+        "preconditions": [
+          "User is logged in",
+          "Bash shell is available"
+        ],
+        "stimuli": [
+          "Valid command entered by user"
+        ],
+        "expected_outputs": [
+          "Command executed successfully"
+        ],
+        "coverage_criterion": "Normal path",
+        "priority": "high",
+        "source_req_ids": [
+          "The system shall execute commands entered by the user through the command line interface."
+        ]
+      },
+      "source_req_ids": [
+        "The system shall execute commands entered by the user through the command line interface."
+      ]
+    },
+    {
+      "tr_id": "BASH_U-FUNC-002",
+      "category": "functional",
+      "source_id": "bash_user_manual",
+      "tr_h": "When a user enters an invalid command, the system shall display an error message.",
+      "tr_a": {
+        "tr_id": "BASH_U-FUNC-002",
+        "preconditions": [
+          "User is logged in",
+          "Bash shell is available"
+        ],
+        "stimuli": [
+          "Invalid command entered by user"
+        ],
+        "expected_outputs": [
+          "Error message displayed"
+        ],
+        "coverage_criterion": "Boundary condition",
+        "priority": "medium",
+        "source_req_ids": [
+          "The system shall execute commands entered by the user through the command line interface."
+        ]
+      },
+      "source_req_ids": [
+        "The system shall execute commands entered by the user through the command line interface."
+      ]
+    },
+    {
+      "tr_id": "BASH_U-FUNC-003",
+      "category": "functional",
+      "source_id": "bash_user_manual",
+      "tr_h": "When a user enters a command with insufficient privileges, the system shall deny execution.",
+      "tr_a": {
+        "tr_id": "BASH_U-FUNC-003",
+        "preconditions": [
+          "User is logged in",
+          "Bash shell is available"
+        ],
+        "stimuli": [
+          "Command requiring elevated privileges entered by user"
+        ],
+        "expected_outputs": [
+          "Execution denied due to insufficient privileges"
+        ],
+        "coverage_criterion": "Negative path",
+        "priority": "high",
+        "source_req_ids": [
+          "The system shall execute commands entered by the user through the command line interface."
+        ]
+      },
+      "source_req_ids": [
+        "The system shall execute commands entered by the user through the command line interface."
+      ]
+    },
+    {
+      "tr_id": "BASH_U-FUNC-004",
+      "category": "functional",
+      "source_id": "bash_user_manual",
+      "tr_h": "When a file containing commands is provided, the system shall execute them.",
+      "tr_a": {
+        "tr_id": "BASH_U-FUNC-004",
+        "preconditions": [
+          "File exists",
+          "Bash shell is available"
+        ],
+        "stimuli": [
+          "Valid file with commands"
+        ],
+        "expected_outputs": [
+          "Commands executed successfully"
+        ],
+        "coverage_criterion": "Normal path",
+        "priority": "medium",
+        "source_req_ids": [
+          "The system shall execute commands read from a file or string input."
+        ]
+      },
+      "source_req_ids": [
+        "The system shall execute commands read from a file or string input."
+      ]
+    },
+    {
+      "tr_id": "BASH_U-FUNC-005",
+      "category": "functional",
+      "source_id": "bash_user_manual",
+      "tr_h": "When an empty file is provided, the system shall not execute any commands.",
+      "tr_a": {
+        "tr_id": "BASH_U-FUNC-005",
+        "preconditions": [
+          "File exists",
+          "Bash shell is available"
+        ],
+        "stimuli": [
+          "Empty file"
+        ],
+        "expected_outputs": [
+          "No commands executed"
+        ],
+        "coverage_criterion": "Boundary condition",
+        "priority": "low",
+        "source_req_ids": [
+          "The system shall execute commands read from a file or string input."
+        ]
+      },
+      "source_req_ids": [
+        "The system shall execute commands read from a file or string input."
+      ]
+    },
+    {
+      "tr_id": "BASH_U-FUNC-006",
+      "category": "functional",
+      "source_id": "bash_user_manual",
+      "tr_h": "When a non-existent file is provided, the system shall display an error message.",
+      "tr_a": {
+        "tr_id": "BASH_U-FUNC-006",
+        "preconditions": [
+          "Bash shell is available"
+        ],
+        "stimuli": [
+          "Non-existent file"
+        ],
+        "expected_outputs": [
+          "Error message displayed"
+        ],
+        "coverage_criterion": "Negative path",
+        "priority": "medium",
+        "source_req_ids": [
+          "The system shall execute commands read from a file or string input."
+        ]
+      },
+      "source_req_ids": [
+        "The system shall execute commands read from a file or string input."
+      ]
+    },
+    {
+      "tr_id": "BASH_U-FUNC-007",
+      "category": "functional",
+      "source_id": "bash_user_manual",
+      "tr_h": "When multiple processes are running, the system shall allow job control.",
+      "tr_a": {
+        "tr_id": "BASH_U-FUNC-007",
+        "preconditions": [
+          "Multiple processes running",
+          "Bash shell is available"
+        ],
+        "stimuli": [
+          "Job control command entered by user"
+        ],
+        "expected_outputs": [
+          "Job control functionality available"
+        ],
+        "coverage_criterion": "Normal path",
+        "priority": "high",
+        "source_req_ids": [
+          "The system shall support job control for managing multiple processes."
+        ]
+      },
+      "source_req_ids": [
+        "The system shall support job control for managing multiple processes."
+      ]
+    },
+    {
+      "tr_id": "BASH_U-FUNC-008",
+      "category": "functional",
+      "source_id": "bash_user_manual",
+      "tr_h": "When only one process is running, the system shall not allow job control.",
+      "tr_a": {
+        "tr_id": "BASH_U-FUNC-008",
+        "preconditions": [
+          "Single process running",
+          "Bash shell is available"
+        ],
+        "stimuli": [
+          "Job control command entered by user"
+        ],
+        "expected_outputs": [
+          "Job control functionality not available"
+        ],
+        "coverage_criterion": "Boundary condition",
+        "priority": "low",
+        "source_req_ids": [
+          "The system shall support job control for managing multiple processes."
+        ]
+      },
+      "source_req_ids": [
+        "The system shall support job control for managing multiple processes."
+      ]
+    },
+    {
+      "tr_id": "BASH_U-FUNC-009",
+      "category": "functional",
+      "source_id": "bash_user_manual",
+      "tr_h": "When a user attempts to access a non-existent GNU utility, the system shall display an error message.",
+      "tr_a": {
+        "tr_id": "BASH_U-FUNC-009",
+        "preconditions": [
+          "User is logged in",
+          "Bash shell is available"
+        ],
+        "stimuli": [
+          "Non-existent GNU utility accessed by user"
+        ],
+        "expected_outputs": [
+          "Error message displayed"
+        ],
+        "coverage_criterion": "Negative path",
+        "priority": "medium",
+        "source_req_ids": [
+          "The system shall provide a user interface to access GNU utilities."
+        ]
+      },
+      "source_req_ids": [
+        "The system shall provide a user interface to access GNU utilities."
+      ]
+    },
+    {
+      "tr_id": "BASH_U-RUNT-010",
+      "category": "runtime_environment",
+      "source_id": "bash_user_manual",
+      "tr_h": "When a single quote occurs between single quotes, the system shall report an error.",
+      "tr_a": {
+        "tr_id": "BASH_U-RUNT-010",
+        "preconditions": [
+          "single quoted string is being processed"
+        ],
+        "stimuli": [
+          "input containing single quote within single quotes"
+        ],
+        "expected_outputs": [
+          "error message indicating invalid syntax"
+        ],
+        "coverage_criterion": "Error handling",
+        "priority": "high",
+        "source_req_ids": [
+          "single quote may not occur between single quotes"
+        ]
+      },
+      "source_req_ids": [
+        "single quote may not occur between single quotes"
+      ]
+    },
+    {
+      "tr_id": "BASH_U-RUNT-011",
+      "category": "runtime_environment",
+      "source_id": "bash_user_manual",
+      "tr_h": "When a non-zero exit status occurs, the system shall terminate with an error code.",
+      "tr_a": {
+        "tr_id": "BASH_U-RUNT-011",
+        "preconditions": [
+          "command or function has completed execution"
+        ],
+        "stimuli": [
+          "non-zero exit status from command or function"
+        ],
+        "expected_outputs": [
+          "error message indicating non-zero exit status",
+          "termination with non-zero exit code"
+        ],
+        "coverage_criterion": "Error handling",
+        "priority": "high",
+        "source_req_ids": [
+          "non-zero exit status"
+        ]
+      },
+      "source_req_ids": [
+        "non-zero exit status"
+      ]
+    },
+    {
+      "tr_id": "BASH_U-RUNT-012",
+      "category": "runtime_environment",
+      "source_id": "bash_user_manual",
+      "tr_h": "When job control is not active, the system shall not attempt to use job control features.",
+      "tr_a": {
+        "tr_id": "BASH_U-RUNT-012",
+        "preconditions": [
+          "job control is disabled or unavailable"
+        ],
+        "stimuli": [
+          "attempt to use job control feature"
+        ],
+        "expected_outputs": [
+          "error message indicating job control is not available",
+          "alternative behavior without using job control"
+        ],
+        "coverage_criterion": "Feature interaction",
+        "priority": "medium",
+        "source_req_ids": [
+          "job control not active"
+        ]
+      },
+      "source_req_ids": [
+        "job control not active"
+      ]
+    },
+    {
+      "tr_id": "BASH_U-RUNT-013",
+      "category": "runtime_environment",
+      "source_id": "bash_user_manual",
+      "tr_h": "When EXPR2 evaluates to zero, the system shall not perform the associated action.",
+      "tr_a": {
+        "tr_id": "BASH_U-RUNT-013",
+        "preconditions": [
+          "EXPR2 is being evaluated as a condition"
+        ],
+        "stimuli": [
+          "EXPR2 evaluates to zero"
+        ],
+        "expected_outputs": [
+          "no action taken",
+          "alternative behavior or error message"
+        ],
+        "coverage_criterion": "Conditional logic",
+        "priority": "medium",
+        "source_req_ids": [
+          "EXPR2 evaluates to zero"
+        ]
+      },
+      "source_req_ids": [
+        "EXPR2 evaluates to zero"
+      ]
+    },
+    {
+      "tr_id": "BASH_U-RUNT-014",
+      "category": "runtime_environment",
+      "source_id": "bash_user_manual",
+      "tr_h": "When no PATTERN matches, the system shall report an error or take alternative action.",
+      "tr_a": {
+        "tr_id": "BASH_U-RUNT-014",
+        "preconditions": [
+          "PATTERN is being searched for in input"
+        ],
+        "stimuli": [
+          "no match found for PATTERN"
+        ],
+        "expected_outputs": [
+          "error message indicating no match",
+          "alternative behavior without match"
+        ],
+        "coverage_criterion": "Pattern matching",
+        "priority": "medium",
+        "source_req_ids": [
+          "no PATTERN matches"
+        ]
+      },
+      "source_req_ids": [
+        "no PATTERN matches"
+      ]
+    },
+    {
+      "tr_id": "BASH_U-RUNT-015",
+      "category": "runtime_environment",
+      "source_id": "bash_user_manual",
+      "tr_h": "When EOF is read, the system shall handle end-of-file condition correctly.",
+      "tr_a": {
+        "tr_id": "BASH_U-RUNT-015",
+        "preconditions": [
+          "input file or stream is being processed"
+        ],
+        "stimuli": [
+          "EOF encountered in input"
+        ],
+        "expected_outputs": [
+          "correct handling of EOF",
+          "error message or alternative behavior if necessary"
+        ],
+        "coverage_criterion": "Input/Output",
+        "priority": "medium",
+        "source_req_ids": [
+          "EOF is read"
+        ]
+      },
+      "source_req_ids": [
+        "EOF is read"
+      ]
+    },
+    {
+      "tr_id": "BASH_U-RUNT-016",
+      "category": "runtime_environment",
+      "source_id": "bash_user_manual",
+      "tr_h": "When unescaped double quote characters result in empty strings, the system shall report an error.",
+      "tr_a": {
+        "tr_id": "BASH_U-RUNT-016",
+        "preconditions": [
+          "double quoted string is being processed"
+        ],
+        "stimuli": [
+          "unescaped double quotes resulting in empty string"
+        ],
+        "expected_outputs": [
+          "error message indicating invalid syntax",
+          "correct handling of empty string"
+        ],
+        "coverage_criterion": "Error handling",
+        "priority": "high",
+        "source_req_ids": [
+          "unescaped double quote characters result in empty strings"
+        ]
+      },
+      "source_req_ids": [
+        "unescaped double quote characters result in empty strings"
+      ]
+    },
+    {
+      "tr_id": "BASH_U-RUNT-017",
+      "category": "runtime_environment",
+      "source_id": "bash_user_manual",
+      "tr_h": "When a regular expression is syntactically incorrect, the system shall report an error.",
+      "tr_a": {
+        "tr_id": "BASH_U-RUNT-017",
+        "preconditions": [
+          "regular expression is being compiled or executed"
+        ],
+        "stimuli": [
+          "syntactically incorrect regular expression"
+        ],
+        "expected_outputs": [
+          "error message indicating syntax error",
+          "correct handling of invalid regex"
+        ],
+        "coverage_criterion": "Error handling",
+        "priority": "high",
+        "source_req_ids": [
+          "regular expression is syntactically incorrect"
+        ]
+      },
+      "source_req_ids": [
+        "regular expression is syntactically incorrect"
+      ]
+    },
+    {
+      "tr_id": "BASH_U-RUNT-018",
+      "category": "runtime_environment",
+      "source_id": "bash_user_manual",
+      "tr_h": "When a syntax error occurs or a readonly function with the same name already exists, the system shall report an error.",
+      "tr_a": {
+        "tr_id": "BASH_U-RUNT-018",
+        "preconditions": [
+          "function definition is being processed"
+        ],
+        "stimuli": [
+          "syntax error in function definition",
+          "readonly function with same name already exists"
+        ],
+        "expected_outputs": [
+          "error message indicating syntax error or existing readonly function",
+          "correct handling of invalid function definition"
+        ],
+        "coverage_criterion": "Error handling",
+        "priority": "high",
+        "source_req_ids": [
+          "syntax error occurs or a readonly function with the same name already exists"
+        ]
+      },
+      "source_req_ids": [
+        "syntax error occurs or a readonly function with the same name already exists"
+      ]
+    },
+    {
+      "tr_id": "BASH_U-RUNT-019",
+      "category": "runtime_environment",
+      "source_id": "bash_user_manual",
+      "tr_h": "When maximum function nesting level is exceeded, the system shall report an error.",
+      "tr_a": {
+        "tr_id": "BASH_U-RUNT-019",
+        "preconditions": [
+          "function calls are being nested"
+        ],
+        "stimuli": [
+          "exceeding maximum allowed function nesting level"
+        ],
+        "expected_outputs": [
+          "error message indicating excessive nesting",
+          "correct handling of invalid function call"
+        ],
+        "coverage_criterion": "Error handling",
+        "priority": "high",
+        "source_req_ids": [
+          "exceed maximum function nesting level"
+        ]
+      },
+      "source_req_ids": [
+        "exceed maximum function nesting level"
+      ]
+    },
+    {
+      "tr_id": "BASH_U-INTE-020",
+      "category": "interface_exception",
+      "source_id": "bash_user_manual",
+      "tr_h": "When User executes a command, the Shell shall provide command history expansion facilities.",
+      "tr_a": {
+        "tr_id": "BASH_U-INTE-020",
+        "preconditions": [
+          "User is logged in",
+          "Shell is active"
+        ],
+        "stimuli": [
+          "User enters a command"
+        ],
+        "expected_outputs": [
+          "Command history expansion options are displayed"
+        ],
+        "coverage_criterion": "Interface interaction",
+        "priority": "high",
+        "source_req_ids": [
+          "Use case: User -> Execute a command"
+        ]
+      },
+      "source_req_ids": [
+        "Use case: User -> Execute a command"
+      ]
+    },
+    {
+      "tr_id": "BASH_U-INTE-021",
+      "category": "interface_exception",
+      "source_id": "bash_user_manual",
+      "tr_h": "When Translator translates a string, the gettext tools shall produce an MO file.",
+      "tr_a": {
+        "tr_id": "BASH_U-INTE-021",
+        "preconditions": [
+          "Translator is active",
+          "Input string is valid"
+        ],
+        "stimuli": [
+          "Translator initiates translation"
+        ],
+        "expected_outputs": [
+          "MO file is generated"
+        ],
+        "coverage_criterion": "Interface interaction",
+        "priority": "high",
+        "source_req_ids": [
+          "Use case: Translator -> Translate a string"
+        ]
+      },
+      "source_req_ids": [
+        "Use case: Translator -> Translate a string"
+      ]
+    },
+    {
+      "tr_id": "BASH_U-INTE-022",
+      "category": "interface_exception",
+      "source_id": "bash_user_manual",
+      "tr_h": "When single quote may not occur between single quotes, the Shell shall raise an error.",
+      "tr_a": {
+        "tr_id": "BASH_U-INTE-022",
+        "preconditions": [
+          "Single quote is entered between single quotes"
+        ],
+        "stimuli": [
+          "User enters a command with invalid single quotes"
+        ],
+        "expected_outputs": [
+          "Error message is displayed"
+        ],
+        "coverage_criterion": "Exception handling",
+        "priority": "medium",
+        "source_req_ids": [
+          "Exception condition: single quote may not occur between single quotes"
+        ]
+      },
+      "source_req_ids": [
+        "Exception condition: single quote may not occur between single quotes"
+      ]
+    },
+    {
+      "tr_id": "BASH_U-INTE-023",
+      "category": "interface_exception",
+      "source_id": "bash_user_manual",
+      "tr_h": "When non-zero exit status occurs, the Bash shall display an error message.",
+      "tr_a": {
+        "tr_id": "BASH_U-INTE-023",
+        "preconditions": [
+          "Non-zero exit status is encountered"
+        ],
+        "stimuli": [
+          "Bash encounters a non-zero exit status"
+        ],
+        "expected_outputs": [
+          "Error message is displayed"
+        ],
+        "coverage_criterion": "Exception handling",
+        "priority": "medium",
+        "source_req_ids": [
+          "Exception condition: non-zero exit status"
+        ]
+      },
+      "source_req_ids": [
+        "Exception condition: non-zero exit status"
+      ]
+    },
+    {
+      "tr_id": "BASH_U-INTE-024",
+      "category": "interface_exception",
+      "source_id": "bash_user_manual",
+      "tr_h": "When job control is not active, the Shell shall disable job control features.",
+      "tr_a": {
+        "tr_id": "BASH_U-INTE-024",
+        "preconditions": [
+          "Job control is not active"
+        ],
+        "stimuli": [
+          "User attempts to use job control feature"
+        ],
+        "expected_outputs": [
+          "Job control feature is disabled"
+        ],
+        "coverage_criterion": "Exception handling",
+        "priority": "low",
+        "source_req_ids": [
+          "Exception condition: job control not active"
+        ]
+      },
+      "source_req_ids": [
+        "Exception condition: job control not active"
+      ]
+    },
+    {
+      "tr_id": "BASH_U-INTE-025",
+      "category": "interface_exception",
+      "source_id": "bash_user_manual",
+      "tr_h": "When EXPR2 evaluates to zero, the Shell shall raise an error.",
+      "tr_a": {
+        "tr_id": "BASH_U-INTE-025",
+        "preconditions": [
+          "EXPR2 evaluates to zero"
+        ],
+        "stimuli": [
+          "User enters a command with invalid EXPR2"
+        ],
+        "expected_outputs": [
+          "Error message is displayed"
+        ],
+        "coverage_criterion": "Exception handling",
+        "priority": "medium",
+        "source_req_ids": [
+          "Exception condition: EXPR2 evaluates to zero"
+        ]
+      },
+      "source_req_ids": [
+        "Exception condition: EXPR2 evaluates to zero"
+      ]
+    },
+    {
+      "tr_id": "BASH_U-INTE-026",
+      "category": "interface_exception",
+      "source_id": "bash_user_manual",
+      "tr_h": "When no PATTERN matches, the Shell shall display a warning message.",
+      "tr_a": {
+        "tr_id": "BASH_U-INTE-026",
+        "preconditions": [
+          "No PATTERN matches"
+        ],
+        "stimuli": [
+          "User enters a command with invalid PATTERN"
+        ],
+        "expected_outputs": [
+          "Warning message is displayed"
+        ],
+        "coverage_criterion": "Exception handling",
+        "priority": "low",
+        "source_req_ids": [
+          "Exception condition: no PATTERN matches"
+        ]
+      },
+      "source_req_ids": [
+        "Exception condition: no PATTERN matches"
+      ]
+    },
+    {
+      "tr_id": "BASH_U-INTE-027",
+      "category": "interface_exception",
+      "source_id": "bash_user_manual",
+      "tr_h": "When EOF is read, the Shell shall exit.",
+      "tr_a": {
+        "tr_id": "BASH_U-INTE-027",
+        "preconditions": [
+          "EOF is encountered"
+        ],
+        "stimuli": [
+          "User enters a command with EOF"
+        ],
+        "expected_outputs": [
+          "Shell exits"
+        ],
+        "coverage_criterion": "Exception handling",
+        "priority": "high",
+        "source_req_ids": [
+          "Exception condition: EOF is read"
+        ]
+      },
+      "source_req_ids": [
+        "Exception condition: EOF is read"
+      ]
+    },
+    {
+      "tr_id": "BASH_U-INTE-029",
+      "category": "interface_exception",
+      "source_id": "bash_user_manual",
+      "tr_h": "When regular expression is syntactically incorrect, the Shell shall raise an error.",
+      "tr_a": {
+        "tr_id": "BASH_U-INTE-029",
+        "preconditions": [
+          "Regular expression is syntactically incorrect"
+        ],
+        "stimuli": [
+          "User enters a command with invalid regular expression"
+        ],
+        "expected_outputs": [
+          "Error message is displayed"
+        ],
+        "coverage_criterion": "Exception handling",
+        "priority": "medium",
+        "source_req_ids": [
+          "Exception condition: regular expression is syntactically incorrect"
+        ]
+      },
+      "source_req_ids": [
+        "Exception condition: regular expression is syntactically incorrect"
+      ]
+    },
+    {
+      "tr_id": "BASH_U-INTE-030",
+      "category": "interface_exception",
+      "source_id": "bash_user_manual",
+      "tr_h": "The Shell shall preserve the literal value of the next character when a backslash is encountered.",
+      "tr_a": {
+        "tr_id": "BASH_U-INTE-030",
+        "preconditions": [
+          "Backslash is encountered"
+        ],
+        "stimuli": [
+          "User enters a command with a backslash"
+        ],
+        "expected_outputs": [
+          "Literal value of next character is preserved"
+        ],
+        "coverage_criterion": "Process flow verification",
+        "priority": "high",
+        "source_req_ids": [
+          "Use case: Shell -> Preserve literal value of next character"
+        ]
+      },
+      "source_req_ids": [
+        "Use case: Shell -> Preserve literal value of next character"
+      ]
+    },
+    {
+      "tr_id": "BASH_U-INTE-031",
+      "category": "interface_exception",
+      "source_id": "bash_user_manual",
+      "tr_h": "The Translator shall copy the template file to a separate file for each target language.",
+      "tr_a": {
+        "tr_id": "BASH_U-INTE-031",
+        "preconditions": [
+          "Template file is available",
+          "Target languages are specified"
+        ],
+        "stimuli": [
+          "Translator initiates translation"
+        ],
+        "expected_outputs": [
+          "Template file is copied for each target language"
+        ],
+        "coverage_criterion": "Process flow verification",
+        "priority": "high",
+        "source_req_ids": [
+          "Use case: Translator -> Copy template file to separate file for each target language"
+        ]
+      },
+      "source_req_ids": [
+        "Use case: Translator -> Copy template file to separate file for each target language"
+      ]
+    },
+    {
+      "tr_id": "BASH_U-CONS-032",
+      "category": "consistency_driven",
+      "source_id": "bash_user_manual",
+      "tr_h": "When a user enables 'Metafy next character typed', the system shall display the metafied character.",
+      "tr_a": {
+        "tr_id": "BASH_U-CONS-032",
+        "preconditions": [
+          "User has enabled 'Metafy next character typed' feature"
+        ],
+        "stimuli": [
+          "User types a character"
+        ],
+        "expected_outputs": [
+          "System displays the metafied character"
+        ],
+        "coverage_criterion": "Feature coverage",
+        "priority": "high",
+        "source_req_ids": [
+          "ISSUE-1"
+        ]
+      },
+      "source_req_ids": [
+        "ISSUE-1"
+      ]
+    },
+    {
+      "tr_id": "BASH_U-CONS-033",
+      "category": "consistency_driven",
+      "source_id": "bash_user_manual",
+      "tr_h": "When a user performs tilde expansion on current word, the system shall expand the tilde to the user's home directory.",
+      "tr_a": {
+        "tr_id": "BASH_U-CONS-033",
+        "preconditions": [
+          "User has entered a word with a tilde"
+        ],
+        "stimuli": [
+          "User requests tilde expansion"
+        ],
+        "expected_outputs": [
+          "System expands the tilde to the user's home directory"
+        ],
+        "coverage_criterion": "Feature coverage",
+        "priority": "high",
+        "source_req_ids": [
+          "ISSUE-2"
+        ]
+      },
+      "source_req_ids": [
+        "ISSUE-2"
+      ]
+    },
+    {
+      "tr_id": "BASH_U-CONS-034",
+      "category": "consistency_driven",
+      "source_id": "bash_user_manual",
+      "tr_h": "When a user installs compiled translations, the system shall make the translations available for use.",
+      "tr_a": {
+        "tr_id": "BASH_U-CONS-034",
+        "preconditions": [
+          "User has selected compiled translations for installation"
+        ],
+        "stimuli": [
+          "User initiates installation"
+        ],
+        "expected_outputs": [
+          "System makes the translations available for use"
+        ],
+        "coverage_criterion": "Feature coverage",
+        "priority": "high",
+        "source_req_ids": [
+          "ISSUE-3"
+        ]
+      },
+      "source_req_ids": [
+        "ISSUE-3"
+      ]
+    },
+    {
+      "tr_id": "BASH_U-CONS-035",
+      "category": "consistency_driven",
+      "source_id": "bash_user_manual",
+      "tr_h": "When a user calls the waitpid function, the system shall return the process ID of the child process.",
+      "tr_a": {
+        "tr_id": "BASH_U-CONS-035",
+        "preconditions": [
+          "User has called the waitpid function"
+        ],
+        "stimuli": [
+          "System executes the waitpid function"
+        ],
+        "expected_outputs": [
+          "System returns the process ID of the child process"
+        ],
+        "coverage_criterion": "Feature coverage",
+        "priority": "high",
+        "source_req_ids": [
+          "ISSUE-4"
+        ]
+      },
+      "source_req_ids": [
+        "ISSUE-4"
+      ]
+    },
+    {
+      "tr_id": "BASH_U-CONS-036",
+      "category": "consistency_driven",
+      "source_id": "bash_user_manual",
+      "tr_h": "When a user requests the exit status of the last command executed, the system shall return the exit status.",
+      "tr_a": {
+        "tr_id": "BASH_U-CONS-036",
+        "preconditions": [
+          "User has executed a command"
+        ],
+        "stimuli": [
+          "User requests the exit status"
+        ],
+        "expected_outputs": [
+          "System returns the exit status"
+        ],
+        "coverage_criterion": "Feature coverage",
+        "priority": "high",
+        "source_req_ids": [
+          "ISSUE-5"
+        ]
+      },
+      "source_req_ids": [
+        "ISSUE-5"
+      ]
+    },
+    {
+      "tr_id": "BASH_U-CONS-037",
+      "category": "consistency_driven",
+      "source_id": "bash_user_manual",
+      "tr_h": "When a user sets the value of NAME to selected word, the system shall store the selected word as the value of NAME.",
+      "tr_a": {
+        "tr_id": "BASH_U-CONS-037",
+        "preconditions": [
+          "User has selected a word"
+        ],
+        "stimuli": [
+          "User sets the value of NAME"
+        ],
+        "expected_outputs": [
+          "System stores the selected word as the value of NAME"
+        ],
+        "coverage_criterion": "Feature coverage",
+        "priority": "high",
+        "source_req_ids": [
+          "ISSUE-6"
+        ]
+      },
+      "source_req_ids": [
+        "ISSUE-6"
+      ]
+    },
+    {
+      "tr_id": "BASH_U-CONS-038",
+      "category": "consistency_driven",
+      "source_id": "bash_user_manual",
+      "tr_h": "When a user evaluates a conditional expression EXPRESSION, the system shall return the result of the evaluation.",
+      "tr_a": {
+        "tr_id": "BASH_U-CONS-038",
+        "preconditions": [
+          "User has entered a conditional expression"
+        ],
+        "stimuli": [
+          "User requests evaluation"
+        ],
+        "expected_outputs": [
+          "System returns the result of the evaluation"
+        ],
+        "coverage_criterion": "Feature coverage",
+        "priority": "high",
+        "source_req_ids": [
+          "ISSUE-7"
+        ]
+      },
+      "source_req_ids": [
+        "ISSUE-7"
+      ]
+    },
+    {
+      "tr_id": "BASH_U-CONS-039",
+      "category": "consistency_driven",
+      "source_id": "bash_user_manual",
+      "tr_h": "When a user defines a shell function named FNAME, the system shall store the function definition.",
+      "tr_a": {
+        "tr_id": "BASH_U-CONS-039",
+        "preconditions": [
+          "User has entered a function definition"
+        ],
+        "stimuli": [
+          "User defines the function"
+        ],
+        "expected_outputs": [
+          "System stores the function definition"
+        ],
+        "coverage_criterion": "Feature coverage",
+        "priority": "high",
+        "source_req_ids": [
+          "ISSUE-8"
+        ]
+      },
+      "source_req_ids": [
+        "ISSUE-8"
+      ]
+    },
+    {
+      "tr_id": "BASH_U-CONS-040",
+      "category": "consistency_driven",
+      "source_id": "bash_user_manual",
+      "tr_h": "The system shall provide a clear and concise structure to facilitate easier verification of implementation within 1 minute.",
+      "tr_a": {
+        "tr_id": "BASH_U-CONS-040",
+        "preconditions": [
+          "User has accessed the system documentation"
+        ],
+        "stimuli": [
+          "User attempts to verify implementation"
+        ],
+        "expected_outputs": [
+          "System provides a clear and concise structure"
+        ],
+        "coverage_criterion": "Requirement coverage",
+        "priority": "medium",
+        "source_req_ids": [
+          "ISSUE-9"
+        ]
+      },
+      "source_req_ids": [
+        "ISSUE-9"
+      ]
+    },
+    {
+      "tr_id": "BASH_U-CONS-041",
+      "category": "consistency_driven",
+      "source_id": "bash_user_manual",
+      "tr_h": "The system shall enable technology transfer by providing accessible documentation and resources within 1 hour.",
+      "tr_a": {
+        "tr_id": "BASH_U-CONS-041",
+        "preconditions": [
+          "User has accessed the system documentation"
+        ],
+        "stimuli": [
+          "User attempts to access documentation and resources"
+        ],
+        "expected_outputs": [
+          "System provides accessible documentation and resources"
+        ],
+        "coverage_criterion": "Requirement coverage",
+        "priority": "medium",
+        "source_req_ids": [
+          "ISSUE-10"
+        ]
+      },
+      "source_req_ids": [
+        "ISSUE-10"
+      ]
+    },
+    {
+      "tr_id": "BASH_U-FIXD-1001",
+      "category": "functional",
+      "source_id": "bash_user_manual",
+      "tr_h": "When a user attempts to configure the system, the system shall set environment variables with valid values.",
+      "tr_a": {
+        "tr_id": "BASH_U-FIXD-1001",
+        "preconditions": [
+          "The system is in a configurable state",
+          "The user has necessary permissions"
+        ],
+        "stimuli": [
+          "User input for environment variable configuration"
+        ],
+        "expected_outputs": [
+          "Environment variables are set correctly",
+          "System logs indicate successful configuration"
+        ],
+        "coverage_criterion": "Valid values for environment variables",
+        "priority": "high",
+        "source_req_ids": [
+          "Set environment variables"
+        ]
+      },
+      "source_req_ids": [
+        "Set environment variables"
+      ]
+    },
+    {
+      "tr_id": "BASH_U-FIXD-1002",
+      "category": "functional",
+      "source_id": "bash_user_manual",
+      "tr_h": "When a user attempts to set an invalid value for an environment variable, the system shall prevent the change and display an error message.",
+      "tr_a": {
+        "tr_id": "BASH_U-FIXD-1002",
+        "preconditions": [
+          "The system is in a configurable state",
+          "The user has necessary permissions"
+        ],
+        "stimuli": [
+          "User input with invalid value for environment variable configuration"
+        ],
+        "expected_outputs": [
+          "Environment variable remains unchanged",
+          "Error message is displayed to the user"
+        ],
+        "coverage_criterion": "Invalid values for environment variables",
+        "priority": "medium",
+        "source_req_ids": [
+          "Set environment variables"
+        ]
+      },
+      "source_req_ids": [
+        "Set environment variables"
+      ]
+    },
+    {
+      "tr_id": "BASH_U-FIXD-1003",
+      "category": "functional",
+      "source_id": "bash_user_manual",
+      "tr_h": "When a user attempts to set an environment variable with a value exceeding the maximum allowed length, the system shall truncate the value and display a warning message.",
+      "tr_a": {
+        "tr_id": "BASH_U-FIXD-1003",
+        "preconditions": [
+          "The system is in a configurable state",
+          "The user has necessary permissions"
+        ],
+        "stimuli": [
+          "User input with value exceeding maximum allowed length for environment variable configuration"
+        ],
+        "expected_outputs": [
+          "Environment variable is set with truncated value",
+          "Warning message is displayed to the user"
+        ],
+        "coverage_criterion": "Value length limits for environment variables",
+        "priority": "low",
+        "source_req_ids": [
+          "Set environment variables"
+        ]
+      },
+      "source_req_ids": [
+        "Set environment variables"
+      ]
+    },
+    {
+      "tr_id": "BASH_U-INTE-028",
+      "category": "interface_exception",
+      "source_id": "bash_user_manual",
+      "tr_h": "When a command line argument contains an unescaped double quote character, the Shell shall raise a 'syntax error' exception with a non-zero exit code (1) and display an error message indicating the syntax error.",
+      "tr_a": {
+        "tr_id": "BASH_U-INTE-028",
+        "preconditions": [
+          "The Shell is in a valid state",
+          "A command line argument is provided"
+        ],
+        "stimuli": [
+          "A command line argument containing an unescaped double quote character is entered"
+        ],
+        "expected_outputs": [
+          "A 'syntax error' exception is raised",
+          "A non-zero exit code (1) is returned",
+          "An error message indicating the syntax error is displayed"
+        ],
+        "coverage_criterion": "Command line argument validation",
+        "priority": "high",
+        "source_req_ids": [
+          "BASH_U-INTE-028"
+        ]
+      },
+      "source_req_ids": [
+        "BASH_U-INTE-028"
+      ]
+    },
+    {
+      "tr_id": "BASH_U-FIXD-1001",
+      "category": "functional",
+      "source_id": "bash_user_manual",
+      "tr_h": "When a user attempts to configure the system, the system shall set environment variables with valid values.",
+      "tr_a": {
+        "tr_id": "BASH_U-FIXD-1001",
+        "preconditions": [
+          "The system is in a configurable state",
+          "The user has necessary permissions"
+        ],
+        "stimuli": [
+          "User input for environment variable configuration"
+        ],
+        "expected_outputs": [
+          "Environment variables are set correctly",
+          "System logs indicate successful configuration"
+        ],
+        "coverage_criterion": "Valid values for environment variables",
+        "priority": "high",
+        "source_req_ids": [
+          "Set environment variables"
+        ]
+      },
+      "source_req_ids": [
+        "Set environment variables"
+      ]
+    },
+    {
+      "tr_id": "BASH_U-FIXD-1002",
+      "category": "functional",
+      "source_id": "bash_user_manual",
+      "tr_h": "When a user attempts to set an invalid value for an environment variable, the system shall prevent the change and display an error message.",
+      "tr_a": {
+        "tr_id": "BASH_U-FIXD-1002",
+        "preconditions": [
+          "The system is in a configurable state",
+          "The user has necessary permissions"
+        ],
+        "stimuli": [
+          "User input with invalid value for environment variable configuration"
+        ],
+        "expected_outputs": [
+          "Environment variable remains unchanged",
+          "Error message indicates invalid value"
+        ],
+        "coverage_criterion": "Invalid values for environment variables",
+        "priority": "medium",
+        "source_req_ids": [
+          "Set environment variables"
+        ]
+      },
+      "source_req_ids": [
+        "Set environment variables"
+      ]
+    },
+    {
+      "tr_id": "BASH_U-FIXD-1003",
+      "category": "functional",
+      "source_id": "bash_user_manual",
+      "tr_h": "When the system is restarted, the previously set environment variables shall be retained.",
+      "tr_a": {
+        "tr_id": "BASH_U-FIXD-1003",
+        "preconditions": [
+          "The system has been configured with environment variables",
+          "System restart is initiated"
+        ],
+        "stimuli": [
+          "System restart"
+        ],
+        "expected_outputs": [
+          "Environment variables are preserved after restart",
+          "System logs indicate successful retention of configuration"
+        ],
+        "coverage_criterion": "Persistence of environment variable settings",
+        "priority": "medium",
+        "source_req_ids": [
+          "Set environment variables"
+        ]
+      },
+      "source_req_ids": [
+        "Set environment variables"
+      ]
+    }
+  ],
+  "total_count": 47
+}

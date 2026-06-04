@@ -1,0 +1,84 @@
+{
+  "source_id": "bash_user_manual",
+  "total_trs": 41,
+  "dimensions": {
+    "coverage": {
+      "score": 0.95,
+      "covered": 19,
+      "uncovered": [
+        "Parse tokens into commands"
+      ],
+      "total": 20
+    },
+    "constraints": {
+      "covered": 0,
+      "total": 0,
+      "uncovered": []
+    },
+    "traceability": {
+      "score": 1.0,
+      "traced": 41,
+      "untraceable": [],
+      "total": 41
+    },
+    "quality": {
+      "duplicate_count": 1,
+      "duplicate_pairs": [
+        [
+          "BASH_U-RUNT-016",
+          "BASH_U-INTE-028"
+        ]
+      ],
+      "untestable_count": 0,
+      "untestable_ids": [],
+      "flagged_ids": [
+        "BASH_U-INTE-028"
+      ]
+    },
+    "schema": {
+      "score": 1.0,
+      "valid": 41,
+      "invalid_ids": [],
+      "total": 41
+    },
+    "ears": {
+      "score": 0.8292682926829268,
+      "compliant": 34,
+      "non_compliant": 7,
+      "non_compliant_ids": [
+        "BASH_U-FUNC-001",
+        "BASH_U-FUNC-002",
+        "BASH_U-FUNC-004",
+        "BASH_U-FUNC-005",
+        "BASH_U-FUNC-006",
+        "BASH_U-FUNC-009",
+        "BASH_U-INTE-027"
+      ],
+      "top_issues": [
+        "vague expected output",
+        "no measurable threshold or specific interface"
+      ],
+      "issue_detail": {
+        "vague expected output": 7,
+        "no measurable threshold or specific interface": 7
+      },
+      "total": 41
+    }
+  },
+  "flagged_tr_ids": [
+    "BASH_U-FUNC-001",
+    "BASH_U-FUNC-002",
+    "BASH_U-FUNC-004",
+    "BASH_U-FUNC-005",
+    "BASH_U-FUNC-006",
+    "BASH_U-INTE-028"
+  ],
+  "correction_notes": [],
+  "metrics": {
+    "q_h": 0.8292682926829268,
+    "q_a": 1.0,
+    "traceability": 1.0,
+    "coverage": 0.95
+  },
+  "passed": true
+}

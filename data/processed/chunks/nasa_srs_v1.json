@@ -1,0 +1,184 @@
+[
+  {
+    "chunk_id": "nasa_srs_v1__s0001__c0001",
+    "source_id": "nasa_srs_v1",
+    "artifact_type": "srs",
+    "content": "HDTN Software Requirements Specification\nConsultative Committee for Space Data Systems Fall Meeting\nRachel Dudukovich, José Lombay-González, Stephanie Booth, Ethan Schweinsberg\n NASA GRC\n11/5/24\nLondon, UK and Virtual",
+    "page_ref": "page 1",
+    "metadata": {
+      "section_id": 1,
+      "chunk_index": 1,
+      "token_count": 52,
+      "overlap": false
+    }
+  },
+  {
+    "chunk_id": "nasa_srs_v1__s0002__c0001",
+    "source_id": "nasa_srs_v1",
+    "artifact_type": "srs",
+    "content": "Motivation\n• Support protocol interoperability\n• Streamline development process and implementation\n• Easier to verify an implementation\n• Facilitate technology transfer to other centers and\norganizations",
+    "page_ref": "page 2",
+    "metadata": {
+      "section_id": 2,
+      "chunk_index": 1,
+      "token_count": 37,
+      "overlap": false
+    }
+  },
+  {
+    "chunk_id": "nasa_srs_v1__s0003__c0001",
+    "source_id": "nasa_srs_v1",
+    "artifact_type": "srs",
+    "content": "Challenges\n•\nRFCs are not written using the same language between all RFCs\nresulting in potential misconceptions.\n•\nMany “Requirements” from the CCSDS documents are too broad\nand/or multiple requirements in one statement.\n•\nCCSDS reports did not cross-reference always correctly to the RFC\nsection.\n•\nCCSDS reports would say a full section in the RFC is required but the\nsection in the RFC contained no statements related to a potential\nrequirement.",
+    "page_ref": "page 3",
+    "metadata": {
+      "section_id": 3,
+      "chunk_index": 1,
+      "token_count": 102,
+      "overlap": false
+    }
+  },
+  {
+    "chunk_id": "nasa_srs_v1__s0004__c0001",
+    "source_id": "nasa_srs_v1",
+    "artifact_type": "srs",
+    "content": "NASA Procedural Requirements (NPR) 7150.2D\nSummary\n• Provides a set of requirements for software acquisition,\ndevelopment, maintenance, retirements, operations, and\nmanagement\n•\nPlanning, Requirements, Design, Implementation, Verification\n• Supports NASA programs and projects in accomplishing their\nplanned goals (e.g., mission success, safety, schedule, and budget)\nwhile satisfying their specified requirements.\n• Level of compliance and rigor is associated with the class of the\nsoftware to be built or acquired.",
+    "page_ref": "page 4",
+    "metadata": {
+      "section_id": 4,
+      "chunk_index": 1,
+      "token_count": 108,
+      "overlap": false
+    }
+  },
+  {
+    "chunk_id": "nasa_srs_v1__s0005__c0001",
+    "source_id": "nasa_srs_v1",
+    "artifact_type": "srs",
+    "content": "HDTN Software Requirements Specification (SRS)\nSummary\n• Currently contains 417 requirements\n• Documents requirements from Bundle\nProtocols and Convergence Layers\nSpecification\n•\nRequirements written generically to\ncapture capability\n• Documents requirements for\napplications functionality\n•\nStarting point to identify functionality\nrelevant for future missions\n• Documents specific HDTN\nrequirements\n•\nProject specific requirements\nBundle Protocol\nRequirements\nBPv6\n43\nBPv7\n24\nBPSec\n60\nRTP\n4\nConvergence Layer\nRequirements\nTCPCL\n51\nSTCP\n8\nUDP\n4\nLTP\n43\nApplication Requirements\nBPGen\n21\nBPSink\n12\nBPing\n14\nBPSendFile\n20\nBPReceiveFile\n12\nBPSendPacket\n16\nBPReceivePacket\n11\nBPSendStream\n16\nBPReceiveStream\n15\nHDTN Requirements\nRouting\n6\nHDTN\nEnvironmental\n11\nHDTN API\n7\nHDTN GUI\n19",
+    "page_ref": "page 5",
+    "metadata": {
+      "section_id": 5,
+      "chunk_index": 1,
+      "token_count": 222,
+      "overlap": false
+    }
+  },
+  {
+    "chunk_id": "nasa_srs_v1__s0006__c0001",
+    "source_id": "nasa_srs_v1",
+    "artifact_type": "srs",
+    "content": "HDTN Related Documents\n•\nData Dictionary:\n•\nDescribes the structure and content of HDTN data elements like variables, data structures,\ninputs, outputs, commands, file system structures, telemetry, data files, and configuration\nfiles.\n•\nPublic release planned for 12/2024\n•\nArchitecture and Design Document:\n•\nDescribes the software design and implementation for the High-rate Delay Tolerant\nNetworking (HDTN) project.\n•\nProvides information for developers and maintainers about the software high level\narchitecture, software modules interactions during operation, and detailed system flow.\n•\nPublic release planned for early 2025\n•\nRequirements Management Plan\n•\nDescribes the process for the development and management of requirements during the\nsoftware life cycle.",
+    "page_ref": "page 6",
+    "metadata": {
+      "section_id": 6,
+      "chunk_index": 1,
+      "token_count": 161,
+      "overlap": false
+    }
+  },
+  {
+    "chunk_id": "nasa_srs_v1__s0007__c0001",
+    "source_id": "nasa_srs_v1",
+    "artifact_type": "srs",
+    "content": "SRS Sample",
+    "page_ref": "page 7",
+    "metadata": {
+      "section_id": 7,
+      "chunk_index": 1,
+      "token_count": 3,
+      "overlap": false
+    }
+  },
+  {
+    "chunk_id": "nasa_srs_v1__s0008__c0001",
+    "source_id": "nasa_srs_v1",
+    "artifact_type": "srs",
+    "content": "Requirements Development Process\n• Performed iterative process to\nderive requirements from each\nspecification\n• Reviewed CCSDS PICS\nrequirements where applicable\n• In older specs, a single PICS item\nmay be too complex to verify\n• We pulled out all “Shall”, “Must”,\nand “Required” statements from\nRFCs",
+    "page_ref": "page 8",
+    "metadata": {
+      "section_id": 8,
+      "chunk_index": 1,
+      "token_count": 71,
+      "overlap": false
+    }
+  },
+  {
+    "chunk_id": "nasa_srs_v1__s0009__c0001",
+    "source_id": "nasa_srs_v1",
+    "artifact_type": "srs",
+    "content": "Requirements Development Process\n•\nDeveloped set of candidate requirements\n•\nDetermined what aspects were design, data definitions or software requirements\n•\nRefined language\n•\nConducted initial peer review for each specification\n•\nImported into MagicDraw model-based system engineering model\n•\nConducted formal review of completed draft SRS",
+    "page_ref": "page 9",
+    "metadata": {
+      "section_id": 9,
+      "chunk_index": 1,
+      "token_count": 69,
+      "overlap": false
+    }
+  },
+  {
+    "chunk_id": "nasa_srs_v1__s0010__c0001",
+    "source_id": "nasa_srs_v1",
+    "artifact_type": "srs",
+    "content": "Requirements Analysis\n•\nThe RFCs contain design, functionality, and other information\n•\nRequires to sort through each requirement sentence if it was for a\nDesign Document, Data Dictionary, or the Requirements Document.\nRequired\nItems\nFound\nData\nDictionary\nDesign\nDocument\nN/A or Not\nImplemented Requirement\nRequirement\n+ Data\nDictionary\nRequirement\n+ Design\nDocument\nBlank\nBPv6\n178\n20\n54\n25\n32\n33\n14\n0\nTCP\n120\n17\n9\n22\n48\n1\n6\n17\nBPv7\n181\n43\n39\n57\n31\n6\n3\n2\nLTP\n151\n63\n22\n17\n38\n3\n4\n2\nUDP\n6\n0\n0\n0\n3\n3\n0\n0\nSTCP\n8\n1\n0\n0\n5\n2\n0\n0",
+    "page_ref": "page 10",
+    "metadata": {
+      "section_id": 10,
+      "chunk_index": 1,
+      "token_count": 194,
+      "overlap": false
+    }
+  },
+  {
+    "chunk_id": "nasa_srs_v1__s0011__c0001",
+    "source_id": "nasa_srs_v1",
+    "artifact_type": "srs",
+    "content": "PICS vs. HDTN Requirements\n•\nSRS requirements to PICS are\nnot one-to-one\n•\nWe covered all sections called\nout in PICS references\n•\nWe included only what is\nimplemented in HDTN\n•\nMore general statements in PICS\nmight be broken into several\nrequirements\n•\nPICS discussing internal\nprocessing procedures (ex. Local\nBundle Delivery) are design\nconsiderations and do not affect\nprotocol interoperability\nProtocol\nRelevant Specification\nCCSDS Mandatory\nRequirements\nSRS Requirements\nBP v6\nCCSDS 734.2-B-1 (September 2015)\n39\n43\nBP v7\nCCSDS 734.2-P-1.1 (April 2023)\n32\n24\nLTP\nCCSDS 734.1-B-1 (May 2015)\n10\n43\nBPSec\nCCSDS 734.5-R-2 (September 2023)\n50\n60\nSABR\nCCSDS 734.3-B-1 (July 2019)\n10\n6\nTCPCLv4\nRFC 9174\nNA\n51\nUDP\nRFC 7122\nNA\n4\nSTCP\nNA\nNA\n8\nRTP\nCCSDS 766.3-R-2 (May 2020)\n2\n4\nApplications\nNA\nNA\n137",
+    "page_ref": "page 11",
+    "metadata": {
+      "section_id": 11,
+      "chunk_index": 1,
+      "token_count": 302,
+      "overlap": false
+    }
+  },
+  {
+    "chunk_id": "nasa_srs_v1__s0012__c0001",
+    "source_id": "nasa_srs_v1",
+    "artifact_type": "srs",
+    "content": "Testing/V&V\n• Majority of HDTN software requirements are verified automatically\n• The HDTN Test Framework is collection of Python modules that\nautomate the testing process\n• Key features:\n•\nGeneration of BPv6, BPv7, LTP, and TCPCL test data\n•\nHandles communication with the unit\nunder test\n•\nConfigures the unit under test depending\non requirement needs\n• Designed to work with any DTN\nimplementation!",
+    "page_ref": "page 12",
+    "metadata": {
+      "section_id": 12,
+      "chunk_index": 1,
+      "token_count": 98,
+      "overlap": false
+    }
+  },
+  {
+    "chunk_id": "nasa_srs_v1__s0013__c0001",
+    "source_id": "nasa_srs_v1",
+    "artifact_type": "srs",
+    "content": "Feedback\n•\nNewer specifications’ PICS seem clearer (BPSec versus LTP)\n•\nNewer specifications have changing PICS after several\nimplementations are already complete\n•\nDifficulty in tracking document versions\nBPSec PICS\nLTP PICS",
+    "page_ref": "page 13",
+    "metadata": {
+      "section_id": 13,
+      "chunk_index": 1,
+      "token_count": 56,
+      "overlap": false
+    }
+  },
+  {
+    "chunk_id": "nasa_srs_v1__s0014__c0001",
+    "source_id": "nasa_srs_v1",
+    "artifact_type": "srs",
+    "content": "Thank you!\nHDTN SRS Team:\nJosé Lombay-González, Eric Brace, Kevin Carmichael, Rachel\nDudukovich, Stephanie Booth, Nadia Kortas, Ethan Schweinsberg, Prash\nChoksi, and Shaun McKeehan Eugene Heard, Amber Waid, John\nNowakowski, Brian Tomko, Daniel Raible, Joseph Ponyik, Shira Nadile,\nand Alyssa Brewer",
+    "page_ref": "page 14",
+    "metadata": {
+      "section_id": 14,
+      "chunk_index": 1,
+      "token_count": 92,
+      "overlap": false
+    }
+  }
+]

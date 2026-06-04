@@ -1,0 +1,90 @@
+[
+  {
+    "source_id": "swagger_petstore",
+    "artifact_type": "runtime",
+    "entity_type": "interface_name",
+    "content": "Swagger Petstore API",
+    "page_ref": "openapi:info",
+    "confidence_score": 0.9
+  },
+  {
+    "source_id": "swagger_petstore",
+    "artifact_type": "runtime",
+    "entity_type": "function_point",
+    "content": "authorization filters",
+    "page_ref": "openapi:info",
+    "confidence_score": 0.8
+  },
+  {
+    "source_id": "swagger_petstore",
+    "artifact_type": "runtime",
+    "entity_type": "interface_name",
+    "content": "/pet/{petId}/uploadImage",
+    "page_ref": "openapi:path:/pet/{petId}/uploadImage",
+    "confidence_score": 0.9
+  },
+  {
+    "source_id": "swagger_petstore",
+    "artifact_type": "runtime",
+    "entity_type": "function_point",
+    "content": "uploads an image",
+    "page_ref": "openapi:path:/pet/{petId}/uploadImage",
+    "confidence_score": 0.8
+  },
+  {
+    "source_id": "swagger_petstore",
+    "artifact_type": "runtime",
+    "entity_type": "interface_name",
+    "content": "/pet endpoint",
+    "page_ref": "openapi:path:/pet",
+    "confidence_score": 0.9
+  },
+  {
+    "source_id": "swagger_petstore",
+    "artifact_type": "runtime",
+    "entity_type": "function_point",
+    "content": "Add a new pet to the store",
+    "page_ref": "openapi:path:/pet",
+    "confidence_score": 0.8
+  },
+  {
+    "source_id": "swagger_petstore",
+    "artifact_type": "runtime",
+    "entity_type": "exception_condition",
+    "content": "Invalid input",
+    "page_ref": "openapi:path:/pet",
+    "confidence_score": 0.7
+  },
+  {
+    "source_id": "swagger_petstore",
+    "artifact_type": "runtime",
+    "entity_type": "function_point",
+    "content": "Update an existing pet",
+    "page_ref": "openapi:path:/pet",
+    "confidence_score": 0.8
+  },
+  {
+    "source_id": "swagger_petstore",
+    "artifact_type": "runtime",
+    "entity_type": "exception_condition",
+    "content": "Invalid ID supplied",
+    "page_ref": "openapi:path:/pet",
+    "confidence_score": 0.7
+  },
+  {
+    "source_id": "swagger_petstore",
+    "artifact_type": "runtime",
+    "entity_type": "exception_condition",
+    "content": "Pet not found",
+    "page_ref": "openapi:path:/pet",
+    "confidence_score": 0.7
+  },
+  {
+    "source_id": "swagger_petstore",
+    "artifact_type": "runtime",
+    "entity_type": "exception_condition",
+    "content": "Validation exception",
+    "page_ref": "openapi:path:/pet",
+    "confidence_score": 0.7
+  }
+]

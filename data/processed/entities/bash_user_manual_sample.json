@@ -1,0 +1,138 @@
+[
+  {
+    "source_id": "bash_user_manual",
+    "artifact_type": "user_manual",
+    "entity_type": "actor_role",
+    "content": "Stephen Bourne",
+    "page_ref": "Bash Features",
+    "confidence_score": 0.9
+  },
+  {
+    "source_id": "bash_user_manual",
+    "artifact_type": "user_manual",
+    "entity_type": "function_point",
+    "content": "Bash shell",
+    "page_ref": "Bash Features",
+    "confidence_score": 0.8
+  },
+  {
+    "source_id": "bash_user_manual",
+    "artifact_type": "user_manual",
+    "entity_type": "glossary_term",
+    "content": "GNU operating system",
+    "page_ref": "Bash Features",
+    "confidence_score": 0.7
+  },
+  {
+    "source_id": "bash_user_manual",
+    "artifact_type": "user_manual",
+    "entity_type": "actor_role",
+    "content": "Bourne Shell (sh)",
+    "page_ref": "Bash Features",
+    "confidence_score": 0.8
+  },
+  {
+    "source_id": "bash_user_manual",
+    "artifact_type": "user_manual",
+    "entity_type": "actor_role",
+    "content": "Korn Shell (ksh)",
+    "page_ref": "Bash Features",
+    "confidence_score": 0.8
+  },
+  {
+    "source_id": "bash_user_manual",
+    "artifact_type": "user_manual",
+    "entity_type": "actor_role",
+    "content": "C-shell (csh and tcsh)",
+    "page_ref": "Bash Features",
+    "confidence_score": 0.8
+  },
+  {
+    "source_id": "bash_user_manual",
+    "artifact_type": "user_manual",
+    "entity_type": "function_point",
+    "content": "executes commands",
+    "page_ref": "1.2 What is a shell?",
+    "confidence_score": 0.8
+  },
+  {
+    "source_id": "bash_user_manual",
+    "artifact_type": "user_manual",
+    "entity_type": "glossary_term",
+    "content": "macro processor",
+    "page_ref": "1.2 What is a shell?",
+    "confidence_score": 0.9
+  },
+  {
+    "source_id": "bash_user_manual",
+    "artifact_type": "user_manual",
+    "entity_type": "actor_role",
+    "content": "user",
+    "page_ref": "1.2 What is a shell?",
+    "confidence_score": 0.7
+  },
+  {
+    "source_id": "bash_user_manual",
+    "artifact_type": "user_manual",
+    "entity_type": "function_point",
+    "content": "provides user interface to GNU utilities",
+    "page_ref": "1.2 What is a shell?",
+    "confidence_score": 0.8
+  },
+  {
+    "source_id": "bash_user_manual",
+    "artifact_type": "user_manual",
+    "entity_type": "process_step",
+    "content": "accept input typed from keyboard",
+    "page_ref": "1.2 What is a shell?",
+    "confidence_score": 0.6
+  },
+  {
+    "source_id": "bash_user_manual",
+    "artifact_type": "user_manual",
+    "entity_type": "function_point",
+    "content": "execute commands read from file or string",
+    "page_ref": "1.2 What is a shell?",
+    "confidence_score": 0.8
+  },
+  {
+    "source_id": "bash_user_manual",
+    "artifact_type": "user_manual",
+    "entity_type": "glossary_term",
+    "content": "redirection",
+    "page_ref": "1.2 What is a shell?",
+    "confidence_score": 0.9
+  },
+  {
+    "source_id": "bash_user_manual",
+    "artifact_type": "user_manual",
+    "entity_type": "function_point",
+    "content": "job control",
+    "page_ref": "1.2 What is a shell?",
+    "confidence_score": 0.8
+  },
+  {
+    "source_id": "bash_user_manual",
+    "artifact_type": "user_manual",
+    "entity_type": "function_point",
+    "content": "command line editing",
+    "page_ref": "1.2 What is a shell?",
+    "confidence_score": 0.8
+  },
+  {
+    "source_id": "bash_user_manual",
+    "artifact_type": "user_manual",
+    "entity_type": "function_point",
+    "content": "command history",
+    "page_ref": "1.2 What is a shell?",
+    "confidence_score": 0.8
+  },
+  {
+    "source_id": "bash_user_manual",
+    "artifact_type": "user_manual",
+    "entity_type": "function_point",
+    "content": "aliases",
+    "page_ref": "1.2 What is a shell?",
+    "confidence_score": 0.7
+  }
+]

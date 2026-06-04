@@ -1,0 +1,5 @@
+The system shall authenticate users before access.
+
+Administrators can create accounts.
+
+Response time shall be less than 2 seconds.
