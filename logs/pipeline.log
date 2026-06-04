@@ -1,0 +1,186 @@
+nohup: 忽略输入
+
+AI4RE-Test  |  Full Pipeline Runner with Feedback Loop
+============================================================
+Sources      : nasa_srs_v1, swagger_petstore, auth_system_design, bash_user_manual
+Feedback loop: YES
+============================================================
+
+[Stage 2] Loading demand models ...
+  Loaded: nasa_srs_v1
+  Loaded: swagger_petstore
+  Loaded: auth_system_design
+  Loaded: bash_user_manual
+
+[Stage 3] Consistency check ...
+  Check 1: SRS vs User Manual ...
+Traceback (most recent call last):
+  File "/mnt/cisk/junaid/miniconda/envs/traintrust/lib/python3.10/urllib/request.py", line 1348, in do_open
+    h.request(req.get_method(), req.selector, req.data, headers,
+  File "/mnt/cisk/junaid/miniconda/envs/traintrust/lib/python3.10/http/client.py", line 1303, in request
+    self._send_request(method, url, body, headers, encode_chunked)
+  File "/mnt/cisk/junaid/miniconda/envs/traintrust/lib/python3.10/http/client.py", line 1349, in _send_request
+    self.endheaders(body, encode_chunked=encode_chunked)
+  File "/mnt/cisk/junaid/miniconda/envs/traintrust/lib/python3.10/http/client.py", line 1298, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+  File "/mnt/cisk/junaid/miniconda/envs/traintrust/lib/python3.10/http/client.py", line 1058, in _send_output
+    self.send(msg)
+  File "/mnt/cisk/junaid/miniconda/envs/traintrust/lib/python3.10/http/client.py", line 996, in send
+    self.connect()
+  File "/mnt/cisk/junaid/miniconda/envs/traintrust/lib/python3.10/http/client.py", line 962, in connect
+    self.sock = self._create_connection(
+  File "/mnt/cisk/junaid/miniconda/envs/traintrust/lib/python3.10/socket.py", line 857, in create_connection
+    raise err
+  File "/mnt/cisk/junaid/miniconda/envs/traintrust/lib/python3.10/socket.py", line 845, in create_connection
+    sock.connect(sa)
+ConnectionRefusedError: [Errno 111] Connection refused
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/mnt/cisk/junaid/junaid/AI4RE-Test/run_pipeline.py", line 219, in <module>
+    main()
+  File "/mnt/cisk/junaid/junaid/AI4RE-Test/run_pipeline.py", line 140, in main
+    consistency_reports = checker.check_all(models, verbose=True)
+  File "/mnt/cisk/junaid/junaid/AI4RE-Test/src/reasoning/consistency_checker.py", line 67, in check_all
+    r = self._check_srs_vs_manual(srs, manual)
+  File "/mnt/cisk/junaid/junaid/AI4RE-Test/src/reasoning/consistency_checker.py", line 145, in _check_srs_vs_manual
+    raw    = self._chat(prompt)
+  File "/mnt/cisk/junaid/junaid/AI4RE-Test/src/reasoning/consistency_checker.py", line 335, in _chat
+    with urllib.request.urlopen(req, timeout=self.timeout) as resp:
+  File "/mnt/cisk/junaid/miniconda/envs/traintrust/lib/python3.10/urllib/request.py", line 216, in urlopen
+    return opener.open(url, data, timeout)
+  File "/mnt/cisk/junaid/miniconda/envs/traintrust/lib/python3.10/urllib/request.py", line 519, in open
+    response = self._open(req, data)
+  File "/mnt/cisk/junaid/miniconda/envs/traintrust/lib/python3.10/urllib/request.py", line 536, in _open
+    result = self._call_chain(self.handle_open, protocol, protocol +
+  File "/mnt/cisk/junaid/miniconda/envs/traintrust/lib/python3.10/urllib/request.py", line 496, in _call_chain
+    result = func(*args)
+  File "/mnt/cisk/junaid/miniconda/envs/traintrust/lib/python3.10/urllib/request.py", line 1377, in http_open
+    return self.do_open(http.client.HTTPConnection, req)
+  File "/mnt/cisk/junaid/miniconda/envs/traintrust/lib/python3.10/urllib/request.py", line 1351, in do_open
+    raise URLError(err)
+urllib.error.URLError: <urlopen error [Errno 111] Connection refused>
+nohup: 忽略输入
+
+AI4RE-Test  |  Full Pipeline Runner with Feedback Loop
+============================================================
+Sources      : nasa_srs_v1, swagger_petstore, auth_system_design, bash_user_manual
+Feedback loop: YES
+============================================================
+
+[Stage 2] Loading demand models ...
+  Loaded: nasa_srs_v1
+  Loaded: swagger_petstore
+  Loaded: auth_system_design
+  Loaded: bash_user_manual
+
+[Stage 3] Consistency check ...
+  Check 1: SRS vs User Manual ...
+    -> 11 issues
+  Check 2: Runtime vs SRS ...
+    -> 0 issues
+  Check 3: Design vs SRS ...
+    -> 0 issues
+  Check 4: Intra-source consistency ...
+    -> nasa_srs_v1 (8 issues)
+    -> swagger_petstore (8 issues)
+    -> auth_system_design (5 issues)
+    -> bash_user_manual (3 issues)
+  Check 5: Terminology ...
+    -> 0 issues
+  35 issues found  (4186s)
+
+[Stage 4+5] nasa_srs_v1
+  Generating TRs ...
+  46 TRs generated  (5139s)
+  Reviewing ...
+  Q_H=0.67 Q_A=0.87 Trace=1.00 Coverage=1.00  (331s)
+  Running feedback loop ...
+
+  Feedback iteration 1/2
+    Regenerating 7 flagged TRs ...
+    Regenerated 7 TRs
+
+  Feedback iteration 2/2
+    Regenerating 7 flagged TRs ...
+    Regenerated 7 TRs
+  After feedback: Q_H=0.67 Q_A=1.00 Trace=1.00 Coverage=1.00  (2314s)
+  Final TR-Doc saved: data/processed/evaluation/final/nasa_srs_v1_final_tr_doc.json  (68.5 KB, 46 TRs)
+
+[Stage 4+5] swagger_petstore
+  Generating TRs ...
+  42 TRs generated  (6261s)
+  Reviewing ...
+  Q_H=0.67 Q_A=1.00 Trace=1.00 Coverage=0.91  (328s)
+  Running feedback loop ...
+
+  Feedback iteration 1/2
+    Regenerating 10 flagged TRs ...
+    Generating TRs for 2 uncovered items ...
+    Added 4 new TRs
+
+  Feedback iteration 2/2
+    Regenerating 10 flagged TRs ...
+    Generating TRs for 2 uncovered items ...
+    Added 4 new TRs
+  After feedback: Q_H=0.50 Q_A=1.00 Trace=1.00 Coverage=0.86  (2996s)
+  Final TR-Doc saved: data/processed/evaluation/final/swagger_petstore_final_tr_doc.json  (52.4 KB, 40 TRs)
+
+[Stage 4+5] auth_system_design
+  Generating TRs ...
+  47 TRs generated  (5327s)
+  Reviewing ...
+  Q_H=0.67 Q_A=1.00 Trace=1.00 Coverage=0.91  (303s)
+  Running feedback loop ...
+
+  Feedback iteration 1/2
+    Regenerating 1 flagged TRs ...
+    Regenerated 1 TRs
+    Generating TRs for 2 uncovered items ...
+    Added 3 new TRs
+
+  Feedback iteration 2/2
+    Regenerating 1 flagged TRs ...
+    Regenerated 1 TRs
+    Generating TRs for 2 uncovered items ...
+    Added 3 new TRs
+  After feedback: Q_H=0.67 Q_A=1.00 Trace=1.00 Coverage=0.96  (2166s)
+  Final TR-Doc saved: data/processed/evaluation/final/auth_system_design_final_tr_doc.json  (75.3 KB, 53 TRs)
+
+[Stage 4+5] bash_user_manual
+  Generating TRs ...
+  41 TRs generated  (4162s)
+  Reviewing ...
+  Q_H=0.67 Q_A=1.00 Trace=1.00 Coverage=0.95  (291s)
+  Running feedback loop ...
+
+  Feedback iteration 1/2
+    Regenerating 1 flagged TRs ...
+    Regenerated 1 TRs
+    Generating TRs for 1 uncovered items ...
+    Added 3 new TRs
+
+  Feedback iteration 2/2
+    Regenerating 1 flagged TRs ...
+    Regenerated 1 TRs
+    Generating TRs for 1 uncovered items ...
+    Added 3 new TRs
+  After feedback: Q_H=0.67 Q_A=1.00 Trace=1.00 Coverage=1.00  (1397s)
+  Final TR-Doc saved: data/processed/evaluation/final/bash_user_manual_final_tr_doc.json  (66.1 KB, 47 TRs)
+
+============================================================
+  PIPELINE COMPLETE
+============================================================
+  nasa_srs_v1                NEEDS REVIEW  46 TRs  Q_H=0.67 Q_A=1.00
+  swagger_petstore           NEEDS REVIEW  40 TRs  Q_H=0.50 Q_A=1.00
+  auth_system_design         NEEDS REVIEW  53 TRs  Q_H=0.67 Q_A=1.00
+  bash_user_manual           NEEDS REVIEW  47 TRs  Q_H=0.67 Q_A=1.00
+
+Output artifacts:
+  demand          : data/processed/demand_model
+  consistency     : data/processed/consistency
+  tr              : data/processed/tr_doc
+  reviews         : data/processed/evaluation/reviews
+  final           : data/processed/evaluation/final
+

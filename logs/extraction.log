@@ -1,0 +1,1050 @@
+nohup: 忽略输入
+
+AI4RE-Test  |  Stage 1 Extraction  |  llama3.1:70b
+------------------------------------------------------------
+Host   : http://127.0.0.1:11434
+Model  : llama3.1:70b
+Chunks : ALL
+Debug  : False
+Ollama OK  |  model: llama3.1:70b  |  host: http://127.0.0.1:11434
+
+============================================================
+  nasa_srs_v1 -- ALL chunks
+============================================================
+
+  14 chunks total, processing 14
+
+  [  1/14] nasa_srs_v1__s0001__c0001 ... 0 entities  (206.2s)
+  [  2/14] nasa_srs_v1__s0002__c0001 ... 4 entities  (106.8s)
+  [  3/14] nasa_srs_v1__s0003__c0001 ... 3 entities  (84.4s)
+  [  4/14] nasa_srs_v1__s0004__c0001 ... 4 entities  (108.4s)
+  [  5/14] nasa_srs_v1__s0005__c0001 ... 23 entities  (419.4s)
+  [  6/14] nasa_srs_v1__s0006__c0001 ... 0 entities  (62.1s)
+  [  7/14] nasa_srs_v1__s0007__c0001 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [  8/14] nasa_srs_v1__s0008__c0001 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [  9/14] nasa_srs_v1__s0009__c0001 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [ 10/14] nasa_srs_v1__s0010__c0001 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [ 11/14] nasa_srs_v1__s0011__c0001 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [ 12/14] nasa_srs_v1__s0012__c0001 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [ 13/14] nasa_srs_v1__s0013__c0001 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [ 14/14] nasa_srs_v1__s0014__c0001 ... ERROR: <urlopen error [Errno 111] Connection refused>
+
+  Extracted: 34 entities  (987.4s)
+
+  Entity type breakdown:
+    actor_role               : 12
+    function_point           : 10
+    interface_name           : 9
+    constraint               : 2
+    process_step             : 1
+
+  Sample entities (first 2 per type):
+    [function_point      ] (0.80)  Support protocol interoperability
+    [process_step        ] (0.70)  Streamline development process and implementation
+    [function_point      ] (0.80)  Easier to verify an implementation
+    [constraint          ] (0.80)  RFCs use consistent language
+    [actor_role          ] (0.90)  CCSDS documents
+    [actor_role          ] (0.90)  NASA programs and projects
+    [constraint          ] (0.70)  Level of compliance and rigor is associated with software class
+    [interface_name      ] (0.90)  BPv6
+    [interface_name      ] (0.90)  BPv7
+
+  Saved: data/processed/entities/nasa_srs_v1.json  (6.5 KB)
+
+============================================================
+  bash_user_manual -- ALL chunks
+============================================================
+
+  367 chunks total, processing 367
+
+  [  1/367] bash_user_manual__s0001__c0001 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [  2/367] bash_user_manual__s0002__c0001 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [  3/367] bash_user_manual__s0002__c0002 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [  4/367] bash_user_manual__s0003__c0001 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [  5/367] bash_user_manual__s0003__c0002 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [  6/367] bash_user_manual__s0003__c0003 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [  7/367] bash_user_manual__s0004__c0001 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [  8/367] bash_user_manual__s0004__c0002 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [  9/367] bash_user_manual__s0005__c0001 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [ 10/367] bash_user_manual__s0005__c0002 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [ 11/367] bash_user_manual__s0006__c0001 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [ 12/367] bash_user_manual__s0006__c0002 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [ 13/367] bash_user_manual__s0007__c0001 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [ 14/367] bash_user_manual__s0007__c0002 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [ 15/367] bash_user_manual__s0008__c0001 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [ 16/367] bash_user_manual__s0008__c0002 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [ 17/367] bash_user_manual__s0009__c0001 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [ 18/367] bash_user_manual__s0009__c0002 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [ 19/367] bash_user_manual__s0010__c0001 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [ 20/367] bash_user_manual__s0010__c0002 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [ 21/367] bash_user_manual__s0011__c0001 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [ 22/367] bash_user_manual__s0011__c0002 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [ 23/367] bash_user_manual__s0012__c0001 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [ 24/367] bash_user_manual__s0012__c0002 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [ 25/367] bash_user_manual__s0012__c0003 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [ 26/367] bash_user_manual__s0013__c0001 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [ 27/367] bash_user_manual__s0014__c0001 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [ 28/367] bash_user_manual__s0014__c0002 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [ 29/367] bash_user_manual__s0014__c0003 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [ 30/367] bash_user_manual__s0014__c0004 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [ 31/367] bash_user_manual__s0014__c0005 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [ 32/367] bash_user_manual__s0015__c0001 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [ 33/367] bash_user_manual__s0016__c0001 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [ 34/367] bash_user_manual__s0016__c0002 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [ 35/367] bash_user_manual__s0017__c0001 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [ 36/367] bash_user_manual__s0017__c0002 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [ 37/367] bash_user_manual__s0017__c0003 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [ 38/367] bash_user_manual__s0018__c0001 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [ 39/367] bash_user_manual__s0018__c0002 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [ 40/367] bash_user_manual__s0019__c0001 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [ 41/367] bash_user_manual__s0019__c0002 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [ 42/367] bash_user_manual__s0020__c0001 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [ 43/367] bash_user_manual__s0021__c0001 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [ 44/367] bash_user_manual__s0021__c0002 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [ 45/367] bash_user_manual__s0022__c0001 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [ 46/367] bash_user_manual__s0023__c0001 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [ 47/367] bash_user_manual__s0023__c0002 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [ 48/367] bash_user_manual__s0024__c0001 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [ 49/367] bash_user_manual__s0024__c0002 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [ 50/367] bash_user_manual__s0025__c0001 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [ 51/367] bash_user_manual__s0025__c0002 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [ 52/367] bash_user_manual__s0026__c0001 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [ 53/367] bash_user_manual__s0026__c0002 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [ 54/367] bash_user_manual__s0027__c0001 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [ 55/367] bash_user_manual__s0027__c0002 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [ 56/367] bash_user_manual__s0028__c0001 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [ 57/367] bash_user_manual__s0028__c0002 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [ 58/367] bash_user_manual__s0028__c0003 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [ 59/367] bash_user_manual__s0028__c0004 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [ 60/367] bash_user_manual__s0028__c0005 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [ 61/367] bash_user_manual__s0029__c0001 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [ 62/367] bash_user_manual__s0029__c0002 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [ 63/367] bash_user_manual__s0030__c0001 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [ 64/367] bash_user_manual__s0030__c0002 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [ 65/367] bash_user_manual__s0031__c0001 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [ 66/367] bash_user_manual__s0032__c0001 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [ 67/367] bash_user_manual__s0032__c0002 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [ 68/367] bash_user_manual__s0033__c0001 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [ 69/367] bash_user_manual__s0033__c0002 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [ 70/367] bash_user_manual__s0033__c0003 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [ 71/367] bash_user_manual__s0034__c0001 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [ 72/367] bash_user_manual__s0034__c0002 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [ 73/367] bash_user_manual__s0034__c0003 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [ 74/367] bash_user_manual__s0035__c0001 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [ 75/367] bash_user_manual__s0036__c0001 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [ 76/367] bash_user_manual__s0036__c0002 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [ 77/367] bash_user_manual__s0037__c0001 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [ 78/367] bash_user_manual__s0037__c0002 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [ 79/367] bash_user_manual__s0038__c0001 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [ 80/367] bash_user_manual__s0039__c0001 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [ 81/367] bash_user_manual__s0039__c0002 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [ 82/367] bash_user_manual__s0040__c0001 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [ 83/367] bash_user_manual__s0041__c0001 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [ 84/367] bash_user_manual__s0041__c0002 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [ 85/367] bash_user_manual__s0042__c0001 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [ 86/367] bash_user_manual__s0043__c0001 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [ 87/367] bash_user_manual__s0044__c0001 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [ 88/367] bash_user_manual__s0044__c0002 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [ 89/367] bash_user_manual__s0045__c0001 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [ 90/367] bash_user_manual__s0046__c0001 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [ 91/367] bash_user_manual__s0046__c0002 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [ 92/367] bash_user_manual__s0047__c0001 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [ 93/367] bash_user_manual__s0048__c0001 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [ 94/367] bash_user_manual__s0048__c0002 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [ 95/367] bash_user_manual__s0049__c0001 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [ 96/367] bash_user_manual__s0049__c0002 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [ 97/367] bash_user_manual__s0049__c0003 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [ 98/367] bash_user_manual__s0049__c0004 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [ 99/367] bash_user_manual__s0049__c0005 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [100/367] bash_user_manual__s0049__c0006 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [101/367] bash_user_manual__s0049__c0007 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [102/367] bash_user_manual__s0049__c0008 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [103/367] bash_user_manual__s0050__c0001 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [104/367] bash_user_manual__s0051__c0001 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [105/367] bash_user_manual__s0051__c0002 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [106/367] bash_user_manual__s0051__c0003 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [107/367] bash_user_manual__s0051__c0004 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [108/367] bash_user_manual__s0052__c0001 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [109/367] bash_user_manual__s0053__c0001 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [110/367] bash_user_manual__s0053__c0002 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [111/367] bash_user_manual__s0054__c0001 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [112/367] bash_user_manual__s0054__c0002 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [113/367] bash_user_manual__s0054__c0003 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [114/367] bash_user_manual__s0054__c0004 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [115/367] bash_user_manual__s0054__c0005 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [116/367] bash_user_manual__s0054__c0006 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [117/367] bash_user_manual__s0054__c0007 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [118/367] bash_user_manual__s0054__c0008 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [119/367] bash_user_manual__s0055__c0001 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [120/367] bash_user_manual__s0055__c0002 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [121/367] bash_user_manual__s0056__c0001 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [122/367] bash_user_manual__s0056__c0002 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [123/367] bash_user_manual__s0056__c0003 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [124/367] bash_user_manual__s0057__c0001 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [125/367] bash_user_manual__s0057__c0002 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [126/367] bash_user_manual__s0057__c0003 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [127/367] bash_user_manual__s0057__c0004 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [128/367] bash_user_manual__s0058__c0001 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [129/367] bash_user_manual__s0058__c0002 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [130/367] bash_user_manual__s0058__c0003 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [131/367] bash_user_manual__s0059__c0001 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [132/367] bash_user_manual__s0060__c0001 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [133/367] bash_user_manual__s0060__c0002 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [134/367] bash_user_manual__s0060__c0003 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [135/367] bash_user_manual__s0061__c0001 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [136/367] bash_user_manual__s0061__c0002 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [137/367] bash_user_manual__s0061__c0003 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [138/367] bash_user_manual__s0062__c0001 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [139/367] bash_user_manual__s0062__c0002 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [140/367] bash_user_manual__s0062__c0003 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [141/367] bash_user_manual__s0063__c0001 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [142/367] bash_user_manual__s0063__c0002 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [143/367] bash_user_manual__s0063__c0003 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [144/367] bash_user_manual__s0064__c0001 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [145/367] bash_user_manual__s0065__c0001 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [146/367] bash_user_manual__s0065__c0002 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [147/367] bash_user_manual__s0065__c0003 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [148/367] bash_user_manual__s0066__c0001 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [149/367] bash_user_manual__s0066__c0002 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [150/367] bash_user_manual__s0067__c0001 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [151/367] bash_user_manual__s0067__c0002 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [152/367] bash_user_manual__s0068__c0001 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [153/367] bash_user_manual__s0068__c0002 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [154/367] bash_user_manual__s0068__c0003 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [155/367] bash_user_manual__s0068__c0004 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [156/367] bash_user_manual__s0069__c0001 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [157/367] bash_user_manual__s0069__c0002 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [158/367] bash_user_manual__s0069__c0003 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [159/367] bash_user_manual__s0069__c0004 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [160/367] bash_user_manual__s0069__c0005 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [161/367] bash_user_manual__s0069__c0006 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [162/367] bash_user_manual__s0069__c0007 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [163/367] bash_user_manual__s0069__c0008 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [164/367] bash_user_manual__s0069__c0009 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [165/367] bash_user_manual__s0069__c0010 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [166/367] bash_user_manual__s0069__c0011 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [167/367] bash_user_manual__s0069__c0012 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [168/367] bash_user_manual__s0069__c0013 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [169/367] bash_user_manual__s0069__c0014 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [170/367] bash_user_manual__s0069__c0015 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [171/367] bash_user_manual__s0069__c0016 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [172/367] bash_user_manual__s0069__c0017 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [173/367] bash_user_manual__s0069__c0018 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [174/367] bash_user_manual__s0069__c0019 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [175/367] bash_user_manual__s0070__c0001 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [176/367] bash_user_manual__s0071__c0001 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [177/367] bash_user_manual__s0071__c0002 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [178/367] bash_user_manual__s0071__c0003 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [179/367] bash_user_manual__s0071__c0004 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [180/367] bash_user_manual__s0072__c0001 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [181/367] bash_user_manual__s0072__c0002 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [182/367] bash_user_manual__s0073__c0001 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [183/367] bash_user_manual__s0073__c0002 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [184/367] bash_user_manual__s0074__c0001 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [185/367] bash_user_manual__s0074__c0002 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [186/367] bash_user_manual__s0075__c0001 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [187/367] bash_user_manual__s0075__c0002 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [188/367] bash_user_manual__s0075__c0003 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [189/367] bash_user_manual__s0075__c0004 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [190/367] bash_user_manual__s0076__c0001 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [191/367] bash_user_manual__s0076__c0002 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [192/367] bash_user_manual__s0077__c0001 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [193/367] bash_user_manual__s0077__c0002 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [194/367] bash_user_manual__s0078__c0001 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [195/367] bash_user_manual__s0079__c0001 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [196/367] bash_user_manual__s0079__c0002 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [197/367] bash_user_manual__s0079__c0003 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [198/367] bash_user_manual__s0080__c0001 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [199/367] bash_user_manual__s0080__c0002 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [200/367] bash_user_manual__s0081__c0001 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [201/367] bash_user_manual__s0081__c0002 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [202/367] bash_user_manual__s0082__c0001 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [203/367] bash_user_manual__s0082__c0002 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [204/367] bash_user_manual__s0083__c0001 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [205/367] bash_user_manual__s0083__c0002 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [206/367] bash_user_manual__s0084__c0001 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [207/367] bash_user_manual__s0085__c0001 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [208/367] bash_user_manual__s0086__c0001 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [209/367] bash_user_manual__s0087__c0001 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [210/367] bash_user_manual__s0087__c0002 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [211/367] bash_user_manual__s0088__c0001 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [212/367] bash_user_manual__s0089__c0001 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [213/367] bash_user_manual__s0089__c0002 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [214/367] bash_user_manual__s0090__c0001 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [215/367] bash_user_manual__s0090__c0002 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [216/367] bash_user_manual__s0090__c0003 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [217/367] bash_user_manual__s0090__c0004 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [218/367] bash_user_manual__s0090__c0005 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [219/367] bash_user_manual__s0091__c0001 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [220/367] bash_user_manual__s0092__c0001 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [221/367] bash_user_manual__s0092__c0002 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [222/367] bash_user_manual__s0092__c0003 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [223/367] bash_user_manual__s0092__c0004 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [224/367] bash_user_manual__s0093__c0001 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [225/367] bash_user_manual__s0093__c0002 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [226/367] bash_user_manual__s0093__c0003 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [227/367] bash_user_manual__s0093__c0004 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [228/367] bash_user_manual__s0094__c0001 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [229/367] bash_user_manual__s0095__c0001 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [230/367] bash_user_manual__s0095__c0002 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [231/367] bash_user_manual__s0096__c0001 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [232/367] bash_user_manual__s0097__c0001 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [233/367] bash_user_manual__s0098__c0001 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [234/367] bash_user_manual__s0098__c0002 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [235/367] bash_user_manual__s0099__c0001 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [236/367] bash_user_manual__s0100__c0001 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [237/367] bash_user_manual__s0100__c0002 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [238/367] bash_user_manual__s0101__c0001 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [239/367] bash_user_manual__s0101__c0002 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [240/367] bash_user_manual__s0101__c0003 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [241/367] bash_user_manual__s0101__c0004 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [242/367] bash_user_manual__s0101__c0005 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [243/367] bash_user_manual__s0101__c0006 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [244/367] bash_user_manual__s0101__c0007 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [245/367] bash_user_manual__s0101__c0008 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [246/367] bash_user_manual__s0101__c0009 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [247/367] bash_user_manual__s0102__c0001 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [248/367] bash_user_manual__s0102__c0002 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [249/367] bash_user_manual__s0103__c0001 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [250/367] bash_user_manual__s0104__c0001 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [251/367] bash_user_manual__s0104__c0002 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [252/367] bash_user_manual__s0105__c0001 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [253/367] bash_user_manual__s0105__c0002 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [254/367] bash_user_manual__s0106__c0001 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [255/367] bash_user_manual__s0106__c0002 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [256/367] bash_user_manual__s0107__c0001 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [257/367] bash_user_manual__s0107__c0002 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [258/367] bash_user_manual__s0108__c0001 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [259/367] bash_user_manual__s0108__c0002 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [260/367] bash_user_manual__s0109__c0001 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [261/367] bash_user_manual__s0109__c0002 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [262/367] bash_user_manual__s0109__c0003 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [263/367] bash_user_manual__s0110__c0001 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [264/367] bash_user_manual__s0110__c0002 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [265/367] bash_user_manual__s0110__c0003 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [266/367] bash_user_manual__s0111__c0001 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [267/367] bash_user_manual__s0111__c0002 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [268/367] bash_user_manual__s0112__c0001 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [269/367] bash_user_manual__s0112__c0002 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [270/367] bash_user_manual__s0112__c0003 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [271/367] bash_user_manual__s0113__c0001 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [272/367] bash_user_manual__s0114__c0001 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [273/367] bash_user_manual__s0114__c0002 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [274/367] bash_user_manual__s0114__c0003 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [275/367] bash_user_manual__s0114__c0004 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [276/367] bash_user_manual__s0115__c0001 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [277/367] bash_user_manual__s0116__c0001 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [278/367] bash_user_manual__s0116__c0002 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [279/367] bash_user_manual__s0116__c0003 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [280/367] bash_user_manual__s0116__c0004 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [281/367] bash_user_manual__s0116__c0005 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [282/367] bash_user_manual__s0117__c0001 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [283/367] bash_user_manual__s0117__c0002 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [284/367] bash_user_manual__s0118__c0001 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [285/367] bash_user_manual__s0118__c0002 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [286/367] bash_user_manual__s0119__c0001 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [287/367] bash_user_manual__s0119__c0002 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [288/367] bash_user_manual__s0119__c0003 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [289/367] bash_user_manual__s0120__c0001 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [290/367] bash_user_manual__s0120__c0002 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [291/367] bash_user_manual__s0121__c0001 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [292/367] bash_user_manual__s0121__c0002 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [293/367] bash_user_manual__s0122__c0001 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [294/367] bash_user_manual__s0122__c0002 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [295/367] bash_user_manual__s0123__c0001 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [296/367] bash_user_manual__s0123__c0002 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [297/367] bash_user_manual__s0124__c0001 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [298/367] bash_user_manual__s0124__c0002 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [299/367] bash_user_manual__s0125__c0001 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [300/367] bash_user_manual__s0125__c0002 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [301/367] bash_user_manual__s0125__c0003 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [302/367] bash_user_manual__s0126__c0001 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [303/367] bash_user_manual__s0127__c0001 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [304/367] bash_user_manual__s0127__c0002 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [305/367] bash_user_manual__s0128__c0001 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [306/367] bash_user_manual__s0128__c0002 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [307/367] bash_user_manual__s0129__c0001 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [308/367] bash_user_manual__s0129__c0002 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [309/367] bash_user_manual__s0130__c0001 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [310/367] bash_user_manual__s0130__c0002 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [311/367] bash_user_manual__s0131__c0001 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [312/367] bash_user_manual__s0131__c0002 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [313/367] bash_user_manual__s0131__c0003 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [314/367] bash_user_manual__s0132__c0001 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [315/367] bash_user_manual__s0132__c0002 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [316/367] bash_user_manual__s0133__c0001 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [317/367] bash_user_manual__s0133__c0002 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [318/367] bash_user_manual__s0133__c0003 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [319/367] bash_user_manual__s0134__c0001 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [320/367] bash_user_manual__s0134__c0002 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [321/367] bash_user_manual__s0134__c0003 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [322/367] bash_user_manual__s0135__c0001 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [323/367] bash_user_manual__s0136__c0001 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [324/367] bash_user_manual__s0136__c0002 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [325/367] bash_user_manual__s0136__c0003 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [326/367] bash_user_manual__s0136__c0004 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [327/367] bash_user_manual__s0136__c0005 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [328/367] bash_user_manual__s0136__c0006 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [329/367] bash_user_manual__s0136__c0007 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [330/367] bash_user_manual__s0136__c0008 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [331/367] bash_user_manual__s0136__c0009 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [332/367] bash_user_manual__s0136__c0010 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [333/367] bash_user_manual__s0136__c0011 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [334/367] bash_user_manual__s0137__c0001 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [335/367] bash_user_manual__s0137__c0002 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [336/367] bash_user_manual__s0138__c0001 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [337/367] bash_user_manual__s0139__c0001 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [338/367] bash_user_manual__s0139__c0002 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [339/367] bash_user_manual__s0139__c0003 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [340/367] bash_user_manual__s0140__c0001 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [341/367] bash_user_manual__s0140__c0002 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [342/367] bash_user_manual__s0141__c0001 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [343/367] bash_user_manual__s0141__c0002 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [344/367] bash_user_manual__s0141__c0003 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [345/367] bash_user_manual__s0142__c0001 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [346/367] bash_user_manual__s0142__c0002 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [347/367] bash_user_manual__s0143__c0001 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [348/367] bash_user_manual__s0144__c0001 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [349/367] bash_user_manual__s0145__c0001 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [350/367] bash_user_manual__s0146__c0001 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [351/367] bash_user_manual__s0146__c0002 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [352/367] bash_user_manual__s0147__c0001 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [353/367] bash_user_manual__s0148__c0001 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [354/367] bash_user_manual__s0148__c0002 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [355/367] bash_user_manual__s0148__c0003 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [356/367] bash_user_manual__s0148__c0004 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [357/367] bash_user_manual__s0148__c0005 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [358/367] bash_user_manual__s0148__c0006 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [359/367] bash_user_manual__s0149__c0001 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [360/367] bash_user_manual__s0149__c0002 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [361/367] bash_user_manual__s0149__c0003 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [362/367] bash_user_manual__s0149__c0004 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [363/367] bash_user_manual__s0149__c0005 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [364/367] bash_user_manual__s0150__c0001 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [365/367] bash_user_manual__s0150__c0002 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [366/367] bash_user_manual__s0150__c0003 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [367/367] bash_user_manual__s0150__c0004 ... ERROR: <urlopen error [Errno 111] Connection refused>
+
+  Extracted: 0 entities  (0.1s)
+  No entities extracted.
+  No entities to save.
+
+============================================================
+  swagger_petstore -- ALL chunks
+============================================================
+
+  21 chunks total, processing 21
+
+  [  1/21] swagger_petstore__s0001__c0001 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [  2/21] swagger_petstore__s0002__c0001 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [  3/21] swagger_petstore__s0003__c0001 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [  4/21] swagger_petstore__s0004__c0001 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [  5/21] swagger_petstore__s0005__c0001 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [  6/21] swagger_petstore__s0006__c0001 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [  7/21] swagger_petstore__s0007__c0001 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [  8/21] swagger_petstore__s0008__c0001 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [  9/21] swagger_petstore__s0009__c0001 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [ 10/21] swagger_petstore__s0010__c0001 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [ 11/21] swagger_petstore__s0011__c0001 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [ 12/21] swagger_petstore__s0012__c0001 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [ 13/21] swagger_petstore__s0013__c0001 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [ 14/21] swagger_petstore__s0014__c0001 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [ 15/21] swagger_petstore__s0015__c0001 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [ 16/21] swagger_petstore__s0016__c0001 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [ 17/21] swagger_petstore__s0017__c0001 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [ 18/21] swagger_petstore__s0018__c0001 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [ 19/21] swagger_petstore__s0019__c0001 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [ 20/21] swagger_petstore__s0020__c0001 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [ 21/21] swagger_petstore__s0021__c0001 ... ERROR: <urlopen error [Errno 111] Connection refused>
+
+  Extracted: 0 entities  (0.0s)
+  No entities extracted.
+  No entities to save.
+
+============================================================
+  auth_system_design -- ALL chunks
+============================================================
+
+  17 chunks total, processing 17
+
+  [  1/17] auth_system_design__s0001__c0001 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [  2/17] auth_system_design__s0002__c0001 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [  3/17] auth_system_design__s0003__c0001 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [  4/17] auth_system_design__s0004__c0001 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [  5/17] auth_system_design__s0005__c0001 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [  6/17] auth_system_design__s0006__c0001 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [  7/17] auth_system_design__s0007__c0001 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [  8/17] auth_system_design__s0008__c0001 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [  9/17] auth_system_design__s0009__c0001 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [ 10/17] auth_system_design__s0010__c0001 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [ 11/17] auth_system_design__s0011__c0001 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [ 12/17] auth_system_design__s0012__c0001 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [ 13/17] auth_system_design__s0013__c0001 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [ 14/17] auth_system_design__s0014__c0001 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [ 15/17] auth_system_design__s0015__c0001 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [ 16/17] auth_system_design__s0016__c0001 ... ERROR: <urlopen error [Errno 111] Connection refused>
+  [ 17/17] auth_system_design__s0017__c0001 ... ERROR: <urlopen error [Errno 111] Connection refused>
+
+  Extracted: 0 entities  (0.0s)
+  No entities extracted.
+  No entities to save.
+
+============================================================
+  Done.  Passed:4  Skipped:0  Total entities:34
+============================================================
+
+nohup: 忽略输入
+
+AI4RE-Test  |  Stage 1 Extraction  |  llama3.1:70b
+------------------------------------------------------------
+Host   : http://127.0.0.1:11434
+Model  : llama3.1:70b
+Chunks : ALL
+Debug  : False
+Ollama OK  |  model: llama3.1:70b  |  host: http://127.0.0.1:11434
+
+============================================================
+  nasa_srs_v1 -- ALL chunks
+============================================================
+
+  14 chunks total, processing 14
+
+  [  1/14] nasa_srs_v1__s0001__c0001 ... 0 entities  (23.7s)
+  [  2/14] nasa_srs_v1__s0002__c0001 ... 4 entities  (103.4s)
+  [  3/14] nasa_srs_v1__s0003__c0001 ... 3 entities  (78.1s)
+  [  4/14] nasa_srs_v1__s0004__c0001 ... 4 entities  (110.5s)
+  [  5/14] nasa_srs_v1__s0005__c0001 ... 23 entities  (422.3s)
+  [  6/14] nasa_srs_v1__s0006__c0001 ... 7 entities  (189.7s)
+  [  7/14] nasa_srs_v1__s0007__c0001 ... 0 entities  (2.1s)
+  [  8/14] nasa_srs_v1__s0008__c0001 ... 3 entities  (69.8s)
+  [  9/14] nasa_srs_v1__s0009__c0001 ... 4 entities  (97.8s)
+  [ 10/14] nasa_srs_v1__s0010__c0001 ... 5 entities  (114.4s)
+  [ 11/14] nasa_srs_v1__s0011__c0001 ... 13 entities  (286.6s)
+  [ 12/14] nasa_srs_v1__s0012__c0001 ... 3 entities  (83.8s)
+  [ 13/14] nasa_srs_v1__s0013__c0001 ... 3 entities  (71.2s)
+  [ 14/14] nasa_srs_v1__s0014__c0001 ... 0 entities  (4.5s)
+
+  Extracted: 72 entities  (1657.8s)
+
+  Entity type breakdown:
+    interface_name           : 27
+    actor_role               : 20
+    function_point           : 19
+    process_step             : 4
+    constraint               : 2
+
+  Sample entities (first 2 per type):
+    [function_point      ] (0.80)  Support protocol interoperability
+    [process_step        ] (0.70)  Streamline development process and implementation
+    [function_point      ] (0.80)  Easier to verify an implementation
+    [constraint          ] (0.80)  RFCs use consistent language
+    [actor_role          ] (0.90)  CCSDS documents
+    [actor_role          ] (0.90)  NASA programs and projects
+    [constraint          ] (0.70)  Level of compliance and rigor is associated with software class
+    [interface_name      ] (0.90)  BPv6
+    [interface_name      ] (0.90)  BPv7
+    [process_step        ] (0.80)  derive requirements from each specification
+
+  Saved: data/processed/entities/nasa_srs_v1.json  (14.0 KB)
+
+============================================================
+  bash_user_manual -- ALL chunks
+============================================================
+
+  367 chunks total, processing 367
+
+  [  1/367] bash_user_manual__s0001__c0001 ... 6 entities  (147.9s)
+  [  2/367] bash_user_manual__s0002__c0001 ... 7 entities  (178.3s)
+  [  3/367] bash_user_manual__s0002__c0002 ... 4 entities  (96.6s)
+  [  4/367] bash_user_manual__s0003__c0001 ... 8 entities  (168.4s)
+  [  5/367] bash_user_manual__s0003__c0002 ... 8 entities  (165.8s)
+  [  6/367] bash_user_manual__s0003__c0003 ... 4 entities  (115.6s)
+  [  7/367] bash_user_manual__s0004__c0001 ... 7 entities  (544.4s)
+  [  8/367] bash_user_manual__s0004__c0002 ... 5 entities  (240.5s)
+  [  9/367] bash_user_manual__s0005__c0001 ... 9 entities  (262.7s)
+  [ 10/367] bash_user_manual__s0005__c0002 ... 3 entities  (424.1s)
+  [ 11/367] bash_user_manual__s0006__c0001 ... 5 entities  (254.0s)
+  [ 12/367] bash_user_manual__s0006__c0002 ... 8 entities  (209.3s)
+  [ 13/367] bash_user_manual__s0007__c0001 ... 7 entities  (168.2s)
+  [ 14/367] bash_user_manual__s0007__c0002 ... 5 entities  (610.3s)
+  [ 15/367] bash_user_manual__s0008__c0001 ... 8 entities  (148.5s)
+  [ 16/367] bash_user_manual__s0008__c0002 ... 3 entities  (71.7s)
+  [ 17/367] bash_user_manual__s0009__c0001 ... 7 entities  (139.8s)
+  [ 18/367] bash_user_manual__s0009__c0002 ... 5 entities  (118.9s)
+  [ 19/367] bash_user_manual__s0010__c0001 ... 5 entities  (116.1s)
+  [ 20/367] bash_user_manual__s0010__c0002 ... 8 entities  (198.0s)
+  [ 21/367] bash_user_manual__s0011__c0001 ... 6 entities  (146.3s)
+  [ 22/367] bash_user_manual__s0011__c0002 ... 3 entities  (83.1s)
+  [ 23/367] bash_user_manual__s0012__c0001 ... 10 entities  (221.9s)
+  [ 24/367] bash_user_manual__s0012__c0002 ... 5 entities  (117.0s)
+  [ 25/367] bash_user_manual__s0012__c0003 ... 6 entities  (146.9s)
+  [ 26/367] bash_user_manual__s0013__c0001 ... 4 entities  (107.0s)
+  [ 27/367] bash_user_manual__s0014__c0001 ... 5 entities  (125.1s)
+  [ 28/367] bash_user_manual__s0014__c0002 ... 6 entities  (147.6s)
+  [ 29/367] bash_user_manual__s0014__c0003 ... 3 entities  (74.9s)
+  [ 30/367] bash_user_manual__s0014__c0004 ... 3 entities  (76.2s)
+  [ 31/367] bash_user_manual__s0014__c0005 ... 5 entities  (119.6s)
+  [ 32/367] bash_user_manual__s0015__c0001 ... 5 entities  (123.0s)
+  [ 33/367] bash_user_manual__s0016__c0001 ... 3 entities  (75.2s)
+  [ 34/367] bash_user_manual__s0016__c0002 ... 4 entities  (99.8s)
+  [ 35/367] bash_user_manual__s0017__c0001 ... 6 entities  (154.9s)
+  [ 36/367] bash_user_manual__s0017__c0002 ... 7 entities  (167.0s)
+  [ 37/367] bash_user_manual__s0017__c0003 ... 6 entities  (147.1s)
+  [ 38/367] bash_user_manual__s0018__c0001 ... 6 entities  (147.1s)
+  [ 39/367] bash_user_manual__s0018__c0002 ... 6 entities  (136.0s)
+  [ 40/367] bash_user_manual__s0019__c0001 ... 12 entities  (263.6s)
+  [ 41/367] bash_user_manual__s0019__c0002 ... 5 entities  (115.4s)
+  [ 42/367] bash_user_manual__s0020__c0001 ... 6 entities  (140.4s)
+  [ 43/367] bash_user_manual__s0021__c0001 ... 5 entities  (118.8s)
+  [ 44/367] bash_user_manual__s0021__c0002 ... 7 entities  (189.6s)
+  [ 45/367] bash_user_manual__s0022__c0001 ... 9 entities  (201.1s)
+  [ 46/367] bash_user_manual__s0023__c0001 ... 5 entities  (118.5s)
+  [ 47/367] bash_user_manual__s0023__c0002 ... 5 entities  (115.7s)
+  [ 48/367] bash_user_manual__s0024__c0001 ... 7 entities  (163.2s)
+  [ 49/367] bash_user_manual__s0024__c0002 ... 6 entities  (139.9s)
+  [ 50/367] bash_user_manual__s0025__c0001 ... 5 entities  (110.5s)
+  [ 51/367] bash_user_manual__s0025__c0002 ... 7 entities  (163.8s)
+  [ 52/367] bash_user_manual__s0026__c0001 ... 5 entities  (118.0s)
+  [ 53/367] bash_user_manual__s0026__c0002 ... 4 entities  (103.7s)
+  [ 54/367] bash_user_manual__s0027__c0001 ... 5 entities  (129.1s)
+  [ 55/367] bash_user_manual__s0027__c0002 ... 5 entities  (127.3s)
+  [ 56/367] bash_user_manual__s0028__c0001 ... 6 entities  (163.8s)
+  [ 57/367] bash_user_manual__s0028__c0002 ... 4 entities  (97.5s)
+  [ 58/367] bash_user_manual__s0028__c0003 ... 7 entities  (165.4s)
+  [ 59/367] bash_user_manual__s0028__c0004 ... 4 entities  (99.0s)
+  [ 60/367] bash_user_manual__s0028__c0005 ... 3 entities  (95.2s)
+  [ 61/367] bash_user_manual__s0029__c0001 ... 6 entities  (185.9s)
+  [ 62/367] bash_user_manual__s0029__c0002 ... 2 entities  (60.1s)
+  [ 63/367] bash_user_manual__s0030__c0001 ... 5 entities  (154.7s)
+  [ 64/367] bash_user_manual__s0030__c0002 ... 4 entities  (119.3s)
+  [ 65/367] bash_user_manual__s0031__c0001 ... 5 entities  (123.7s)
+  [ 66/367] bash_user_manual__s0032__c0001 ... 6 entities  (152.3s)
+  [ 67/367] bash_user_manual__s0032__c0002 ... 3 entities  (92.6s)
+  [ 68/367] bash_user_manual__s0033__c0001 ... 8 entities  (222.2s)
+  [ 69/367] bash_user_manual__s0033__c0002 ... 6 entities  (171.7s)
+  [ 70/367] bash_user_manual__s0033__c0003 ... 2 entities  (56.9s)
+  [ 71/367] bash_user_manual__s0034__c0001 ... 3 entities  (82.2s)
+  [ 72/367] bash_user_manual__s0034__c0002 ... 14 entities  (384.2s)
+  [ 73/367] bash_user_manual__s0034__c0003 ... 5 entities  (119.8s)
+  [ 74/367] bash_user_manual__s0035__c0001 ... 1 entities  (34.8s)
+  [ 75/367] bash_user_manual__s0036__c0001 ... 6 entities  (156.4s)
+  [ 76/367] bash_user_manual__s0036__c0002 ... 11 entities  (232.0s)
+  [ 77/367] bash_user_manual__s0037__c0001 ... 6 entities  (170.3s)
+  [ 78/367] bash_user_manual__s0037__c0002 ... 2 entities  (62.9s)
+  [ 79/367] bash_user_manual__s0038__c0001 ... 6 entities  (149.6s)
+  [ 80/367] bash_user_manual__s0039__c0001 ... 5 entities  (132.9s)
+  [ 81/367] bash_user_manual__s0039__c0002 ... 4 entities  (104.6s)
+  [ 82/367] bash_user_manual__s0040__c0001 ... 10 entities  (253.3s)
+  [ 83/367] bash_user_manual__s0041__c0001 ... 8 entities  (195.3s)
+  [ 84/367] bash_user_manual__s0041__c0002 ... 6 entities  (159.4s)
+  [ 85/367] bash_user_manual__s0042__c0001 ... 7 entities  (183.5s)
+  [ 86/367] bash_user_manual__s0043__c0001 ... 6 entities  (152.5s)
+  [ 87/367] bash_user_manual__s0044__c0001 ... 7 entities  (148.7s)
+  [ 88/367] bash_user_manual__s0044__c0002 ... 8 entities  (206.9s)
+  [ 89/367] bash_user_manual__s0045__c0001 ... 8 entities  (200.3s)
+  [ 90/367] bash_user_manual__s0046__c0001 ... 6 entities  (164.8s)
+  [ 91/367] bash_user_manual__s0046__c0002 ... 5 entities  (143.9s)
+  [ 92/367] bash_user_manual__s0047__c0001 ... 11 entities  (284.9s)
+  [ 93/367] bash_user_manual__s0048__c0001 ... 5 entities  (158.9s)
+  [ 94/367] bash_user_manual__s0048__c0002 ... 6 entities  (534.3s)
+  [ 95/367] bash_user_manual__s0049__c0001 ... 7 entities  (312.9s)
+  [ 96/367] bash_user_manual__s0049__c0002 ... 7 entities  (252.7s)
+  [ 97/367] bash_user_manual__s0049__c0003 ... 6 entities  (594.4s)
+  [ 98/367] bash_user_manual__s0049__c0004 ... 5 entities  (303.6s)
+  [ 99/367] bash_user_manual__s0049__c0005 ... 7 entities  (232.9s)
+  [100/367] bash_user_manual__s0049__c0006 ... 7 entities  (231.8s)
+  [101/367] bash_user_manual__s0049__c0007 ... ERROR: timed out
+  [102/367] bash_user_manual__s0049__c0008 ... ERROR: timed out
+  [103/367] bash_user_manual__s0050__c0001 ... ERROR: timed out
+  [104/367] bash_user_manual__s0051__c0001 ... ERROR: timed out
+  [105/367] bash_user_manual__s0051__c0002 ... ERROR: timed out
+  [106/367] bash_user_manual__s0051__c0003 ... 6 entities  (410.7s)
+  [107/367] bash_user_manual__s0051__c0004 ... ERROR: timed out
+  [108/367] bash_user_manual__s0052__c0001 ... 8 entities  (363.2s)
+  [109/367] bash_user_manual__s0053__c0001 ... 5 entities  (148.3s)
+  [110/367] bash_user_manual__s0053__c0002 ... 6 entities  (239.1s)
+  [111/367] bash_user_manual__s0054__c0001 ... 7 entities  (348.6s)
+  [112/367] bash_user_manual__s0054__c0002 ... 9 entities  (1994.4s)
+  [113/367] bash_user_manual__s0054__c0003 ... 7 entities  (134.5s)
+  [114/367] bash_user_manual__s0054__c0004 ... 5 entities  (107.1s)
+  [115/367] bash_user_manual__s0054__c0005 ... 6 entities  (129.4s)
+  [116/367] bash_user_manual__s0054__c0006 ... 11 entities  (237.8s)
+  [117/367] bash_user_manual__s0054__c0007 ... 7 entities  (147.3s)
+  [118/367] bash_user_manual__s0054__c0008 ... 2 entities  (58.8s)
+  [119/367] bash_user_manual__s0055__c0001 ... 6 entities  (130.5s)
+  [120/367] bash_user_manual__s0055__c0002 ... 8 entities  (167.1s)
+  [121/367] bash_user_manual__s0056__c0001 ... 5 entities  (114.0s)
+  [122/367] bash_user_manual__s0056__c0002 ... 5 entities  (100.0s)
+  [123/367] bash_user_manual__s0056__c0003 ... 6 entities  (121.9s)
+  [124/367] bash_user_manual__s0057__c0001 ... 6 entities  (122.9s)
+  [125/367] bash_user_manual__s0057__c0002 ... 6 entities  (131.3s)
+  [126/367] bash_user_manual__s0057__c0003 ... 10 entities  (209.5s)
+  [127/367] bash_user_manual__s0057__c0004 ... 5 entities  (113.4s)
+  [128/367] bash_user_manual__s0058__c0001 ... 9 entities  (184.3s)
+  [129/367] bash_user_manual__s0058__c0002 ... 12 entities  (201.6s)
+  [130/367] bash_user_manual__s0058__c0003 ... 5 entities  (104.0s)
+  [131/367] bash_user_manual__s0059__c0001 ... 5 entities  (102.5s)
+  [132/367] bash_user_manual__s0060__c0001 ... 6 entities  (125.8s)
+  [133/367] bash_user_manual__s0060__c0002 ... 6 entities  (131.4s)
+  [134/367] bash_user_manual__s0060__c0003 ... 5 entities  (88.9s)
+  [135/367] bash_user_manual__s0061__c0001 ... 5 entities  (375.4s)
+  [136/367] bash_user_manual__s0061__c0002 ... 6 entities  (231.3s)
+  [137/367] bash_user_manual__s0061__c0003 ... 6 entities  (163.5s)
+  [138/367] bash_user_manual__s0062__c0001 ... 6 entities  (426.0s)
+  [139/367] bash_user_manual__s0062__c0002 ... 7 entities  (260.4s)
+  [140/367] bash_user_manual__s0062__c0003 ... 4 entities  (101.1s)
+  [141/367] bash_user_manual__s0063__c0001 ... 5 entities  (117.5s)
+  [142/367] bash_user_manual__s0063__c0002 ... 7 entities  (631.9s)
+  [143/367] bash_user_manual__s0063__c0003 ... 9 entities  (345.6s)
+  [144/367] bash_user_manual__s0064__c0001 ... 7 entities  (149.3s)
+  [145/367] bash_user_manual__s0065__c0001 ... 5 entities  (105.6s)
+  [146/367] bash_user_manual__s0065__c0002 ... 7 entities  (152.3s)
+  [147/367] bash_user_manual__s0065__c0003 ... 6 entities  (129.2s)
+  [148/367] bash_user_manual__s0066__c0001 ... 9 entities  (178.6s)
+  [149/367] bash_user_manual__s0066__c0002 ... 3 entities  (61.5s)
+  [150/367] bash_user_manual__s0067__c0001 ... 10 entities  (161.9s)
+  [151/367] bash_user_manual__s0067__c0002 ... 3 entities  (68.3s)
+  [152/367] bash_user_manual__s0068__c0001 ... 7 entities  (140.0s)
+  [153/367] bash_user_manual__s0068__c0002 ... 6 entities  (135.0s)
+  [154/367] bash_user_manual__s0068__c0003 ... 7 entities  (143.9s)
+  [155/367] bash_user_manual__s0068__c0004 ... 4 entities  (82.1s)
+  [156/367] bash_user_manual__s0069__c0001 ... 8 entities  (163.8s)
+  [157/367] bash_user_manual__s0069__c0002 ... 8 entities  (161.8s)
+  [158/367] bash_user_manual__s0069__c0003 ... 8 entities  (157.7s)
+  [159/367] bash_user_manual__s0069__c0004 ... 5 entities  (101.0s)
+  [160/367] bash_user_manual__s0069__c0005 ... 9 entities  (181.7s)
+  [161/367] bash_user_manual__s0069__c0006 ... 7 entities  (139.1s)
+  [162/367] bash_user_manual__s0069__c0007 ... 7 entities  (155.6s)
+  [163/367] bash_user_manual__s0069__c0008 ... 7 entities  (144.1s)
+  [164/367] bash_user_manual__s0069__c0009 ... 5 entities  (101.2s)
+  [165/367] bash_user_manual__s0069__c0010 ... 8 entities  (171.0s)
+  [166/367] bash_user_manual__s0069__c0011 ... 6 entities  (128.9s)
+  [167/367] bash_user_manual__s0069__c0012 ... 6 entities  (118.2s)
+  [168/367] bash_user_manual__s0069__c0013 ... 6 entities  (103.3s)
+  [169/367] bash_user_manual__s0069__c0014 ... 10 entities  (176.4s)
+  [170/367] bash_user_manual__s0069__c0015 ... 9 entities  (195.7s)
+  [171/367] bash_user_manual__s0069__c0016 ... 5 entities  (107.8s)
+  [172/367] bash_user_manual__s0069__c0017 ... 7 entities  (138.8s)
+  [173/367] bash_user_manual__s0069__c0018 ... 7 entities  (146.0s)
+  [174/367] bash_user_manual__s0069__c0019 ... 7 entities  (138.8s)
+  [175/367] bash_user_manual__s0070__c0001 ... 2 entities  (44.0s)
+  [176/367] bash_user_manual__s0071__c0001 ... 6 entities  (100.6s)
+  [177/367] bash_user_manual__s0071__c0002 ... 7 entities  (146.5s)
+  [178/367] bash_user_manual__s0071__c0003 ... 7 entities  (145.7s)
+  [179/367] bash_user_manual__s0071__c0004 ... 7 entities  (139.3s)
+  [180/367] bash_user_manual__s0072__c0001 ... 8 entities  (170.4s)
+  [181/367] bash_user_manual__s0072__c0002 ... 2 entities  (45.4s)
+  [182/367] bash_user_manual__s0073__c0001 ... 6 entities  (126.5s)
+  [183/367] bash_user_manual__s0073__c0002 ... 5 entities  (101.9s)
+  [184/367] bash_user_manual__s0074__c0001 ... 5 entities  (99.9s)
+  [185/367] bash_user_manual__s0074__c0002 ... 10 entities  (178.7s)
+  [186/367] bash_user_manual__s0075__c0001 ... 7 entities  (138.2s)
+  [187/367] bash_user_manual__s0075__c0002 ... 17 entities  (279.9s)
+  [188/367] bash_user_manual__s0075__c0003 ... 9 entities  (157.6s)
+  [189/367] bash_user_manual__s0075__c0004 ... 4 entities  (86.4s)
+  [190/367] bash_user_manual__s0076__c0001 ... 7 entities  (117.8s)
+  [191/367] bash_user_manual__s0076__c0002 ... 5 entities  (111.3s)
+  [192/367] bash_user_manual__s0077__c0001 ... 6 entities  (125.5s)
+  [193/367] bash_user_manual__s0077__c0002 ... 8 entities  (179.9s)
+  [194/367] bash_user_manual__s0078__c0001 ... 5 entities  (107.7s)
+  [195/367] bash_user_manual__s0079__c0001 ... 5 entities  (106.8s)
+  [196/367] bash_user_manual__s0079__c0002 ... 5 entities  (110.1s)
+  [197/367] bash_user_manual__s0079__c0003 ... 6 entities  (133.9s)
+  [198/367] bash_user_manual__s0080__c0001 ... 9 entities  (153.6s)
+  [199/367] bash_user_manual__s0080__c0002 ... 2 entities  (46.9s)
+  [200/367] bash_user_manual__s0081__c0001 ... 6 entities  (125.2s)
+  [201/367] bash_user_manual__s0081__c0002 ... 5 entities  (112.4s)
+  [202/367] bash_user_manual__s0082__c0001 ... 5 entities  (94.1s)
+  [203/367] bash_user_manual__s0082__c0002 ... 6 entities  (133.8s)
+  [204/367] bash_user_manual__s0083__c0001 ... 5 entities  (112.0s)
+  [205/367] bash_user_manual__s0083__c0002 ... 7 entities  (147.8s)
+  [206/367] bash_user_manual__s0084__c0001 ... 8 entities  (177.9s)
+  [207/367] bash_user_manual__s0085__c0001 ... 6 entities  (127.4s)
+  [208/367] bash_user_manual__s0086__c0001 ... 6 entities  (130.1s)
+  [209/367] bash_user_manual__s0087__c0001 ... 6 entities  (131.5s)
+  [210/367] bash_user_manual__s0087__c0002 ... 6 entities  (126.2s)
+  [211/367] bash_user_manual__s0088__c0001 ... 8 entities  (175.6s)
+  [212/367] bash_user_manual__s0089__c0001 ... 7 entities  (171.2s)
+  [213/367] bash_user_manual__s0089__c0002 ... 3 entities  (79.3s)
+  [214/367] bash_user_manual__s0090__c0001 ... 5 entities  (106.0s)
+  [215/367] bash_user_manual__s0090__c0002 ... 7 entities  (153.3s)
+  [216/367] bash_user_manual__s0090__c0003 ... 8 entities  (163.2s)
+  [217/367] bash_user_manual__s0090__c0004 ... 6 entities  (128.0s)
+  [218/367] bash_user_manual__s0090__c0005 ... 6 entities  (132.9s)
+  [219/367] bash_user_manual__s0091__c0001 ... 2 entities  (41.6s)
+  [220/367] bash_user_manual__s0092__c0001 ... 9 entities  (183.2s)
+  [221/367] bash_user_manual__s0092__c0002 ... 9 entities  (153.5s)
+  [222/367] bash_user_manual__s0092__c0003 ... 6 entities  (128.7s)
+  [223/367] bash_user_manual__s0092__c0004 ... 11 entities  (234.6s)
+  [224/367] bash_user_manual__s0093__c0001 ... 5 entities  (111.5s)
+  [225/367] bash_user_manual__s0093__c0002 ... 7 entities  (147.2s)
+  [226/367] bash_user_manual__s0093__c0003 ... 5 entities  (111.2s)
+  [227/367] bash_user_manual__s0093__c0004 ... 6 entities  (112.5s)
+  [228/367] bash_user_manual__s0094__c0001 ... 6 entities  (128.4s)
+  [229/367] bash_user_manual__s0095__c0001 ... 7 entities  (150.6s)
+  [230/367] bash_user_manual__s0095__c0002 ... 3 entities  (63.3s)
+  [231/367] bash_user_manual__s0096__c0001 ... 8 entities  (185.2s)
+  [232/367] bash_user_manual__s0097__c0001 ... 11 entities  (183.9s)
+  [233/367] bash_user_manual__s0098__c0001 ... 11 entities  (229.7s)
+  [234/367] bash_user_manual__s0098__c0002 ... 6 entities  (133.5s)
+  [235/367] bash_user_manual__s0099__c0001 ... 8 entities  (164.1s)
+  [236/367] bash_user_manual__s0100__c0001 ... 6 entities  (126.1s)
+  [237/367] bash_user_manual__s0100__c0002 ... 4 entities  (93.4s)
+  [238/367] bash_user_manual__s0101__c0001 ... 5 entities  (105.3s)
+  [239/367] bash_user_manual__s0101__c0002 ... 6 entities  (131.7s)
+  [240/367] bash_user_manual__s0101__c0003 ... 6 entities  (128.0s)
+  [241/367] bash_user_manual__s0101__c0004 ... 5 entities  (112.5s)
+  [242/367] bash_user_manual__s0101__c0005 ... 7 entities  (117.3s)
+  [243/367] bash_user_manual__s0101__c0006 ... 4 entities  (88.0s)
+  [244/367] bash_user_manual__s0101__c0007 ... 6 entities  (123.7s)
+  [245/367] bash_user_manual__s0101__c0008 ... 6 entities  (131.7s)
+  [246/367] bash_user_manual__s0101__c0009 ... 5 entities  (108.9s)
+  [247/367] bash_user_manual__s0102__c0001 ... 8 entities  (162.3s)
+  [248/367] bash_user_manual__s0102__c0002 ... 6 entities  (128.4s)
+  [249/367] bash_user_manual__s0103__c0001 ... 6 entities  (124.4s)
+  [250/367] bash_user_manual__s0104__c0001 ... 6 entities  (102.5s)
+  [251/367] bash_user_manual__s0104__c0002 ... 13 entities  (271.8s)
+  [252/367] bash_user_manual__s0105__c0001 ... 7 entities  (145.8s)
+  [253/367] bash_user_manual__s0105__c0002 ... 2 entities  (44.0s)
+  [254/367] bash_user_manual__s0106__c0001 ... 6 entities  (130.0s)
+  [255/367] bash_user_manual__s0106__c0002 ... 7 entities  (141.5s)
+  [256/367] bash_user_manual__s0107__c0001 ... 5 entities  (106.4s)
+  [257/367] bash_user_manual__s0107__c0002 ... 7 entities  (144.0s)
+  [258/367] bash_user_manual__s0108__c0001 ... 9 entities  (170.1s)
+  [259/367] bash_user_manual__s0108__c0002 ... 6 entities  (132.4s)
+  [260/367] bash_user_manual__s0109__c0001 ... 9 entities  (182.1s)
+  [261/367] bash_user_manual__s0109__c0002 ... 5 entities  (105.4s)
+  [262/367] bash_user_manual__s0109__c0003 ... 7 entities  (146.8s)
+  [263/367] bash_user_manual__s0110__c0001 ... 7 entities  (149.7s)
+  [264/367] bash_user_manual__s0110__c0002 ... 11 entities  (196.9s)
+  [265/367] bash_user_manual__s0110__c0003 ... 4 entities  (89.8s)
+  [266/367] bash_user_manual__s0111__c0001 ... 6 entities  (107.2s)
+  [267/367] bash_user_manual__s0111__c0002 ... 8 entities  (131.6s)
+  [268/367] bash_user_manual__s0112__c0001 ... 6 entities  (133.0s)
+  [269/367] bash_user_manual__s0112__c0002 ... 4 entities  (89.2s)
+  [270/367] bash_user_manual__s0112__c0003 ... 7 entities  (117.2s)
+  [271/367] bash_user_manual__s0113__c0001 ... 4 entities  (94.2s)
+  [272/367] bash_user_manual__s0114__c0001 ... 10 entities  (175.2s)
+  [273/367] bash_user_manual__s0114__c0002 ... 4 entities  (89.9s)
+  [274/367] bash_user_manual__s0114__c0003 ... 8 entities  (178.2s)
+  [275/367] bash_user_manual__s0114__c0004 ... 11 entities  (180.1s)
+  [276/367] bash_user_manual__s0115__c0001 ... 6 entities  (123.9s)
+  [277/367] bash_user_manual__s0116__c0001 ... 6 entities  (124.7s)
+  [278/367] bash_user_manual__s0116__c0002 ... 7 entities  (147.3s)
+  [279/367] bash_user_manual__s0116__c0003 ... 8 entities  (197.5s)
+  [280/367] bash_user_manual__s0116__c0004 ... 7 entities  (137.7s)
+  [281/367] bash_user_manual__s0116__c0005 ... 8 entities  (134.5s)
+  [282/367] bash_user_manual__s0117__c0001 ... 4 entities  (83.4s)
+  [283/367] bash_user_manual__s0117__c0002 ... 4 entities  (82.2s)
+  [284/367] bash_user_manual__s0118__c0001 ... 6 entities  (100.9s)
+  [285/367] bash_user_manual__s0118__c0002 ... 3 entities  (67.5s)
+  [286/367] bash_user_manual__s0119__c0001 ... 16 entities  (253.3s)
+  [287/367] bash_user_manual__s0119__c0002 ... 7 entities  (156.6s)
+  [288/367] bash_user_manual__s0119__c0003 ... 6 entities  (118.7s)
+  [289/367] bash_user_manual__s0120__c0001 ... 5 entities  (109.4s)
+  [290/367] bash_user_manual__s0120__c0002 ... 5 entities  (109.6s)
+  [291/367] bash_user_manual__s0121__c0001 ... 6 entities  (129.8s)
+  [292/367] bash_user_manual__s0121__c0002 ... 4 entities  (84.9s)
+  [293/367] bash_user_manual__s0122__c0001 ... 6 entities  (121.2s)
+  [294/367] bash_user_manual__s0122__c0002 ... 8 entities  (163.8s)
+  [295/367] bash_user_manual__s0123__c0001 ... 6 entities  (127.8s)
+  [296/367] bash_user_manual__s0123__c0002 ... 5 entities  (114.8s)
+  [297/367] bash_user_manual__s0124__c0001 ... 4 entities  (93.4s)
+  [298/367] bash_user_manual__s0124__c0002 ... 5 entities  (103.3s)
+  [299/367] bash_user_manual__s0125__c0001 ... 7 entities  (139.6s)
+  [300/367] bash_user_manual__s0125__c0002 ... 4 entities  (84.9s)
+  [301/367] bash_user_manual__s0125__c0003 ... 5 entities  (102.4s)
+  [302/367] bash_user_manual__s0126__c0001 ... 6 entities  (126.3s)
+  [303/367] bash_user_manual__s0127__c0001 ... 5 entities  (105.8s)
+  [304/367] bash_user_manual__s0127__c0002 ... 5 entities  (104.2s)
+  [305/367] bash_user_manual__s0128__c0001 ... 7 entities  (151.6s)
+  [306/367] bash_user_manual__s0128__c0002 ... 4 entities  (85.9s)
+  [307/367] bash_user_manual__s0129__c0001 ... 5 entities  (111.2s)
+  [308/367] bash_user_manual__s0129__c0002 ... 7 entities  (148.8s)
+  [309/367] bash_user_manual__s0130__c0001 ... 7 entities  (142.6s)
+  [310/367] bash_user_manual__s0130__c0002 ... 2 entities  (45.9s)
+  [311/367] bash_user_manual__s0131__c0001 ... 6 entities  (124.3s)
+  [312/367] bash_user_manual__s0131__c0002 ... 7 entities  (148.7s)
+  [313/367] bash_user_manual__s0131__c0003 ... 5 entities  (114.4s)
+  [314/367] bash_user_manual__s0132__c0001 ... 8 entities  (163.9s)
+  [315/367] bash_user_manual__s0132__c0002 ... 6 entities  (146.6s)
+  [316/367] bash_user_manual__s0133__c0001 ... 7 entities  (139.4s)
+  [317/367] bash_user_manual__s0133__c0002 ... 12 entities  (253.2s)
+  [318/367] bash_user_manual__s0133__c0003 ... 7 entities  (147.5s)
+  [319/367] bash_user_manual__s0134__c0001 ... 11 entities  (180.3s)
+  [320/367] bash_user_manual__s0134__c0002 ... 8 entities  (175.1s)
+  [321/367] bash_user_manual__s0134__c0003 ... 4 entities  (92.8s)
+  [322/367] bash_user_manual__s0135__c0001 ... 6 entities  (124.2s)
+  [323/367] bash_user_manual__s0136__c0001 ... 7 entities  (153.5s)
+  [324/367] bash_user_manual__s0136__c0002 ... 9 entities  (203.8s)
+  [325/367] bash_user_manual__s0136__c0003 ... 6 entities  (136.7s)
+  [326/367] bash_user_manual__s0136__c0004 ... 6 entities  (121.5s)
+  [327/367] bash_user_manual__s0136__c0005 ... 20 entities  (336.1s)
+  [328/367] bash_user_manual__s0136__c0006 ... 9 entities  (189.7s)
+  [329/367] bash_user_manual__s0136__c0007 ... 14 entities  (226.6s)
+  [330/367] bash_user_manual__s0136__c0008 ... 13 entities  (261.6s)
+  [331/367] bash_user_manual__s0136__c0009 ... 6 entities  (104.5s)
+  [332/367] bash_user_manual__s0136__c0010 ... 10 entities  (159.6s)
+  [333/367] bash_user_manual__s0136__c0011 ... 11 entities  (246.9s)
+  [334/367] bash_user_manual__s0137__c0001 ... 6 entities  (147.8s)
+  [335/367] bash_user_manual__s0137__c0002 ... 6 entities  (117.3s)
+  [336/367] bash_user_manual__s0138__c0001 ... 4 entities  (85.4s)
+  [337/367] bash_user_manual__s0139__c0001 ... 3 entities  (63.0s)
+  [338/367] bash_user_manual__s0139__c0002 ... 4 entities  (89.1s)
+  [339/367] bash_user_manual__s0139__c0003 ... 3 entities  (66.0s)
+  [340/367] bash_user_manual__s0140__c0001 ... 6 entities  (122.2s)
+  [341/367] bash_user_manual__s0140__c0002 ... 4 entities  (83.5s)
+  [342/367] bash_user_manual__s0141__c0001 ... 2 entities  (46.5s)
+  [343/367] bash_user_manual__s0141__c0002 ... 5 entities  (105.1s)
+  [344/367] bash_user_manual__s0141__c0003 ... 2 entities  (41.6s)
+  [345/367] bash_user_manual__s0142__c0001 ... 5 entities  (107.9s)
+  [346/367] bash_user_manual__s0142__c0002 ... 5 entities  (103.3s)
+  [347/367] bash_user_manual__s0143__c0001 ... 4 entities  (90.8s)
+  [348/367] bash_user_manual__s0144__c0001 ... 2 entities  (48.6s)
+  [349/367] bash_user_manual__s0145__c0001 ... 4 entities  (83.9s)
+  [350/367] bash_user_manual__s0146__c0001 ... 5 entities  (84.7s)
+  [351/367] bash_user_manual__s0146__c0002 ... 16 entities  (274.1s)
+  [352/367] bash_user_manual__s0147__c0001 ... 4 entities  (67.4s)
+  [353/367] bash_user_manual__s0148__c0001 ... 2 entities  (37.9s)
+  [354/367] bash_user_manual__s0148__c0002 ... 16 entities  (268.3s)
+  [355/367] bash_user_manual__s0148__c0003 ... 18 entities  (286.6s)
+  [356/367] bash_user_manual__s0148__c0004 ... 16 entities  (255.3s)
+  [357/367] bash_user_manual__s0148__c0005 ... 14 entities  (219.4s)
+  [358/367] bash_user_manual__s0148__c0006 ... 18 entities  (293.7s)
+  [359/367] bash_user_manual__s0149__c0001 ... 16 entities  (259.7s)
+  [360/367] bash_user_manual__s0149__c0002 ... 13 entities  (202.8s)
+  [361/367] bash_user_manual__s0149__c0003 ... 16 entities  (254.2s)
+  [362/367] bash_user_manual__s0149__c0004 ... 22 entities  (345.7s)
+  [363/367] bash_user_manual__s0149__c0005 ... 12 entities  (191.6s)
+  [364/367] bash_user_manual__s0150__c0001 ... 15 entities  (231.6s)
+  [365/367] bash_user_manual__s0150__c0002 ... 15 entities  (246.8s)
+  [366/367] bash_user_manual__s0150__c0003 ... 7 entities  (112.6s)
+  [367/367] bash_user_manual__s0150__c0004 ... 8 entities  (128.9s)
+
+  Extracted: 2390 entities  (61109.5s)
+
+  Entity type breakdown:
+    function_point           : 1047
+    glossary_term            : 453
+    actor_role               : 423
+    process_step             : 341
+    exception_condition      : 90
+    interface_name           : 36
+
+  Sample entities (first 2 per type):
+    [actor_role          ] (0.90)  Stephen Bourne
+    [function_point      ] (0.80)  Bash shell
+    [glossary_term       ] (0.70)  GNU operating system
+    [actor_role          ] (0.80)  Bourne Shell (sh)
+    [function_point      ] (0.80)  executes commands
+    [glossary_term       ] (0.90)  macro processor
+    [process_step        ] (0.60)  accept input typed from keyboard
+    [process_step        ] (0.80)  reads input and divides into words and operators
+    [exception_condition ] (0.90)  single quote may not occur between single quotes
+    [interface_name      ] (0.80)  gettext tools
+    [exception_condition ] (0.90)  non-zero exit status
+    [interface_name      ] (0.90)  shopt
+
+  Saved: data/processed/entities/bash_user_manual.json  (565.3 KB)
+
+============================================================
+  swagger_petstore -- ALL chunks
+============================================================
+
+  21 chunks total, processing 21
+
+  [  1/21] swagger_petstore__s0001__c0001 ... 2 entities  (43.3s)
+  [  2/21] swagger_petstore__s0002__c0001 ... 2 entities  (44.9s)
+  [  3/21] swagger_petstore__s0003__c0001 ... 7 entities  (136.8s)
+  [  4/21] swagger_petstore__s0004__c0001 ... 4 entities  (85.3s)
+  [  5/21] swagger_petstore__s0005__c0001 ... 4 entities  (84.4s)
+  [  6/21] swagger_petstore__s0006__c0001 ... 7 entities  (139.1s)
+  [  7/21] swagger_petstore__s0007__c0001 ... 2 entities  (44.1s)
+  [  8/21] swagger_petstore__s0008__c0001 ... 2 entities  (43.7s)
+  [  9/21] swagger_petstore__s0009__c0001 ... 6 entities  (125.2s)
+  [ 10/21] swagger_petstore__s0010__c0001 ... 2 entities  (46.2s)
+  [ 11/21] swagger_petstore__s0011__c0001 ... 8 entities  (154.2s)
+  [ 12/21] swagger_petstore__s0012__c0001 ... 2 entities  (43.3s)
+  [ 13/21] swagger_petstore__s0013__c0001 ... 2 entities  (44.0s)
+  [ 14/21] swagger_petstore__s0014__c0001 ... 2 entities  (45.8s)
+  [ 15/21] swagger_petstore__s0015__c0001 ... 2 entities  (42.4s)
+  [ 16/21] swagger_petstore__s0016__c0001 ... 4 entities  (77.7s)
+  [ 17/21] swagger_petstore__s0017__c0001 ... 3 entities  (58.2s)
+  [ 18/21] swagger_petstore__s0018__c0001 ... 2 entities  (42.3s)
+  [ 19/21] swagger_petstore__s0019__c0001 ... 3 entities  (56.6s)
+  [ 20/21] swagger_petstore__s0020__c0001 ... 6 entities  (114.5s)
+  [ 21/21] swagger_petstore__s0021__c0001 ... 9 entities  (167.7s)
+
+  Extracted: 81 entities  (1639.8s)
+
+  Entity type breakdown:
+    function_point           : 38
+    interface_name           : 21
+    exception_condition      : 11
+    constraint               : 10
+    glossary_term            : 1
+
+  Sample entities (first 2 per type):
+    [interface_name      ] (0.90)  Swagger Petstore API
+    [function_point      ] (0.80)  authorization filters
+    [interface_name      ] (0.90)  /pet/{petId}/uploadImage
+    [function_point      ] (0.80)  uploads an image
+    [exception_condition ] (0.70)  Invalid input
+    [exception_condition ] (0.70)  Invalid ID supplied
+    [constraint          ] (0.70)  Multiple status values can be provided with comma separated strin
+    [constraint          ] (0.80)  Multiple tags can be provided with comma separated strings
+    [glossary_term       ] (0.60)  Order Status
+
+  Saved: data/processed/entities/swagger_petstore.json  (17.9 KB)
+
+============================================================
+  auth_system_design -- ALL chunks
+============================================================
+
+  17 chunks total, processing 17
+
+  [  1/17] auth_system_design__s0001__c0001 ... 2 entities  (41.2s)
+  [  2/17] auth_system_design__s0002__c0001 ... 1 entities  (23.3s)
+  [  3/17] auth_system_design__s0003__c0001 ... 2 entities  (35.3s)
+  [  4/17] auth_system_design__s0004__c0001 ... 3 entities  (50.1s)
+  [  5/17] auth_system_design__s0005__c0001 ... 5 entities  (78.6s)
+  [  6/17] auth_system_design__s0006__c0001 ... 3 entities  (48.9s)
+  [  7/17] auth_system_design__s0007__c0001 ... 7 entities  (219.9s)
+  [  8/17] auth_system_design__s0008__c0001 ... 4 entities  (77.5s)
+  [  9/17] auth_system_design__s0009__c0001 ... 4 entities  (77.7s)
+  [ 10/17] auth_system_design__s0010__c0001 ... 2 entities  (34.8s)
+  [ 11/17] auth_system_design__s0011__c0001 ... 5 entities  (82.0s)
+  [ 12/17] auth_system_design__s0012__c0001 ... 3 entities  (47.5s)
+  [ 13/17] auth_system_design__s0013__c0001 ... 5 entities  (83.9s)
+  [ 14/17] auth_system_design__s0014__c0001 ... 13 entities  (195.2s)
+  [ 15/17] auth_system_design__s0015__c0001 ... 1 entities  (21.7s)
+  [ 16/17] auth_system_design__s0016__c0001 ... 10 entities  (155.1s)
+  [ 17/17] auth_system_design__s0017__c0001 ... 11 entities  (201.1s)
+
+  Extracted: 81 entities  (1473.8s)
+
+  Entity type breakdown:
+    actor_role               : 20
+    interface_name           : 20
+    function_point           : 18
+    glossary_term            : 12
+    constraint               : 11
+
+  Sample entities (first 2 per type):
+    [actor_role          ] (0.90)  User
+    [interface_name      ] (0.80)  Authentication API
+    [interface_name      ] (0.90)  Authentication Service
+    [actor_role          ] (0.90)  Web Browser Client
+    [function_point      ] (0.80)  validateCredentials
+    [function_point      ] (0.80)  enableMFA
+    [glossary_term       ] (0.80)  accessToken
+    [glossary_term       ] (0.80)  refreshToken
+    [constraint          ] (0.90)  Access token TTL: 15 minutes
+    [constraint          ] (0.90)  Refresh token TTL: 7 days
+
+  Saved: data/processed/entities/auth_system_design.json  (17.6 KB)
+
+============================================================
+  Done.  Passed:4  Skipped:0  Total entities:2624
+============================================================
+
