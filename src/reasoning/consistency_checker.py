@@ -1,15 +1,28 @@
 """
 consistency_checker.py  --  Stage 3: Consistency Check
 
-Four checks:
+Five checks, scoped to documents that share a bundle_id (i.e. describe
+the SAME system):
   1. SRS vs User Manual       : function coverage gaps
   2. Runtime vs SRS           : execution condition compatibility
   3. Design vs SRS            : constraint implementation gaps
   4. Intra-source checks      : each document checked against itself
      (functional reqs vs NFR, functional reqs vs exceptions)
+  5. Terminology              : term usage consistency within a bundle
 
-This ensures Stage 4 always receives a useful consistency issue list
-even when source documents come from different application domains.
+Cross-document checks (1-3, 5) are only run between documents that share
+a bundle_id, so that consistency findings are always about the same
+underlying system. Intra-source checks (4) run for every document
+regardless of bundling, since they only ever inspect one document
+against itself.
+
+NOTE ON A PRIOR VERSION OF THIS MODULE: an earlier version of check_all()
+ran cross-document checks over the full `models` dict without any
+notion of "same system," which meant Checks 1-3 could compare artifacts
+describing unrelated systems (e.g. a NASA SRS against a GNU Bash
+manual) when both were present in the same pipeline run. That behavior
+has been removed; see check_all()'s docstring for the corrected,
+bundle-aware default.
 """
 
 import json, os, sys, time, urllib.request
@@ -52,49 +65,100 @@ class ConsistencyChecker:
     def check_all(
         self,
         models: Dict[str, DemandModel],
+        bundles: Optional[Dict[str, str]] = None,
         verbose: bool = True,
     ) -> List[ConsistencyReport]:
-        reports = []
+        """
+        Run Stage 3 consistency checks.
 
-        # Cross-document checks (only if same-domain docs available)
-        srs     = self._find(models, ["srs", "nasa"])
-        manual  = self._find(models, ["manual", "bash", "user"])
-        runtime = self._find(models, ["swagger", "petstore", "runtime"])
-        design  = self._find(models, ["auth", "design"])
+        IMPORTANT (see Section 9.1.1 / reviewer comment R1):
+        Cross-document checks (1-3) and the terminology check (5) are only
+        meaningful between artifacts that describe THE SAME SYSTEM. This
+        method therefore groups `models` into bundles via `bundles`
+        (a source_id -> bundle_id mapping) and only cross-checks documents
+        that share a bundle_id.
 
-        if srs and manual:
-            if verbose: print("  Check 1: SRS vs User Manual ...")
-            r = self._check_srs_vs_manual(srs, manual)
-            reports.append(r)
-            if verbose: print("    -> {} issues".format(len(r.issues)))
+        If `bundles` is not supplied, every document is treated as its own
+        singleton bundle by default -- i.e. NO cross-document checks fire.
+        This is the safe default: it prevents silently re-introducing the
+        cross-domain comparison bug (e.g. comparing a NASA SRS against a
+        GNU Bash manual) that produced non-meaningful "cross-document"
+        issues in the original evaluation. To obtain cross-document
+        findings, the caller must explicitly declare which documents
+        belong to the same system via `bundles`.
 
-        if runtime and srs:
-            if verbose: print("  Check 2: Runtime vs SRS ...")
-            r = self._check_runtime_vs_srs(runtime, srs)
-            reports.append(r)
-            if verbose: print("    -> {} issues".format(len(r.issues)))
+        The intra-source check (4) is unaffected by bundling: it only ever
+        inspects one document against itself, so it always runs for every
+        document regardless of bundle membership.
+        """
+        reports: List[ConsistencyReport] = []
 
-        if design and srs:
-            if verbose: print("  Check 3: Design vs SRS ...")
-            r = self._check_design_vs_srs(design, srs)
-            reports.append(r)
-            if verbose: print("    -> {} issues".format(len(r.issues)))
+        if bundles is None:
+            bundles = {sid: sid for sid in models}  # each doc = its own bundle
+            if verbose:
+                print("  No bundle mapping supplied -- each document treated as "
+                      "its own singleton bundle (cross-document checks disabled "
+                      "by default; see check_all() docstring).")
 
-        # Intra-source checks: every document checked against itself
-        if verbose: print("  Check 4: Intra-source consistency ...")
-        for src_id, model in models.items():
-            r = self._check_intra_source(model)
-            if r.issues:
-                reports.append(r)
+        bundle_groups: Dict[str, List[str]] = {}
+        for sid in models:
+            bid = bundles.get(sid, sid)  # unmapped docs default to their own bundle
+            bundle_groups.setdefault(bid, []).append(sid)
+
+        for bundle_id, sids in bundle_groups.items():
+            bundle_models = {sid: models[sid] for sid in sids}
+
+            if verbose:
+                print("  Bundle '{}': {} document(s) -- {}".format(
+                    bundle_id, len(bundle_models), ", ".join(sids)
+                ))
+
+            if len(bundle_models) >= 2:
+                srs     = self._find(bundle_models, ["srs", "nasa"])
+                manual  = self._find(bundle_models, ["manual", "bash", "user"])
+                runtime = self._find(bundle_models, ["swagger", "petstore", "runtime"])
+                design  = self._find(bundle_models, ["design"])  # "auth" removed: was
+                                                                    # ambiguous once multiple
+                                                                    # auth_system_* docs coexist
+
+                if srs and manual:
+                    if verbose: print("    Check 1: SRS vs User Manual ...")
+                    r = self._check_srs_vs_manual(srs, manual)
+                    reports.append(r)
+                    if verbose: print("      -> {} issues".format(len(r.issues)))
+
+                if runtime and srs:
+                    if verbose: print("    Check 2: Runtime vs SRS ...")
+                    r = self._check_runtime_vs_srs(runtime, srs)
+                    reports.append(r)
+                    if verbose: print("      -> {} issues".format(len(r.issues)))
+
+                if design and srs:
+                    if verbose: print("    Check 3: Design vs SRS ...")
+                    r = self._check_design_vs_srs(design, srs)
+                    reports.append(r)
+                    if verbose: print("      -> {} issues".format(len(r.issues)))
+
+                if verbose: print("    Check 5: Terminology (within bundle) ...")
+                r = self._check_terminology(bundle_models)
+                if r.issues:
+                    reports.append(r)
+                if verbose: print("      -> {} issues".format(len(r.issues)))
+            else:
                 if verbose:
-                    print("    -> {} ({} issues)".format(src_id, len(r.issues)))
+                    print("    Only {} document(s) in this bundle -- skipping "
+                          "cross-document checks 1-3 and terminology check 5 "
+                          "(need >=2 same-system artifacts).".format(len(bundle_models)))
 
-        # Terminology check
-        if verbose: print("  Check 5: Terminology ...")
-        r = self._check_terminology(models)
-        if r.issues:
-            reports.append(r)
-        if verbose: print("    -> {} issues".format(len(r.issues)))
+            # Intra-source check: always runs per document, independent of bundling
+            for sid, model in bundle_models.items():
+                r = self._check_intra_source(model)
+                if r.issues:
+                    reports.append(r)
+                    if verbose:
+                        print("    Check 4 (intra-source) -> {} ({} issues)".format(
+                            sid, len(r.issues)
+                        ))
 
         return reports
 
@@ -156,6 +220,7 @@ class ConsistencyChecker:
         )
         srs_reqs = [r.description for r in srs.functional_reqs[:12]]
         srs_nfr  = [c.description for c in srs.nfr_constraints[:6]]
+        srs_rt   = [c.description for c in srs.runtime_constraints[:8]]
 
         prompt = (
             "Check if runtime environment constraints are compatible with "
@@ -164,10 +229,12 @@ class ConsistencyChecker:
             "{rt}\n\n"
             "SRS requirements:\n"
             "Functional: {func}\n"
-            "NFR: {nfr}\n\n"
+            "NFR: {nfr}\n"
+            "Runtime/operational constraints: {srs_rt}\n\n"
             "Find:\n"
             "1. Runtime conditions preventing requirements from being met "
-            "(conflict)\n"
+            "(conflict) -- INCLUDING numeric mismatches (e.g. a rate limit, "
+            "duration, or threshold that differs between RUNTIME and SRS)\n"
             "2. Requirements assuming undocumented runtime conditions "
             "(omission)\n"
             "3. Implicit execution conditions not addressed by runtime specs "
@@ -176,9 +243,10 @@ class ConsistencyChecker:
             "severity, suggested_fix.\n"
             "Return [] if no issues.\nJSON array:"
         ).format(
-            rt  ="\n".join("- "+r for r in rt_items[:20]),
-            func="\n".join("- "+r for r in srs_reqs),
-            nfr ="\n".join("- "+r for r in srs_nfr) if srs_nfr else "(none)",
+            rt    ="\n".join("- "+r for r in rt_items[:20]),
+            func  ="\n".join("- "+r for r in srs_reqs),
+            nfr   ="\n".join("- "+r for r in srs_nfr) if srs_nfr else "(none)",
+            srs_rt="\n".join("- "+r for r in srs_rt) if srs_rt else "(none)",
         )
         raw    = self._chat(prompt)
         issues = self._parse_issues(raw, runtime.source_id, srs.source_id)
@@ -189,9 +257,11 @@ class ConsistencyChecker:
     ) -> ConsistencyReport:
         d_reqs  = [r.description for r in design.functional_reqs[:12]]
         d_nfr   = [c.description for c in design.nfr_constraints[:10]]
+        d_rt    = [c.description for c in design.runtime_constraints[:8]]
         d_roles = design.user_roles[:10]
         srs_reqs= [r.description for r in srs.functional_reqs[:12]]
         srs_nfr = [c.description for c in srs.nfr_constraints[:6]]
+        srs_rt  = [c.description for c in srs.runtime_constraints[:8]]
 
         prompt = (
             "Check whether the system design correctly addresses the "
@@ -199,13 +269,19 @@ class ConsistencyChecker:
             "DESIGN components/functions/constraints:\n"
             "Components: {roles}\n"
             "Functions: {d_func}\n"
-            "Constraints: {d_nfr}\n\n"
+            "Constraints (NFR): {d_nfr}\n"
+            "Constraints (runtime/operational): {d_rt}\n\n"
             "SRS requirements:\n"
             "Functional: {srs_func}\n"
-            "NFR: {srs_nfr}\n\n"
+            "NFR: {srs_nfr}\n"
+            "Runtime/operational constraints: {srs_rt}\n\n"
             "Find:\n"
             "1. SRS requirements not addressed in the design (omission)\n"
-            "2. Design decisions contradicting SRS constraints (conflict)\n"
+            "2. Design decisions contradicting SRS constraints (conflict) -- "
+            "INCLUDING numeric mismatches (e.g. a duration, threshold, or "
+            "limit that differs between the DESIGN constraints and the SRS "
+            "constraints above, even if both describe the same concept using "
+            "different wording)\n"
             "3. Design components not traceable to any requirement (to_confirm)\n\n"
             "Return JSON array. Each item: issue_id, issue_type, description, "
             "severity, suggested_fix.\n"
@@ -214,8 +290,10 @@ class ConsistencyChecker:
             roles   =", ".join(d_roles),
             d_func  ="\n".join("- "+r for r in d_reqs),
             d_nfr   ="\n".join("- "+c for c in d_nfr) if d_nfr else "(none)",
+            d_rt    ="\n".join("- "+c for c in d_rt) if d_rt else "(none)",
             srs_func="\n".join("- "+r for r in srs_reqs),
             srs_nfr ="\n".join("- "+c for c in srs_nfr) if srs_nfr else "(none)",
+            srs_rt  ="\n".join("- "+c for c in srs_rt) if srs_rt else "(none)",
         )
         raw    = self._chat(prompt)
         issues = self._parse_issues(raw, design.source_id, srs.source_id)
