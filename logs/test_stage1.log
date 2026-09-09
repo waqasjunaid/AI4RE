@@ -1,0 +1,138 @@
+nohup: 忽略输入
+
+AI4RE-Test  |  Stage 1: Document Parsing + Chunking
+------------------------------------------------------------
+
+============================================================
+  nasa_srs_v1 [srs]
+============================================================
+  SKIP -- chunks already exist: data/processed/chunks/nasa_srs_v1.json
+  (pass --force to re-chunk)
+
+============================================================
+  bash_user_manual [user_manual]
+============================================================
+  SKIP -- chunks already exist: data/processed/chunks/bash_user_manual.json
+  (pass --force to re-chunk)
+
+============================================================
+  swagger_petstore [runtime]
+============================================================
+  SKIP -- chunks already exist: data/processed/chunks/swagger_petstore.json
+  (pass --force to re-chunk)
+
+============================================================
+  auth_system_design [design]
+============================================================
+  SKIP -- chunks already exist: data/processed/chunks/auth_system_design.json
+  (pass --force to re-chunk)
+
+============================================================
+  auth_system_srs [srs]
+============================================================
+
+[1] Loading data/raw/srs/auth_system_srs.docx ...
+    Sections loaded : 9  (0.1s)
+    Schema check    : OK
+
+    First 3 sections:
+      [1] Preamble
+           "Authentication Service — Software Requirements Specification"
+      [2] H1: 1. Introduction
+           "This document specifies the functional and non-functional requirements for the Authenticat"
+      [3] H1: 2. System Overview
+           "The Authentication Service is composed of an AuthController, a TokenService, a PasswordHas"
+
+[2] Chunking ...
+    Chunks produced : 9  (0.0s)
+    Token range     : 6 - 62
+    Mean tokens     : 37
+    Overlap chunks  : 0
+
+    First 2 chunks:
+      chunk_id     : auth_system_srs__s0001__c0001
+      page_ref     : Preamble
+      token_count  : 6
+      content[:80] : "Authentication Service — Software Requirements Specification"
+
+      chunk_id     : auth_system_srs__s0002__c0001
+      page_ref     : H1: 1. Introduction
+      token_count  : 34
+      content[:80] : "This document specifies the functional and non-functional requirements for the A"
+
+[3] Saved to  : data/processed/chunks/auth_system_srs.json  (5.0 KB)
+
+============================================================
+  auth_system_manual [user_manual]
+============================================================
+
+[1] Loading data/raw/user_manual/auth_system_manual.txt ...
+    Sections loaded : 2  (0.0s)
+    Schema check    : OK
+
+    First 3 sections:
+      [1] GETTING STARTED
+           "This guide explains how to sign in, manage your session, and keep your account secure.  To"
+      [2] 3 Forgot Your Password
+           "If you forget your password, click the "Forgot password?" link on the sign-in page. We wil"
+
+[2] Chunking ...
+    Chunks produced : 2  (0.0s)
+    Token range     : 104 - 140
+    Mean tokens     : 122
+    Overlap chunks  : 0
+
+    First 2 chunks:
+      chunk_id     : auth_system_manual__s0001__c0001
+      page_ref     : GETTING STARTED
+      token_count  : 140
+      content[:80] : "This guide explains how to sign in, manage your session, and keep your account s"
+
+      chunk_id     : auth_system_manual__s0002__c0001
+      page_ref     : 3 Forgot Your Password
+      token_count  : 104
+      content[:80] : "If you forget your password, click the "Forgot password?" link on the sign-in pa"
+
+[3] Saved to  : data/processed/chunks/auth_system_manual.json  (2.1 KB)
+
+============================================================
+  auth_system_runtime [runtime]
+============================================================
+
+[1] Loading data/raw/runtime/auth_system_runtime.json ...
+    Sections loaded : 6  (0.0s)
+    Schema check    : OK
+
+    First 3 sections:
+      [1] openapi:info
+           "API: Authentication Service API Version: 1.0.0 Description: REST API for user authenticati"
+      [2] openapi:path:/auth/login
+           "Endpoint: /auth/login   Method: POST   Summary: Authenticate a user   Description: Authent"
+      [3] openapi:path:/auth/mfa
+           "Endpoint: /auth/mfa   Method: POST   Summary: Submit MFA verification code   Description: "
+
+[2] Chunking ...
+    Chunks produced : 6  (0.0s)
+    Token range     : 21 - 87
+    Mean tokens     : 43
+    Overlap chunks  : 0
+
+    First 2 chunks:
+      chunk_id     : auth_system_runtime__s0001__c0001
+      page_ref     : openapi:info
+      token_count  : 21
+      content[:80] : "API: Authentication Service API Version: 1.0.0 Description: REST API for user au"
+
+      chunk_id     : auth_system_runtime__s0002__c0001
+      page_ref     : openapi:path:/auth/login
+      token_count  : 87
+      content[:80] : "Endpoint: /auth/login   Method: POST   Summary: Authenticate a user   Descriptio"
+
+[3] Saved to  : data/processed/chunks/auth_system_runtime.json  (3.8 KB)
+
+============================================================
+  Stage 1 complete.
+  Passed: 3   Skipped: 4   Failed: 0
+  Chunk files in: data/processed/chunks
+============================================================
+
