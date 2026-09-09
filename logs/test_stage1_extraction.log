@@ -1,0 +1,137 @@
+nohup: 忽略输入
+
+AI4RE-Test  |  Stage 1 Extraction  |  llama3.1:70b
+------------------------------------------------------------
+Host   : http://127.0.0.1:11434
+Model  : llama3.1:70b
+Chunks : ALL
+Debug  : False
+Ollama OK  |  model: llama3.1:70b  |  host: http://127.0.0.1:11434
+
+============================================================
+  nasa_srs_v1 -- ALL chunks
+============================================================
+  SKIP -- entities already exist: data/processed/entities/nasa_srs_v1.json
+  (pass --force to re-extract)
+
+============================================================
+  bash_user_manual -- ALL chunks
+============================================================
+  SKIP -- entities already exist: data/processed/entities/bash_user_manual.json
+  (pass --force to re-extract)
+
+============================================================
+  swagger_petstore -- ALL chunks
+============================================================
+  SKIP -- entities already exist: data/processed/entities/swagger_petstore.json
+  (pass --force to re-extract)
+
+============================================================
+  auth_system_design -- ALL chunks
+============================================================
+  SKIP -- entities already exist: data/processed/entities/auth_system_design.json
+  (pass --force to re-extract)
+
+============================================================
+  auth_system_srs -- ALL chunks
+============================================================
+
+  9 chunks total, processing 9
+
+  [  1/9] auth_system_srs__s0001__c0001 ... 1 entities  (54.0s)
+  [  2/9] auth_system_srs__s0002__c0001 ... 5 entities  (123.7s)
+  [  3/9] auth_system_srs__s0003__c0001 ... 10 entities  (251.1s)
+  [  4/9] auth_system_srs__s0004__c0001 ... 5 entities  (148.2s)
+  [  5/9] auth_system_srs__s0005__c0001 ... 5 entities  (122.1s)
+  [  6/9] auth_system_srs__s0006__c0001 ... 6 entities  (206.8s)
+  [  7/9] auth_system_srs__s0007__c0001 ... 2 entities  (146.6s)
+  [  8/9] auth_system_srs__s0008__c0001 ... 5 entities  (171.3s)
+  [  9/9] auth_system_srs__s0009__c0001 ... 2 entities  (157.0s)
+
+  Extracted: 41 entities  (1380.7s)
+
+  Entity type breakdown:
+    interface_name           : 15
+    function_point           : 13
+    constraint               : 9
+    actor_role               : 4
+
+  Sample entities (first 2 per type):
+    [interface_name      ] (0.90)  Authentication Service
+    [function_point      ] (0.90)  user authentication
+    [function_point      ] (0.90)  session management
+    [actor_role          ] (0.80)  client applications
+    [interface_name      ] (0.95)  API Gateway
+    [constraint          ] (0.80)  invalid submitted credentials
+    [constraint          ] (0.80)  5 consecutive failed login attempts
+    [actor_role          ] (0.80)  system
+
+  Saved: data/processed/entities/auth_system_srs.json  (9.0 KB)
+
+============================================================
+  auth_system_manual -- ALL chunks
+============================================================
+
+  2 chunks total, processing 2
+
+  [  1/2] auth_system_manual__s0001__c0001 ... 6 entities  (186.2s)
+  [  2/2] auth_system_manual__s0002__c0001 ... 5 entities  (209.5s)
+
+  Extracted: 11 entities  (395.7s)
+
+  Entity type breakdown:
+    process_step             : 3
+    function_point           : 3
+    actor_role               : 2
+    exception_condition      : 2
+    glossary_term            : 1
+
+  Sample entities (first 2 per type):
+    [process_step        ] (0.80)  sign in to the system
+    [actor_role          ] (0.70)  user
+    [function_point      ] (0.90)  multi-factor authentication (MFA)
+    [exception_condition ] (0.80)  incorrect password entered five times
+    [process_step        ] (0.70)  change password from Account Settings
+    [glossary_term       ] (0.60)  lockout period
+    [function_point      ] (0.90)  password recovery via email
+    [actor_role          ] (0.70)  user
+    [exception_condition ] (0.90)  account lock due to failed sign-in attempts
+
+  Saved: data/processed/entities/auth_system_manual.json  (2.5 KB)
+
+============================================================
+  auth_system_runtime -- ALL chunks
+============================================================
+
+  6 chunks total, processing 6
+
+  [  1/6] auth_system_runtime__s0001__c0001 ... 2 entities  (162.5s)
+  [  2/6] auth_system_runtime__s0002__c0001 ... 3 entities  (133.4s)
+  [  3/6] auth_system_runtime__s0003__c0001 ... 4 entities  (112.3s)
+  [  4/6] auth_system_runtime__s0004__c0001 ... 2 entities  (155.7s)
+  [  5/6] auth_system_runtime__s0005__c0001 ... 2 entities  (139.8s)
+  [  6/6] auth_system_runtime__s0006__c0001 ... 2 entities  (140.7s)
+
+  Extracted: 15 entities  (844.4s)
+
+  Entity type breakdown:
+    interface_name           : 6
+    function_point           : 6
+    constraint               : 2
+    exception_condition      : 1
+
+  Sample entities (first 2 per type):
+    [interface_name      ] (0.90)  Authentication Service API
+    [function_point      ] (0.80)  user authentication, session management, and token issuance
+    [interface_name      ] (1.00)  /auth/login
+    [function_point      ] (1.00)  Authenticate a user
+    [constraint          ] (1.00)  rate limit of 8 requests per minute per client IP
+    [constraint          ] (0.80)  multi-factor authentication enabled
+    [exception_condition ] (1.00)  Invalid or expired MFA code
+
+  Saved: data/processed/entities/auth_system_runtime.json  (3.4 KB)
+
+============================================================
+  Done.  Passed:3  Skipped:4  Total entities:67
+============================================================
+
