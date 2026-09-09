@@ -38,7 +38,28 @@ ALL_SOURCES = [
     "swagger_petstore",
     "auth_system_design",
     "bash_user_manual",
+    "auth_system_srs",
+    "auth_system_manual",
+    "auth_system_runtime",
 ]
+
+# Bundle configuration (see reviewer comment R1 / Section 9.1.1):
+# cross-document checks 1-3 and 5 only fire between documents that share
+# a bundle_id, i.e. that describe the SAME system. The four original
+# documents describe four unrelated systems, so each keeps its own
+# singleton bundle (no cross-document checks between them -- this is
+# correct behavior, not a regression: those checks were never meaningful).
+# The four auth_system_* documents describe one system and share a bundle,
+# enabling genuine cross-document consistency findings.
+BUNDLES = {
+    "nasa_srs_v1":          "nasa_srs_v1",         # singleton bundle (unrelated system)
+    "swagger_petstore":     "swagger_petstore",    # singleton bundle (unrelated system)
+    "bash_user_manual":     "bash_user_manual",    # singleton bundle (unrelated system)
+    "auth_system_design":   "auth_system",
+    "auth_system_srs":      "auth_system",
+    "auth_system_manual":   "auth_system",
+    "auth_system_runtime":  "auth_system",
+}
 
 
 # -- Loaders ------------------------------------------------------------------
@@ -137,7 +158,8 @@ def main():
     # - Stage 3: consistency check -
     print("\n[Stage 3] Consistency check ...")
     t0 = time.time()
-    consistency_reports = checker.check_all(models, verbose=True)
+    active_bundles = {sid: BUNDLES[sid] for sid in models if sid in BUNDLES}
+    consistency_reports = checker.check_all(models, bundles=active_bundles, verbose=True)
     checker.save_reports(consistency_reports, DIRS["consistency"])
     total_issues = sum(len(r.issues) for r in consistency_reports)
     print("  {} issues found  ({:.0f}s)".format(total_issues, time.time()-t0))
