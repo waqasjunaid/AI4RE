@@ -6,6 +6,8 @@ Run: python test_stage2_demand.py
 import sys, os, json, time
 sys.path.insert(0, os.getcwd())
 
+FORCE = "--force" in sys.argv   # rebuild even if demand model already exists
+
 from schemas.entity_schema import ExtractedEntity, ArtifactType, EntityType
 from schemas.demand_schema  import DemandModel
 from src.reasoning.demand_modeller import DemandModeller
@@ -19,7 +21,25 @@ DOCUMENTS = [
     {"source_id": "swagger_petstore",   "artifact_type": "runtime"},
     {"source_id": "auth_system_design", "artifact_type": "design"},
     {"source_id": "bash_user_manual",   "artifact_type": "user_manual"},
+    # -- Same-system bundle added in response to reviewer comment R1 --
+    {"source_id": "auth_system_srs",      "artifact_type": "srs"},
+    {"source_id": "auth_system_manual",   "artifact_type": "user_manual"},
+    {"source_id": "auth_system_runtime",  "artifact_type": "runtime"},
 ]
+
+# Mirrors run_pipeline.py's BUNDLES mapping. Stamped onto each saved
+# DemandModel purely for documentation/traceability when inspecting the
+# JSON files directly; the actual cross-document check scoping is driven
+# by run_pipeline.py's BUNDLES dict passed to ConsistencyChecker.check_all().
+BUNDLE_OF = {
+    "nasa_srs_v1":          "nasa_srs_v1",
+    "swagger_petstore":     "swagger_petstore",
+    "bash_user_manual":     "bash_user_manual",
+    "auth_system_design":   "auth_system",
+    "auth_system_srs":      "auth_system",
+    "auth_system_manual":   "auth_system",
+    "auth_system_runtime":  "auth_system",
+}
 
 
 def load_entities(source_id: str) -> list:
@@ -107,6 +127,13 @@ def main():
         source_id = cfg["source_id"]
         divider("{} [{}]".format(source_id, cfg["artifact_type"]))
 
+        existing_path = os.path.join(DEMAND_DIR, "{}.json".format(source_id))
+        if os.path.exists(existing_path) and not FORCE:
+            print("  SKIP -- demand model already exists: {}".format(existing_path))
+            print("  (pass --force to rebuild)")
+            results["skipped"] += 1
+            continue
+
         entities = load_entities(source_id)
         if not entities:
             print("  SKIP -- no entity file found for: {}".format(source_id))
@@ -124,6 +151,7 @@ def main():
             source_id = source_id,
             verbose   = True,
         )
+        model.bundle_id = BUNDLE_OF.get(source_id, source_id)
         elapsed = time.time() - t0
 
         print("\n  Build time: {:.1f}s".format(elapsed))
