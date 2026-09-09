@@ -9,6 +9,8 @@ import sys
 import os
 import time
 
+FORCE = "--force" in sys.argv   # re-chunk even if chunk file already exists
+
 sys.path.insert(0, os.getcwd())
 
 from src.ingestion.document_manager import DocumentManager
@@ -35,6 +37,23 @@ DOCUMENTS = [
         "artifact_type": "design",
         "source_id":     "auth_system_design",
     },
+    # -- Same-system bundle added in response to reviewer comment R1 --
+    # (see run_pipeline.py BUNDLES and src/reasoning/consistency_checker.py)
+    {
+        "file_path":     "data/raw/srs/auth_system_srs.docx",
+        "artifact_type": "srs",
+        "source_id":     "auth_system_srs",
+    },
+    {
+        "file_path":     "data/raw/user_manual/auth_system_manual.txt",
+        "artifact_type": "user_manual",
+        "source_id":     "auth_system_manual",
+    },
+    {
+        "file_path":     "data/raw/runtime/auth_system_runtime.json",
+        "artifact_type": "runtime",
+        "source_id":     "auth_system_runtime",
+    },
 ]
 
 CHUNKS_OUTPUT_DIR = "data/processed/chunks"
@@ -54,6 +73,13 @@ def test_document(cfg, manager, chunker):
     if not os.path.exists(path):
         print("  SKIP -- file not found: {}".format(path))
         return False
+
+    existing_chunk_path = os.path.join(CHUNKS_OUTPUT_DIR, "{}.json".format(source_id))
+    if os.path.exists(existing_chunk_path) and not FORCE:
+        divider("{} [{}]".format(source_id, artifact_type))
+        print("  SKIP -- chunks already exist: {}".format(existing_chunk_path))
+        print("  (pass --force to re-chunk)")
+        return "skip"
 
     divider("{} [{}]".format(source_id, artifact_type))
 
@@ -148,7 +174,9 @@ def main():
                 print("  SKIP -- {}".format(cfg["file_path"]))
             else:
                 ok = test_document(cfg, manager, chunker)
-                if ok:
+                if ok == "skip":
+                    results["skipped"] += 1
+                elif ok:
                     results["passed"] += 1
                 else:
                     results["failed"] += 1
