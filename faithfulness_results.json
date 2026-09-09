@@ -1,0 +1,191 @@
+{
+  "summary": {
+    "SUPPORTED": 30,
+    "PARTIALLY_SUPPORTED": 0,
+    "UNSUPPORTED": 0,
+    "UNPARSEABLE": 0,
+    "ERROR": 0
+  },
+  "detail": [
+    {
+      "tr_id": "AUTH_S-NFR_-001",
+      "tr_h": "When a user attempts to create an account, the system shall reject the password if it does not contain at least one uppercase letter, one lowercase letter, one digit, and one symbol.",
+      "source": "Password must contain uppercase, lowercase, digit, symbol",
+      "verdict": "SUPPORTED"
+    },
+    {
+      "tr_id": "AUTH_S-NFR_-002",
+      "tr_h": "When a token is generated, the system shall sign it with RS256 (asymmetric) algorithm.",
+      "source": "All tokens must be signed with RS256 (asymmetric)",
+      "verdict": "SUPPORTED"
+    },
+    {
+      "tr_id": "AUTH_S-NFR_-003",
+      "tr_h": "When a connection is established, the system shall use TLS 1.2 or higher protocol.",
+      "source": "TLS 1.2 minimum for all connections",
+      "verdict": "SUPPORTED"
+    },
+    {
+      "tr_id": "AUTH_S-NFR_-004",
+      "tr_h": "When a user attempts to log in, the system shall lock the account after 5 failed login attempts within 30 minutes.",
+      "source": "Max failed login attempts: 5 before lock",
+      "verdict": "SUPPORTED"
+    },
+    {
+      "tr_id": "AUTH_S-NFR_-005",
+      "tr_h": "When an account is locked, the system shall unlock it after 30 minutes.",
+      "source": "Account lock duration: 30 minutes",
+      "verdict": "SUPPORTED"
+    },
+    {
+      "tr_id": "AUTH_S-NFR_-006",
+      "tr_h": "When a session is created, the system shall store it with a TTL aligned with the refresh token TTL.",
+      "source": "Session store TTL: aligned with refresh token TTL",
+      "verdict": "SUPPORTED"
+    },
+    {
+      "tr_id": "AUTH_S-NFR_-007",
+      "tr_h": "When a password is entered, the system shall check for at least one uppercase letter.",
+      "source": "Password must contain uppercase, lowercase, digit, symbol",
+      "verdict": "SUPPORTED"
+    },
+    {
+      "tr_id": "AUTH_S-NFR_-008",
+      "tr_h": "When a password is entered, the system shall check for at least one lowercase letter.",
+      "source": "Password must contain uppercase, lowercase, digit, symbol",
+      "verdict": "SUPPORTED"
+    },
+    {
+      "tr_id": "AUTH_S-NFR_-009",
+      "tr_h": "When a password is entered, the system shall check for at least one digit.",
+      "source": "Password must contain uppercase, lowercase, digit, symbol",
+      "verdict": "SUPPORTED"
+    },
+    {
+      "tr_id": "AUTH_S-NFR_-010",
+      "tr_h": "When a password is entered, the system shall check for at least one symbol.",
+      "source": "Password must contain uppercase, lowercase, digit, symbol",
+      "verdict": "SUPPORTED"
+    },
+    {
+      "tr_id": "AUTH_S-NFR_-011",
+      "tr_h": "When a token is verified, the system shall check for RS256 (asymmetric) signature.",
+      "source": "All tokens must be signed with RS256 (asymmetric)",
+      "verdict": "SUPPORTED"
+    },
+    {
+      "tr_id": "AUTH_S-NFR_-012",
+      "tr_h": "When a connection is established, the system shall negotiate TLS version.",
+      "source": "TLS 1.2 minimum for all connections",
+      "verdict": "SUPPORTED"
+    },
+    {
+      "tr_id": "AUTH_S-RUNT-013",
+      "tr_h": "When a user attempts to log in more than 5 times with incorrect credentials, the system shall lock the account.",
+      "source": "Max failed login attempts: 5 before lock",
+      "verdict": "SUPPORTED"
+    },
+    {
+      "tr_id": "AUTH_S-RUNT-014",
+      "tr_h": "When an account is locked, the system shall prevent login for 30 minutes.",
+      "source": "Account lock duration: 30 minutes",
+      "verdict": "SUPPORTED"
+    },
+    {
+      "tr_id": "AUTH_S-RUNT-015",
+      "tr_h": "When a session store TTL expires, the system shall remove the corresponding session data.",
+      "source": "Session store TTL: aligned with refresh token TTL",
+      "verdict": "SUPPORTED"
+    },
+    {
+      "tr_id": "AUTH_S-RUNT-016",
+      "tr_h": "When a user attempts to log in after account lock duration has expired, the system shall allow login.",
+      "source": "Account lock duration: 30 minutes",
+      "verdict": "SUPPORTED"
+    },
+    {
+      "tr_id": "AUTH_S-RUNT-017",
+      "tr_h": "When a user logs in successfully, the system shall reset failed login attempt counter.",
+      "source": "Max failed login attempts: 5 before lock",
+      "verdict": "SUPPORTED"
+    },
+    {
+      "tr_id": "AUTH_S-INTE-018",
+      "tr_h": "When user attempts to login, the system shall authenticate the user.",
+      "source": "User -> Login to the system",
+      "verdict": "SUPPORTED"
+    },
+    {
+      "tr_id": "AUTH_S-INTE-019",
+      "tr_h": "When user attempts to change password, the system shall update the user's password.",
+      "source": "User -> Change password",
+      "verdict": "SUPPORTED"
+    },
+    {
+      "tr_id": "AUTH_S-INTE-020",
+      "tr_h": "When user enables MFA, the system shall configure MFA for the user.",
+      "source": "User -> Enable MFA",
+      "verdict": "SUPPORTED"
+    },
+    {
+      "tr_id": "AUTH_S-INTE-021",
+      "tr_h": "When client requests token refresh, the system shall issue a new access token.",
+      "source": "Client -> Refresh token",
+      "verdict": "SUPPORTED"
+    },
+    {
+      "tr_id": "AUTH_S-INTE-022",
+      "tr_h": "When user logs out, the system shall invalidate the user's session.",
+      "source": "User -> Logout from the system",
+      "verdict": "SUPPORTED"
+    },
+    {
+      "tr_id": "AUTH_S-INTE-023",
+      "tr_h": "When rate limiter detects excessive login attempts, the system shall lock the account.",
+      "source": "Rate Limiter -> Lock account due to excessive login attempts",
+      "verdict": "SUPPORTED"
+    },
+    {
+      "tr_id": "AUTH_S-INTE-024",
+      "tr_h": "When user validates AuthRequest, the system shall verify the request.",
+      "source": "User -> Validate AuthRequest",
+      "verdict": "SUPPORTED"
+    },
+    {
+      "tr_id": "AUTH_S-INTE-025",
+      "tr_h": "When TokenService invalidates token pair, the system shall remove the tokens.",
+      "source": "TokenService -> Invalidate token pair",
+      "verdict": "SUPPORTED"
+    },
+    {
+      "tr_id": "AUTH_S-INTE-026",
+      "tr_h": "The system shall authenticate the user within 2 seconds.",
+      "source": "User -> Login to the system",
+      "verdict": "SUPPORTED"
+    },
+    {
+      "tr_id": "AUTH_S-INTE-027",
+      "tr_h": "The system shall update the user's password within 1 second.",
+      "source": "User -> Change password",
+      "verdict": "SUPPORTED"
+    },
+    {
+      "tr_id": "AUTH_S-INTE-028",
+      "tr_h": "The system shall configure MFA for the user within 1 second.",
+      "source": "User -> Enable MFA",
+      "verdict": "SUPPORTED"
+    },
+    {
+      "tr_id": "AUTH_S-INTE-029",
+      "tr_h": "The system shall issue a new access token within 1 second.",
+      "source": "Client -> Refresh token",
+      "verdict": "SUPPORTED"
+    },
+    {
+      "tr_id": "AUTH_S-CONS-030",
+      "tr_h": "When a user attempts to log in with an invalid password, the system shall lock their account after 3 failed login attempts.",
+      "source": "[REQ-001]",
+      "verdict": "SUPPORTED"
+    }
+  ]
+}
