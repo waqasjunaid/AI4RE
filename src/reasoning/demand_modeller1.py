@@ -27,27 +27,11 @@ from schemas.demand_schema  import (
 OLLAMA_HOST = "http://127.0.0.1:11434"
 MODEL_NAME  = "llama3.1:70b"
 TEMPERATURE = 0.0
-MAX_TOKENS  = int(os.environ.get("AI4RE_MAX_TOKENS", "1500"))
-TIMEOUT     = 600
+MAX_TOKENS  = 1500
+TIMEOUT     = 1200
 
 # Max entities to include in each prompt to stay within context window
 MAX_PER_TYPE = 30
-
-# -- Demand model item cap (see reviewer comment R3a) -------------------------
-# A SINGLE, consistent cap applied uniformly to use_cases[], functional_reqs[],
-# nfr_constraints[], and runtime_constraints[], both for which entities are
-# offered to the LLM and for how many parsed items are kept afterward.
-#
-# Prior versions of this file used THREE different, undocumented, mutually
-# inconsistent limits across these code paths (30 for input entities via
-# MAX_PER_TYPE; a "max 10" vs "max 15" instruction mismatch between the
-# use-case and functional-requirement prompts; and post-parse slices of
-# [:12] and [:15] that did not match either prompt instruction or the
-# paper's stated "capped at 10" claim). This constant replaces all of that
-# with one value, used everywhere, and overridable via the
-# AI4RE_DEMAND_ITEM_CAP environment variable so a sensitivity analysis can
-# vary it without editing code (see sensitivity_analysis.py).
-DEMAND_ITEM_CAP = int(os.environ.get("AI4RE_DEMAND_ITEM_CAP", "10"))
 
 SYSTEM_PROMPT = (
     "You are a requirements engineer. "
@@ -109,27 +93,19 @@ class DemandModeller:
         if verbose: print("    -> {} NFR + {} runtime  ({:.0f}s)".format(
             len(nfr), len(runtime), time.time()-t0))
 
-        # Glossary: parse glossary_term entities (term: definition format).
-        # Previously hardcoded [:50], bypassing DEMAND_ITEM_CAP entirely --
-        # this silently kept ALL glossary terms whenever a document had
-        # fewer than 50 (as bash_user_manual's 46 did), making this field
-        # invisible to the sensitivity analysis in reviewer comment R3a.
-        # Now ranked by significance and capped consistently, same as
-        # every other demand model field.
-        glossary_entities = by_type.get("glossary_term", [])
-        ranked_glossary_content = self._rank_by_significance(glossary_entities, DEMAND_ITEM_CAP * 3)
+        # Glossary: parse glossary_term entities (term: definition format)
         glossary = {}
-        for content in ranked_glossary_content:
-            parts = content.split(":", 1)
+        for e in by_type.get("glossary_term", [])[:50]:
+            parts = e.content.split(":", 1)
             if len(parts) == 2:
                 glossary[parts[0].strip()] = parts[1].strip()
             else:
-                glossary[content[:40]] = content
+                glossary[e.content[:40]] = e.content
 
-        # Exceptions: previously hardcoded [:30] -- same issue as above.
-        exceptions = self._rank_by_significance(
-            by_type.get("exception_condition", []), DEMAND_ITEM_CAP * 3
-        )
+        # Exceptions
+        exceptions = [
+            e.content for e in by_type.get("exception_condition", [])[:30]
+        ]
 
         # System objectives: highest-confidence function_points
         fps = sorted(
@@ -160,10 +136,10 @@ class DemandModeller:
     # -- CoT Steps ------------------------------------------------------------
 
     def _step1_roles(self, by_type: Dict) -> List[str]:
-        actors = self._rank_by_significance(by_type.get("actor_role", []), DEMAND_ITEM_CAP)
+        actors = [e.content for e in by_type.get("actor_role", [])[:MAX_PER_TYPE]]
         # Also include interface_name for runtime/design docs
         # (components act as actors in those contexts)
-        ifaces = self._rank_by_significance(by_type.get("interface_name", []), DEMAND_ITEM_CAP)
+        ifaces = [e.content for e in by_type.get("interface_name", [])[:10]]
         if not actors and not ifaces:
             return ["User", "System"]
 
@@ -177,23 +153,20 @@ class DemandModeller:
             "- Include both human roles (User, Admin) and system components "
             "(AuthService, Database) if they appear as actors\n"
             "- Remove noise words and non-role items\n"
-            "- Maximum {cap} items\n\n"
+            "- Maximum 10 items\n\n"
             "Example: [\"Administrator\", \"End User\", "
             "\"Authentication Service\", \"Database\"]\n\n"
             "JSON array:"
-        ).format(
-            mentions="\n".join("- " + a for a in all_mentions),
-            cap=DEMAND_ITEM_CAP,
-        )
+        ).format(mentions="\n".join("- " + a for a in all_mentions[:40]))
 
         raw = self._chat(prompt)
-        return self._parse_list(raw)[:DEMAND_ITEM_CAP]
+        return self._parse_list(raw)
 
     def _step2_use_cases(
         self, by_type: Dict, roles: List[str]
     ) -> List[UseCase]:
-        fps = self._rank_by_significance(by_type.get("function_point", []), DEMAND_ITEM_CAP * 2)
-        procs = self._rank_by_significance(by_type.get("process_step", []), DEMAND_ITEM_CAP)
+        fps = [e.content for e in by_type.get("function_point", [])[:MAX_PER_TYPE]]
+        procs = [e.content for e in by_type.get("process_step", [])[:15]]
         if not fps:
             return []
 
@@ -202,7 +175,7 @@ class DemandModeller:
             "Given these system functions:\n{functions}\n\n"
             "And these process steps:\n{steps}\n\n"
             "User roles: {roles}\n\n"
-            "Create use cases. Return a JSON array (max {cap} items). "
+            "Create use cases. Return a JSON array (max 10 items). "
             "Each item must have exactly these keys:\n"
             "  use_case_id    (e.g. UC-001)\n"
             "  actor          (one of the roles)\n"
@@ -213,17 +186,16 @@ class DemandModeller:
             "  exceptions     (array of strings)\n\n"
             "JSON array:"
         ).format(
-            functions="\n".join("- " + f for f in fps),
-            steps="\n".join("- " + p for p in procs) if procs else "(none)",
+            functions="\n".join("- " + f for f in fps[:20]),
+            steps="\n".join("- " + p for p in procs[:10]) if procs else "(none)",
             roles=role_str,
-            cap=DEMAND_ITEM_CAP,
         )
 
         raw  = self._chat(prompt)
         data = self._parse_json_list(raw)
 
         use_cases = []
-        for i, item in enumerate(data[:DEMAND_ITEM_CAP], start=1):
+        for i, item in enumerate(data[:12], start=1):
             try:
                 use_cases.append(UseCase(
                     use_case_id    = item.get("use_case_id", "UC-{:03d}".format(i)),
@@ -241,30 +213,26 @@ class DemandModeller:
     def _step3_functional_reqs(
         self, by_type: Dict, source_id: str
     ) -> List[FunctionalRequirement]:
-        fps = self._rank_by_significance(by_type.get("function_point", []), DEMAND_ITEM_CAP * 2)
+        fps = [e.content for e in by_type.get("function_point", [])[:MAX_PER_TYPE]]
         if not fps:
             return []
 
-        gen_target = DEMAND_ITEM_CAP + 5  # ask for a buffer above the final cap so
-                                            # near-duplicate merging (below) has real
-                                            # candidates to work on, rather than
-                                            # deduplicating an already-capped set
         prompt = (
             "Convert these system function descriptions into formal "
             "functional requirements using 'shall' statements.\n\n"
             "Functions:\n{functions}\n\n"
-            "Return a JSON array (max {gen_target} items). Each item:\n"
+            "Return a JSON array (max 15 items). Each item:\n"
             "  req_id      (e.g. FR-001)\n"
             "  description (clear 'The system shall...' statement)\n"
             "  priority    (high / medium / low)\n\n"
             "JSON array:"
-        ).format(functions="\n".join("- " + f for f in fps), gen_target=gen_target)
+        ).format(functions="\n".join("- " + f for f in fps[:25]))
 
         raw  = self._chat(prompt)
         data = self._parse_json_list(raw)
 
         reqs = []
-        for i, item in enumerate(data[:gen_target], start=1):
+        for i, item in enumerate(data[:15], start=1):
             try:
                 reqs.append(FunctionalRequirement(
                     req_id      = item.get("req_id", "FR-{:03d}".format(i)),
@@ -274,65 +242,14 @@ class DemandModeller:
                 ))
             except Exception:
                 continue
-
-        # Merge near-duplicates from the OVERSIZED candidate pool, THEN
-        # truncate to the final cap -- this gives deduplication genuine
-        # candidates to act on, rather than deduplicating an already
-        # size-limited set (which rarely contains duplicates by
-        # construction, since the model was asked for a small, distinct
-        # set directly).
-        deduped = self._merge_near_duplicate_reqs(reqs)
-        return deduped[:DEMAND_ITEM_CAP]
-
-    @staticmethod
-    def _jaccard_similarity(text_a: str, text_b: str) -> float:
-        tokens_a = set(text_a.lower().split())
-        tokens_b = set(text_b.lower().split())
-        if not tokens_a or not tokens_b:
-            return 0.0
-        intersection = len(tokens_a & tokens_b)
-        union = len(tokens_a | tokens_b)
-        return intersection / union if union else 0.0
-
-    def _merge_near_duplicate_reqs(
-        self, reqs: List[FunctionalRequirement], threshold: float = 0.75
-    ) -> List[FunctionalRequirement]:
-        """Merge pairs of functional requirements whose descriptions have
-        Jaccard similarity over token sets > threshold. When two
-        requirements are merged, the longer (more complete) description
-        is kept and source_ids are unioned. Order is preserved for the
-        surviving requirements."""
-        merged: List[FunctionalRequirement] = []
-        absorbed = set()
-        for i, req_a in enumerate(reqs):
-            if i in absorbed:
-                continue
-            keep = req_a
-            for j in range(i + 1, len(reqs)):
-                if j in absorbed:
-                    continue
-                req_b = reqs[j]
-                if self._jaccard_similarity(keep.description, req_b.description) > threshold:
-                    absorbed.add(j)
-                    if len(req_b.description) > len(keep.description):
-                        keep = FunctionalRequirement(
-                            req_id=keep.req_id, description=req_b.description,
-                            source_ids=list(set(keep.source_ids + req_b.source_ids)),
-                            priority=keep.priority,
-                        )
-                    else:
-                        keep = FunctionalRequirement(
-                            req_id=keep.req_id, description=keep.description,
-                            source_ids=list(set(keep.source_ids + req_b.source_ids)),
-                            priority=keep.priority,
-                        )
-            merged.append(keep)
-        return merged
+        return reqs
 
     def _step4_constraints(
         self, by_type: Dict, source_id: str
     ):
-        constraints = self._rank_by_significance(by_type.get("constraint", []), DEMAND_ITEM_CAP * 2)
+        constraints = [
+            e.content for e in by_type.get("constraint", [])[:MAX_PER_TYPE]
+        ]
         if not constraints:
             return [], []
 
@@ -353,14 +270,14 @@ class DemandModeller:
             "  affects_reqs   (array of strings, can be empty)\n\n"
             "JSON object:"
         ).format(
-            constraints="\n".join("- " + c for c in constraints)
+            constraints="\n".join("- " + c for c in constraints[:20])
         )
 
         raw  = self._chat(prompt)
         data = self._parse_json_obj(raw)
 
         nfr_list = []
-        for i, item in enumerate(data.get("nfr_constraints", [])[:DEMAND_ITEM_CAP], 1):
+        for i, item in enumerate(data.get("nfr_constraints", [])[:15], 1):
             try:
                 nfr_list.append(NFRConstraint(
                     constraint_id = item.get("constraint_id", "NFR-{:03d}".format(i)),
@@ -373,7 +290,7 @@ class DemandModeller:
                 continue
 
         rt_list = []
-        for i, item in enumerate(data.get("runtime_constraints", [])[:DEMAND_ITEM_CAP], 1):
+        for i, item in enumerate(data.get("runtime_constraints", [])[:10], 1):
             try:
                 rt_list.append(RuntimeConstraint(
                     constraint_id = item.get("constraint_id", "RT-{:03d}".format(i)),
@@ -470,41 +387,3 @@ class DemandModeller:
             key = e.entity_type.value
             groups.setdefault(key, []).append(e)
         return groups
-
-    def _rank_by_significance(self, entities: List[ExtractedEntity], top_n: int) -> List[str]:
-        """Rank entities by (1) frequency -- how many near-duplicate mentions
-        of this same content appear across the fragment library -- and
-        (2) mean extraction confidence, then return the top_n most
-        significant items' text, deduplicated.
-
-        This is what Section 5.1 of the paper describes ("the top-N most
-        significant items ranked by entity frequency and prominence in the
-        fragment library rather than the first N encountered"). Earlier
-        versions of this method took a plain list-order slice
-        (entities[:N]) instead, which does not implement that claim --
-        with entities appended in extraction/chunk order, a plain slice
-        systematically favors content from early chunks regardless of
-        document size, exactly the failure mode raised in reviewer
-        comment R3a.
-        """
-        if not entities:
-            return []
-
-        groups: Dict[str, List[ExtractedEntity]] = {}
-        for e in entities:
-            key = " ".join(e.content.lower().split())  # normalize whitespace/case
-            groups.setdefault(key, []).append(e)
-
-        scored = []
-        for key, group in groups.items():
-            frequency = len(group)
-            mean_confidence = sum(g.confidence_score for g in group) / len(group)
-            representative = max(group, key=lambda g: len(g.content))
-            # Frequency dominates (repeated mentions across the document are
-            # the strongest signal of genuine significance); confidence
-            # breaks ties among equally-frequent items.
-            significance = frequency + mean_confidence
-            scored.append((significance, representative.content))
-
-        scored.sort(key=lambda x: x[0], reverse=True)
-        return [content for _, content in scored[:top_n]]
