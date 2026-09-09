@@ -1,0 +1,43 @@
+GETTING STARTED
+
+This guide explains how to sign in, manage your session, and keep your
+account secure.
+
+1 Signing In
+
+To sign in, open the login page and enter your email address and
+password. If your account has multi-factor authentication (MFA)
+enabled, you will be prompted for a 6-digit verification code from
+your authenticator app after your password is accepted.
+
+If you enter an incorrect password five times in a row, your account
+will be temporarily locked for security reasons. Wait for the lockout
+period to end before trying again, or contact support if you need
+immediate access.
+
+2 Changing Your Password
+
+Once signed in, you can change your password at any time from Account
+Settings, Security, Change Password. Enter your current password
+followed by your new password. Your new password must be at least 12
+characters and include a mix of uppercase letters, lowercase letters,
+numbers, and symbols.
+
+3 Forgot Your Password
+
+If you forget your password, click the "Forgot password?" link on the
+sign-in page. We will email you a secure recovery link that lets you
+set a new password. The recovery link expires after a short period for
+your protection.
+
+4 Staying Signed In
+
+Your session remains active while you use the application. If you are
+inactive for an extended period, you may be asked to sign in again.
+You can manually sign out at any time from the account menu.
+
+5 Account Lockout
+
+For your protection, repeated failed sign-in attempts will temporarily
+lock your account. This is a normal security measure and does not mean
+your account has been compromised.
