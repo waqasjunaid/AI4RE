@@ -17,12 +17,17 @@ ENTITIES_DIR   = "data/processed/entities"
 CHUNKS_PER_DOC = None   # change to None for full extraction
 
 DEBUG = "--debug" in sys.argv   # python test_stage1_extraction.py --debug
+FORCE = "--force" in sys.argv   # re-extract even if entity file already exists
 
 DOCUMENTS = [
     {"chunk_file": "nasa_srs_v1.json",        "source_id": "nasa_srs_v1"},
     {"chunk_file": "bash_user_manual.json",   "source_id": "bash_user_manual"},
     {"chunk_file": "swagger_petstore.json",   "source_id": "swagger_petstore"},
     {"chunk_file": "auth_system_design.json", "source_id": "auth_system_design"},
+    # -- Same-system bundle added in response to reviewer comment R1 --
+    {"chunk_file": "auth_system_srs.json",      "source_id": "auth_system_srs"},
+    {"chunk_file": "auth_system_manual.json",   "source_id": "auth_system_manual"},
+    {"chunk_file": "auth_system_runtime.json",  "source_id": "auth_system_runtime"},
 ]
 
 # -- Helpers ------------------------------------------------------------------
@@ -163,6 +168,16 @@ def main():
         divider("{} -- {} chunks".format(
             cfg["source_id"], CHUNKS_PER_DOC or "ALL"
         ))
+
+        suffix_check = "_sample" if CHUNKS_PER_DOC else ""
+        existing_path = os.path.join(
+            ENTITIES_DIR, "{}{}.json".format(cfg["source_id"], suffix_check)
+        )
+        if os.path.exists(existing_path) and not FORCE:
+            print("  SKIP -- entities already exist: {}".format(existing_path))
+            print("  (pass --force to re-extract)")
+            results["skipped"] += 1
+            continue
 
         chunks = load_chunks(cfg["chunk_file"])
         if not chunks:
