@@ -1,0 +1,74 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Authentication Service API",
+    "version": "1.0.0",
+    "description": "REST API for user authentication, session management, and token issuance."
+  },
+  "basePath": "/auth",
+  "paths": {
+    "/auth/login": {
+      "post": {
+        "summary": "Authenticate a user",
+        "description": "Authenticates a user with email and password. Returns an access token and refresh token pair on success. Enforces a rate limit of 8 requests per minute per client IP.",
+        "tags": ["Authentication"],
+        "parameters": [
+          {"name": "email", "in": "body", "type": "string", "required": true},
+          {"name": "password", "in": "body", "type": "string", "required": true}
+        ],
+        "responses": {
+          "200": {"description": "Authentication successful; returns AuthResponse"},
+          "401": {"description": "Invalid email or password"},
+          "423": {"description": "Account locked due to repeated failed attempts"},
+          "429": {"description": "Rate limit exceeded: maximum 8 login requests per minute per client IP"}
+        }
+      }
+    },
+    "/auth/mfa": {
+      "post": {
+        "summary": "Submit MFA verification code",
+        "description": "Completes authentication for accounts with multi-factor authentication enabled by submitting a time-based one-time password (TOTP) code.",
+        "tags": ["Authentication"],
+        "parameters": [
+          {"name": "mfaCode", "in": "body", "type": "string", "required": true}
+        ],
+        "responses": {
+          "200": {"description": "MFA verified; returns AuthResponse"},
+          "401": {"description": "Invalid or expired MFA code"}
+        }
+      }
+    },
+    "/auth/refresh": {
+      "post": {
+        "summary": "Refresh an access token",
+        "description": "Issues a new access token using a valid, non-expired refresh token.",
+        "tags": ["Token Management"],
+        "responses": {
+          "200": {"description": "New access token issued"},
+          "401": {"description": "Refresh token invalid or expired"}
+        }
+      }
+    },
+    "/auth/logout": {
+      "post": {
+        "summary": "Terminate the current session",
+        "description": "Invalidates the caller's active session and associated tokens.",
+        "tags": ["Session Management"],
+        "responses": {
+          "200": {"description": "Session terminated"}
+        }
+      }
+    }
+  },
+  "definitions": {
+    "AuthResponse": {
+      "description": "Returned on successful authentication or token refresh.",
+      "properties": {
+        "accessToken": {"type": "string", "description": "Short-lived JWT signed with RS256"},
+        "refreshToken": {"type": "string", "description": "Long-lived opaque token"},
+        "expiresIn": {"type": "integer", "description": "Access token lifetime in seconds"},
+        "tokenType": {"type": "string", "description": "Always 'Bearer'"}
+      }
+    }
+  }
+}
