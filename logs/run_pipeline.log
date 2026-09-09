@@ -1,0 +1,153 @@
+nohup: 忽略输入
+
+AI4RE-Test  |  Full Pipeline Runner with Feedback Loop
+============================================================
+Sources      : nasa_srs_v1, swagger_petstore, auth_system_design, bash_user_manual, auth_system_srs, auth_system_manual, auth_system_runtime
+Feedback loop: YES
+============================================================
+
+[Stage 2] Loading demand models ...
+  Loaded: nasa_srs_v1
+  Loaded: swagger_petstore
+  Loaded: auth_system_design
+  Loaded: bash_user_manual
+  Loaded: auth_system_srs
+  Loaded: auth_system_manual
+  Loaded: auth_system_runtime
+
+[Stage 3] Consistency check ...
+  Bundle 'nasa_srs_v1': 1 document(s) -- nasa_srs_v1
+    Only 1 document(s) in this bundle -- skipping cross-document checks 1-3 and terminology check 5 (need >=2 same-system artifacts).
+    Check 4 (intra-source) -> nasa_srs_v1 (4 issues)
+  Bundle 'swagger_petstore': 1 document(s) -- swagger_petstore
+    Only 1 document(s) in this bundle -- skipping cross-document checks 1-3 and terminology check 5 (need >=2 same-system artifacts).
+    Check 4 (intra-source) -> swagger_petstore (8 issues)
+  Bundle 'auth_system': 4 document(s) -- auth_system_design, auth_system_srs, auth_system_manual, auth_system_runtime
+    Check 1: SRS vs User Manual ...
+      -> 6 issues
+    Check 2: Runtime vs SRS ...
+      -> 0 issues
+    Check 3: Design vs SRS ...
+      -> 0 issues
+    Check 5: Terminology (within bundle) ...
+      -> 0 issues
+    Check 4 (intra-source) -> auth_system_design (4 issues)
+    Check 4 (intra-source) -> auth_system_srs (4 issues)
+    Check 4 (intra-source) -> auth_system_manual (4 issues)
+    Check 4 (intra-source) -> auth_system_runtime (4 issues)
+  Bundle 'bash_user_manual': 1 document(s) -- bash_user_manual
+    Only 1 document(s) in this bundle -- skipping cross-document checks 1-3 and terminology check 5 (need >=2 same-system artifacts).
+    Check 4 (intra-source) -> bash_user_manual (3 issues)
+  37 issues found  (1826s)
+
+[Stage 4+5] nasa_srs_v1
+  Generating TRs ...
+  42 TRs generated  (2161s)
+  Reviewing ...
+  Q_H=0.62 Q_A=1.00 Trace=1.00 Coverage=0.95  (0s)
+  Running feedback loop ...
+
+  Feedback iteration 1/2
+    Regenerating 8 flagged TRs ...
+    Regenerated 8 TRs
+    Generating TRs for 1 uncovered items ...
+    Added 3 new TRs
+
+  Feedback iteration 2/2
+    Regenerating 8 flagged TRs ...
+    Regenerated 8 TRs
+    Generating TRs for 1 uncovered items ...
+    Added 3 new TRs
+  After feedback: Q_H=0.79 Q_A=1.00 Trace=1.00 Coverage=1.00  (1512s)
+  Final TR-Doc saved: data/processed/evaluation/final/nasa_srs_v1_final_tr_doc.json  (71.5 KB, 48 TRs)
+
+[Stage 4+5] swagger_petstore
+  Generating TRs ...
+  62 TRs generated  (2941s)
+  Reviewing ...
+  Q_H=0.97 Q_A=1.00 Trace=1.00 Coverage=1.00  (0s)
+  Final TR-Doc saved: data/processed/evaluation/final/swagger_petstore_final_tr_doc.json  (77.9 KB, 62 TRs)
+
+[Stage 4+5] auth_system_design
+  Generating TRs ...
+  49 TRs generated  (2281s)
+  Reviewing ...
+  Q_H=0.73 Q_A=1.00 Trace=1.00 Coverage=1.00  (0s)
+  Running feedback loop ...
+
+  Feedback iteration 1/2
+    Regenerating 10 flagged TRs ...
+    Regenerated 8 TRs
+
+  Feedback iteration 2/2
+    Regenerating 10 flagged TRs ...
+    No changes made -- stopping early
+  After feedback: Q_H=0.79 Q_A=1.00 Trace=1.00 Coverage=1.00  (1078s)
+  Final TR-Doc saved: data/processed/evaluation/final/auth_system_design_final_tr_doc.json  (51.8 KB, 39 TRs)
+
+[Stage 4+5] bash_user_manual
+  Generating TRs ...
+  49 TRs generated  (2206s)
+  Reviewing ...
+  Q_H=0.16 Q_A=0.90 Trace=1.00 Coverage=1.00  (0s)
+  Running feedback loop ...
+
+  Feedback iteration 1/2
+    Regenerating 15 flagged TRs ...
+    Regenerated 8 TRs
+
+  Feedback iteration 2/2
+    Regenerating 15 flagged TRs ...
+    Regenerated 8 TRs
+  After feedback: Q_H=0.38 Q_A=1.00 Trace=1.00 Coverage=1.00  (1041s)
+  Final TR-Doc saved: data/processed/evaluation/final/bash_user_manual_final_tr_doc.json  (58.7 KB, 42 TRs)
+
+[Stage 4+5] auth_system_srs
+  Generating TRs ...
+  50 TRs generated  (2484s)
+  Reviewing ...
+  Q_H=0.84 Q_A=1.00 Trace=1.00 Coverage=0.96  (0s)
+  Final TR-Doc saved: data/processed/evaluation/final/auth_system_srs_final_tr_doc.json  (72.1 KB, 50 TRs)
+
+[Stage 4+5] auth_system_manual
+  Generating TRs ...
+  33 TRs generated  (1622s)
+  Reviewing ...
+  Q_H=1.00 Q_A=1.00 Trace=1.00 Coverage=1.00  (0s)
+  Final TR-Doc saved: data/processed/evaluation/final/auth_system_manual_final_tr_doc.json  (47.6 KB, 33 TRs)
+
+[Stage 4+5] auth_system_runtime
+  Generating TRs ...
+  35 TRs generated  (1603s)
+  Reviewing ...
+  Q_H=0.60 Q_A=1.00 Trace=1.00 Coverage=1.00  (0s)
+  Running feedback loop ...
+
+  Feedback iteration 1/2
+    Regenerating 7 flagged TRs ...
+    Regenerated 7 TRs
+
+  Feedback iteration 2/2
+    Regenerating 7 flagged TRs ...
+    No changes made -- stopping early
+  After feedback: Q_H=0.68 Q_A=1.00 Trace=1.00 Coverage=1.00  (987s)
+  Final TR-Doc saved: data/processed/evaluation/final/auth_system_runtime_final_tr_doc.json  (38.5 KB, 28 TRs)
+
+============================================================
+  PIPELINE COMPLETE
+============================================================
+  nasa_srs_v1                PASS          48 TRs  Q_H=0.79 Q_A=1.00
+  swagger_petstore           PASS          62 TRs  Q_H=0.97 Q_A=1.00
+  auth_system_design         PASS          39 TRs  Q_H=0.79 Q_A=1.00
+  bash_user_manual           NEEDS REVIEW  42 TRs  Q_H=0.38 Q_A=1.00
+  auth_system_srs            PASS          50 TRs  Q_H=0.84 Q_A=1.00
+  auth_system_manual         PASS          33 TRs  Q_H=1.00 Q_A=1.00
+  auth_system_runtime        NEEDS REVIEW  28 TRs  Q_H=0.68 Q_A=1.00
+
+Output artifacts:
+  demand          : data/processed/demand_model
+  consistency     : data/processed/consistency
+  tr              : data/processed/tr_doc
+  reviews         : data/processed/evaluation/reviews
+  final           : data/processed/evaluation/final
+
