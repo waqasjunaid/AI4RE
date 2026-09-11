@@ -1,0 +1,356 @@
+{
+  "source_id": "bash_user_manual",
+  "bundle_id": null,
+  "system_objectives": [
+    "prints timing statistics for pipeline",
+    "Evaluate conditional expression EXPRESSION",
+    "coproc executes a command in a subshell",
+    "defines a shell function named FNAME",
+    "unset builtin with -f option deletes function definitions",
+    "declare builtin command lists function names and definitions",
+    "arithmetic expansion",
+    "set builtin command"
+  ],
+  "user_roles": [
+    "User",
+    "Bash shell",
+    "Readline"
+  ],
+  "use_cases": [
+    {
+      "use_case_id": "UC-001",
+      "actor": "User",
+      "goal": "Execute a shell script",
+      "preconditions": [
+        "SCRIPTNAME exists",
+        "User has execute permission"
+      ],
+      "steps": [
+        "mark strings in shell script named SCRIPTNAME",
+        "executing a shell function or script"
+      ],
+      "postconditions": [
+        "Script executed successfully"
+      ],
+      "exceptions": [
+        "Permission denied",
+        "Script not found"
+      ]
+    },
+    {
+      "use_case_id": "UC-002",
+      "actor": "Bash shell",
+      "goal": "Expand words and execute commands",
+      "preconditions": [
+        "WORDS are provided",
+        "COMMANDS are valid"
+      ],
+      "steps": [
+        "expand WORDS and execute COMMANDS once for each word",
+        "consume all of the ARGUMENTS"
+      ],
+      "postconditions": [
+        "Commands executed successfully"
+      ],
+      "exceptions": [
+        "Invalid command",
+        "No arguments provided"
+      ]
+    },
+    {
+      "use_case_id": "UC-003",
+      "actor": "User",
+      "goal": "Use history substitution",
+      "preconditions": [
+        "History is enabled",
+        "Previous commands exist"
+      ],
+      "steps": [
+        "history expansion",
+        "next-history"
+      ],
+      "postconditions": [
+        "Previous command executed successfully"
+      ],
+      "exceptions": [
+        "History not enabled",
+        "No previous commands"
+      ]
+    },
+    {
+      "use_case_id": "UC-004",
+      "actor": "Bash shell",
+      "goal": "Evaluate arithmetic expressions",
+      "preconditions": [
+        "EXPR1 and EXPR2 are valid"
+      ],
+      "steps": [
+        "evaluate arithmetic expression EXPR1 and then EXPR2 until zero"
+      ],
+      "postconditions": [
+        "Expressions evaluated successfully"
+      ],
+      "exceptions": [
+        "Invalid expression",
+        "Division by zero"
+      ]
+    },
+    {
+      "use_case_id": "UC-005",
+      "actor": "User",
+      "goal": "Use alias command",
+      "preconditions": [
+        "Alias is defined",
+        "Command is valid"
+      ],
+      "steps": [
+        "alias command"
+      ],
+      "postconditions": [
+        "Alias executed successfully"
+      ],
+      "exceptions": [
+        "Alias not defined",
+        "Invalid command"
+      ]
+    },
+    {
+      "use_case_id": "UC-006",
+      "actor": "Readline",
+      "goal": "Display function names and bindings",
+      "preconditions": [
+        "Readline is enabled"
+      ],
+      "steps": [
+        "Display Readline function names and bindings"
+      ],
+      "postconditions": [
+        "Function names and bindings displayed successfully"
+      ],
+      "exceptions": [
+        "Readline not enabled"
+      ]
+    },
+    {
+      "use_case_id": "UC-007",
+      "actor": "User",
+      "goal": "Move to start or end of line",
+      "preconditions": [
+        "Line is editable"
+      ],
+      "steps": [
+        "Move to start of line",
+        "Move to end of line"
+      ],
+      "postconditions": [
+        "Cursor moved successfully"
+      ],
+      "exceptions": [
+        "Line not editable"
+      ]
+    },
+    {
+      "use_case_id": "UC-008",
+      "actor": "Bash shell",
+      "goal": "Perform pattern matching",
+      "preconditions": [
+        "Pattern is valid",
+        "Files exist"
+      ],
+      "steps": [
+        "pattern matching"
+      ],
+      "postconditions": [
+        "Matching files found successfully"
+      ],
+      "exceptions": [
+        "Invalid pattern",
+        "No matching files"
+      ]
+    },
+    {
+      "use_case_id": "UC-009",
+      "actor": "User",
+      "goal": "Use cd builtin",
+      "preconditions": [
+        "Directory exists",
+        "User has permission"
+      ],
+      "steps": [
+        "cd builtin"
+      ],
+      "postconditions": [
+        "Directory changed successfully"
+      ],
+      "exceptions": [
+        "Directory not found",
+        "Permission denied"
+      ]
+    },
+    {
+      "use_case_id": "UC-010",
+      "actor": "Bash shell",
+      "goal": "Perform quote removal",
+      "preconditions": [
+        "Quotes are present"
+      ],
+      "steps": [
+        "quote removal"
+      ],
+      "postconditions": [
+        "Quotes removed successfully"
+      ],
+      "exceptions": [
+        "No quotes found"
+      ]
+    }
+  ],
+  "functional_reqs": [
+    {
+      "req_id": "FR-001",
+      "description": "The system shall perform arithmetic expansion on expressions enclosed in double parentheses.",
+      "source_ids": [
+        "bash_user_manual"
+      ],
+      "priority": "medium"
+    },
+    {
+      "req_id": "FR-002",
+      "description": "The system shall substitute the output of a command into the current command line when the command is enclosed in backticks or $().",
+      "source_ids": [
+        "bash_user_manual"
+      ],
+      "priority": "high"
+    },
+    {
+      "req_id": "FR-003",
+      "description": "The system shall expand filenames that contain patterns such as *, ?, and [] to match existing files.",
+      "source_ids": [
+        "bash_user_manual"
+      ],
+      "priority": "medium"
+    },
+    {
+      "req_id": "FR-004",
+      "description": "The system shall replace a tilde (~) at the beginning of a word with the value of the HOME variable.",
+      "source_ids": [
+        "bash_user_manual"
+      ],
+      "priority": "low"
+    },
+    {
+      "req_id": "FR-005",
+      "description": "The system shall split input lines into words based on spaces, tabs, and other whitespace characters.",
+      "source_ids": [
+        "bash_user_manual"
+      ],
+      "priority": "high"
+    },
+    {
+      "req_id": "FR-006",
+      "description": "The system shall remove quotes from words that are enclosed in single or double quotes.",
+      "source_ids": [
+        "bash_user_manual"
+      ],
+      "priority": "medium"
+    },
+    {
+      "req_id": "FR-007",
+      "description": "The system shall expand parameters and variables to their values when they appear on the command line.",
+      "source_ids": [
+        "bash_user_manual"
+      ],
+      "priority": "high"
+    },
+    {
+      "req_id": "FR-008",
+      "description": "The system shall move the cursor to the start of the current line when the user presses the corresponding key binding.",
+      "source_ids": [
+        "bash_user_manual"
+      ],
+      "priority": "low"
+    },
+    {
+      "req_id": "FR-009",
+      "description": "The system shall display the next command from the history list when the user presses the corresponding key binding.",
+      "source_ids": [
+        "bash_user_manual"
+      ],
+      "priority": "medium"
+    },
+    {
+      "req_id": "FR-010",
+      "description": "The system shall execute an alias command when the user types the alias name followed by a space or tab.",
+      "source_ids": [
+        "bash_user_manual"
+      ],
+      "priority": "high"
+    }
+  ],
+  "nfr_constraints": [],
+  "runtime_constraints": [],
+  "glossary": {
+    "Pattern Matching": "Pattern Matching",
+    "Bash Conditional Expressions": "Bash Conditional Expressions",
+    "Arithmetic Expansion": "Arithmetic Expansion",
+    "POSIX mode": "POSIX mode",
+    "POSIX standard": "POSIX standard",
+    "HISTIGNORE": "HISTIGNORE",
+    "emacs mode": "emacs mode",
+    "Programmable Completion": "Programmable Completion",
+    "Bash Variables": "Bash Variables",
+    "positional parameter": "positional parameter",
+    "POSIX": "POSIX",
+    "Bash": "Bash",
+    "builtin": "builtin",
+    "Bash POSIX Mode": "Bash POSIX Mode",
+    "EPOCHREALTIME": "EPOCHREALTIME",
+    "IFS": "IFS",
+    "EOF": "EOF",
+    "vi mode": "vi mode",
+    "BASH_ENV": "BASH_ENV",
+    "Shell Arithmetic": "Shell Arithmetic",
+    "LC_CTYPE locale category": "LC_CTYPE locale category",
+    "word splitting": "word splitting",
+    "incremental search": "incremental search",
+    "tilde expansion": "tilde expansion",
+    "SIGINT": "SIGINT",
+    "word designator": "word designator",
+    "Special Parameters": "Special Parameters",
+    "identifier": "identifier",
+    "internationalization": "internationalization",
+    "HISTSIZE": "HISTSIZE"
+  },
+  "exception_handlers": [
+    "invalid option supplied",
+    "unescaped double quote characters result in empty strings",
+    "syntax error occurs or a readonly function with the same name already exists",
+    "parameter is null or unset",
+    "IFS value is null, no word splitting occurs",
+    "fatal signal",
+    "invalid option detected",
+    "readonly or may not be unset",
+    "invalid option is supplied or write error occurs",
+    "read-only variables cannot be reset",
+    "variable assignment error",
+    "unbalanced quotes cause hard-to-find errors",
+    "SIGINT received while waiting for foreground command",
+    "Redirection fails if file exists and is regular file",
+    "redirection error",
+    "receipt of SIGHUP",
+    "N is greater than $# or less than zero",
+    "non-zero exit status",
+    "invalid option or option argument supplied",
+    "end-of-file is encountered",
+    "function invocations exceed nesting level cause command to abort",
+    "invalid option specified",
+    "error if unset readonly variable",
+    "ringing the bell",
+    "output error occurs",
+    "shell security hole",
+    "SIGSEGV blocked causes shell misbehavior",
+    "assignment statements not allowed",
+    "failure to open or create a file",
+    ". does not search PATH if sourcepath is turned off"
+  ]
+}

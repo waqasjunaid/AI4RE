@@ -1,0 +1,593 @@
+{
+  "source_id": "bash_user_manual",
+  "bundle_id": null,
+  "system_objectives": [
+    "prints timing statistics for pipeline",
+    "Evaluate conditional expression EXPRESSION",
+    "coproc executes a command in a subshell",
+    "defines a shell function named FNAME",
+    "unset builtin with -f option deletes function definitions",
+    "declare builtin command lists function names and definitions",
+    "arithmetic expansion",
+    "set builtin command"
+  ],
+  "user_roles": [
+    "User",
+    "Bash",
+    "Readline",
+    "Operating System",
+    "Terminal",
+    "Shell",
+    "Publisher",
+    "Caller",
+    "AuthService"
+  ],
+  "use_cases": [
+    {
+      "use_case_id": "UC-001",
+      "actor": "User",
+      "goal": "Execute a shell command",
+      "preconditions": [
+        "User is logged in",
+        "Shell is running"
+      ],
+      "steps": [
+        "User types a command",
+        "Shell executes the command",
+        "Command output is displayed"
+      ],
+      "postconditions": [
+        "Command is executed successfully"
+      ],
+      "exceptions": [
+        "Command not found",
+        "Permission denied"
+      ]
+    },
+    {
+      "use_case_id": "UC-002",
+      "actor": "Bash",
+      "goal": "Perform filename expansion",
+      "preconditions": [
+        "Filename pattern is provided"
+      ],
+      "steps": [
+        "Bash expands the filename pattern",
+        "Matching files are listed"
+      ],
+      "postconditions": [
+        "Files matching the pattern are displayed"
+      ],
+      "exceptions": [
+        "No matching files found"
+      ]
+    },
+    {
+      "use_case_id": "UC-003",
+      "actor": "Readline",
+      "goal": "Complete a filename",
+      "preconditions": [
+        "Partial filename is provided"
+      ],
+      "steps": [
+        "Readline generates possible completions",
+        "User selects a completion"
+      ],
+      "postconditions": [
+        "Filename is completed successfully"
+      ],
+      "exceptions": [
+        "No matching files found"
+      ]
+    },
+    {
+      "use_case_id": "UC-004",
+      "actor": "Operating System",
+      "goal": "Handle a signal",
+      "preconditions": [
+        "Signal is received"
+      ],
+      "steps": [
+        "Operating System handles the signal",
+        "Appropriate action is taken"
+      ],
+      "postconditions": [
+        "Signal is handled successfully"
+      ],
+      "exceptions": [
+        "Signal cannot be handled"
+      ]
+    },
+    {
+      "use_case_id": "UC-005",
+      "actor": "Terminal",
+      "goal": "Display command output",
+      "preconditions": [
+        "Command output is available"
+      ],
+      "steps": [
+        "Terminal displays the output",
+        "Output is visible to the user"
+      ],
+      "postconditions": [
+        "Output is displayed successfully"
+      ],
+      "exceptions": [
+        "Output cannot be displayed"
+      ]
+    },
+    {
+      "use_case_id": "UC-006",
+      "actor": "Shell",
+      "goal": "Execute a shell script",
+      "preconditions": [
+        "Script file exists",
+        "Script has execute permission"
+      ],
+      "steps": [
+        "Shell executes the script",
+        "Script commands are executed"
+      ],
+      "postconditions": [
+        "Script is executed successfully"
+      ],
+      "exceptions": [
+        "Script not found",
+        "Permission denied"
+      ]
+    },
+    {
+      "use_case_id": "UC-007",
+      "actor": "Publisher",
+      "goal": "Distribute a document",
+      "preconditions": [
+        "Document is available"
+      ],
+      "steps": [
+        "Publisher distributes the document",
+        "Document is made available to the public"
+      ],
+      "postconditions": [
+        "Document is distributed successfully"
+      ],
+      "exceptions": [
+        "Document cannot be distributed"
+      ]
+    },
+    {
+      "use_case_id": "UC-008",
+      "actor": "Caller",
+      "goal": "Invoke a shell function",
+      "preconditions": [
+        "Function exists",
+        "Function has execute permission"
+      ],
+      "steps": [
+        "Caller invokes the function",
+        "Function is executed"
+      ],
+      "postconditions": [
+        "Function is invoked successfully"
+      ],
+      "exceptions": [
+        "Function not found",
+        "Permission denied"
+      ]
+    },
+    {
+      "use_case_id": "UC-009",
+      "actor": "User",
+      "goal": "Check mail",
+      "preconditions": [
+        "Mail account exists"
+      ],
+      "steps": [
+        "User checks mail",
+        "New mail is displayed"
+      ],
+      "postconditions": [
+        "Mail is checked successfully"
+      ],
+      "exceptions": [
+        "No new mail"
+      ]
+    },
+    {
+      "use_case_id": "UC-010",
+      "actor": "Bash",
+      "goal": "Perform arithmetic expansion",
+      "preconditions": [
+        "Arithmetic expression is provided"
+      ],
+      "steps": [
+        "Bash evaluates the expression",
+        "Result is displayed"
+      ],
+      "postconditions": [
+        "Expression is evaluated successfully"
+      ],
+      "exceptions": [
+        "Invalid expression"
+      ]
+    }
+  ],
+  "functional_reqs": [
+    {
+      "req_id": "FR-001",
+      "description": "The system shall perform arithmetic expansion on expressions.",
+      "source_ids": [
+        "bash_user_manual"
+      ],
+      "priority": "medium"
+    },
+    {
+      "req_id": "FR-002",
+      "description": "The system shall substitute commands with their output.",
+      "source_ids": [
+        "bash_user_manual"
+      ],
+      "priority": "high"
+    },
+    {
+      "req_id": "FR-003",
+      "description": "The system shall expand filenames based on patterns.",
+      "source_ids": [
+        "bash_user_manual"
+      ],
+      "priority": "medium"
+    },
+    {
+      "req_id": "FR-004",
+      "description": "The system shall expand tilde (~) characters to home directories.",
+      "source_ids": [
+        "bash_user_manual"
+      ],
+      "priority": "low"
+    },
+    {
+      "req_id": "FR-005",
+      "description": "The system shall split words into separate tokens based on whitespace.",
+      "source_ids": [
+        "bash_user_manual"
+      ],
+      "priority": "medium"
+    },
+    {
+      "req_id": "FR-006",
+      "description": "The system shall remove quotes from strings.",
+      "source_ids": [
+        "bash_user_manual"
+      ],
+      "priority": "low"
+    },
+    {
+      "req_id": "FR-007",
+      "description": "The system shall expand parameters and variables in expressions.",
+      "source_ids": [
+        "bash_user_manual"
+      ],
+      "priority": "high"
+    },
+    {
+      "req_id": "FR-008",
+      "description": "The system shall perform parameter expansion on expressions.",
+      "source_ids": [
+        "bash_user_manual"
+      ],
+      "priority": "medium"
+    },
+    {
+      "req_id": "FR-009",
+      "description": "The system shall expand aliases to their corresponding commands.",
+      "source_ids": [
+        "bash_user_manual"
+      ],
+      "priority": "low"
+    },
+    {
+      "req_id": "FR-010",
+      "description": "The system shall provide job control facilities for managing processes.",
+      "source_ids": [
+        "bash_user_manual"
+      ],
+      "priority": "high"
+    },
+    {
+      "req_id": "FR-011",
+      "description": "The system shall perform brace expansion on expressions.",
+      "source_ids": [
+        "bash_user_manual"
+      ],
+      "priority": "medium"
+    },
+    {
+      "req_id": "FR-012",
+      "description": "The system shall move the cursor to the start of the line.",
+      "source_ids": [
+        "bash_user_manual"
+      ],
+      "priority": "low"
+    },
+    {
+      "req_id": "FR-013",
+      "description": "The system shall move the cursor to the end of the line.",
+      "source_ids": [
+        "bash_user_manual"
+      ],
+      "priority": "low"
+    },
+    {
+      "req_id": "FR-014",
+      "description": "The system shall retrieve the next command from history.",
+      "source_ids": [
+        "bash_user_manual"
+      ],
+      "priority": "medium"
+    },
+    {
+      "req_id": "FR-015",
+      "description": "The system shall execute alias commands.",
+      "source_ids": [
+        "bash_user_manual"
+      ],
+      "priority": "low"
+    },
+    {
+      "req_id": "FR-016",
+      "description": "The system shall provide a shopt builtin for managing shell options.",
+      "source_ids": [
+        "bash_user_manual"
+      ],
+      "priority": "high"
+    },
+    {
+      "req_id": "FR-017",
+      "description": "The system shall perform history substitution on expressions.",
+      "source_ids": [
+        "bash_user_manual"
+      ],
+      "priority": "medium"
+    },
+    {
+      "req_id": "FR-018",
+      "description": "The system shall change the current directory using the cd builtin.",
+      "source_ids": [
+        "bash_user_manual"
+      ],
+      "priority": "low"
+    },
+    {
+      "req_id": "FR-019",
+      "description": "The system shall expand history entries to their corresponding commands.",
+      "source_ids": [
+        "bash_user_manual"
+      ],
+      "priority": "medium"
+    },
+    {
+      "req_id": "FR-020",
+      "description": "The system shall perform pattern matching on expressions.",
+      "source_ids": [
+        "bash_user_manual"
+      ],
+      "priority": "high"
+    }
+  ],
+  "nfr_constraints": [],
+  "runtime_constraints": [],
+  "glossary": {
+    "Pattern Matching": "Pattern Matching",
+    "Bash Conditional Expressions": "Bash Conditional Expressions",
+    "Arithmetic Expansion": "Arithmetic Expansion",
+    "POSIX mode": "POSIX mode",
+    "POSIX standard": "POSIX standard",
+    "HISTIGNORE": "HISTIGNORE",
+    "emacs mode": "emacs mode",
+    "Programmable Completion": "Programmable Completion",
+    "Bash Variables": "Bash Variables",
+    "positional parameter": "positional parameter",
+    "POSIX": "POSIX",
+    "Bash": "Bash",
+    "builtin": "builtin",
+    "Bash POSIX Mode": "Bash POSIX Mode",
+    "EPOCHREALTIME": "EPOCHREALTIME",
+    "IFS": "IFS",
+    "EOF": "EOF",
+    "vi mode": "vi mode",
+    "BASH_ENV": "BASH_ENV",
+    "Shell Arithmetic": "Shell Arithmetic",
+    "LC_CTYPE locale category": "LC_CTYPE locale category",
+    "word splitting": "word splitting",
+    "incremental search": "incremental search",
+    "tilde expansion": "tilde expansion",
+    "SIGINT": "SIGINT",
+    "word designator": "word designator",
+    "Special Parameters": "Special Parameters",
+    "identifier": "identifier",
+    "internationalization": "internationalization",
+    "HISTSIZE": "HISTSIZE",
+    "MAPFILE": "MAPFILE",
+    "OLDPWD": "OLDPWD",
+    "OSTYPE": "OSTYPE",
+    "PIPESTATUS": "PIPESTATUS",
+    "kill-ring": "kill-ring",
+    "GNU Free Documentation License": "GNU Free Documentation License",
+    "EUID": "EUID",
+    "macro processor": "macro processor",
+    "GNU utilities": "GNU utilities",
+    "exit status": "exit status",
+    "Bourne shell": "Bourne shell",
+    "POSIX specification": "POSIX specification",
+    "Bash escape character": "Bash escape character",
+    "line continuation": "line continuation",
+    "reserved words": "reserved words",
+    "bracket expressions": "bracket expressions",
+    "FUNCNEST variable": "FUNCNEST variable",
+    "positional parameters": "positional parameters",
+    "IFS variable": "IFS variable",
+    "tilde-prefix": "tilde-prefix",
+    "IFS whitespace character": "IFS whitespace character",
+    "PATTERN": "PATTERN",
+    "bracket expression": "bracket expression",
+    "extglob option": "extglob option",
+    "redirection operators": "redirection operators",
+    "noclobber option": "noclobber option",
+    "waitpid system call": "waitpid system call",
+    "KEYMAP names": "KEYMAP names",
+    "READLINE_LINE variable": "READLINE_LINE variable",
+    "READLINE_POINT variable": "READLINE_POINT variable",
+    "READLINE_MARK variable": "READLINE_MARK variable",
+    "allexport": "allexport",
+    "braceexpand": "braceexpand",
+    "emacs": "emacs",
+    "errexit": "errexit",
+    "errtrace": "errtrace",
+    "functrace": "functrace",
+    "hashall": "hashall",
+    "histexpand": "histexpand",
+    "history": "history",
+    "BASH_SOURCE array variable": "BASH_SOURCE array variable",
+    "FIGNORE shell variable": "FIGNORE shell variable",
+    "Pattern Matching bracket expressions": "Pattern Matching bracket expressions",
+    "login shell": "login shell",
+    "CDPATH": "CDPATH",
+    "HOME": "HOME",
+    "MAIL": "MAIL",
+    "MAILPATH": "MAILPATH",
+    "BASHOPTS": "BASHOPTS",
+    "BASH_ARGV": "BASH_ARGV",
+    "BASH_ARGV0": "BASH_ARGV0",
+    "quick substitution": "quick substitution",
+    "tokenization": "tokenization",
+    "TIMEFORMAT parameter": "TIMEFORMAT parameter",
+    "interactive shell": "interactive shell",
+    "directory stack": "directory stack",
+    "RESTRICTED shell": "RESTRICTED shell",
+    "POSIX Shell and Utilities standard": "POSIX Shell and Utilities standard",
+    "IEEE Std 1003.1-2024": "IEEE Std 1003.1-2024",
+    "SIG_DFL": "SIG_DFL",
+    "job number": "job number",
+    "process group ID": "process group ID",
+    "job specification (jobspec)": "job specification (jobspec)",
+    "job ID": "job ID",
+    "meta character": "meta character",
+    "KEYSEQ": "KEYSEQ",
+    "KEYNAME": "KEYNAME",
+    "compspec": "compspec",
+    "installation prefix": "installation prefix",
+    "Andrew File System": "Andrew File System",
+    "bash-malloc": "bash-malloc",
+    "extglob shell option": "extglob shell option",
+    "copyleft": "copyleft",
+    "Document": "Document",
+    "Modified Version": "Modified Version",
+    "Transparent copy": "Transparent copy",
+    "MMC Site": "MMC Site",
+    "Bash Variables ENV": "Bash Variables ENV",
+    "GNU operating system": "GNU operating system",
+    "blank": "blank",
+    "whitespace": "whitespace",
+    "control operator": "control operator",
+    "field": "field",
+    "message domain": "message domain",
+    "message catalog files": "message catalog files",
+    "regular expression grammar": "regular expression grammar",
+    "dynamic scope": "dynamic scope",
+    "filename expansion": "filename expansion",
+    "PREAMBLE": "PREAMBLE",
+    "POSTSCRIPT": "POSTSCRIPT",
+    "parameter expansion": "parameter expansion",
+    "globstar shell option": "globstar shell option",
+    "range expression": "range expression",
+    "restricted mode": "restricted mode",
+    "RANDOM parameter": "RANDOM parameter",
+    "READLINE_ARGUMENT": "READLINE_ARGUMENT",
+    "READLINE_LINE": "READLINE_LINE",
+    "READLINE_MARK": "READLINE_MARK",
+    "READLINE_POINT": "READLINE_POINT",
+    "Locale Translation": "Locale Translation",
+    "compatibility level": "compatibility level",
+    "inputrc file": "inputrc file",
+    "vi command mode": "vi command mode",
+    "vi insertion mode": "vi insertion mode",
+    "HISTCONTROL": "HISTCONTROL",
+    "metafy": "metafy",
+    "cdspell shell option": "cdspell shell option",
+    "free software": "free software",
+    "Secondary Section": "Secondary Section",
+    "Opaque format": "Opaque format",
+    "Massive Multiauthor Collaboration Site (": "Massive Multiauthor Collaboration Site (MMC Site)",
+    "Conditional Constructs": "Conditional Constructs",
+    "Command Grouping": "Command Grouping",
+    "binary arithmetic operators": "binary arithmetic operators",
+    "bitwise arithmetic operators": "bitwise arithmetic operators",
+    "pipeline operator": "pipeline operator",
+    "DEBUG trap": "DEBUG trap",
+    "RETURN trap": "RETURN trap",
+    "word expansion": "word expansion",
+    "_ (underscore)": "_ (underscore)"
+  },
+  "exception_handlers": [
+    "invalid option supplied",
+    "unescaped double quote characters result in empty strings",
+    "syntax error occurs or a readonly function with the same name already exists",
+    "parameter is null or unset",
+    "IFS value is null, no word splitting occurs",
+    "fatal signal",
+    "invalid option detected",
+    "readonly or may not be unset",
+    "invalid option is supplied or write error occurs",
+    "read-only variables cannot be reset",
+    "variable assignment error",
+    "unbalanced quotes cause hard-to-find errors",
+    "SIGINT received while waiting for foreground command",
+    "Redirection fails if file exists and is regular file",
+    "redirection error",
+    "receipt of SIGHUP",
+    "N is greater than $# or less than zero",
+    "non-zero exit status",
+    "invalid option or option argument supplied",
+    "end-of-file is encountered",
+    "function invocations exceed nesting level cause command to abort",
+    "invalid option specified",
+    "error if unset readonly variable",
+    "ringing the bell",
+    "output error occurs",
+    "shell security hole",
+    "SIGSEGV blocked causes shell misbehavior",
+    "assignment statements not allowed",
+    "failure to open or create a file",
+    ". does not search PATH if sourcepath is turned off",
+    "error encountered while determining directory name",
+    "failed command",
+    "variable assignment error occurs",
+    "SUBSCRIPT is less than zero",
+    "error occurs or invalid option encountered",
+    "UID and GID alteration leads to unexpected results",
+    "no items in the expansion of WORDS",
+    "variable is unset",
+    "invalid arithmetic expression",
+    "no matching filenames found",
+    "non-zero status",
+    "redirection errors",
+    "ambiguities with historical operator-precedence parsing",
+    "invalid option or argument",
+    "non-existent directory name",
+    "standard error being closed",
+    "invalid value",
+    "file exists but cannot be read",
+    "disallowed or not performed actions",
+    "invalid expression from expansion",
+    "history entry has been modified",
+    "prefix or substring matches more than one job",
+    "job control not enabled",
+    "bell-style setting",
+    "invalid offset from current command number",
+    "terminated child process",
+    "technical measures to obstruct or control reading",
+    "disagreement between the translation and the original version",
+    "job control not active",
+    "single quotes not considered special within double-quoted parameter expansion",
+    "no compspec for command word"
+  ]
+}

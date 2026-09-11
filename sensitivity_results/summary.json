@@ -1,0 +1,38 @@
+{
+  "10": {
+    "user_roles": 3,
+    "use_cases": 10,
+    "functional_reqs": 10,
+    "nfr_constraints": 0,
+    "runtime_constraints": 0,
+    "exception_handlers": 30,
+    "glossary_terms": 30
+  },
+  "20": {
+    "user_roles": 5,
+    "use_cases": 20,
+    "functional_reqs": 19,
+    "nfr_constraints": 0,
+    "runtime_constraints": 0,
+    "exception_handlers": 60,
+    "glossary_terms": 60
+  },
+  "30": {
+    "user_roles": 7,
+    "use_cases": 20,
+    "functional_reqs": 20,
+    "nfr_constraints": 0,
+    "runtime_constraints": 0,
+    "exception_handlers": 61,
+    "glossary_terms": 90
+  },
+  "50": {
+    "user_roles": 9,
+    "use_cases": 10,
+    "functional_reqs": 20,
+    "nfr_constraints": 0,
+    "runtime_constraints": 0,
+    "exception_handlers": 61,
+    "glossary_terms": 150
+  }
+}

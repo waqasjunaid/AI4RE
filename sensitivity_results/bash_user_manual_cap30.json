@@ -1,0 +1,707 @@
+{
+  "source_id": "bash_user_manual",
+  "bundle_id": null,
+  "system_objectives": [
+    "prints timing statistics for pipeline",
+    "Evaluate conditional expression EXPRESSION",
+    "coproc executes a command in a subshell",
+    "defines a shell function named FNAME",
+    "unset builtin with -f option deletes function definitions",
+    "declare builtin command lists function names and definitions",
+    "arithmetic expansion",
+    "set builtin command"
+  ],
+  "user_roles": [
+    "User",
+    "Bash",
+    "Shell",
+    "Readline",
+    "Operating System",
+    "Terminal Driver",
+    "Emacs"
+  ],
+  "use_cases": [
+    {
+      "use_case_id": "UC-001",
+      "actor": "User",
+      "goal": "Execute a shell command",
+      "preconditions": [
+        "User is logged in",
+        "Shell is running"
+      ],
+      "steps": [
+        "User types a command",
+        "Shell executes the command",
+        "Command output is displayed"
+      ],
+      "postconditions": [
+        "Command is executed successfully"
+      ],
+      "exceptions": [
+        "Invalid command syntax"
+      ]
+    },
+    {
+      "use_case_id": "UC-002",
+      "actor": "Bash",
+      "goal": "Perform filename expansion",
+      "preconditions": [
+        "Filename pattern is provided"
+      ],
+      "steps": [
+        "Bash expands the filename pattern",
+        "Matching files are listed"
+      ],
+      "postconditions": [
+        "Expanded filenames are displayed"
+      ],
+      "exceptions": [
+        "No matching files found"
+      ]
+    },
+    {
+      "use_case_id": "UC-003",
+      "actor": "Shell",
+      "goal": "Evaluate a conditional expression",
+      "preconditions": [
+        "Conditional expression is provided"
+      ],
+      "steps": [
+        "Shell evaluates the expression",
+        "Result is determined"
+      ],
+      "postconditions": [
+        "Expression result is known"
+      ],
+      "exceptions": [
+        "Invalid expression syntax"
+      ]
+    },
+    {
+      "use_case_id": "UC-004",
+      "actor": "Readline",
+      "goal": "Insert a special character",
+      "preconditions": [
+        "Special character is selected"
+      ],
+      "steps": [
+        "Readline inserts the character",
+        "Character is displayed"
+      ],
+      "postconditions": [
+        "Special character is inserted"
+      ],
+      "exceptions": [
+        "Invalid character selection"
+      ]
+    },
+    {
+      "use_case_id": "UC-005",
+      "actor": "Operating System",
+      "goal": "Handle a signal",
+      "preconditions": [
+        "Signal is received"
+      ],
+      "steps": [
+        "OS handles the signal",
+        "Action is taken"
+      ],
+      "postconditions": [
+        "Signal is handled successfully"
+      ],
+      "exceptions": [
+        "Invalid signal"
+      ]
+    },
+    {
+      "use_case_id": "UC-006",
+      "actor": "Terminal Driver",
+      "goal": "Read input from user",
+      "preconditions": [
+        "User input is available"
+      ],
+      "steps": [
+        "Terminal driver reads the input",
+        "Input is processed"
+      ],
+      "postconditions": [
+        "User input is read successfully"
+      ],
+      "exceptions": [
+        "Invalid input"
+      ]
+    },
+    {
+      "use_case_id": "UC-007",
+      "actor": "Emacs",
+      "goal": "Edit a file",
+      "preconditions": [
+        "File is selected"
+      ],
+      "steps": [
+        "Emacs opens the file",
+        "User edits the file",
+        "Changes are saved"
+      ],
+      "postconditions": [
+        "File is edited successfully"
+      ],
+      "exceptions": [
+        "Invalid file selection"
+      ]
+    },
+    {
+      "use_case_id": "UC-008",
+      "actor": "Bash",
+      "goal": "Define a shell function",
+      "preconditions": [
+        "Function name and body are provided"
+      ],
+      "steps": [
+        "Bash defines the function",
+        "Function is available for use"
+      ],
+      "postconditions": [
+        "Shell function is defined successfully"
+      ],
+      "exceptions": [
+        "Invalid function syntax"
+      ]
+    },
+    {
+      "use_case_id": "UC-009",
+      "actor": "User",
+      "goal": "Mark strings in a shell script",
+      "preconditions": [
+        "Script name and strings are provided"
+      ],
+      "steps": [
+        "User marks the strings",
+        "Strings are highlighted"
+      ],
+      "postconditions": [
+        "Strings are marked successfully"
+      ],
+      "exceptions": [
+        "Invalid script or string selection"
+      ]
+    },
+    {
+      "use_case_id": "UC-010",
+      "actor": "Shell",
+      "goal": "Connect output of each command to input of next command",
+      "preconditions": [
+        "Commands are provided"
+      ],
+      "steps": [
+        "Shell connects the commands",
+        "Output is piped"
+      ],
+      "postconditions": [
+        "Commands are connected successfully"
+      ],
+      "exceptions": [
+        "Invalid command syntax"
+      ]
+    },
+    {
+      "use_case_id": "UC-011",
+      "actor": "Bash",
+      "goal": "Expand words and execute commands once for each word",
+      "preconditions": [
+        "Words and commands are provided"
+      ],
+      "steps": [
+        "Bash expands the words",
+        "Commands are executed"
+      ],
+      "postconditions": [
+        "Words are expanded and commands are executed successfully"
+      ],
+      "exceptions": [
+        "Invalid word or command syntax"
+      ]
+    },
+    {
+      "use_case_id": "UC-012",
+      "actor": "Readline",
+      "goal": "Display Readline function names and bindings",
+      "preconditions": [
+        "Readline is running"
+      ],
+      "steps": [
+        "Readline displays the functions and bindings",
+        "Information is displayed"
+      ],
+      "postconditions": [
+        "Functions and bindings are displayed successfully"
+      ],
+      "exceptions": [
+        "Invalid Readline state"
+      ]
+    },
+    {
+      "use_case_id": "UC-013",
+      "actor": "Operating System",
+      "goal": "Exit shell and return status",
+      "preconditions": [
+        "Shell is running"
+      ],
+      "steps": [
+        "OS exits the shell",
+        "Status is returned"
+      ],
+      "postconditions": [
+        "Shell is exited successfully"
+      ],
+      "exceptions": [
+        "Invalid shell state"
+      ]
+    },
+    {
+      "use_case_id": "UC-014",
+      "actor": "Terminal Driver",
+      "goal": "Read input from file descriptor instead of standard input",
+      "preconditions": [
+        "File descriptor is provided"
+      ],
+      "steps": [
+        "Terminal driver reads the input",
+        "Input is processed"
+      ],
+      "postconditions": [
+        "Input is read successfully"
+      ],
+      "exceptions": [
+        "Invalid file descriptor"
+      ]
+    },
+    {
+      "use_case_id": "UC-015",
+      "actor": "Emacs",
+      "goal": "Insert open and close double quotes",
+      "preconditions": [
+        "Text is selected"
+      ],
+      "steps": [
+        "Emacs inserts the quotes",
+        "Quotes are displayed"
+      ],
+      "postconditions": [
+        "Quotes are inserted successfully"
+      ],
+      "exceptions": [
+        "Invalid text selection"
+      ]
+    },
+    {
+      "use_case_id": "UC-016",
+      "actor": "Bash",
+      "goal": "Evaluate a conditional expression",
+      "preconditions": [
+        "Expression is provided"
+      ],
+      "steps": [
+        "Bash evaluates the expression",
+        "Result is determined"
+      ],
+      "postconditions": [
+        "Expression result is known"
+      ],
+      "exceptions": [
+        "Invalid expression syntax"
+      ]
+    },
+    {
+      "use_case_id": "UC-017",
+      "actor": "User",
+      "goal": "Select a special character",
+      "preconditions": [
+        "Character selection is available"
+      ],
+      "steps": [
+        "User selects the character",
+        "Character is displayed"
+      ],
+      "postconditions": [
+        "Special character is selected successfully"
+      ],
+      "exceptions": [
+        "Invalid character selection"
+      ]
+    },
+    {
+      "use_case_id": "UC-018",
+      "actor": "Shell",
+      "goal": "Handle a signal",
+      "preconditions": [
+        "Signal is received"
+      ],
+      "steps": [
+        "Shell handles the signal",
+        "Action is taken"
+      ],
+      "postconditions": [
+        "Signal is handled successfully"
+      ],
+      "exceptions": [
+        "Invalid signal"
+      ]
+    },
+    {
+      "use_case_id": "UC-019",
+      "actor": "Readline",
+      "goal": "Insert a special character",
+      "preconditions": [
+        "Special character is selected"
+      ],
+      "steps": [
+        "Readline inserts the character",
+        "Character is displayed"
+      ],
+      "postconditions": [
+        "Special character is inserted successfully"
+      ],
+      "exceptions": [
+        "Invalid character selection"
+      ]
+    },
+    {
+      "use_case_id": "UC-020",
+      "actor": "Operating System",
+      "goal": "Exit shell and return status",
+      "preconditions": [
+        "Shell is running"
+      ],
+      "steps": [
+        "OS exits the shell",
+        "Status is returned"
+      ],
+      "postconditions": [
+        "Shell is exited successfully"
+      ],
+      "exceptions": [
+        "Invalid shell state"
+      ]
+    }
+  ],
+  "functional_reqs": [
+    {
+      "req_id": "FR-001",
+      "description": "The system shall perform arithmetic expansion on expressions.",
+      "source_ids": [
+        "bash_user_manual"
+      ],
+      "priority": "medium"
+    },
+    {
+      "req_id": "FR-002",
+      "description": "The system shall substitute commands with their output.",
+      "source_ids": [
+        "bash_user_manual"
+      ],
+      "priority": "high"
+    },
+    {
+      "req_id": "FR-003",
+      "description": "The system shall expand filenames based on patterns.",
+      "source_ids": [
+        "bash_user_manual"
+      ],
+      "priority": "medium"
+    },
+    {
+      "req_id": "FR-004",
+      "description": "The system shall expand tilde (~) notation to user directories.",
+      "source_ids": [
+        "bash_user_manual"
+      ],
+      "priority": "low"
+    },
+    {
+      "req_id": "FR-005",
+      "description": "The system shall split input into words based on delimiters.",
+      "source_ids": [
+        "bash_user_manual"
+      ],
+      "priority": "medium"
+    },
+    {
+      "req_id": "FR-006",
+      "description": "The system shall remove quotes from input strings.",
+      "source_ids": [
+        "bash_user_manual"
+      ],
+      "priority": "low"
+    },
+    {
+      "req_id": "FR-007",
+      "description": "The system shall expand parameters and variables in expressions.",
+      "source_ids": [
+        "bash_user_manual"
+      ],
+      "priority": "high"
+    },
+    {
+      "req_id": "FR-008",
+      "description": "The system shall expand aliases to their corresponding commands.",
+      "source_ids": [
+        "bash_user_manual"
+      ],
+      "priority": "medium"
+    },
+    {
+      "req_id": "FR-009",
+      "description": "The system shall provide job control facilities for managing processes.",
+      "source_ids": [
+        "bash_user_manual"
+      ],
+      "priority": "high"
+    },
+    {
+      "req_id": "FR-010",
+      "description": "The system shall move the cursor to the start of the line.",
+      "source_ids": [
+        "bash_user_manual"
+      ],
+      "priority": "low"
+    },
+    {
+      "req_id": "FR-011",
+      "description": "The system shall move the cursor to the end of the line.",
+      "source_ids": [
+        "bash_user_manual"
+      ],
+      "priority": "low"
+    },
+    {
+      "req_id": "FR-012",
+      "description": "The system shall retrieve the next command from history.",
+      "source_ids": [
+        "bash_user_manual"
+      ],
+      "priority": "medium"
+    },
+    {
+      "req_id": "FR-013",
+      "description": "The system shall execute a command in a subshell using coproc.",
+      "source_ids": [
+        "bash_user_manual"
+      ],
+      "priority": "high"
+    },
+    {
+      "req_id": "FR-014",
+      "description": "The system shall define a shell function named FNAME.",
+      "source_ids": [
+        "bash_user_manual"
+      ],
+      "priority": "medium"
+    },
+    {
+      "req_id": "FR-015",
+      "description": "The system shall delete function definitions using unset -f.",
+      "source_ids": [
+        "bash_user_manual"
+      ],
+      "priority": "low"
+    },
+    {
+      "req_id": "FR-016",
+      "description": "The system shall list function names and definitions using declare.",
+      "source_ids": [
+        "bash_user_manual"
+      ],
+      "priority": "medium"
+    },
+    {
+      "req_id": "FR-017",
+      "description": "The system shall execute builtin commands directly within the shell.",
+      "source_ids": [
+        "bash_user_manual"
+      ],
+      "priority": "high"
+    },
+    {
+      "req_id": "FR-018",
+      "description": "The system shall exit the shell and return a status code.",
+      "source_ids": [
+        "bash_user_manual"
+      ],
+      "priority": "medium"
+    },
+    {
+      "req_id": "FR-019",
+      "description": "The system shall export variables to the environment.",
+      "source_ids": [
+        "bash_user_manual"
+      ],
+      "priority": "low"
+    },
+    {
+      "req_id": "FR-020",
+      "description": "The system shall mark a variable as readonly.",
+      "source_ids": [
+        "bash_user_manual"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "nfr_constraints": [],
+  "runtime_constraints": [],
+  "glossary": {
+    "Pattern Matching": "Pattern Matching",
+    "Bash Conditional Expressions": "Bash Conditional Expressions",
+    "Arithmetic Expansion": "Arithmetic Expansion",
+    "POSIX mode": "POSIX mode",
+    "POSIX standard": "POSIX standard",
+    "HISTIGNORE": "HISTIGNORE",
+    "emacs mode": "emacs mode",
+    "Programmable Completion": "Programmable Completion",
+    "Bash Variables": "Bash Variables",
+    "positional parameter": "positional parameter",
+    "POSIX": "POSIX",
+    "Bash": "Bash",
+    "builtin": "builtin",
+    "Bash POSIX Mode": "Bash POSIX Mode",
+    "EPOCHREALTIME": "EPOCHREALTIME",
+    "IFS": "IFS",
+    "EOF": "EOF",
+    "vi mode": "vi mode",
+    "BASH_ENV": "BASH_ENV",
+    "Shell Arithmetic": "Shell Arithmetic",
+    "LC_CTYPE locale category": "LC_CTYPE locale category",
+    "word splitting": "word splitting",
+    "incremental search": "incremental search",
+    "tilde expansion": "tilde expansion",
+    "SIGINT": "SIGINT",
+    "word designator": "word designator",
+    "Special Parameters": "Special Parameters",
+    "identifier": "identifier",
+    "internationalization": "internationalization",
+    "HISTSIZE": "HISTSIZE",
+    "MAPFILE": "MAPFILE",
+    "OLDPWD": "OLDPWD",
+    "OSTYPE": "OSTYPE",
+    "PIPESTATUS": "PIPESTATUS",
+    "kill-ring": "kill-ring",
+    "GNU Free Documentation License": "GNU Free Documentation License",
+    "EUID": "EUID",
+    "macro processor": "macro processor",
+    "GNU utilities": "GNU utilities",
+    "exit status": "exit status",
+    "Bourne shell": "Bourne shell",
+    "POSIX specification": "POSIX specification",
+    "Bash escape character": "Bash escape character",
+    "line continuation": "line continuation",
+    "reserved words": "reserved words",
+    "bracket expressions": "bracket expressions",
+    "FUNCNEST variable": "FUNCNEST variable",
+    "positional parameters": "positional parameters",
+    "IFS variable": "IFS variable",
+    "tilde-prefix": "tilde-prefix",
+    "IFS whitespace character": "IFS whitespace character",
+    "PATTERN": "PATTERN",
+    "bracket expression": "bracket expression",
+    "extglob option": "extglob option",
+    "redirection operators": "redirection operators",
+    "noclobber option": "noclobber option",
+    "waitpid system call": "waitpid system call",
+    "KEYMAP names": "KEYMAP names",
+    "READLINE_LINE variable": "READLINE_LINE variable",
+    "READLINE_POINT variable": "READLINE_POINT variable",
+    "READLINE_MARK variable": "READLINE_MARK variable",
+    "allexport": "allexport",
+    "braceexpand": "braceexpand",
+    "emacs": "emacs",
+    "errexit": "errexit",
+    "errtrace": "errtrace",
+    "functrace": "functrace",
+    "hashall": "hashall",
+    "histexpand": "histexpand",
+    "history": "history",
+    "BASH_SOURCE array variable": "BASH_SOURCE array variable",
+    "FIGNORE shell variable": "FIGNORE shell variable",
+    "Pattern Matching bracket expressions": "Pattern Matching bracket expressions",
+    "login shell": "login shell",
+    "CDPATH": "CDPATH",
+    "HOME": "HOME",
+    "MAIL": "MAIL",
+    "MAILPATH": "MAILPATH",
+    "BASHOPTS": "BASHOPTS",
+    "BASH_ARGV": "BASH_ARGV",
+    "BASH_ARGV0": "BASH_ARGV0",
+    "quick substitution": "quick substitution",
+    "tokenization": "tokenization",
+    "TIMEFORMAT parameter": "TIMEFORMAT parameter",
+    "interactive shell": "interactive shell",
+    "directory stack": "directory stack",
+    "RESTRICTED shell": "RESTRICTED shell",
+    "POSIX Shell and Utilities standard": "POSIX Shell and Utilities standard",
+    "IEEE Std 1003.1-2024": "IEEE Std 1003.1-2024",
+    "SIG_DFL": "SIG_DFL"
+  },
+  "exception_handlers": [
+    "invalid option supplied",
+    "unescaped double quote characters result in empty strings",
+    "syntax error occurs or a readonly function with the same name already exists",
+    "parameter is null or unset",
+    "IFS value is null, no word splitting occurs",
+    "fatal signal",
+    "invalid option detected",
+    "readonly or may not be unset",
+    "invalid option is supplied or write error occurs",
+    "read-only variables cannot be reset",
+    "variable assignment error",
+    "unbalanced quotes cause hard-to-find errors",
+    "SIGINT received while waiting for foreground command",
+    "Redirection fails if file exists and is regular file",
+    "redirection error",
+    "receipt of SIGHUP",
+    "N is greater than $# or less than zero",
+    "non-zero exit status",
+    "invalid option or option argument supplied",
+    "end-of-file is encountered",
+    "function invocations exceed nesting level cause command to abort",
+    "invalid option specified",
+    "error if unset readonly variable",
+    "ringing the bell",
+    "output error occurs",
+    "shell security hole",
+    "SIGSEGV blocked causes shell misbehavior",
+    "assignment statements not allowed",
+    "failure to open or create a file",
+    ". does not search PATH if sourcepath is turned off",
+    "error encountered while determining directory name",
+    "failed command",
+    "variable assignment error occurs",
+    "SUBSCRIPT is less than zero",
+    "error occurs or invalid option encountered",
+    "UID and GID alteration leads to unexpected results",
+    "no items in the expansion of WORDS",
+    "variable is unset",
+    "invalid arithmetic expression",
+    "no matching filenames found",
+    "non-zero status",
+    "redirection errors",
+    "ambiguities with historical operator-precedence parsing",
+    "invalid option or argument",
+    "non-existent directory name",
+    "standard error being closed",
+    "invalid value",
+    "file exists but cannot be read",
+    "disallowed or not performed actions",
+    "invalid expression from expansion",
+    "history entry has been modified",
+    "prefix or substring matches more than one job",
+    "job control not enabled",
+    "bell-style setting",
+    "invalid offset from current command number",
+    "terminated child process",
+    "technical measures to obstruct or control reading",
+    "disagreement between the translation and the original version",
+    "job control not active",
+    "single quotes not considered special within double-quoted parameter expansion",
+    "no compspec for command word"
+  ]
+}
