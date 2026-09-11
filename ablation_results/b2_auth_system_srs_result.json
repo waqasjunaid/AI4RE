@@ -1,0 +1,12 @@
+{
+  "source_id": "auth_system_srs",
+  "total_trs": 30,
+  "cat5_trs": 0,
+  "metrics": {
+    "q_h": 0.7666666666666667,
+    "q_a": 1.0,
+    "traceability": 1.0,
+    "coverage": 1.0
+  },
+  "passed": false
+}
