@@ -144,6 +144,14 @@ class TRGenerator:
         reqs = [r.description for r in model.functional_reqs[:12]]
         if not reqs:
             return []
+
+        # Scale the output cap to genuinely accommodate the stated
+        # normal/boundary/negative triple pattern (Section 7.1.1), rather
+        # than a flat cap that silently discards TRs whenever there are
+        # more than 5 input requirements (5*3=15, the previous flat cap).
+        # See reviewer comment R4a.
+        max_items = len(reqs) * 3
+
         prompt = (
             "Generate functional test requirements from these software "
             "requirements.\n\n"
@@ -153,7 +161,7 @@ class TRGenerator:
             "  1. A normal-path TR\n"
             "  2. A boundary-condition TR\n"
             "  3. A negative-path TR (invalid input or error state)\n\n"
-            "Return JSON array (max 15 items). Each item:\n"
+            "Return JSON array (max {max_items} items). Each item:\n"
             "  tr_h: EARS-format test requirement string\n"
             "  preconditions: array of strings\n"
             "  stimuli: array of strings (inputs/triggers)\n"
@@ -165,10 +173,29 @@ class TRGenerator:
         ).format(
             ears=EARS_REMINDER,
             reqs="\n".join("- "+r for r in reqs),
+            max_items=max_items,
         )
-        return self._parse_and_build(
-            self._chat(prompt), model.source_id, TRCategory.FUNCTIONAL
-        )
+
+        # Scale the output token budget with max_items -- the previous fix
+        # (scaling max_items to len(reqs)*3) asked the model for up to
+        # twice as many fully-detailed JSON objects without also scaling
+        # the fixed 1500-token output budget, causing truncation-induced
+        # complete generation failures on exactly the documents with more
+        # functional requirements (confirmed: 4/7 documents regressed to
+        # 0 Cat.1 TRs after that change). ~120 tokens/item is a generous
+        # estimate for one TR-H/TR-A object (7 fields, 3 array fields);
+        # floor at the original 1500 default so small requests are
+        # unaffected.
+        call_max_tokens = max(1500, max_items * 120)
+
+        for attempt in range(2):
+            trs = self._parse_and_build(
+                self._chat(prompt, max_tokens=call_max_tokens),
+                model.source_id, TRCategory.FUNCTIONAL
+            )
+            if trs:
+                return trs
+        return trs  # both attempts failed; return the (empty) result rather than raise
 
     def _gen_nfr(self, model: DemandModel) -> List[TestRequirement]:
         nfr = [c.description for c in model.nfr_constraints[:10]]
@@ -180,8 +207,9 @@ class TRGenerator:
             "Generate NFR and constraint test requirements.\n\n"
             "{ears}\n\n"
             "Constraints to test:\n{constraints}\n\n"
-            "For each constraint generate a test requirement that verifies "
-            "the constraint is met, including the measurable threshold.\n\n"
+            "For each constraint generate EXACTLY ONE test requirement that "
+            "verifies the constraint is met, including the measurable "
+            "threshold. Do not generate more than one TR per constraint.\n\n"
             "Return JSON array (max 12 items). Each item:\n"
             "  tr_h: EARS-format test requirement with measurable threshold\n"
             "  preconditions: array of strings\n"
@@ -209,8 +237,9 @@ class TRGenerator:
             "{ears}\n\n"
             "Runtime constraints:\n{rt}\n"
             "Exception conditions:\n{exc}\n\n"
-            "For each item generate a test requirement that verifies "
-            "the system handles this runtime condition correctly.\n\n"
+            "For each item generate EXACTLY ONE test requirement that "
+            "verifies the system handles this runtime condition correctly. "
+            "Do not generate more than one TR per item.\n\n"
             "Return JSON array (max 10 items). Each item:\n"
             "  tr_h: EARS-format test requirement\n"
             "  preconditions: array of strings\n"
@@ -269,11 +298,19 @@ class TRGenerator:
     def _gen_consistency_driven(
         self, model: DemandModel, issues
     ) -> List[TestRequirement]:
+        # Previously capped at issues[:10], silently violating the stated
+        # "one TR per consistency issue" rule whenever a document had more
+        # than 10 relevant issues (confirmed to affect auth_system_srs:
+        # 14 relevant issues, only 9 Cat.5 TRs produced -- see reviewer
+        # comment R4b). Raised to a generous ceiling (50) that comfortably
+        # covers every document observed in this evaluation (max 14) while
+        # still guarding against a pathological future document with an
+        # unreasonably large issue count blowing the prompt size.
         issue_lines = [
             "[{}] ({}) {}".format(
                 iss.issue_id, iss.issue_type.value, iss.description
             )
-            for iss in issues[:10]
+            for iss in issues[:50]
         ]
         prompt = (
             "Generate consistency-driven test requirements. Each TR must "
@@ -302,14 +339,14 @@ class TRGenerator:
 
     # -- LLM + parsing --------------------------------------------------------
 
-    def _chat(self, user_message: str) -> str:
+    def _chat(self, user_message: str, max_tokens: int = None) -> str:
         url = "{}/api/chat".format(self.host)
         payload = json.dumps({
             "model":  self.model,
             "stream": True,
             "options": {
                 "temperature": self.temperature,
-                "num_predict": self.max_tokens,
+                "num_predict": max_tokens if max_tokens is not None else self.max_tokens,
                 "stop": [],
             },
             "messages": [
@@ -353,7 +390,18 @@ class TRGenerator:
             return []
 
         result = []
-        for item in data[:15]:
+        # Previously hardcoded at data[:15] -- a SHARED cap applied after
+        # parsing, downstream of and uncoordinated with each category's own
+        # prompt-level cap (Functional's len(reqs)*3, NFR's 12, Runtime's
+        # 10, etc.). Confirmed as the actual binding constraint for several
+        # Cat1 documents that landed at exactly 15 despite their own prompt
+        # requesting far more (e.g. nasa_srs_v1: 10 FRs, prompt cap 30, but
+        # this line silently truncated the result back to 15 regardless).
+        # Raised to a generous ceiling well above every category's own cap,
+        # so each category's own prompt-level limit is the actual binding
+        # constraint, with this line acting only as a safety net against a
+        # pathologically oversized LLM response.
+        for item in data[:50]:
             try:
                 self._tr_counter += 1
                 tr_id = "{}-{}-{:03d}".format(
