@@ -48,6 +48,10 @@ class RuntimeConstraint(BaseModel):
 
 class DemandModel(BaseModel):
     source_id:            str
+    bundle_id:            Optional[str] = None  # groups artifacts describing the SAME system;
+                                                  # cross-document consistency checks (1-3, 5) only
+                                                  # compare documents sharing a bundle_id. See
+                                                  # ConsistencyChecker.check_all() and Section 9.1.1.
     system_objectives:    List[str] = []
     user_roles:           List[str] = []
     use_cases:            List[UseCase] = []
