@@ -1,0 +1,1640 @@
+{
+  "source_id": "auth_system_srs",
+  "tr_h_list": [
+    "When a valid user submits a POST request to /auth/login, the system shall authenticate the user.",
+    "When a user submits a POST request to /auth/login with an invalid username, the system shall return an HTTP 401 Unauthorized response.",
+    "When a user submits a POST request to /auth/login without providing a TOTP code, the system shall return an error message.",
+    "When a user submits a POST request to /auth/login with an expired refresh token, the system shall return an HTTP 401 Unauthorized response.",
+    "When a user submits a POST request to /auth/login with an invalid refresh token, the system shall return an error message.",
+    "When a user logs out, the system shall invalidate their session.",
+    "When a user exceeds the maximum number of failed login attempts, the system shall lock their account.",
+    "When a user's account is locked, the system shall not allow them to log in.",
+    "When a user's account is automatically unlocked, the system shall allow them to log in.",
+    "When the rate limit for login attempts is exceeded, the system shall return an error message.",
+    "When a user logs in, the system shall record an audit log entry.",
+    "When an access token is generated, the system shall sign it using RS256 algorithm.",
+    "When a user sets a password, the system shall enforce a minimum of 12 characters with mixed case and symbols.",
+    "When the client initiates communication, the system shall use TLS 1.2 or higher.",
+    "When an access token is used after issuance, the system shall invalidate it within 15 minutes.",
+    "When invalid credentials are submitted, the system shall reject the login attempt.",
+    "When the 5th consecutive failed login attempt occurs, the system shall lock the account.",
+    "When an account is locked, the system shall unlock it within 15 minutes.",
+    "When the client exceeds 10 requests per minute, the system shall reject subsequent requests.",
+    "When an access token is used after 15 minutes from issuance, the system shall return an error response.",
+    "When invalid credentials are submitted, the system shall return an error response.",
+    "When the system detects 5 consecutive failed login attempts, it shall lock the account for 15 minutes.",
+    "When the account is locked, the system shall unlock it after 15 minutes.",
+    "When the system detects more than 10 requests per minute from a client IP address, it shall return an error response.",
+    "When Unauthenticated Client attempts to authenticate, the system shall respond with an access token.",
+    "When Registered User requests a new access token, the system shall respond with a new access token within 2 seconds.",
+    "When Registered User requests to invalidate their session, the system shall invalidate the user session.",
+    "When Unauthenticated Client attempts to authenticate with MFA, the system shall respond with an access token.",
+    "When API Gateway receives an access token, the system shall validate the access token.",
+    "When AuthController processes an authentication request, the system shall record an audit log entry.",
+    "When Unauthenticated Client attempts to login with invalid credentials, the system shall respond with an error message.",
+    "When SessionManager detects multiple failed login attempts, the system shall lock the user account.",
+    "When Unauthenticated Client requests to authenticate, the system shall respond with an access token or error message within 5 seconds.",
+    "When Registered User requests to invalidate their session, the system shall invalidate the user session and update the audit log within 2 seconds.",
+    "When API Gateway receives an access token, the system shall validate the access token and update the audit log.",
+    "When AuthController processes an authentication request, the system shall record an audit log entry and update the user session."
+  ],
+  "tr_a_list": [
+    {
+      "tr_id": "AUTH_S-FUNC-001",
+      "preconditions": [
+        "User has a valid account",
+        "User provides correct credentials"
+      ],
+      "stimuli": [
+        "POST request to /auth/login with valid credentials"
+      ],
+      "expected_outputs": [
+        "HTTP 200 OK response",
+        "Access and refresh tokens issued"
+      ],
+      "coverage_criterion": "Normal-path coverage",
+      "priority": "high",
+      "source_req_ids": [
+        "The system shall authenticate users via a POST request to the /auth/login endpoint."
+      ]
+    },
+    {
+      "tr_id": "AUTH_S-FUNC-002",
+      "preconditions": [
+        "User has an account",
+        "User provides incorrect credentials"
+      ],
+      "stimuli": [
+        "POST request to /auth/login with invalid username"
+      ],
+      "expected_outputs": [
+        "HTTP 401 Unauthorized response"
+      ],
+      "coverage_criterion": "Boundary-condition coverage",
+      "priority": "medium",
+      "source_req_ids": [
+        "The system shall return an HTTP 401 Unauthorized response when authentication fails."
+      ]
+    },
+    {
+      "tr_id": "AUTH_S-FUNC-003",
+      "preconditions": [
+        "User has an account",
+        "MFA is enabled"
+      ],
+      "stimuli": [
+        "POST request to /auth/login without TOTP code"
+      ],
+      "expected_outputs": [
+        "Error message indicating missing TOTP code"
+      ],
+      "coverage_criterion": "Negative-path coverage",
+      "priority": "medium",
+      "source_req_ids": [
+        "The system shall require a valid TOTP code for multi-factor authentication (MFA)."
+      ]
+    },
+    {
+      "tr_id": "AUTH_S-FUNC-004",
+      "preconditions": [
+        "User has an account",
+        "Refresh token is expired"
+      ],
+      "stimuli": [
+        "POST request to /auth/login with expired refresh token"
+      ],
+      "expected_outputs": [
+        "HTTP 401 Unauthorized response"
+      ],
+      "coverage_criterion": "Boundary-condition coverage",
+      "priority": "medium",
+      "source_req_ids": [
+        "The system shall allow users to obtain a new access token using the refresh token."
+      ]
+    },
+    {
+      "tr_id": "AUTH_S-FUNC-005",
+      "preconditions": [
+        "User has an account",
+        "Refresh token is invalid"
+      ],
+      "stimuli": [
+        "POST request to /auth/login with invalid refresh token"
+      ],
+      "expected_outputs": [
+        "Error message indicating invalid refresh token"
+      ],
+      "coverage_criterion": "Negative-path coverage",
+      "priority": "medium",
+      "source_req_ids": [
+        "The system shall allow users to obtain a new access token using the refresh token."
+      ]
+    },
+    {
+      "tr_id": "AUTH_S-FUNC-006",
+      "preconditions": [
+        "User is logged in"
+      ],
+      "stimuli": [
+        "Logout request"
+      ],
+      "expected_outputs": [
+        "Session invalidated"
+      ],
+      "coverage_criterion": "Normal-path coverage",
+      "priority": "high",
+      "source_req_ids": [
+        "The system shall invalidate a user's session upon logout or expiration."
+      ]
+    },
+    {
+      "tr_id": "AUTH_S-FUNC-007",
+      "preconditions": [
+        "User has an account",
+        "Maximum failed login attempts exceeded"
+      ],
+      "stimuli": [
+        "Failed login attempt"
+      ],
+      "expected_outputs": [
+        "Account locked"
+      ],
+      "coverage_criterion": "Boundary-condition coverage",
+      "priority": "medium",
+      "source_req_ids": [
+        "The system shall lock a user account after a specified number of failed login attempts."
+      ]
+    },
+    {
+      "tr_id": "AUTH_S-FUNC-008",
+      "preconditions": [
+        "User has an account",
+        "Account is locked"
+      ],
+      "stimuli": [
+        "Login attempt"
+      ],
+      "expected_outputs": [
+        "Error message indicating account is locked"
+      ],
+      "coverage_criterion": "Negative-path coverage",
+      "priority": "medium",
+      "source_req_ids": [
+        "The system shall lock a user account after a specified number of failed login attempts."
+      ]
+    },
+    {
+      "tr_id": "AUTH_S-FUNC-009",
+      "preconditions": [
+        "User has an account",
+        "Account is locked",
+        "Unlock time period exceeded"
+      ],
+      "stimuli": [
+        "Login attempt"
+      ],
+      "expected_outputs": [
+        "Successful login"
+      ],
+      "coverage_criterion": "Normal-path coverage",
+      "priority": "medium",
+      "source_req_ids": [
+        "The system shall automatically unlock a locked user account after a specified time period."
+      ]
+    },
+    {
+      "tr_id": "AUTH_S-FUNC-010",
+      "preconditions": [
+        "User has an account",
+        "Rate limit exceeded"
+      ],
+      "stimuli": [
+        "Login attempt"
+      ],
+      "expected_outputs": [
+        "Error message indicating rate limit exceeded"
+      ],
+      "coverage_criterion": "Boundary-condition coverage",
+      "priority": "medium",
+      "source_req_ids": [
+        "The system shall rate-limit login attempts to prevent brute-force attacks."
+      ]
+    },
+    {
+      "tr_id": "AUTH_S-FUNC-011",
+      "preconditions": [
+        "User has an account"
+      ],
+      "stimuli": [
+        "Login attempt"
+      ],
+      "expected_outputs": [
+        "Audit log entry recorded"
+      ],
+      "coverage_criterion": "Normal-path coverage",
+      "priority": "low",
+      "source_req_ids": [
+        "The system shall record an audit log entry for each user authentication attempt."
+      ]
+    },
+    {
+      "tr_id": "AUTH_S-NFR_-012",
+      "preconditions": [
+        "Access token generation request"
+      ],
+      "stimuli": [
+        "Generate access token"
+      ],
+      "expected_outputs": [
+        "Signed access token with RS256 algorithm"
+      ],
+      "coverage_criterion": "Algorithm verification",
+      "priority": "high",
+      "source_req_ids": [
+        "Access tokens must be signed using RS256 algorithm"
+      ]
+    },
+    {
+      "tr_id": "AUTH_S-NFR_-013",
+      "preconditions": [
+        "User account creation or update"
+      ],
+      "stimuli": [
+        "Set password with less than 12 characters or without mixed case and symbols"
+      ],
+      "expected_outputs": [
+        "Error message indicating invalid password format"
+      ],
+      "coverage_criterion": "Password format validation",
+      "priority": "high",
+      "source_req_ids": [
+        "User passwords must have a minimum of 12 characters with mixed case and symbols"
+      ]
+    },
+    {
+      "tr_id": "AUTH_S-NFR_-014",
+      "preconditions": [
+        "Client-server connection establishment"
+      ],
+      "stimuli": [
+        "Initiate communication using lower TLS version"
+      ],
+      "expected_outputs": [
+        "Error message indicating unsupported TLS version"
+      ],
+      "coverage_criterion": "TLS version verification",
+      "priority": "high",
+      "source_req_ids": [
+        "Client-server communication must use TLS 1.2 or higher"
+      ]
+    },
+    {
+      "tr_id": "AUTH_S-NFR_-015",
+      "preconditions": [
+        "Access token generation and usage"
+      ],
+      "stimuli": [
+        "Use access token after 16 minutes of issuance"
+      ],
+      "expected_outputs": [
+        "Error message indicating expired access token"
+      ],
+      "coverage_criterion": "Token expiration verification",
+      "priority": "medium",
+      "source_req_ids": [
+        "Access tokens expire 15 minutes after issuance"
+      ]
+    },
+    {
+      "tr_id": "AUTH_S-NFR_-016",
+      "preconditions": [
+        "Login request with invalid credentials"
+      ],
+      "stimuli": [
+        "Submit invalid credentials"
+      ],
+      "expected_outputs": [
+        "Error message indicating invalid credentials"
+      ],
+      "coverage_criterion": "Invalid credential handling",
+      "priority": "high",
+      "source_req_ids": [
+        "Invalid submitted credentials"
+      ]
+    },
+    {
+      "tr_id": "AUTH_S-NFR_-017",
+      "preconditions": [
+        "4 consecutive failed login attempts"
+      ],
+      "stimuli": [
+        "Submit invalid credentials for the 5th time"
+      ],
+      "expected_outputs": [
+        "Account locked message"
+      ],
+      "coverage_criterion": "Consecutive failure handling",
+      "priority": "medium",
+      "source_req_ids": [
+        "5 consecutive failed login attempts"
+      ]
+    },
+    {
+      "tr_id": "AUTH_S-NFR_-018",
+      "preconditions": [
+        "Account lock due to consecutive failures"
+      ],
+      "stimuli": [
+        "Wait for 16 minutes after account lock"
+      ],
+      "expected_outputs": [
+        "Account unlocked message"
+      ],
+      "coverage_criterion": "Account lock duration verification",
+      "priority": "medium",
+      "source_req_ids": [
+        "15 minutes to unlock account"
+      ]
+    },
+    {
+      "tr_id": "AUTH_S-NFR_-019",
+      "preconditions": [
+        "Client IP address with 9 requests within a minute"
+      ],
+      "stimuli": [
+        "Submit the 11th request within the same minute"
+      ],
+      "expected_outputs": [
+        "Error message indicating rate limit exceeded"
+      ],
+      "coverage_criterion": "Rate limiting verification",
+      "priority": "medium",
+      "source_req_ids": [
+        "10 requests per minute per client IP address"
+      ]
+    },
+    {
+      "tr_id": "AUTH_S-RUNT-020",
+      "preconditions": [
+        "Access token has been issued",
+        "Token has expired"
+      ],
+      "stimuli": [
+        "Use expired access token for a request"
+      ],
+      "expected_outputs": [
+        "Error response indicating token expiration"
+      ],
+      "coverage_criterion": "Runtime constraint",
+      "priority": "high",
+      "source_req_ids": [
+        "Access tokens expire 15 minutes after issuance"
+      ]
+    },
+    {
+      "tr_id": "AUTH_S-RUNT-021",
+      "preconditions": [
+        "User attempts to log in"
+      ],
+      "stimuli": [
+        "Submit invalid login credentials"
+      ],
+      "expected_outputs": [
+        "Error response indicating invalid credentials"
+      ],
+      "coverage_criterion": "Runtime constraint",
+      "priority": "high",
+      "source_req_ids": [
+        "Invalid submitted credentials"
+      ]
+    },
+    {
+      "tr_id": "AUTH_S-RUNT-022",
+      "preconditions": [
+        "User has made less than 5 failed login attempts"
+      ],
+      "stimuli": [
+        "Make 5 consecutive failed login attempts"
+      ],
+      "expected_outputs": [
+        "Account locked for 15 minutes"
+      ],
+      "coverage_criterion": "Runtime constraint",
+      "priority": "high",
+      "source_req_ids": [
+        "5 consecutive failed login attempts"
+      ]
+    },
+    {
+      "tr_id": "AUTH_S-RUNT-023",
+      "preconditions": [
+        "Account has been locked for less than 15 minutes"
+      ],
+      "stimuli": [
+        "Wait for 15 minutes"
+      ],
+      "expected_outputs": [
+        "Account unlocked"
+      ],
+      "coverage_criterion": "Runtime constraint",
+      "priority": "medium",
+      "source_req_ids": [
+        "15 minutes to unlock account"
+      ]
+    },
+    {
+      "tr_id": "AUTH_S-RUNT-024",
+      "preconditions": [
+        "Client has made less than 10 requests in the last minute"
+      ],
+      "stimuli": [
+        "Make more than 10 requests within a minute from the same client IP address"
+      ],
+      "expected_outputs": [
+        "Error response indicating rate limit exceeded"
+      ],
+      "coverage_criterion": "Runtime constraint",
+      "priority": "high",
+      "source_req_ids": [
+        "10 requests per minute per client IP address"
+      ]
+    },
+    {
+      "tr_id": "AUTH_S-INTE-025",
+      "preconditions": [
+        "Unauthenticated Client exists",
+        "Valid credentials provided"
+      ],
+      "stimuli": [
+        "Authenticate request with valid credentials"
+      ],
+      "expected_outputs": [
+        "Access token returned"
+      ],
+      "coverage_criterion": "Interface interaction",
+      "priority": "high",
+      "source_req_ids": [
+        "Unauthenticated Client -> Authenticate and obtain access token"
+      ]
+    },
+    {
+      "tr_id": "AUTH_S-INTE-026",
+      "preconditions": [
+        "Registered User exists",
+        "Valid refresh token provided"
+      ],
+      "stimuli": [
+        "Request for new access token with valid refresh token"
+      ],
+      "expected_outputs": [
+        "New access token returned within 2 seconds"
+      ],
+      "coverage_criterion": "Interface interaction",
+      "priority": "medium",
+      "source_req_ids": [
+        "Registered User -> Obtain new access token using refresh token"
+      ]
+    },
+    {
+      "tr_id": "AUTH_S-INTE-027",
+      "preconditions": [
+        "Registered User exists",
+        "Valid session ID provided"
+      ],
+      "stimuli": [
+        "Request to invalidate user session with valid session ID"
+      ],
+      "expected_outputs": [
+        "User session invalidated"
+      ],
+      "coverage_criterion": "Interface interaction",
+      "priority": "medium",
+      "source_req_ids": [
+        "Registered User -> Invalidate user session"
+      ]
+    },
+    {
+      "tr_id": "AUTH_S-INTE-028",
+      "preconditions": [
+        "Unauthenticated Client exists",
+        "Valid credentials and MFA code provided"
+      ],
+      "stimuli": [
+        "Authenticate request with valid credentials and MFA code"
+      ],
+      "expected_outputs": [
+        "Access token returned"
+      ],
+      "coverage_criterion": "Interface interaction",
+      "priority": "high",
+      "source_req_ids": [
+        "Unauthenticated Client -> Authenticate with MFA"
+      ]
+    },
+    {
+      "tr_id": "AUTH_S-INTE-029",
+      "preconditions": [
+        "API Gateway exists",
+        "Access token provided"
+      ],
+      "stimuli": [
+        "Validate access token request"
+      ],
+      "expected_outputs": [
+        "Access token validation result returned"
+      ],
+      "coverage_criterion": "Interface interaction",
+      "priority": "high",
+      "source_req_ids": [
+        "API Gateway -> Validate access token"
+      ]
+    },
+    {
+      "tr_id": "AUTH_S-INTE-030",
+      "preconditions": [
+        "AuthController exists",
+        "Authentication request processed"
+      ],
+      "stimuli": [
+        "Audit log entry creation request"
+      ],
+      "expected_outputs": [
+        "Audit log entry created"
+      ],
+      "coverage_criterion": "Process flow",
+      "priority": "medium",
+      "source_req_ids": [
+        "AuthController -> Record audit log entry"
+      ]
+    },
+    {
+      "tr_id": "AUTH_S-INTE-031",
+      "preconditions": [
+        "Unauthenticated Client exists",
+        "Invalid credentials provided"
+      ],
+      "stimuli": [
+        "Login request with invalid credentials"
+      ],
+      "expected_outputs": [
+        "Error message returned"
+      ],
+      "coverage_criterion": "Interface interaction",
+      "priority": "medium",
+      "source_req_ids": [
+        "Unauthenticated Client -> Attempt login with invalid credentials"
+      ]
+    },
+    {
+      "tr_id": "AUTH_S-INTE-032",
+      "preconditions": [
+        "SessionManager exists",
+        "Multiple failed login attempts detected"
+      ],
+      "stimuli": [
+        "User account lock request"
+      ],
+      "expected_outputs": [
+        "User account locked"
+      ],
+      "coverage_criterion": "Process flow",
+      "priority": "medium",
+      "source_req_ids": [
+        "SessionManager -> Lock user account after failed login attempts"
+      ]
+    },
+    {
+      "tr_id": "AUTH_S-INTE-033",
+      "preconditions": [
+        "Unauthenticated Client exists"
+      ],
+      "stimuli": [
+        "Authenticate request"
+      ],
+      "expected_outputs": [
+        "Access token or error message returned within 5 seconds"
+      ],
+      "coverage_criterion": "Process flow",
+      "priority": "high",
+      "source_req_ids": [
+        "Unauthenticated Client -> Authenticate and obtain access token"
+      ]
+    },
+    {
+      "tr_id": "AUTH_S-INTE-034",
+      "preconditions": [
+        "Registered User exists",
+        "Valid session ID provided"
+      ],
+      "stimuli": [
+        "Request to invalidate user session with valid session ID"
+      ],
+      "expected_outputs": [
+        "User session invalidated and audit log updated within 2 seconds"
+      ],
+      "coverage_criterion": "Process flow",
+      "priority": "medium",
+      "source_req_ids": [
+        "Registered User -> Invalidate user session"
+      ]
+    },
+    {
+      "tr_id": "AUTH_S-INTE-035",
+      "preconditions": [
+        "API Gateway exists",
+        "Access token provided"
+      ],
+      "stimuli": [
+        "Validate access token request"
+      ],
+      "expected_outputs": [
+        "Access token validation result returned and audit log updated"
+      ],
+      "coverage_criterion": "Process flow",
+      "priority": "high",
+      "source_req_ids": [
+        "API Gateway -> Validate access token"
+      ]
+    },
+    {
+      "tr_id": "AUTH_S-INTE-036",
+      "preconditions": [
+        "AuthController exists",
+        "Authentication request processed"
+      ],
+      "stimuli": [
+        "Audit log entry creation request"
+      ],
+      "expected_outputs": [
+        "Audit log entry created and user session updated"
+      ],
+      "coverage_criterion": "Process flow",
+      "priority": "medium",
+      "source_req_ids": [
+        "AuthController -> Record audit log entry"
+      ]
+    }
+  ],
+  "trs": [
+    {
+      "tr_id": "AUTH_S-FUNC-001",
+      "category": "functional",
+      "source_id": "auth_system_srs",
+      "tr_h": "When a valid user submits a POST request to /auth/login, the system shall authenticate the user.",
+      "tr_a": {
+        "tr_id": "AUTH_S-FUNC-001",
+        "preconditions": [
+          "User has a valid account",
+          "User provides correct credentials"
+        ],
+        "stimuli": [
+          "POST request to /auth/login with valid credentials"
+        ],
+        "expected_outputs": [
+          "HTTP 200 OK response",
+          "Access and refresh tokens issued"
+        ],
+        "coverage_criterion": "Normal-path coverage",
+        "priority": "high",
+        "source_req_ids": [
+          "The system shall authenticate users via a POST request to the /auth/login endpoint."
+        ]
+      },
+      "source_req_ids": [
+        "The system shall authenticate users via a POST request to the /auth/login endpoint."
+      ]
+    },
+    {
+      "tr_id": "AUTH_S-FUNC-002",
+      "category": "functional",
+      "source_id": "auth_system_srs",
+      "tr_h": "When a user submits a POST request to /auth/login with an invalid username, the system shall return an HTTP 401 Unauthorized response.",
+      "tr_a": {
+        "tr_id": "AUTH_S-FUNC-002",
+        "preconditions": [
+          "User has an account",
+          "User provides incorrect credentials"
+        ],
+        "stimuli": [
+          "POST request to /auth/login with invalid username"
+        ],
+        "expected_outputs": [
+          "HTTP 401 Unauthorized response"
+        ],
+        "coverage_criterion": "Boundary-condition coverage",
+        "priority": "medium",
+        "source_req_ids": [
+          "The system shall return an HTTP 401 Unauthorized response when authentication fails."
+        ]
+      },
+      "source_req_ids": [
+        "The system shall return an HTTP 401 Unauthorized response when authentication fails."
+      ]
+    },
+    {
+      "tr_id": "AUTH_S-FUNC-003",
+      "category": "functional",
+      "source_id": "auth_system_srs",
+      "tr_h": "When a user submits a POST request to /auth/login without providing a TOTP code, the system shall return an error message.",
+      "tr_a": {
+        "tr_id": "AUTH_S-FUNC-003",
+        "preconditions": [
+          "User has an account",
+          "MFA is enabled"
+        ],
+        "stimuli": [
+          "POST request to /auth/login without TOTP code"
+        ],
+        "expected_outputs": [
+          "Error message indicating missing TOTP code"
+        ],
+        "coverage_criterion": "Negative-path coverage",
+        "priority": "medium",
+        "source_req_ids": [
+          "The system shall require a valid TOTP code for multi-factor authentication (MFA)."
+        ]
+      },
+      "source_req_ids": [
+        "The system shall require a valid TOTP code for multi-factor authentication (MFA)."
+      ]
+    },
+    {
+      "tr_id": "AUTH_S-FUNC-004",
+      "category": "functional",
+      "source_id": "auth_system_srs",
+      "tr_h": "When a user submits a POST request to /auth/login with an expired refresh token, the system shall return an HTTP 401 Unauthorized response.",
+      "tr_a": {
+        "tr_id": "AUTH_S-FUNC-004",
+        "preconditions": [
+          "User has an account",
+          "Refresh token is expired"
+        ],
+        "stimuli": [
+          "POST request to /auth/login with expired refresh token"
+        ],
+        "expected_outputs": [
+          "HTTP 401 Unauthorized response"
+        ],
+        "coverage_criterion": "Boundary-condition coverage",
+        "priority": "medium",
+        "source_req_ids": [
+          "The system shall allow users to obtain a new access token using the refresh token."
+        ]
+      },
+      "source_req_ids": [
+        "The system shall allow users to obtain a new access token using the refresh token."
+      ]
+    },
+    {
+      "tr_id": "AUTH_S-FUNC-005",
+      "category": "functional",
+      "source_id": "auth_system_srs",
+      "tr_h": "When a user submits a POST request to /auth/login with an invalid refresh token, the system shall return an error message.",
+      "tr_a": {
+        "tr_id": "AUTH_S-FUNC-005",
+        "preconditions": [
+          "User has an account",
+          "Refresh token is invalid"
+        ],
+        "stimuli": [
+          "POST request to /auth/login with invalid refresh token"
+        ],
+        "expected_outputs": [
+          "Error message indicating invalid refresh token"
+        ],
+        "coverage_criterion": "Negative-path coverage",
+        "priority": "medium",
+        "source_req_ids": [
+          "The system shall allow users to obtain a new access token using the refresh token."
+        ]
+      },
+      "source_req_ids": [
+        "The system shall allow users to obtain a new access token using the refresh token."
+      ]
+    },
+    {
+      "tr_id": "AUTH_S-FUNC-006",
+      "category": "functional",
+      "source_id": "auth_system_srs",
+      "tr_h": "When a user logs out, the system shall invalidate their session.",
+      "tr_a": {
+        "tr_id": "AUTH_S-FUNC-006",
+        "preconditions": [
+          "User is logged in"
+        ],
+        "stimuli": [
+          "Logout request"
+        ],
+        "expected_outputs": [
+          "Session invalidated"
+        ],
+        "coverage_criterion": "Normal-path coverage",
+        "priority": "high",
+        "source_req_ids": [
+          "The system shall invalidate a user's session upon logout or expiration."
+        ]
+      },
+      "source_req_ids": [
+        "The system shall invalidate a user's session upon logout or expiration."
+      ]
+    },
+    {
+      "tr_id": "AUTH_S-FUNC-007",
+      "category": "functional",
+      "source_id": "auth_system_srs",
+      "tr_h": "When a user exceeds the maximum number of failed login attempts, the system shall lock their account.",
+      "tr_a": {
+        "tr_id": "AUTH_S-FUNC-007",
+        "preconditions": [
+          "User has an account",
+          "Maximum failed login attempts exceeded"
+        ],
+        "stimuli": [
+          "Failed login attempt"
+        ],
+        "expected_outputs": [
+          "Account locked"
+        ],
+        "coverage_criterion": "Boundary-condition coverage",
+        "priority": "medium",
+        "source_req_ids": [
+          "The system shall lock a user account after a specified number of failed login attempts."
+        ]
+      },
+      "source_req_ids": [
+        "The system shall lock a user account after a specified number of failed login attempts."
+      ]
+    },
+    {
+      "tr_id": "AUTH_S-FUNC-008",
+      "category": "functional",
+      "source_id": "auth_system_srs",
+      "tr_h": "When a user's account is locked, the system shall not allow them to log in.",
+      "tr_a": {
+        "tr_id": "AUTH_S-FUNC-008",
+        "preconditions": [
+          "User has an account",
+          "Account is locked"
+        ],
+        "stimuli": [
+          "Login attempt"
+        ],
+        "expected_outputs": [
+          "Error message indicating account is locked"
+        ],
+        "coverage_criterion": "Negative-path coverage",
+        "priority": "medium",
+        "source_req_ids": [
+          "The system shall lock a user account after a specified number of failed login attempts."
+        ]
+      },
+      "source_req_ids": [
+        "The system shall lock a user account after a specified number of failed login attempts."
+      ]
+    },
+    {
+      "tr_id": "AUTH_S-FUNC-009",
+      "category": "functional",
+      "source_id": "auth_system_srs",
+      "tr_h": "When a user's account is automatically unlocked, the system shall allow them to log in.",
+      "tr_a": {
+        "tr_id": "AUTH_S-FUNC-009",
+        "preconditions": [
+          "User has an account",
+          "Account is locked",
+          "Unlock time period exceeded"
+        ],
+        "stimuli": [
+          "Login attempt"
+        ],
+        "expected_outputs": [
+          "Successful login"
+        ],
+        "coverage_criterion": "Normal-path coverage",
+        "priority": "medium",
+        "source_req_ids": [
+          "The system shall automatically unlock a locked user account after a specified time period."
+        ]
+      },
+      "source_req_ids": [
+        "The system shall automatically unlock a locked user account after a specified time period."
+      ]
+    },
+    {
+      "tr_id": "AUTH_S-FUNC-010",
+      "category": "functional",
+      "source_id": "auth_system_srs",
+      "tr_h": "When the rate limit for login attempts is exceeded, the system shall return an error message.",
+      "tr_a": {
+        "tr_id": "AUTH_S-FUNC-010",
+        "preconditions": [
+          "User has an account",
+          "Rate limit exceeded"
+        ],
+        "stimuli": [
+          "Login attempt"
+        ],
+        "expected_outputs": [
+          "Error message indicating rate limit exceeded"
+        ],
+        "coverage_criterion": "Boundary-condition coverage",
+        "priority": "medium",
+        "source_req_ids": [
+          "The system shall rate-limit login attempts to prevent brute-force attacks."
+        ]
+      },
+      "source_req_ids": [
+        "The system shall rate-limit login attempts to prevent brute-force attacks."
+      ]
+    },
+    {
+      "tr_id": "AUTH_S-FUNC-011",
+      "category": "functional",
+      "source_id": "auth_system_srs",
+      "tr_h": "When a user logs in, the system shall record an audit log entry.",
+      "tr_a": {
+        "tr_id": "AUTH_S-FUNC-011",
+        "preconditions": [
+          "User has an account"
+        ],
+        "stimuli": [
+          "Login attempt"
+        ],
+        "expected_outputs": [
+          "Audit log entry recorded"
+        ],
+        "coverage_criterion": "Normal-path coverage",
+        "priority": "low",
+        "source_req_ids": [
+          "The system shall record an audit log entry for each user authentication attempt."
+        ]
+      },
+      "source_req_ids": [
+        "The system shall record an audit log entry for each user authentication attempt."
+      ]
+    },
+    {
+      "tr_id": "AUTH_S-NFR_-012",
+      "category": "nfr_constraint",
+      "source_id": "auth_system_srs",
+      "tr_h": "When an access token is generated, the system shall sign it using RS256 algorithm.",
+      "tr_a": {
+        "tr_id": "AUTH_S-NFR_-012",
+        "preconditions": [
+          "Access token generation request"
+        ],
+        "stimuli": [
+          "Generate access token"
+        ],
+        "expected_outputs": [
+          "Signed access token with RS256 algorithm"
+        ],
+        "coverage_criterion": "Algorithm verification",
+        "priority": "high",
+        "source_req_ids": [
+          "Access tokens must be signed using RS256 algorithm"
+        ]
+      },
+      "source_req_ids": [
+        "Access tokens must be signed using RS256 algorithm"
+      ]
+    },
+    {
+      "tr_id": "AUTH_S-NFR_-013",
+      "category": "nfr_constraint",
+      "source_id": "auth_system_srs",
+      "tr_h": "When a user sets a password, the system shall enforce a minimum of 12 characters with mixed case and symbols.",
+      "tr_a": {
+        "tr_id": "AUTH_S-NFR_-013",
+        "preconditions": [
+          "User account creation or update"
+        ],
+        "stimuli": [
+          "Set password with less than 12 characters or without mixed case and symbols"
+        ],
+        "expected_outputs": [
+          "Error message indicating invalid password format"
+        ],
+        "coverage_criterion": "Password format validation",
+        "priority": "high",
+        "source_req_ids": [
+          "User passwords must have a minimum of 12 characters with mixed case and symbols"
+        ]
+      },
+      "source_req_ids": [
+        "User passwords must have a minimum of 12 characters with mixed case and symbols"
+      ]
+    },
+    {
+      "tr_id": "AUTH_S-NFR_-014",
+      "category": "nfr_constraint",
+      "source_id": "auth_system_srs",
+      "tr_h": "When the client initiates communication, the system shall use TLS 1.2 or higher.",
+      "tr_a": {
+        "tr_id": "AUTH_S-NFR_-014",
+        "preconditions": [
+          "Client-server connection establishment"
+        ],
+        "stimuli": [
+          "Initiate communication using lower TLS version"
+        ],
+        "expected_outputs": [
+          "Error message indicating unsupported TLS version"
+        ],
+        "coverage_criterion": "TLS version verification",
+        "priority": "high",
+        "source_req_ids": [
+          "Client-server communication must use TLS 1.2 or higher"
+        ]
+      },
+      "source_req_ids": [
+        "Client-server communication must use TLS 1.2 or higher"
+      ]
+    },
+    {
+      "tr_id": "AUTH_S-NFR_-015",
+      "category": "nfr_constraint",
+      "source_id": "auth_system_srs",
+      "tr_h": "When an access token is used after issuance, the system shall invalidate it within 15 minutes.",
+      "tr_a": {
+        "tr_id": "AUTH_S-NFR_-015",
+        "preconditions": [
+          "Access token generation and usage"
+        ],
+        "stimuli": [
+          "Use access token after 16 minutes of issuance"
+        ],
+        "expected_outputs": [
+          "Error message indicating expired access token"
+        ],
+        "coverage_criterion": "Token expiration verification",
+        "priority": "medium",
+        "source_req_ids": [
+          "Access tokens expire 15 minutes after issuance"
+        ]
+      },
+      "source_req_ids": [
+        "Access tokens expire 15 minutes after issuance"
+      ]
+    },
+    {
+      "tr_id": "AUTH_S-NFR_-016",
+      "category": "nfr_constraint",
+      "source_id": "auth_system_srs",
+      "tr_h": "When invalid credentials are submitted, the system shall reject the login attempt.",
+      "tr_a": {
+        "tr_id": "AUTH_S-NFR_-016",
+        "preconditions": [
+          "Login request with invalid credentials"
+        ],
+        "stimuli": [
+          "Submit invalid credentials"
+        ],
+        "expected_outputs": [
+          "Error message indicating invalid credentials"
+        ],
+        "coverage_criterion": "Invalid credential handling",
+        "priority": "high",
+        "source_req_ids": [
+          "Invalid submitted credentials"
+        ]
+      },
+      "source_req_ids": [
+        "Invalid submitted credentials"
+      ]
+    },
+    {
+      "tr_id": "AUTH_S-NFR_-017",
+      "category": "nfr_constraint",
+      "source_id": "auth_system_srs",
+      "tr_h": "When the 5th consecutive failed login attempt occurs, the system shall lock the account.",
+      "tr_a": {
+        "tr_id": "AUTH_S-NFR_-017",
+        "preconditions": [
+          "4 consecutive failed login attempts"
+        ],
+        "stimuli": [
+          "Submit invalid credentials for the 5th time"
+        ],
+        "expected_outputs": [
+          "Account locked message"
+        ],
+        "coverage_criterion": "Consecutive failure handling",
+        "priority": "medium",
+        "source_req_ids": [
+          "5 consecutive failed login attempts"
+        ]
+      },
+      "source_req_ids": [
+        "5 consecutive failed login attempts"
+      ]
+    },
+    {
+      "tr_id": "AUTH_S-NFR_-018",
+      "category": "nfr_constraint",
+      "source_id": "auth_system_srs",
+      "tr_h": "When an account is locked, the system shall unlock it within 15 minutes.",
+      "tr_a": {
+        "tr_id": "AUTH_S-NFR_-018",
+        "preconditions": [
+          "Account lock due to consecutive failures"
+        ],
+        "stimuli": [
+          "Wait for 16 minutes after account lock"
+        ],
+        "expected_outputs": [
+          "Account unlocked message"
+        ],
+        "coverage_criterion": "Account lock duration verification",
+        "priority": "medium",
+        "source_req_ids": [
+          "15 minutes to unlock account"
+        ]
+      },
+      "source_req_ids": [
+        "15 minutes to unlock account"
+      ]
+    },
+    {
+      "tr_id": "AUTH_S-NFR_-019",
+      "category": "nfr_constraint",
+      "source_id": "auth_system_srs",
+      "tr_h": "When the client exceeds 10 requests per minute, the system shall reject subsequent requests.",
+      "tr_a": {
+        "tr_id": "AUTH_S-NFR_-019",
+        "preconditions": [
+          "Client IP address with 9 requests within a minute"
+        ],
+        "stimuli": [
+          "Submit the 11th request within the same minute"
+        ],
+        "expected_outputs": [
+          "Error message indicating rate limit exceeded"
+        ],
+        "coverage_criterion": "Rate limiting verification",
+        "priority": "medium",
+        "source_req_ids": [
+          "10 requests per minute per client IP address"
+        ]
+      },
+      "source_req_ids": [
+        "10 requests per minute per client IP address"
+      ]
+    },
+    {
+      "tr_id": "AUTH_S-RUNT-020",
+      "category": "runtime_environment",
+      "source_id": "auth_system_srs",
+      "tr_h": "When an access token is used after 15 minutes from issuance, the system shall return an error response.",
+      "tr_a": {
+        "tr_id": "AUTH_S-RUNT-020",
+        "preconditions": [
+          "Access token has been issued",
+          "Token has expired"
+        ],
+        "stimuli": [
+          "Use expired access token for a request"
+        ],
+        "expected_outputs": [
+          "Error response indicating token expiration"
+        ],
+        "coverage_criterion": "Runtime constraint",
+        "priority": "high",
+        "source_req_ids": [
+          "Access tokens expire 15 minutes after issuance"
+        ]
+      },
+      "source_req_ids": [
+        "Access tokens expire 15 minutes after issuance"
+      ]
+    },
+    {
+      "tr_id": "AUTH_S-RUNT-021",
+      "category": "runtime_environment",
+      "source_id": "auth_system_srs",
+      "tr_h": "When invalid credentials are submitted, the system shall return an error response.",
+      "tr_a": {
+        "tr_id": "AUTH_S-RUNT-021",
+        "preconditions": [
+          "User attempts to log in"
+        ],
+        "stimuli": [
+          "Submit invalid login credentials"
+        ],
+        "expected_outputs": [
+          "Error response indicating invalid credentials"
+        ],
+        "coverage_criterion": "Runtime constraint",
+        "priority": "high",
+        "source_req_ids": [
+          "Invalid submitted credentials"
+        ]
+      },
+      "source_req_ids": [
+        "Invalid submitted credentials"
+      ]
+    },
+    {
+      "tr_id": "AUTH_S-RUNT-022",
+      "category": "runtime_environment",
+      "source_id": "auth_system_srs",
+      "tr_h": "When the system detects 5 consecutive failed login attempts, it shall lock the account for 15 minutes.",
+      "tr_a": {
+        "tr_id": "AUTH_S-RUNT-022",
+        "preconditions": [
+          "User has made less than 5 failed login attempts"
+        ],
+        "stimuli": [
+          "Make 5 consecutive failed login attempts"
+        ],
+        "expected_outputs": [
+          "Account locked for 15 minutes"
+        ],
+        "coverage_criterion": "Runtime constraint",
+        "priority": "high",
+        "source_req_ids": [
+          "5 consecutive failed login attempts"
+        ]
+      },
+      "source_req_ids": [
+        "5 consecutive failed login attempts"
+      ]
+    },
+    {
+      "tr_id": "AUTH_S-RUNT-023",
+      "category": "runtime_environment",
+      "source_id": "auth_system_srs",
+      "tr_h": "When the account is locked, the system shall unlock it after 15 minutes.",
+      "tr_a": {
+        "tr_id": "AUTH_S-RUNT-023",
+        "preconditions": [
+          "Account has been locked for less than 15 minutes"
+        ],
+        "stimuli": [
+          "Wait for 15 minutes"
+        ],
+        "expected_outputs": [
+          "Account unlocked"
+        ],
+        "coverage_criterion": "Runtime constraint",
+        "priority": "medium",
+        "source_req_ids": [
+          "15 minutes to unlock account"
+        ]
+      },
+      "source_req_ids": [
+        "15 minutes to unlock account"
+      ]
+    },
+    {
+      "tr_id": "AUTH_S-RUNT-024",
+      "category": "runtime_environment",
+      "source_id": "auth_system_srs",
+      "tr_h": "When the system detects more than 10 requests per minute from a client IP address, it shall return an error response.",
+      "tr_a": {
+        "tr_id": "AUTH_S-RUNT-024",
+        "preconditions": [
+          "Client has made less than 10 requests in the last minute"
+        ],
+        "stimuli": [
+          "Make more than 10 requests within a minute from the same client IP address"
+        ],
+        "expected_outputs": [
+          "Error response indicating rate limit exceeded"
+        ],
+        "coverage_criterion": "Runtime constraint",
+        "priority": "high",
+        "source_req_ids": [
+          "10 requests per minute per client IP address"
+        ]
+      },
+      "source_req_ids": [
+        "10 requests per minute per client IP address"
+      ]
+    },
+    {
+      "tr_id": "AUTH_S-INTE-025",
+      "category": "interface_exception",
+      "source_id": "auth_system_srs",
+      "tr_h": "When Unauthenticated Client attempts to authenticate, the system shall respond with an access token.",
+      "tr_a": {
+        "tr_id": "AUTH_S-INTE-025",
+        "preconditions": [
+          "Unauthenticated Client exists",
+          "Valid credentials provided"
+        ],
+        "stimuli": [
+          "Authenticate request with valid credentials"
+        ],
+        "expected_outputs": [
+          "Access token returned"
+        ],
+        "coverage_criterion": "Interface interaction",
+        "priority": "high",
+        "source_req_ids": [
+          "Unauthenticated Client -> Authenticate and obtain access token"
+        ]
+      },
+      "source_req_ids": [
+        "Unauthenticated Client -> Authenticate and obtain access token"
+      ]
+    },
+    {
+      "tr_id": "AUTH_S-INTE-026",
+      "category": "interface_exception",
+      "source_id": "auth_system_srs",
+      "tr_h": "When Registered User requests a new access token, the system shall respond with a new access token within 2 seconds.",
+      "tr_a": {
+        "tr_id": "AUTH_S-INTE-026",
+        "preconditions": [
+          "Registered User exists",
+          "Valid refresh token provided"
+        ],
+        "stimuli": [
+          "Request for new access token with valid refresh token"
+        ],
+        "expected_outputs": [
+          "New access token returned within 2 seconds"
+        ],
+        "coverage_criterion": "Interface interaction",
+        "priority": "medium",
+        "source_req_ids": [
+          "Registered User -> Obtain new access token using refresh token"
+        ]
+      },
+      "source_req_ids": [
+        "Registered User -> Obtain new access token using refresh token"
+      ]
+    },
+    {
+      "tr_id": "AUTH_S-INTE-027",
+      "category": "interface_exception",
+      "source_id": "auth_system_srs",
+      "tr_h": "When Registered User requests to invalidate their session, the system shall invalidate the user session.",
+      "tr_a": {
+        "tr_id": "AUTH_S-INTE-027",
+        "preconditions": [
+          "Registered User exists",
+          "Valid session ID provided"
+        ],
+        "stimuli": [
+          "Request to invalidate user session with valid session ID"
+        ],
+        "expected_outputs": [
+          "User session invalidated"
+        ],
+        "coverage_criterion": "Interface interaction",
+        "priority": "medium",
+        "source_req_ids": [
+          "Registered User -> Invalidate user session"
+        ]
+      },
+      "source_req_ids": [
+        "Registered User -> Invalidate user session"
+      ]
+    },
+    {
+      "tr_id": "AUTH_S-INTE-028",
+      "category": "interface_exception",
+      "source_id": "auth_system_srs",
+      "tr_h": "When Unauthenticated Client attempts to authenticate with MFA, the system shall respond with an access token.",
+      "tr_a": {
+        "tr_id": "AUTH_S-INTE-028",
+        "preconditions": [
+          "Unauthenticated Client exists",
+          "Valid credentials and MFA code provided"
+        ],
+        "stimuli": [
+          "Authenticate request with valid credentials and MFA code"
+        ],
+        "expected_outputs": [
+          "Access token returned"
+        ],
+        "coverage_criterion": "Interface interaction",
+        "priority": "high",
+        "source_req_ids": [
+          "Unauthenticated Client -> Authenticate with MFA"
+        ]
+      },
+      "source_req_ids": [
+        "Unauthenticated Client -> Authenticate with MFA"
+      ]
+    },
+    {
+      "tr_id": "AUTH_S-INTE-029",
+      "category": "interface_exception",
+      "source_id": "auth_system_srs",
+      "tr_h": "When API Gateway receives an access token, the system shall validate the access token.",
+      "tr_a": {
+        "tr_id": "AUTH_S-INTE-029",
+        "preconditions": [
+          "API Gateway exists",
+          "Access token provided"
+        ],
+        "stimuli": [
+          "Validate access token request"
+        ],
+        "expected_outputs": [
+          "Access token validation result returned"
+        ],
+        "coverage_criterion": "Interface interaction",
+        "priority": "high",
+        "source_req_ids": [
+          "API Gateway -> Validate access token"
+        ]
+      },
+      "source_req_ids": [
+        "API Gateway -> Validate access token"
+      ]
+    },
+    {
+      "tr_id": "AUTH_S-INTE-030",
+      "category": "interface_exception",
+      "source_id": "auth_system_srs",
+      "tr_h": "When AuthController processes an authentication request, the system shall record an audit log entry.",
+      "tr_a": {
+        "tr_id": "AUTH_S-INTE-030",
+        "preconditions": [
+          "AuthController exists",
+          "Authentication request processed"
+        ],
+        "stimuli": [
+          "Audit log entry creation request"
+        ],
+        "expected_outputs": [
+          "Audit log entry created"
+        ],
+        "coverage_criterion": "Process flow",
+        "priority": "medium",
+        "source_req_ids": [
+          "AuthController -> Record audit log entry"
+        ]
+      },
+      "source_req_ids": [
+        "AuthController -> Record audit log entry"
+      ]
+    },
+    {
+      "tr_id": "AUTH_S-INTE-031",
+      "category": "interface_exception",
+      "source_id": "auth_system_srs",
+      "tr_h": "When Unauthenticated Client attempts to login with invalid credentials, the system shall respond with an error message.",
+      "tr_a": {
+        "tr_id": "AUTH_S-INTE-031",
+        "preconditions": [
+          "Unauthenticated Client exists",
+          "Invalid credentials provided"
+        ],
+        "stimuli": [
+          "Login request with invalid credentials"
+        ],
+        "expected_outputs": [
+          "Error message returned"
+        ],
+        "coverage_criterion": "Interface interaction",
+        "priority": "medium",
+        "source_req_ids": [
+          "Unauthenticated Client -> Attempt login with invalid credentials"
+        ]
+      },
+      "source_req_ids": [
+        "Unauthenticated Client -> Attempt login with invalid credentials"
+      ]
+    },
+    {
+      "tr_id": "AUTH_S-INTE-032",
+      "category": "interface_exception",
+      "source_id": "auth_system_srs",
+      "tr_h": "When SessionManager detects multiple failed login attempts, the system shall lock the user account.",
+      "tr_a": {
+        "tr_id": "AUTH_S-INTE-032",
+        "preconditions": [
+          "SessionManager exists",
+          "Multiple failed login attempts detected"
+        ],
+        "stimuli": [
+          "User account lock request"
+        ],
+        "expected_outputs": [
+          "User account locked"
+        ],
+        "coverage_criterion": "Process flow",
+        "priority": "medium",
+        "source_req_ids": [
+          "SessionManager -> Lock user account after failed login attempts"
+        ]
+      },
+      "source_req_ids": [
+        "SessionManager -> Lock user account after failed login attempts"
+      ]
+    },
+    {
+      "tr_id": "AUTH_S-INTE-033",
+      "category": "interface_exception",
+      "source_id": "auth_system_srs",
+      "tr_h": "When Unauthenticated Client requests to authenticate, the system shall respond with an access token or error message within 5 seconds.",
+      "tr_a": {
+        "tr_id": "AUTH_S-INTE-033",
+        "preconditions": [
+          "Unauthenticated Client exists"
+        ],
+        "stimuli": [
+          "Authenticate request"
+        ],
+        "expected_outputs": [
+          "Access token or error message returned within 5 seconds"
+        ],
+        "coverage_criterion": "Process flow",
+        "priority": "high",
+        "source_req_ids": [
+          "Unauthenticated Client -> Authenticate and obtain access token"
+        ]
+      },
+      "source_req_ids": [
+        "Unauthenticated Client -> Authenticate and obtain access token"
+      ]
+    },
+    {
+      "tr_id": "AUTH_S-INTE-034",
+      "category": "interface_exception",
+      "source_id": "auth_system_srs",
+      "tr_h": "When Registered User requests to invalidate their session, the system shall invalidate the user session and update the audit log within 2 seconds.",
+      "tr_a": {
+        "tr_id": "AUTH_S-INTE-034",
+        "preconditions": [
+          "Registered User exists",
+          "Valid session ID provided"
+        ],
+        "stimuli": [
+          "Request to invalidate user session with valid session ID"
+        ],
+        "expected_outputs": [
+          "User session invalidated and audit log updated within 2 seconds"
+        ],
+        "coverage_criterion": "Process flow",
+        "priority": "medium",
+        "source_req_ids": [
+          "Registered User -> Invalidate user session"
+        ]
+      },
+      "source_req_ids": [
+        "Registered User -> Invalidate user session"
+      ]
+    },
+    {
+      "tr_id": "AUTH_S-INTE-035",
+      "category": "interface_exception",
+      "source_id": "auth_system_srs",
+      "tr_h": "When API Gateway receives an access token, the system shall validate the access token and update the audit log.",
+      "tr_a": {
+        "tr_id": "AUTH_S-INTE-035",
+        "preconditions": [
+          "API Gateway exists",
+          "Access token provided"
+        ],
+        "stimuli": [
+          "Validate access token request"
+        ],
+        "expected_outputs": [
+          "Access token validation result returned and audit log updated"
+        ],
+        "coverage_criterion": "Process flow",
+        "priority": "high",
+        "source_req_ids": [
+          "API Gateway -> Validate access token"
+        ]
+      },
+      "source_req_ids": [
+        "API Gateway -> Validate access token"
+      ]
+    },
+    {
+      "tr_id": "AUTH_S-INTE-036",
+      "category": "interface_exception",
+      "source_id": "auth_system_srs",
+      "tr_h": "When AuthController processes an authentication request, the system shall record an audit log entry and update the user session.",
+      "tr_a": {
+        "tr_id": "AUTH_S-INTE-036",
+        "preconditions": [
+          "AuthController exists",
+          "Authentication request processed"
+        ],
+        "stimuli": [
+          "Audit log entry creation request"
+        ],
+        "expected_outputs": [
+          "Audit log entry created and user session updated"
+        ],
+        "coverage_criterion": "Process flow",
+        "priority": "medium",
+        "source_req_ids": [
+          "AuthController -> Record audit log entry"
+        ]
+      },
+      "source_req_ids": [
+        "AuthController -> Record audit log entry"
+      ]
+    }
+  ],
+  "total_count": 36
+}

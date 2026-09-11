@@ -1,0 +1,119 @@
+[
+  {
+    "chunk_id": "auth_system_srs__s0001__c0001",
+    "source_id": "auth_system_srs",
+    "artifact_type": "srs",
+    "content": "Authentication Service — Software Requirements Specification",
+    "page_ref": "Preamble",
+    "metadata": {
+      "section_id": 1,
+      "chunk_index": 1,
+      "token_count": 6,
+      "overlap": false
+    }
+  },
+  {
+    "chunk_id": "auth_system_srs__s0002__c0001",
+    "source_id": "auth_system_srs",
+    "artifact_type": "srs",
+    "content": "This document specifies the functional and non-functional requirements for the Authentication Service, which provides user authentication, session management, and token issuance for client applications (web and mobile) accessing the platform via the API Gateway.",
+    "page_ref": "H1: 1. Introduction",
+    "metadata": {
+      "section_id": 2,
+      "chunk_index": 1,
+      "token_count": 34,
+      "overlap": false
+    }
+  },
+  {
+    "chunk_id": "auth_system_srs__s0003__c0001",
+    "source_id": "auth_system_srs",
+    "artifact_type": "srs",
+    "content": "The Authentication Service is composed of an AuthController, a TokenService, a PasswordHasher, and a SessionManager, fronted by a Rate Limiter and Request Router at the API Gateway layer. User records are persisted in UserDB; session state is persisted in SessionStore; authentication events are persisted in AuditDB.",
+    "page_ref": "H1: 2. System Overview",
+    "metadata": {
+      "section_id": 3,
+      "chunk_index": 1,
+      "token_count": 46,
+      "overlap": false
+    }
+  },
+  {
+    "chunk_id": "auth_system_srs__s0004__c0001",
+    "source_id": "auth_system_srs",
+    "artifact_type": "srs",
+    "content": "FR-AUTH-001: The system shall authenticate users via POST /auth/login using an email address and password.\nFR-AUTH-002: The system shall return HTTP 401 Unauthorized when the submitted credentials are invalid.\nFR-AUTH-003: The system shall require a time-based one-time password (TOTP) code to complete authentication when multi-factor authentication (MFA) is enabled for the user account.",
+    "page_ref": "H2: 3.1 User Authentication",
+    "metadata": {
+      "section_id": 4,
+      "chunk_index": 1,
+      "token_count": 53,
+      "overlap": false
+    }
+  },
+  {
+    "chunk_id": "auth_system_srs__s0005__c0001",
+    "source_id": "auth_system_srs",
+    "artifact_type": "srs",
+    "content": "FR-AUTH-004: The system shall issue an access token and a refresh token upon successful authentication.\nFR-AUTH-005: The system shall allow a client to obtain a new access token via POST /auth/refresh using a valid, non-expired refresh token.\nFR-AUTH-006: The system shall invalidate a user's active session upon logout via POST /auth/logout.",
+    "page_ref": "H2: 3.2 Session and Token Management",
+    "metadata": {
+      "section_id": 5,
+      "chunk_index": 1,
+      "token_count": 51,
+      "overlap": false
+    }
+  },
+  {
+    "chunk_id": "auth_system_srs__s0006__c0001",
+    "source_id": "auth_system_srs",
+    "artifact_type": "srs",
+    "content": "FR-AUTH-007: The system shall lock a user account after 5 consecutive failed login attempts.\nFR-AUTH-008: The system shall automatically unlock a locked account after 15 minutes.\nFR-AUTH-009: The system shall rate-limit login attempts to 10 requests per minute per client IP address.",
+    "page_ref": "H2: 3.3 Account Protection",
+    "metadata": {
+      "section_id": 6,
+      "chunk_index": 1,
+      "token_count": 42,
+      "overlap": false
+    }
+  },
+  {
+    "chunk_id": "auth_system_srs__s0007__c0001",
+    "source_id": "auth_system_srs",
+    "artifact_type": "srs",
+    "content": "FR-AUTH-010: The system shall record an audit log entry for every login success, login failure, and logout event.",
+    "page_ref": "H2: 3.4 Audit Logging",
+    "metadata": {
+      "section_id": 7,
+      "chunk_index": 1,
+      "token_count": 18,
+      "overlap": false
+    }
+  },
+  {
+    "chunk_id": "auth_system_srs__s0008__c0001",
+    "source_id": "auth_system_srs",
+    "artifact_type": "srs",
+    "content": "NFR-AUTH-001: All client-server communication shall use TLS 1.2 or higher.\nNFR-AUTH-002: Access tokens shall be signed using the RS256 asymmetric algorithm.\nNFR-AUTH-003: Access tokens shall expire 15 minutes after issuance.\nNFR-AUTH-004: User passwords shall be a minimum of 12 characters and shall contain uppercase, lowercase, numeric, and symbol characters.\nNFR-AUTH-005: Audit log records shall be retained for a minimum of 90 days.",
+    "page_ref": "H1: 4. Non-Functional Requirements",
+    "metadata": {
+      "section_id": 8,
+      "chunk_index": 1,
+      "token_count": 62,
+      "overlap": false
+    }
+  },
+  {
+    "chunk_id": "auth_system_srs__s0009__c0001",
+    "source_id": "auth_system_srs",
+    "artifact_type": "srs",
+    "content": "Registered User: an authenticated end user of the client application.\nUnauthenticated Client: a caller that has not yet completed authentication.",
+    "page_ref": "H1: 5. User Roles",
+    "metadata": {
+      "section_id": 9,
+      "chunk_index": 1,
+      "token_count": 20,
+      "overlap": false
+    }
+  }
+]

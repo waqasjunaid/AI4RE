@@ -1,0 +1,90 @@
+[
+  {
+    "source_id": "auth_system_manual",
+    "artifact_type": "user_manual",
+    "entity_type": "process_step",
+    "content": "sign in to the system",
+    "page_ref": "GETTING STARTED",
+    "confidence_score": 0.8
+  },
+  {
+    "source_id": "auth_system_manual",
+    "artifact_type": "user_manual",
+    "entity_type": "actor_role",
+    "content": "user",
+    "page_ref": "GETTING STARTED",
+    "confidence_score": 0.7
+  },
+  {
+    "source_id": "auth_system_manual",
+    "artifact_type": "user_manual",
+    "entity_type": "function_point",
+    "content": "multi-factor authentication (MFA)",
+    "page_ref": "GETTING STARTED",
+    "confidence_score": 0.9
+  },
+  {
+    "source_id": "auth_system_manual",
+    "artifact_type": "user_manual",
+    "entity_type": "exception_condition",
+    "content": "incorrect password entered five times",
+    "page_ref": "GETTING STARTED",
+    "confidence_score": 0.8
+  },
+  {
+    "source_id": "auth_system_manual",
+    "artifact_type": "user_manual",
+    "entity_type": "process_step",
+    "content": "change password from Account Settings",
+    "page_ref": "GETTING STARTED",
+    "confidence_score": 0.7
+  },
+  {
+    "source_id": "auth_system_manual",
+    "artifact_type": "user_manual",
+    "entity_type": "glossary_term",
+    "content": "lockout period",
+    "page_ref": "GETTING STARTED",
+    "confidence_score": 0.6
+  },
+  {
+    "source_id": "auth_system_manual",
+    "artifact_type": "user_manual",
+    "entity_type": "function_point",
+    "content": "password recovery via email",
+    "page_ref": "3 Forgot Your Password",
+    "confidence_score": 0.9
+  },
+  {
+    "source_id": "auth_system_manual",
+    "artifact_type": "user_manual",
+    "entity_type": "process_step",
+    "content": "click Forgot password? link",
+    "page_ref": "3 Forgot Your Password",
+    "confidence_score": 0.8
+  },
+  {
+    "source_id": "auth_system_manual",
+    "artifact_type": "user_manual",
+    "entity_type": "actor_role",
+    "content": "user",
+    "page_ref": "3 Forgot Your Password",
+    "confidence_score": 0.7
+  },
+  {
+    "source_id": "auth_system_manual",
+    "artifact_type": "user_manual",
+    "entity_type": "function_point",
+    "content": "manual sign out from account menu",
+    "page_ref": "3 Forgot Your Password",
+    "confidence_score": 0.8
+  },
+  {
+    "source_id": "auth_system_manual",
+    "artifact_type": "user_manual",
+    "entity_type": "exception_condition",
+    "content": "account lock due to failed sign-in attempts",
+    "page_ref": "3 Forgot Your Password",
+    "confidence_score": 0.9
+  }
+]

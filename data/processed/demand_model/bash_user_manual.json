@@ -1,233 +1,222 @@
 {
   "source_id": "bash_user_manual",
+  "bundle_id": "bash_user_manual",
   "system_objectives": [
-    "Metafy next character typed",
-    "Perform tilde expansion on current word",
-    "compiled translations installation",
-    "waitpid function",
-    "return exit status of last command executed",
-    "set value of NAME to selected word",
+    "prints timing statistics for pipeline",
     "Evaluate conditional expression EXPRESSION",
-    "defines a shell function named FNAME"
+    "coproc executes a command in a subshell",
+    "defines a shell function named FNAME",
+    "unset builtin with -f option deletes function definitions",
+    "declare builtin command lists function names and definitions",
+    "arithmetic expansion",
+    "set builtin command"
   ],
   "user_roles": [
     "User",
-    "Translator",
-    "Shell",
-    "Bash",
-    "gettext tools"
+    "Bash shell",
+    "Readline"
   ],
   "use_cases": [
     {
       "use_case_id": "UC-001",
       "actor": "User",
-      "goal": "Execute a command",
+      "goal": "Execute a shell script",
       "preconditions": [
-        "User is logged in",
-        "Shell is running"
+        "SCRIPTNAME exists",
+        "User has execute permission"
       ],
       "steps": [
-        "User types command and presses enter",
-        "Shell reads input and divides into words and operators",
-        "Shell executes command"
+        "mark strings in shell script named SCRIPTNAME",
+        "executing a shell function or script"
       ],
       "postconditions": [
-        "Command is executed successfully"
+        "Script executed successfully"
       ],
       "exceptions": [
-        "Invalid command syntax"
+        "Permission denied",
+        "Script not found"
       ]
     },
     {
       "use_case_id": "UC-002",
-      "actor": "Translator",
-      "goal": "Translate a string",
+      "actor": "Bash shell",
+      "goal": "Expand words and execute commands",
       "preconditions": [
-        "PO file exists",
-        "gettext tools are installed"
+        "WORDS are provided",
+        "COMMANDS are valid"
       ],
       "steps": [
-        "Translator marks strings in script that need translation",
-        "Translator translates strings in PO files into appropriate languages",
-        "msgfmt program compiles PO files into MO files"
+        "expand WORDS and execute COMMANDS once for each word",
+        "consume all of the ARGUMENTS"
       ],
       "postconditions": [
-        "MO file is generated"
+        "Commands executed successfully"
       ],
       "exceptions": [
-        "Translation error"
+        "Invalid command",
+        "No arguments provided"
       ]
     },
     {
       "use_case_id": "UC-003",
-      "actor": "Shell",
-      "goal": "Provide command history expansion facilities",
+      "actor": "User",
+      "goal": "Use history substitution",
       "preconditions": [
-        "User has executed previous commands",
-        "Command history is enabled"
+        "History is enabled",
+        "Previous commands exist"
       ],
       "steps": [
-        "User presses up arrow key to recall previous command",
-        "Shell displays previous command",
-        "User edits and executes recalled command"
+        "history expansion",
+        "next-history"
       ],
       "postconditions": [
-        "Previous command is executed successfully"
+        "Previous command executed successfully"
       ],
       "exceptions": [
-        "No previous commands in history"
+        "History not enabled",
+        "No previous commands"
       ]
     },
     {
       "use_case_id": "UC-004",
-      "actor": "Bash",
-      "goal": "Parse tokens into commands",
+      "actor": "Bash shell",
+      "goal": "Evaluate arithmetic expressions",
       "preconditions": [
-        "User input is provided",
-        "Shell is running"
+        "EXPR1 and EXPR2 are valid"
       ],
       "steps": [
-        "Bash reads user input and divides into words and operators",
-        "Bash parses tokens into commands",
-        "Bash executes parsed command"
+        "evaluate arithmetic expression EXPR1 and then EXPR2 until zero"
       ],
       "postconditions": [
-        "Command is executed successfully"
+        "Expressions evaluated successfully"
       ],
       "exceptions": [
-        "Invalid token syntax"
+        "Invalid expression",
+        "Division by zero"
       ]
     },
     {
       "use_case_id": "UC-005",
-      "actor": "gettext tools",
-      "goal": "Produce MO file",
+      "actor": "User",
+      "goal": "Use alias command",
       "preconditions": [
-        "PO file exists",
-        "msgfmt program is installed"
+        "Alias is defined",
+        "Command is valid"
       ],
       "steps": [
-        "gettext tools compile PO files into MO files using msgfmt program",
-        "MO file is generated"
+        "alias command"
       ],
       "postconditions": [
-        "MO file is produced"
+        "Alias executed successfully"
       ],
       "exceptions": [
-        "Compilation error"
+        "Alias not defined",
+        "Invalid command"
       ]
     },
     {
       "use_case_id": "UC-006",
-      "actor": "User",
-      "goal": "Use command line editing",
+      "actor": "Readline",
+      "goal": "Display function names and bindings",
       "preconditions": [
-        "User input is provided",
-        "Shell is running"
+        "Readline is enabled"
       ],
       "steps": [
-        "User edits current command line",
-        "User presses enter to execute edited command",
-        "Shell executes edited command"
+        "Display Readline function names and bindings"
       ],
       "postconditions": [
-        "Edited command is executed successfully"
+        "Function names and bindings displayed successfully"
       ],
       "exceptions": [
-        "Invalid edit operation"
+        "Readline not enabled"
       ]
     },
     {
       "use_case_id": "UC-007",
-      "actor": "Translator",
-      "goal": "Copy template file to separate file for each target language",
+      "actor": "User",
+      "goal": "Move to start or end of line",
       "preconditions": [
-        "Template file exists",
-        "Target languages are defined"
+        "Line is editable"
       ],
       "steps": [
-        "Translator copies template file to separate file for each target language",
-        "Copied files are ready for translation"
+        "Move to start of line",
+        "Move to end of line"
       ],
       "postconditions": [
-        "Copied files exist"
+        "Cursor moved successfully"
       ],
       "exceptions": [
-        "Copy error"
+        "Line not editable"
       ]
     },
     {
       "use_case_id": "UC-008",
-      "actor": "Shell",
-      "goal": "Preserve literal value of next character",
+      "actor": "Bash shell",
+      "goal": "Perform pattern matching",
       "preconditions": [
-        "User input is provided",
-        "Shell is running"
+        "Pattern is valid",
+        "Files exist"
       ],
       "steps": [
-        "User uses backslash escape sequence to preserve literal value",
-        "Shell preserves literal value of next character",
-        "Shell executes command with preserved literal value"
+        "pattern matching"
       ],
       "postconditions": [
-        "Literal value is preserved successfully"
+        "Matching files found successfully"
       ],
       "exceptions": [
-        "Invalid escape sequence"
+        "Invalid pattern",
+        "No matching files"
       ]
     },
     {
       "use_case_id": "UC-009",
-      "actor": "gettext tools",
-      "goal": "Install MO files",
+      "actor": "User",
+      "goal": "Use cd builtin",
       "preconditions": [
-        "MO file exists",
-        "Installation directory is defined"
+        "Directory exists",
+        "User has permission"
       ],
       "steps": [
-        "gettext tools install MO files in installation directory",
-        "MO file is installed successfully"
+        "cd builtin"
       ],
       "postconditions": [
-        "MO file is installed"
+        "Directory changed successfully"
       ],
       "exceptions": [
-        "Installation error"
+        "Directory not found",
+        "Permission denied"
       ]
     },
     {
       "use_case_id": "UC-010",
-      "actor": "User",
-      "goal": "Set environment variables",
+      "actor": "Bash shell",
+      "goal": "Perform quote removal",
       "preconditions": [
-        "Shell is running",
-        "Environment variable name and value are defined"
+        "Quotes are present"
       ],
       "steps": [
-        "User sets environment variable using shell command",
-        "Shell sets environment variable",
-        "Environment variable is set successfully"
+        "quote removal"
       ],
       "postconditions": [
-        "Environment variable is set"
+        "Quotes removed successfully"
       ],
       "exceptions": [
-        "Invalid variable syntax"
+        "No quotes found"
       ]
     }
   ],
   "functional_reqs": [
     {
       "req_id": "FR-001",
-      "description": "The system shall provide a Bash shell for executing commands.",
+      "description": "The system shall perform arithmetic expansion on expressions enclosed in double parentheses.",
       "source_ids": [
         "bash_user_manual"
       ],
-      "priority": "high"
+      "priority": "medium"
     },
     {
       "req_id": "FR-002",
-      "description": "The system shall execute commands entered by the user through the command line interface.",
+      "description": "The system shall substitute the output of a command into the current command line when the command is enclosed in backticks or $().",
       "source_ids": [
         "bash_user_manual"
       ],
@@ -235,7 +224,7 @@
     },
     {
       "req_id": "FR-003",
-      "description": "The system shall provide a user interface to access GNU utilities.",
+      "description": "The system shall expand filenames that contain patterns such as *, ?, and [] to match existing files.",
       "source_ids": [
         "bash_user_manual"
       ],
@@ -243,39 +232,39 @@
     },
     {
       "req_id": "FR-004",
-      "description": "The system shall execute commands read from a file or string input.",
+      "description": "The system shall replace a tilde (~) at the beginning of a word with the value of the HOME variable.",
+      "source_ids": [
+        "bash_user_manual"
+      ],
+      "priority": "low"
+    },
+    {
+      "req_id": "FR-005",
+      "description": "The system shall split input lines into words based on spaces, tabs, and other whitespace characters.",
       "source_ids": [
         "bash_user_manual"
       ],
       "priority": "high"
     },
     {
-      "req_id": "FR-005",
-      "description": "The system shall support job control for managing multiple processes.",
+      "req_id": "FR-006",
+      "description": "The system shall remove quotes from words that are enclosed in single or double quotes.",
       "source_ids": [
         "bash_user_manual"
       ],
       "priority": "medium"
     },
     {
-      "req_id": "FR-006",
-      "description": "The system shall provide command line editing capabilities.",
-      "source_ids": [
-        "bash_user_manual"
-      ],
-      "priority": "low"
-    },
-    {
       "req_id": "FR-007",
-      "description": "The system shall maintain a command history for user reference.",
+      "description": "The system shall expand parameters and variables to their values when they appear on the command line.",
       "source_ids": [
         "bash_user_manual"
       ],
-      "priority": "low"
+      "priority": "high"
     },
     {
       "req_id": "FR-008",
-      "description": "The system shall support aliasing for shortcutting commands.",
+      "description": "The system shall perform parameter expansion on expressions enclosed in ${}.",
       "source_ids": [
         "bash_user_manual"
       ],
@@ -283,15 +272,7 @@
     },
     {
       "req_id": "FR-009",
-      "description": "The system shall parse tokens into executable commands.",
-      "source_ids": [
-        "bash_user_manual"
-      ],
-      "priority": "high"
-    },
-    {
-      "req_id": "FR-010",
-      "description": "The system shall provide command history expansion facilities for user convenience.",
+      "description": "The system shall expand aliases to their corresponding commands when they appear on the command line.",
       "source_ids": [
         "bash_user_manual"
       ],
@@ -301,86 +282,67 @@
   "nfr_constraints": [],
   "runtime_constraints": [],
   "glossary": {
-    "GNU operating system": "GNU operating system",
-    "macro processor": "macro processor",
-    "redirection": "redirection",
-    "POSIX": "POSIX",
-    "blank": "blank",
-    "whitespace": "whitespace",
-    "builtin": "builtin",
-    "control operator": "control operator",
-    "exit status": "exit status",
-    "field": "field",
-    "filename": "filename",
-    "metacharacter": "metacharacter",
-    "name": "name",
-    "operator": "operator",
-    "process group": "process group",
-    "process group ID": "process group ID",
-    "reserved word": "reserved word",
-    "return status": "return status",
-    "signal": "signal",
-    "token": "token",
-    "word": "word",
-    "metacharacters": "metacharacters",
-    "Bash": "Bash",
-    "Bourne shell": "Bourne shell",
-    "shell metacharacters": "shell metacharacters",
-    "history expansion character": "history expansion character",
-    "escape character": "escape character",
-    "Bash escape character": "Bash escape character",
-    "line continuation": "line continuation",
-    "Shell Expansions": "Shell Expansions",
-    "Shell Parameter Expansion": "Shell Parameter Expansion",
-    "ANSI C standard": "ANSI C standard",
-    "gettext documentation": "gettext documentation",
-    "PO file": "PO file",
-    "MO file": "MO file",
-    "message domain": "message domain",
-    "message catalog files": "message catalog files",
-    "reserved words": "reserved words",
-    "simple command": "simple command",
-    "pipeline operator": "pipeline operator",
-    "background": "background",
-    "TEST-COMMANDS": "TEST-COMMANDS",
-    "CONSEQUENT-COMMANDS": "CONSEQUENT-COMMANDS",
     "Pattern Matching": "Pattern Matching",
-    "REPLY variable": "REPLY variable",
     "Bash Conditional Expressions": "Bash Conditional Expressions",
-    "nocasematch shell option": "nocasematch shell option",
-    "regular expression parser": "regular expression parser",
-    "bracket expressions": "bracket expressions"
+    "Arithmetic Expansion": "Arithmetic Expansion",
+    "POSIX mode": "POSIX mode",
+    "POSIX standard": "POSIX standard",
+    "HISTIGNORE": "HISTIGNORE",
+    "emacs mode": "emacs mode",
+    "Programmable Completion": "Programmable Completion",
+    "Bash Variables": "Bash Variables",
+    "positional parameter": "positional parameter",
+    "POSIX": "POSIX",
+    "Bash": "Bash",
+    "builtin": "builtin",
+    "Bash POSIX Mode": "Bash POSIX Mode",
+    "EPOCHREALTIME": "EPOCHREALTIME",
+    "IFS": "IFS",
+    "EOF": "EOF",
+    "vi mode": "vi mode",
+    "BASH_ENV": "BASH_ENV",
+    "Shell Arithmetic": "Shell Arithmetic",
+    "LC_CTYPE locale category": "LC_CTYPE locale category",
+    "word splitting": "word splitting",
+    "incremental search": "incremental search",
+    "tilde expansion": "tilde expansion",
+    "SIGINT": "SIGINT",
+    "word designator": "word designator",
+    "Special Parameters": "Special Parameters",
+    "identifier": "identifier",
+    "internationalization": "internationalization",
+    "HISTSIZE": "HISTSIZE"
   },
   "exception_handlers": [
-    "single quote may not occur between single quotes",
-    "non-zero exit status",
-    "job control not active",
-    "EXPR2 evaluates to zero",
-    "no PATTERN matches",
-    "EOF is read",
-    "unescaped double quote characters result in empty strings",
-    "regular expression is syntactically incorrect",
-    "syntax error occurs or a readonly function with the same name already exists",
-    "exceed maximum function nesting level",
-    "variable is unset",
-    "positional parameter not assigned with assignment statements",
-    "incorrectly formed brace expansion",
-    "parameter is null or unset",
-    "expansion error if LENGTH evaluates to a number less than zero",
-    "invalid expression",
-    "null arguments",
-    "no matching filenames are found",
-    "filenames beginning with a . are ignored",
-    "Redirection fails if file exists and is regular",
-    "redirection error",
-    "command substitution error",
-    "fatal signal",
-    "receipt of SIGHUP",
-    "older Unix versions limit interpreter name and argument length",
-    "N is not greater than or equal to 1",
-    "non-zero status",
-    "COMMAND cannot be executed",
     "invalid option supplied",
-    "invalid options or missing option arguments"
+    "unescaped double quote characters result in empty strings",
+    "syntax error occurs or a readonly function with the same name already exists",
+    "parameter is null or unset",
+    "IFS value is null, no word splitting occurs",
+    "fatal signal",
+    "invalid option detected",
+    "readonly or may not be unset",
+    "invalid option is supplied or write error occurs",
+    "read-only variables cannot be reset",
+    "variable assignment error",
+    "unbalanced quotes cause hard-to-find errors",
+    "SIGINT received while waiting for foreground command",
+    "Redirection fails if file exists and is regular file",
+    "redirection error",
+    "receipt of SIGHUP",
+    "N is greater than $# or less than zero",
+    "non-zero exit status",
+    "invalid option or option argument supplied",
+    "end-of-file is encountered",
+    "function invocations exceed nesting level cause command to abort",
+    "invalid option specified",
+    "error if unset readonly variable",
+    "ringing the bell",
+    "output error occurs",
+    "shell security hole",
+    "SIGSEGV blocked causes shell misbehavior",
+    "assignment statements not allowed",
+    "failure to open or create a file",
+    ". does not search PATH if sourcepath is turned off"
   ]
 }

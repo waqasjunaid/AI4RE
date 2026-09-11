@@ -1,0 +1,173 @@
+{
+  "source_id": "auth_system_runtime",
+  "bundle_id": "auth_system",
+  "system_objectives": [
+    "Authenticate a user",
+    "Submit MFA verification code",
+    "Terminate the current session",
+    "user authentication, session management, and token issuance",
+    "Refresh an access token",
+    "successful authentication or token refresh"
+  ],
+  "user_roles": [
+    "User",
+    "Authentication Service"
+  ],
+  "use_cases": [
+    {
+      "use_case_id": "UC-001",
+      "actor": "User",
+      "goal": "Authenticate successfully",
+      "preconditions": [
+        "User has valid credentials"
+      ],
+      "steps": [
+        "User requests authentication",
+        "Authentication Service authenticates user",
+        "User submits MFA verification code"
+      ],
+      "postconditions": [
+        "User is authenticated",
+        "Session is established"
+      ],
+      "exceptions": [
+        "Invalid credentials",
+        "MFA verification fails"
+      ]
+    },
+    {
+      "use_case_id": "UC-002",
+      "actor": "User",
+      "goal": "Refresh access token",
+      "preconditions": [
+        "User has valid refresh token"
+      ],
+      "steps": [
+        "User requests token refresh",
+        "Authentication Service verifies refresh token",
+        "Authentication Service issues new access token"
+      ],
+      "postconditions": [
+        "New access token is issued"
+      ],
+      "exceptions": [
+        "Invalid refresh token"
+      ]
+    },
+    {
+      "use_case_id": "UC-003",
+      "actor": "User",
+      "goal": "Terminate session",
+      "preconditions": [
+        "User has active session"
+      ],
+      "steps": [
+        "User requests session termination",
+        "Authentication Service terminates session"
+      ],
+      "postconditions": [
+        "Session is terminated"
+      ],
+      "exceptions": []
+    },
+    {
+      "use_case_id": "UC-004",
+      "actor": "Authentication Service",
+      "goal": "Issue access token after successful authentication",
+      "preconditions": [
+        "User is authenticated"
+      ],
+      "steps": [
+        "Authentication Service generates access token",
+        "Authentication Service issues access token to User"
+      ],
+      "postconditions": [
+        "Access token is issued"
+      ],
+      "exceptions": []
+    },
+    {
+      "use_case_id": "UC-005",
+      "actor": "User",
+      "goal": "Submit MFA verification code",
+      "preconditions": [
+        "MFA verification is required"
+      ],
+      "steps": [
+        "User submits MFA verification code",
+        "Authentication Service verifies MFA verification code"
+      ],
+      "postconditions": [
+        "MFA verification is successful"
+      ],
+      "exceptions": [
+        "Invalid MFA verification code"
+      ]
+    }
+  ],
+  "functional_reqs": [
+    {
+      "req_id": "FR-001",
+      "description": "The system shall authenticate a user using their credentials.",
+      "source_ids": [
+        "auth_system_runtime"
+      ],
+      "priority": "high"
+    },
+    {
+      "req_id": "FR-002",
+      "description": "The system shall allow the submission of an MFA verification code to complete the authentication process.",
+      "source_ids": [
+        "auth_system_runtime"
+      ],
+      "priority": "medium"
+    },
+    {
+      "req_id": "FR-003",
+      "description": "The system shall terminate the current session when requested by the user or when a security policy is violated.",
+      "source_ids": [
+        "auth_system_runtime"
+      ],
+      "priority": "high"
+    },
+    {
+      "req_id": "FR-004",
+      "description": "The system shall manage user authentication, including session creation and token issuance.",
+      "source_ids": [
+        "auth_system_runtime"
+      ],
+      "priority": "medium"
+    },
+    {
+      "req_id": "FR-005",
+      "description": "The system shall refresh an access token when the existing one is near expiration or has expired.",
+      "source_ids": [
+        "auth_system_runtime"
+      ],
+      "priority": "low"
+    },
+    {
+      "req_id": "FR-006",
+      "description": "The system shall issue a new access token upon successful authentication or token refresh.",
+      "source_ids": [
+        "auth_system_runtime"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "nfr_constraints": [],
+  "runtime_constraints": [
+    {
+      "constraint_id": "RT-001",
+      "description": "multi-factor authentication enabled",
+      "affects_reqs": [],
+      "source_ids": [
+        "auth_system_runtime"
+      ]
+    }
+  ],
+  "glossary": {},
+  "exception_handlers": [
+    "Invalid or expired MFA code"
+  ]
+}

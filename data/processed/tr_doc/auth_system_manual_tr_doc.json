@@ -1,0 +1,1062 @@
+{
+  "source_id": "auth_system_manual",
+  "tr_h_list": [
+    "When a user attempts to log in, the system shall request additional authentication factors.",
+    "When a user attempts to log in with an invalid password, the system shall not request additional authentication factors.",
+    "When a user attempts to log in with an invalid username, the system shall display an error message.",
+    "When a user requests password recovery, the system shall send an email notification with reset instructions.",
+    "When a user requests password recovery without an associated email address, the system shall display an error message.",
+    "When a user requests password recovery with an invalid account, the system shall not send an email notification.",
+    "When a user selects the manual sign-out option, the system shall terminate the current session.",
+    "When a user selects the manual sign-out option while multiple sessions are active, the system shall terminate all current sessions.",
+    "When a user selects the manual sign-out option while not logged in, the system shall display an error message.",
+    "When an account is locked due to failed sign-in attempts, the system shall display a notification indicating the account lock.",
+    "When an incorrect password is entered five times, the system shall temporarily suspend account access.",
+    "When user clicks sign-in button, the system shall display account dashboard within 3 seconds.",
+    "When user clicks recover password link, the system shall send recovery email within 2 minutes.",
+    "When user enters new password, the system shall update password within 1 second.",
+    "When user clicks sign-out button, the system shall log out user within 1 second.",
+    "When user enters incorrect password five times, the system shall lock account within 1 second.",
+    "When account is locked, the system shall display error message within 1 second.",
+    "When user recovers password, the system shall unlock account within 1 second.",
+    "When user changes password, the system shall update account settings within 1 second.",
+    "When user signs out, the system shall clear session data within 1 second.",
+    "When user signs in, the system shall create new session within 1 second.",
+    "When user attempts to sign in with locked account, the system shall display error message within 1 second.",
+    "When user enters incorrect password, the system shall display error message within 1 second."
+  ],
+  "tr_a_list": [
+    {
+      "tr_id": "AUTH_S-FUNC-001",
+      "preconditions": [
+        "User has valid credentials",
+        "Multi-factor authentication is enabled"
+      ],
+      "stimuli": [
+        "Valid username and password entered"
+      ],
+      "expected_outputs": [
+        "System requests additional authentication factor"
+      ],
+      "coverage_criterion": "Normal-path coverage",
+      "priority": "high",
+      "source_req_ids": [
+        "The system shall provide a multi-factor authentication mechanism to verify user identities."
+      ]
+    },
+    {
+      "tr_id": "AUTH_S-FUNC-002",
+      "preconditions": [
+        "User has valid credentials",
+        "Multi-factor authentication is enabled"
+      ],
+      "stimuli": [
+        "Invalid username or password entered"
+      ],
+      "expected_outputs": [
+        "System does not request additional authentication factor"
+      ],
+      "coverage_criterion": "Boundary-condition coverage",
+      "priority": "medium",
+      "source_req_ids": [
+        "The system shall provide a multi-factor authentication mechanism to verify user identities."
+      ]
+    },
+    {
+      "tr_id": "AUTH_S-FUNC-003",
+      "preconditions": [
+        "User has valid credentials",
+        "Multi-factor authentication is enabled"
+      ],
+      "stimuli": [
+        "Invalid username entered"
+      ],
+      "expected_outputs": [
+        "System displays error message"
+      ],
+      "coverage_criterion": "Negative-path coverage",
+      "priority": "medium",
+      "source_req_ids": [
+        "The system shall provide a multi-factor authentication mechanism to verify user identities."
+      ]
+    },
+    {
+      "tr_id": "AUTH_S-FUNC-004",
+      "preconditions": [
+        "User has valid account",
+        "Email address is associated with account"
+      ],
+      "stimuli": [
+        "Password recovery request submitted"
+      ],
+      "expected_outputs": [
+        "System sends email notification with reset instructions"
+      ],
+      "coverage_criterion": "Normal-path coverage",
+      "priority": "high",
+      "source_req_ids": [
+        "The system shall allow users to recover their passwords via email notification."
+      ]
+    },
+    {
+      "tr_id": "AUTH_S-FUNC-005",
+      "preconditions": [
+        "User has valid account"
+      ],
+      "stimuli": [
+        "Password recovery request submitted",
+        "No email address associated with account"
+      ],
+      "expected_outputs": [
+        "System displays error message"
+      ],
+      "coverage_criterion": "Boundary-condition coverage",
+      "priority": "medium",
+      "source_req_ids": [
+        "The system shall allow users to recover their passwords via email notification."
+      ]
+    },
+    {
+      "tr_id": "AUTH_S-FUNC-006",
+      "preconditions": [
+        "Invalid account"
+      ],
+      "stimuli": [
+        "Password recovery request submitted"
+      ],
+      "expected_outputs": [
+        "System does not send email notification"
+      ],
+      "coverage_criterion": "Negative-path coverage",
+      "priority": "medium",
+      "source_req_ids": [
+        "The system shall allow users to recover their passwords via email notification."
+      ]
+    },
+    {
+      "tr_id": "AUTH_S-FUNC-007",
+      "preconditions": [
+        "User is logged in"
+      ],
+      "stimuli": [
+        "Manual sign-out option selected"
+      ],
+      "expected_outputs": [
+        "System terminates current session"
+      ],
+      "coverage_criterion": "Normal-path coverage",
+      "priority": "high",
+      "source_req_ids": [
+        "The system shall provide a manual sign-out option accessible from the account menu."
+      ]
+    },
+    {
+      "tr_id": "AUTH_S-FUNC-008",
+      "preconditions": [
+        "User is logged in",
+        "Multiple sessions are active"
+      ],
+      "stimuli": [
+        "Manual sign-out option selected"
+      ],
+      "expected_outputs": [
+        "System terminates all current sessions"
+      ],
+      "coverage_criterion": "Boundary-condition coverage",
+      "priority": "medium",
+      "source_req_ids": [
+        "The system shall provide a manual sign-out option accessible from the account menu."
+      ]
+    },
+    {
+      "tr_id": "AUTH_S-FUNC-009",
+      "preconditions": [
+        "User is not logged in"
+      ],
+      "stimuli": [
+        "Manual sign-out option selected"
+      ],
+      "expected_outputs": [
+        "System displays error message"
+      ],
+      "coverage_criterion": "Negative-path coverage",
+      "priority": "medium",
+      "source_req_ids": [
+        "The system shall provide a manual sign-out option accessible from the account menu."
+      ]
+    },
+    {
+      "tr_id": "AUTH_S-RUNT-010",
+      "preconditions": [
+        "User has attempted to sign in with incorrect credentials five times"
+      ],
+      "stimuli": [
+        "User attempts to sign in with correct credentials"
+      ],
+      "expected_outputs": [
+        "Account lock notification displayed",
+        "Login attempt rejected"
+      ],
+      "coverage_criterion": "Exception handling",
+      "priority": "high",
+      "source_req_ids": [
+        "account lock due to failed sign-in attempts"
+      ]
+    },
+    {
+      "tr_id": "AUTH_S-RUNT-011",
+      "preconditions": [
+        "User has attempted to sign in with incorrect credentials four times"
+      ],
+      "stimuli": [
+        "User enters incorrect password for the fifth time"
+      ],
+      "expected_outputs": [
+        "Account access suspended",
+        "Notification of temporary lockout displayed"
+      ],
+      "coverage_criterion": "Exception handling",
+      "priority": "high",
+      "source_req_ids": [
+        "incorrect password entered five times"
+      ]
+    },
+    {
+      "tr_id": "AUTH_S-INTE-012",
+      "preconditions": [
+        "User has valid credentials",
+        "System is online"
+      ],
+      "stimuli": [
+        "Click on sign-in button"
+      ],
+      "expected_outputs": [
+        "Account dashboard displayed"
+      ],
+      "coverage_criterion": "Interface interaction",
+      "priority": "high",
+      "source_req_ids": [
+        "Sign in to the system"
+      ]
+    },
+    {
+      "tr_id": "AUTH_S-INTE-013",
+      "preconditions": [
+        "User has valid email address",
+        "System is online"
+      ],
+      "stimuli": [
+        "Click on recover password link"
+      ],
+      "expected_outputs": [
+        "Recovery email sent to user's email address"
+      ],
+      "coverage_criterion": "Interface interaction",
+      "priority": "medium",
+      "source_req_ids": [
+        "Recover password via email"
+      ]
+    },
+    {
+      "tr_id": "AUTH_S-INTE-014",
+      "preconditions": [
+        "User is signed in",
+        "System is online"
+      ],
+      "stimuli": [
+        "Enter new password and confirm"
+      ],
+      "expected_outputs": [
+        "Password updated successfully"
+      ],
+      "coverage_criterion": "Interface interaction",
+      "priority": "high",
+      "source_req_ids": [
+        "Change password from Account Settings"
+      ]
+    },
+    {
+      "tr_id": "AUTH_S-INTE-015",
+      "preconditions": [
+        "User is signed in",
+        "System is online"
+      ],
+      "stimuli": [
+        "Click on sign-out button"
+      ],
+      "expected_outputs": [
+        "User logged out successfully"
+      ],
+      "coverage_criterion": "Interface interaction",
+      "priority": "high",
+      "source_req_ids": [
+        "Sign out from account menu"
+      ]
+    },
+    {
+      "tr_id": "AUTH_S-INTE-016",
+      "preconditions": [
+        "User has valid credentials",
+        "System is online"
+      ],
+      "stimuli": [
+        "Enter incorrect password five times"
+      ],
+      "expected_outputs": [
+        "Account locked due to excessive failed attempts"
+      ],
+      "coverage_criterion": "Exception handling",
+      "priority": "high",
+      "source_req_ids": [
+        "Incorrect password entered five times"
+      ]
+    },
+    {
+      "tr_id": "AUTH_S-INTE-017",
+      "preconditions": [
+        "Account is locked",
+        "System is online"
+      ],
+      "stimuli": [
+        "Attempt to sign in with locked account"
+      ],
+      "expected_outputs": [
+        "Error message displayed: 'Account locked due to excessive failed attempts'"
+      ],
+      "coverage_criterion": "Exception handling",
+      "priority": "high",
+      "source_req_ids": [
+        "Account lock due to failed sign-in attempts"
+      ]
+    },
+    {
+      "tr_id": "AUTH_S-INTE-018",
+      "preconditions": [
+        "User has valid email address",
+        "System is online"
+      ],
+      "stimuli": [
+        "Recover password via email"
+      ],
+      "expected_outputs": [
+        "Account unlocked successfully"
+      ],
+      "coverage_criterion": "Process flow verification",
+      "priority": "medium",
+      "source_req_ids": [
+        "Recover password via email"
+      ]
+    },
+    {
+      "tr_id": "AUTH_S-INTE-019",
+      "preconditions": [
+        "User is signed in",
+        "System is online"
+      ],
+      "stimuli": [
+        "Change password from Account Settings"
+      ],
+      "expected_outputs": [
+        "Account settings updated successfully"
+      ],
+      "coverage_criterion": "Process flow verification",
+      "priority": "high",
+      "source_req_ids": [
+        "Change password from Account Settings"
+      ]
+    },
+    {
+      "tr_id": "AUTH_S-INTE-020",
+      "preconditions": [
+        "User is signed in",
+        "System is online"
+      ],
+      "stimuli": [
+        "Sign out from account menu"
+      ],
+      "expected_outputs": [
+        "Session data cleared successfully"
+      ],
+      "coverage_criterion": "Process flow verification",
+      "priority": "high",
+      "source_req_ids": [
+        "Sign out from account menu"
+      ]
+    },
+    {
+      "tr_id": "AUTH_S-INTE-021",
+      "preconditions": [
+        "User has valid credentials",
+        "System is online"
+      ],
+      "stimuli": [
+        "Sign in to the system"
+      ],
+      "expected_outputs": [
+        "New session created successfully"
+      ],
+      "coverage_criterion": "Process flow verification",
+      "priority": "high",
+      "source_req_ids": [
+        "Sign in to the system"
+      ]
+    },
+    {
+      "tr_id": "AUTH_S-INTE-022",
+      "preconditions": [
+        "Account is locked",
+        "System is online"
+      ],
+      "stimuli": [
+        "Attempt to sign in with locked account"
+      ],
+      "expected_outputs": [
+        "Error message displayed: 'Account locked due to excessive failed attempts'"
+      ],
+      "coverage_criterion": "Exception handling",
+      "priority": "high",
+      "source_req_ids": [
+        "Account lock due to failed sign-in attempts"
+      ]
+    },
+    {
+      "tr_id": "AUTH_S-INTE-023",
+      "preconditions": [
+        "User has valid credentials",
+        "System is online"
+      ],
+      "stimuli": [
+        "Enter incorrect password"
+      ],
+      "expected_outputs": [
+        "Error message displayed: 'Invalid password'"
+      ],
+      "coverage_criterion": "Exception handling",
+      "priority": "high",
+      "source_req_ids": [
+        "Incorrect password entered five times"
+      ]
+    }
+  ],
+  "trs": [
+    {
+      "tr_id": "AUTH_S-FUNC-001",
+      "category": "functional",
+      "source_id": "auth_system_manual",
+      "tr_h": "When a user attempts to log in, the system shall request additional authentication factors.",
+      "tr_a": {
+        "tr_id": "AUTH_S-FUNC-001",
+        "preconditions": [
+          "User has valid credentials",
+          "Multi-factor authentication is enabled"
+        ],
+        "stimuli": [
+          "Valid username and password entered"
+        ],
+        "expected_outputs": [
+          "System requests additional authentication factor"
+        ],
+        "coverage_criterion": "Normal-path coverage",
+        "priority": "high",
+        "source_req_ids": [
+          "The system shall provide a multi-factor authentication mechanism to verify user identities."
+        ]
+      },
+      "source_req_ids": [
+        "The system shall provide a multi-factor authentication mechanism to verify user identities."
+      ]
+    },
+    {
+      "tr_id": "AUTH_S-FUNC-002",
+      "category": "functional",
+      "source_id": "auth_system_manual",
+      "tr_h": "When a user attempts to log in with an invalid password, the system shall not request additional authentication factors.",
+      "tr_a": {
+        "tr_id": "AUTH_S-FUNC-002",
+        "preconditions": [
+          "User has valid credentials",
+          "Multi-factor authentication is enabled"
+        ],
+        "stimuli": [
+          "Invalid username or password entered"
+        ],
+        "expected_outputs": [
+          "System does not request additional authentication factor"
+        ],
+        "coverage_criterion": "Boundary-condition coverage",
+        "priority": "medium",
+        "source_req_ids": [
+          "The system shall provide a multi-factor authentication mechanism to verify user identities."
+        ]
+      },
+      "source_req_ids": [
+        "The system shall provide a multi-factor authentication mechanism to verify user identities."
+      ]
+    },
+    {
+      "tr_id": "AUTH_S-FUNC-003",
+      "category": "functional",
+      "source_id": "auth_system_manual",
+      "tr_h": "When a user attempts to log in with an invalid username, the system shall display an error message.",
+      "tr_a": {
+        "tr_id": "AUTH_S-FUNC-003",
+        "preconditions": [
+          "User has valid credentials",
+          "Multi-factor authentication is enabled"
+        ],
+        "stimuli": [
+          "Invalid username entered"
+        ],
+        "expected_outputs": [
+          "System displays error message"
+        ],
+        "coverage_criterion": "Negative-path coverage",
+        "priority": "medium",
+        "source_req_ids": [
+          "The system shall provide a multi-factor authentication mechanism to verify user identities."
+        ]
+      },
+      "source_req_ids": [
+        "The system shall provide a multi-factor authentication mechanism to verify user identities."
+      ]
+    },
+    {
+      "tr_id": "AUTH_S-FUNC-004",
+      "category": "functional",
+      "source_id": "auth_system_manual",
+      "tr_h": "When a user requests password recovery, the system shall send an email notification with reset instructions.",
+      "tr_a": {
+        "tr_id": "AUTH_S-FUNC-004",
+        "preconditions": [
+          "User has valid account",
+          "Email address is associated with account"
+        ],
+        "stimuli": [
+          "Password recovery request submitted"
+        ],
+        "expected_outputs": [
+          "System sends email notification with reset instructions"
+        ],
+        "coverage_criterion": "Normal-path coverage",
+        "priority": "high",
+        "source_req_ids": [
+          "The system shall allow users to recover their passwords via email notification."
+        ]
+      },
+      "source_req_ids": [
+        "The system shall allow users to recover their passwords via email notification."
+      ]
+    },
+    {
+      "tr_id": "AUTH_S-FUNC-005",
+      "category": "functional",
+      "source_id": "auth_system_manual",
+      "tr_h": "When a user requests password recovery without an associated email address, the system shall display an error message.",
+      "tr_a": {
+        "tr_id": "AUTH_S-FUNC-005",
+        "preconditions": [
+          "User has valid account"
+        ],
+        "stimuli": [
+          "Password recovery request submitted",
+          "No email address associated with account"
+        ],
+        "expected_outputs": [
+          "System displays error message"
+        ],
+        "coverage_criterion": "Boundary-condition coverage",
+        "priority": "medium",
+        "source_req_ids": [
+          "The system shall allow users to recover their passwords via email notification."
+        ]
+      },
+      "source_req_ids": [
+        "The system shall allow users to recover their passwords via email notification."
+      ]
+    },
+    {
+      "tr_id": "AUTH_S-FUNC-006",
+      "category": "functional",
+      "source_id": "auth_system_manual",
+      "tr_h": "When a user requests password recovery with an invalid account, the system shall not send an email notification.",
+      "tr_a": {
+        "tr_id": "AUTH_S-FUNC-006",
+        "preconditions": [
+          "Invalid account"
+        ],
+        "stimuli": [
+          "Password recovery request submitted"
+        ],
+        "expected_outputs": [
+          "System does not send email notification"
+        ],
+        "coverage_criterion": "Negative-path coverage",
+        "priority": "medium",
+        "source_req_ids": [
+          "The system shall allow users to recover their passwords via email notification."
+        ]
+      },
+      "source_req_ids": [
+        "The system shall allow users to recover their passwords via email notification."
+      ]
+    },
+    {
+      "tr_id": "AUTH_S-FUNC-007",
+      "category": "functional",
+      "source_id": "auth_system_manual",
+      "tr_h": "When a user selects the manual sign-out option, the system shall terminate the current session.",
+      "tr_a": {
+        "tr_id": "AUTH_S-FUNC-007",
+        "preconditions": [
+          "User is logged in"
+        ],
+        "stimuli": [
+          "Manual sign-out option selected"
+        ],
+        "expected_outputs": [
+          "System terminates current session"
+        ],
+        "coverage_criterion": "Normal-path coverage",
+        "priority": "high",
+        "source_req_ids": [
+          "The system shall provide a manual sign-out option accessible from the account menu."
+        ]
+      },
+      "source_req_ids": [
+        "The system shall provide a manual sign-out option accessible from the account menu."
+      ]
+    },
+    {
+      "tr_id": "AUTH_S-FUNC-008",
+      "category": "functional",
+      "source_id": "auth_system_manual",
+      "tr_h": "When a user selects the manual sign-out option while multiple sessions are active, the system shall terminate all current sessions.",
+      "tr_a": {
+        "tr_id": "AUTH_S-FUNC-008",
+        "preconditions": [
+          "User is logged in",
+          "Multiple sessions are active"
+        ],
+        "stimuli": [
+          "Manual sign-out option selected"
+        ],
+        "expected_outputs": [
+          "System terminates all current sessions"
+        ],
+        "coverage_criterion": "Boundary-condition coverage",
+        "priority": "medium",
+        "source_req_ids": [
+          "The system shall provide a manual sign-out option accessible from the account menu."
+        ]
+      },
+      "source_req_ids": [
+        "The system shall provide a manual sign-out option accessible from the account menu."
+      ]
+    },
+    {
+      "tr_id": "AUTH_S-FUNC-009",
+      "category": "functional",
+      "source_id": "auth_system_manual",
+      "tr_h": "When a user selects the manual sign-out option while not logged in, the system shall display an error message.",
+      "tr_a": {
+        "tr_id": "AUTH_S-FUNC-009",
+        "preconditions": [
+          "User is not logged in"
+        ],
+        "stimuli": [
+          "Manual sign-out option selected"
+        ],
+        "expected_outputs": [
+          "System displays error message"
+        ],
+        "coverage_criterion": "Negative-path coverage",
+        "priority": "medium",
+        "source_req_ids": [
+          "The system shall provide a manual sign-out option accessible from the account menu."
+        ]
+      },
+      "source_req_ids": [
+        "The system shall provide a manual sign-out option accessible from the account menu."
+      ]
+    },
+    {
+      "tr_id": "AUTH_S-RUNT-010",
+      "category": "runtime_environment",
+      "source_id": "auth_system_manual",
+      "tr_h": "When an account is locked due to failed sign-in attempts, the system shall display a notification indicating the account lock.",
+      "tr_a": {
+        "tr_id": "AUTH_S-RUNT-010",
+        "preconditions": [
+          "User has attempted to sign in with incorrect credentials five times"
+        ],
+        "stimuli": [
+          "User attempts to sign in with correct credentials"
+        ],
+        "expected_outputs": [
+          "Account lock notification displayed",
+          "Login attempt rejected"
+        ],
+        "coverage_criterion": "Exception handling",
+        "priority": "high",
+        "source_req_ids": [
+          "account lock due to failed sign-in attempts"
+        ]
+      },
+      "source_req_ids": [
+        "account lock due to failed sign-in attempts"
+      ]
+    },
+    {
+      "tr_id": "AUTH_S-RUNT-011",
+      "category": "runtime_environment",
+      "source_id": "auth_system_manual",
+      "tr_h": "When an incorrect password is entered five times, the system shall temporarily suspend account access.",
+      "tr_a": {
+        "tr_id": "AUTH_S-RUNT-011",
+        "preconditions": [
+          "User has attempted to sign in with incorrect credentials four times"
+        ],
+        "stimuli": [
+          "User enters incorrect password for the fifth time"
+        ],
+        "expected_outputs": [
+          "Account access suspended",
+          "Notification of temporary lockout displayed"
+        ],
+        "coverage_criterion": "Exception handling",
+        "priority": "high",
+        "source_req_ids": [
+          "incorrect password entered five times"
+        ]
+      },
+      "source_req_ids": [
+        "incorrect password entered five times"
+      ]
+    },
+    {
+      "tr_id": "AUTH_S-INTE-012",
+      "category": "interface_exception",
+      "source_id": "auth_system_manual",
+      "tr_h": "When user clicks sign-in button, the system shall display account dashboard within 3 seconds.",
+      "tr_a": {
+        "tr_id": "AUTH_S-INTE-012",
+        "preconditions": [
+          "User has valid credentials",
+          "System is online"
+        ],
+        "stimuli": [
+          "Click on sign-in button"
+        ],
+        "expected_outputs": [
+          "Account dashboard displayed"
+        ],
+        "coverage_criterion": "Interface interaction",
+        "priority": "high",
+        "source_req_ids": [
+          "Sign in to the system"
+        ]
+      },
+      "source_req_ids": [
+        "Sign in to the system"
+      ]
+    },
+    {
+      "tr_id": "AUTH_S-INTE-013",
+      "category": "interface_exception",
+      "source_id": "auth_system_manual",
+      "tr_h": "When user clicks recover password link, the system shall send recovery email within 2 minutes.",
+      "tr_a": {
+        "tr_id": "AUTH_S-INTE-013",
+        "preconditions": [
+          "User has valid email address",
+          "System is online"
+        ],
+        "stimuli": [
+          "Click on recover password link"
+        ],
+        "expected_outputs": [
+          "Recovery email sent to user's email address"
+        ],
+        "coverage_criterion": "Interface interaction",
+        "priority": "medium",
+        "source_req_ids": [
+          "Recover password via email"
+        ]
+      },
+      "source_req_ids": [
+        "Recover password via email"
+      ]
+    },
+    {
+      "tr_id": "AUTH_S-INTE-014",
+      "category": "interface_exception",
+      "source_id": "auth_system_manual",
+      "tr_h": "When user enters new password, the system shall update password within 1 second.",
+      "tr_a": {
+        "tr_id": "AUTH_S-INTE-014",
+        "preconditions": [
+          "User is signed in",
+          "System is online"
+        ],
+        "stimuli": [
+          "Enter new password and confirm"
+        ],
+        "expected_outputs": [
+          "Password updated successfully"
+        ],
+        "coverage_criterion": "Interface interaction",
+        "priority": "high",
+        "source_req_ids": [
+          "Change password from Account Settings"
+        ]
+      },
+      "source_req_ids": [
+        "Change password from Account Settings"
+      ]
+    },
+    {
+      "tr_id": "AUTH_S-INTE-015",
+      "category": "interface_exception",
+      "source_id": "auth_system_manual",
+      "tr_h": "When user clicks sign-out button, the system shall log out user within 1 second.",
+      "tr_a": {
+        "tr_id": "AUTH_S-INTE-015",
+        "preconditions": [
+          "User is signed in",
+          "System is online"
+        ],
+        "stimuli": [
+          "Click on sign-out button"
+        ],
+        "expected_outputs": [
+          "User logged out successfully"
+        ],
+        "coverage_criterion": "Interface interaction",
+        "priority": "high",
+        "source_req_ids": [
+          "Sign out from account menu"
+        ]
+      },
+      "source_req_ids": [
+        "Sign out from account menu"
+      ]
+    },
+    {
+      "tr_id": "AUTH_S-INTE-016",
+      "category": "interface_exception",
+      "source_id": "auth_system_manual",
+      "tr_h": "When user enters incorrect password five times, the system shall lock account within 1 second.",
+      "tr_a": {
+        "tr_id": "AUTH_S-INTE-016",
+        "preconditions": [
+          "User has valid credentials",
+          "System is online"
+        ],
+        "stimuli": [
+          "Enter incorrect password five times"
+        ],
+        "expected_outputs": [
+          "Account locked due to excessive failed attempts"
+        ],
+        "coverage_criterion": "Exception handling",
+        "priority": "high",
+        "source_req_ids": [
+          "Incorrect password entered five times"
+        ]
+      },
+      "source_req_ids": [
+        "Incorrect password entered five times"
+      ]
+    },
+    {
+      "tr_id": "AUTH_S-INTE-017",
+      "category": "interface_exception",
+      "source_id": "auth_system_manual",
+      "tr_h": "When account is locked, the system shall display error message within 1 second.",
+      "tr_a": {
+        "tr_id": "AUTH_S-INTE-017",
+        "preconditions": [
+          "Account is locked",
+          "System is online"
+        ],
+        "stimuli": [
+          "Attempt to sign in with locked account"
+        ],
+        "expected_outputs": [
+          "Error message displayed: 'Account locked due to excessive failed attempts'"
+        ],
+        "coverage_criterion": "Exception handling",
+        "priority": "high",
+        "source_req_ids": [
+          "Account lock due to failed sign-in attempts"
+        ]
+      },
+      "source_req_ids": [
+        "Account lock due to failed sign-in attempts"
+      ]
+    },
+    {
+      "tr_id": "AUTH_S-INTE-018",
+      "category": "interface_exception",
+      "source_id": "auth_system_manual",
+      "tr_h": "When user recovers password, the system shall unlock account within 1 second.",
+      "tr_a": {
+        "tr_id": "AUTH_S-INTE-018",
+        "preconditions": [
+          "User has valid email address",
+          "System is online"
+        ],
+        "stimuli": [
+          "Recover password via email"
+        ],
+        "expected_outputs": [
+          "Account unlocked successfully"
+        ],
+        "coverage_criterion": "Process flow verification",
+        "priority": "medium",
+        "source_req_ids": [
+          "Recover password via email"
+        ]
+      },
+      "source_req_ids": [
+        "Recover password via email"
+      ]
+    },
+    {
+      "tr_id": "AUTH_S-INTE-019",
+      "category": "interface_exception",
+      "source_id": "auth_system_manual",
+      "tr_h": "When user changes password, the system shall update account settings within 1 second.",
+      "tr_a": {
+        "tr_id": "AUTH_S-INTE-019",
+        "preconditions": [
+          "User is signed in",
+          "System is online"
+        ],
+        "stimuli": [
+          "Change password from Account Settings"
+        ],
+        "expected_outputs": [
+          "Account settings updated successfully"
+        ],
+        "coverage_criterion": "Process flow verification",
+        "priority": "high",
+        "source_req_ids": [
+          "Change password from Account Settings"
+        ]
+      },
+      "source_req_ids": [
+        "Change password from Account Settings"
+      ]
+    },
+    {
+      "tr_id": "AUTH_S-INTE-020",
+      "category": "interface_exception",
+      "source_id": "auth_system_manual",
+      "tr_h": "When user signs out, the system shall clear session data within 1 second.",
+      "tr_a": {
+        "tr_id": "AUTH_S-INTE-020",
+        "preconditions": [
+          "User is signed in",
+          "System is online"
+        ],
+        "stimuli": [
+          "Sign out from account menu"
+        ],
+        "expected_outputs": [
+          "Session data cleared successfully"
+        ],
+        "coverage_criterion": "Process flow verification",
+        "priority": "high",
+        "source_req_ids": [
+          "Sign out from account menu"
+        ]
+      },
+      "source_req_ids": [
+        "Sign out from account menu"
+      ]
+    },
+    {
+      "tr_id": "AUTH_S-INTE-021",
+      "category": "interface_exception",
+      "source_id": "auth_system_manual",
+      "tr_h": "When user signs in, the system shall create new session within 1 second.",
+      "tr_a": {
+        "tr_id": "AUTH_S-INTE-021",
+        "preconditions": [
+          "User has valid credentials",
+          "System is online"
+        ],
+        "stimuli": [
+          "Sign in to the system"
+        ],
+        "expected_outputs": [
+          "New session created successfully"
+        ],
+        "coverage_criterion": "Process flow verification",
+        "priority": "high",
+        "source_req_ids": [
+          "Sign in to the system"
+        ]
+      },
+      "source_req_ids": [
+        "Sign in to the system"
+      ]
+    },
+    {
+      "tr_id": "AUTH_S-INTE-022",
+      "category": "interface_exception",
+      "source_id": "auth_system_manual",
+      "tr_h": "When user attempts to sign in with locked account, the system shall display error message within 1 second.",
+      "tr_a": {
+        "tr_id": "AUTH_S-INTE-022",
+        "preconditions": [
+          "Account is locked",
+          "System is online"
+        ],
+        "stimuli": [
+          "Attempt to sign in with locked account"
+        ],
+        "expected_outputs": [
+          "Error message displayed: 'Account locked due to excessive failed attempts'"
+        ],
+        "coverage_criterion": "Exception handling",
+        "priority": "high",
+        "source_req_ids": [
+          "Account lock due to failed sign-in attempts"
+        ]
+      },
+      "source_req_ids": [
+        "Account lock due to failed sign-in attempts"
+      ]
+    },
+    {
+      "tr_id": "AUTH_S-INTE-023",
+      "category": "interface_exception",
+      "source_id": "auth_system_manual",
+      "tr_h": "When user enters incorrect password, the system shall display error message within 1 second.",
+      "tr_a": {
+        "tr_id": "AUTH_S-INTE-023",
+        "preconditions": [
+          "User has valid credentials",
+          "System is online"
+        ],
+        "stimuli": [
+          "Enter incorrect password"
+        ],
+        "expected_outputs": [
+          "Error message displayed: 'Invalid password'"
+        ],
+        "coverage_criterion": "Exception handling",
+        "priority": "high",
+        "source_req_ids": [
+          "Incorrect password entered five times"
+        ]
+      },
+      "source_req_ids": [
+        "Incorrect password entered five times"
+      ]
+    }
+  ],
+  "total_count": 23
+}

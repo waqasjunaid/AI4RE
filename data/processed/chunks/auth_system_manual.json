@@ -1,0 +1,28 @@
+[
+  {
+    "chunk_id": "auth_system_manual__s0001__c0001",
+    "source_id": "auth_system_manual",
+    "artifact_type": "user_manual",
+    "content": "This guide explains how to sign in, manage your session, and keep your\naccount secure.\n\nTo sign in, open the login page and enter your email address and\npassword. If your account has multi-factor authentication (MFA)\nenabled, you will be prompted for a 6-digit verification code from\nyour authenticator app after your password is accepted.\n\nIf you enter an incorrect password five times in a row, your account\nwill be temporarily locked for security reasons. Wait for the lockout\nperiod to end before trying again, or contact support if you need\nimmediate access.\n\nOnce signed in, you can change your password at any time from Account\nSettings, Security, Change Password. Enter your current password\nfollowed by your new password. Your new password must be at least 12\ncharacters and include a mix of uppercase letters, lowercase letters,\nnumbers, and symbols.",
+    "page_ref": "GETTING STARTED",
+    "metadata": {
+      "section_id": 1,
+      "chunk_index": 1,
+      "token_count": 140,
+      "overlap": false
+    }
+  },
+  {
+    "chunk_id": "auth_system_manual__s0002__c0001",
+    "source_id": "auth_system_manual",
+    "artifact_type": "user_manual",
+    "content": "If you forget your password, click the \"Forgot password?\" link on the\nsign-in page. We will email you a secure recovery link that lets you\nset a new password. The recovery link expires after a short period for\nyour protection.\n\nYour session remains active while you use the application. If you are\ninactive for an extended period, you may be asked to sign in again.\nYou can manually sign out at any time from the account menu.\n\nFor your protection, repeated failed sign-in attempts will temporarily\nlock your account. This is a normal security measure and does not mean\nyour account has been compromised.",
+    "page_ref": "3 Forgot Your Password",
+    "metadata": {
+      "section_id": 2,
+      "chunk_index": 1,
+      "token_count": 104,
+      "overlap": false
+    }
+  }
+]

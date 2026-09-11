@@ -1,646 +1,619 @@
 {
   "source_id": "swagger_petstore",
   "tr_h_list": [
-    "When a request is received, the system shall filter it using authorization filters.",
-    "When a request is received, the system shall not process it if authorization filters fail.",
-    "When a request is received, the system shall return an error if authorization filters are not configured.",
-    "When a valid image is provided, the system shall upload it to the server.",
-    "When a large image is provided, the system shall not exceed the maximum allowed size.",
-    "When an invalid image is provided, the system shall return an error.",
-    "When valid pet information is provided, the system shall add a new pet to the store.",
-    "When duplicate pet information is provided, the system shall not add a new pet.",
-    "When invalid pet information is provided, the system shall return an error.",
-    "When valid update information is provided, the system shall update an existing pet in the store.",
-    "When invalid update information is provided, the system shall return an error.",
-    "When a valid status is provided, the system shall find and return pets by their status.",
-    "When an invalid status is provided, the system shall return an error.",
-    "When a valid tag is provided, the system shall find and return pets by their tags.",
-    "When an invalid tag is provided, the system shall return an error.",
-    "When multiple status values are provided with comma separated strings, the system shall return a valid response within 200ms.",
-    "When multiple tags are provided with comma separated strings, the system shall return a valid response within 200ms.",
+    "When a valid input array is provided, the system shall create a list of users.",
+    "When an empty input array is provided, the system shall not create a list of users.",
+    "When an invalid input array is provided, the system shall not create a list of users.",
+    "When a valid status is provided, the system shall find pets by status.",
+    "When an invalid status is provided, the system shall not find pets.",
+    "When no status is provided, the system shall not find pets.",
+    "When a valid tag is provided, the system shall find pets by tags.",
+    "When an invalid tag is provided, the system shall not find pets.",
+    "When no tag is provided, the system shall not find pets.",
+    "When a valid ID is provided, the system shall find a pet by ID.",
+    "When an invalid ID is provided, the system shall not find a pet.",
+    "When no ID is provided, the system shall not find a pet.",
+    "When valid form data is provided, the system shall update a pet in the store.",
+    "When invalid form data is provided, the system shall not update a pet.",
+    "When no form data is provided, the system shall not update a pet.",
+    "When a valid ID is provided, the system shall delete a pet.",
+    "When an invalid ID is provided, the system shall not delete a pet.",
+    "When no ID is provided, the system shall not delete a pet.",
+    "When a valid ID is provided, the system shall delete a purchase order.",
+    "When an invalid ID is provided, the system shall not delete a purchase order.",
+    "When no ID is provided, the system shall not delete a purchase order.",
+    "When valid user credentials are provided, the system shall authenticate the user.",
+    "When invalid user credentials are provided, the system shall not authenticate the user.",
+    "When no user credentials are provided, the system shall not authenticate the user.",
+    "When multiple status values are provided with comma separated strings, the system shall return a list of pets within 200ms.",
+    "When multiple tags are provided with comma separated strings, the system shall return a list of pets within 200ms.",
     "When an invalid ID is supplied, the system shall return a 404 error within 100ms.",
-    "When an invalid input is provided, the system shall return a 400 error within 100ms.",
-    "When an integer ID with value >= 1 and <= 10 is provided, the system shall return a valid response within 200ms.",
-    "When an integer ID with positive integer value is provided, the system shall return a valid response within 200ms.",
-    "When a logged in user makes a request, the system shall return a valid response within 200ms.",
+    "When an integer ID with value >= 1 and <= 10 is provided, the system shall return a pet within 200ms.",
+    "When an integer ID with positive integer value is provided, the system shall return a pet within 200ms.",
+    "When a request is made without logging in, the system shall return a 401 error within 100ms.",
     "When a non-integer ID is provided, the system shall return a 400 error within 100ms.",
-    "When multiple status values are provided without comma separation, the system shall return a 400 error within 100ms.",
-    "When multiple tags are provided without comma separation, the system shall return a 400 error within 100ms.",
-    "When an ID outside the range of 1 to 10 is provided, the system shall return a 400 error within 100ms.",
-    "When a non-positive integer ID is provided, the system shall return a 400 error within 100ms.",
+    "When a non-integer petId is provided, the system shall return a 400 error within 100ms.",
     "When an invalid ID is supplied, the system shall return an error response.",
-    "When an invalid input is provided, the system shall return a validation error response.",
-    "When an integer ID with value >= 1 and <= 10 is provided, the system shall process the request successfully.",
-    "When a positive integer ID is provided, the system shall process the request successfully.",
-    "When a logged-in user makes a request, the system shall authenticate the user successfully.",
-    "When an invalid status value is provided, the system shall return a validation error response.",
-    "When a pet ID is provided, the system shall verify that it is an integer.",
-    "When a quantity value is provided, the system shall verify that it is an integer.",
-    "When a pet is not found, the system shall return a 'Pet not found' error response.",
-    "When an invalid username is supplied, the system shall return a 'User not found' error response.",
-    "When a user attempts to add a new pet, the Petstore API shall create a new pet resource.",
-    "When an invalid input is provided, the Petstore API shall return a validation exception.",
-    "When a user attempts to find a pet by ID, the Petstore API shall return the corresponding pet resource.",
-    "When an invalid ID is supplied, the Petstore API shall return a not found exception.",
-    "When a user attempts to update an existing pet, the Petstore API shall update the corresponding pet resource.",
-    "When a validation exception occurs, the Petstore API shall return a validation error message.",
-    "When a user attempts to place an order for a pet, the Petstore API shall create a new order resource.",
-    "When a user attempts to find a purchase order by ID, the Petstore API shall return the corresponding order resource.",
-    "When a user attempts to delete a pet, the Petstore API shall delete the corresponding pet resource.",
-    "When an invalid status value is provided, the Petstore API shall return a validation error message.",
-    "When an invalid tag value is provided, the Petstore API shall return a validation error message.",
-    "When a user logs in, the Petstore API shall authenticate the user and return a valid session ID.",
-    "When multiple status values are provided with comma separated strings, the system shall find and return pets by their status.",
-    "When a user attempts to place an order for a pet, the system shall process the order.",
-    "When an invalid username is supplied, the system shall return an error message.",
-    "When form data containing required fields is provided, the system shall update a pet in the store.",
-    "Within 5 seconds, the system shall return pet inventories by their status.",
-    "When a valid order ID is provided, the system shall return the corresponding purchase order.",
-    "When valid login credentials are provided, the system shall log the user into the system.",
-    "When a logout request is submitted, the system shall log out the current user session."
+    "When an integer ID with value >= 1 and <= 10 is supplied, the system shall process the request successfully.",
+    "When an integer ID with positive integer value is supplied, the system shall process the request successfully.",
+    "When a logged in user only makes a request, the system shall authenticate and authorize the user successfully.",
+    "When an invalid input is supplied, the system shall return a validation error response.",
+    "When a pet ID is not an integer, the system shall return an error response.",
+    "When a quantity is not an integer, the system shall return an error response.",
+    "When a pet not found error occurs, the system shall return an error response.",
+    "When an invalid status value is supplied, the system shall return a validation error response.",
+    "When an invalid tag value is supplied, the system shall return a validation error response.",
+    "When a user requests to create a new pet, the Petstore API shall return a successful creation response.",
+    "When an invalid ID is supplied, the Petstore API shall return an error response.",
+    "When a user requests to find a pet by ID, the Petstore API shall return the pet data.",
+    "When invalid input is supplied, the Petstore API shall return an error response.",
+    "When a user requests to update an existing pet, the Petstore API shall return a successful update response.",
+    "When a pet is not found, the Petstore API shall return an error response.",
+    "When a user requests to delete a pet, the Petstore API shall return a successful deletion response.",
+    "When an invalid status value is supplied, the Petstore API shall return an error response.",
+    "When a user requests to place an order for a pet, the Petstore API shall return a successful order creation response.",
+    "When an invalid tag value is supplied, the Petstore API shall return an error response.",
+    "When a user requests to find purchase order by ID, the Petstore API shall return the order data.",
+    "When an invalid username is supplied, the Petstore API shall return an error response.",
+    "When searching for pets by status, the system shall return a list of pets with only one status value.",
+    "When placing an order for a pet, the system shall create a new order record.",
+    "When invalid data is provided, the system shall raise a validation exception.",
+    "When updating a pet in the store, the system shall update all form data fields.",
+    "When deleting a pet, the system shall remove the pet record within 1 second.",
+    "When getting a user by username, the system shall return the user record within 500ms.",
+    "When updating an existing user, the system shall update all user fields within 2 seconds.",
+    "When deleting a purchase order by ID, the system shall remove the order record within 1 second."
   ],
   "tr_a_list": [
     {
       "tr_id": "SWAGGE-FUNC-001",
       "preconditions": [
-        "System is running",
-        "Authorization filters are configured"
+        "System is initialized",
+        "Input array is not empty"
       ],
       "stimuli": [
-        "Incoming request with valid credentials"
+        "Valid input array"
       ],
       "expected_outputs": [
-        "Request is processed successfully"
+        "List of users created successfully"
       ],
       "coverage_criterion": "Normal path",
       "priority": "high",
       "source_req_ids": [
-        "The system shall filter incoming requests using authorization filters."
+        "The system shall create a list of users with the given input array."
       ]
     },
     {
       "tr_id": "SWAGGE-FUNC-002",
       "preconditions": [
-        "System is running",
-        "Authorization filters are configured"
+        "System is initialized"
       ],
       "stimuli": [
-        "Incoming request with invalid credentials"
+        "Empty input array"
       ],
       "expected_outputs": [
-        "Request is rejected with error message"
+        "Error message: Input array cannot be empty"
       ],
       "coverage_criterion": "Boundary condition",
       "priority": "medium",
       "source_req_ids": [
-        "The system shall filter incoming requests using authorization filters."
+        "The system shall create a list of users with the given input array."
       ]
     },
     {
       "tr_id": "SWAGGE-FUNC-003",
       "preconditions": [
-        "System is running",
-        "Authorization filters are not configured"
+        "System is initialized"
       ],
       "stimuli": [
-        "Incoming request with valid credentials"
+        "Invalid input array (e.g. null or undefined)"
       ],
       "expected_outputs": [
-        "Error message indicating missing configuration"
+        "Error message: Invalid input array"
       ],
       "coverage_criterion": "Negative path",
       "priority": "low",
       "source_req_ids": [
-        "The system shall filter incoming requests using authorization filters."
+        "The system shall create a list of users with the given input array."
       ]
     },
     {
       "tr_id": "SWAGGE-FUNC-004",
       "preconditions": [
-        "System is running",
-        "Server is available"
+        "System is initialized",
+        "Pets exist in the database"
       ],
       "stimuli": [
-        "Valid image file"
+        "Valid status (e.g. 'available')"
       ],
       "expected_outputs": [
-        "Image is uploaded successfully"
+        "List of pets with matching status"
       ],
       "coverage_criterion": "Normal path",
       "priority": "high",
       "source_req_ids": [
-        "The system shall upload an image to the server."
+        "The system shall find pets by status."
       ]
     },
     {
       "tr_id": "SWAGGE-FUNC-005",
       "preconditions": [
-        "System is running",
-        "Server is available"
+        "System is initialized"
       ],
       "stimuli": [
-        "Image file larger than maximum allowed size"
+        "Invalid status (e.g. 'invalid_status')"
       ],
       "expected_outputs": [
-        "Error message indicating size limit exceeded"
+        "Error message: Invalid status"
       ],
       "coverage_criterion": "Boundary condition",
       "priority": "medium",
       "source_req_ids": [
-        "The system shall upload an image to the server."
+        "The system shall find pets by status."
       ]
     },
     {
       "tr_id": "SWAGGE-FUNC-006",
       "preconditions": [
-        "System is running",
-        "Server is available"
+        "System is initialized"
       ],
       "stimuli": [
-        "Invalid image file"
+        "No status provided"
       ],
       "expected_outputs": [
-        "Error message indicating invalid format"
+        "Error message: Status cannot be empty"
       ],
       "coverage_criterion": "Negative path",
       "priority": "low",
       "source_req_ids": [
-        "The system shall upload an image to the server."
+        "The system shall find pets by status."
       ]
     },
     {
       "tr_id": "SWAGGE-FUNC-007",
       "preconditions": [
-        "System is running",
-        "Store is available"
+        "System is initialized",
+        "Pets exist in the database"
       ],
       "stimuli": [
-        "Valid pet information"
+        "Valid tag (e.g. 'tag1')"
       ],
       "expected_outputs": [
-        "Pet is added successfully"
+        "List of pets with matching tag"
       ],
       "coverage_criterion": "Normal path",
       "priority": "high",
       "source_req_ids": [
-        "The system shall add a new pet to the store with provided information."
+        "The system shall find pets by tags."
       ]
     },
     {
       "tr_id": "SWAGGE-FUNC-008",
       "preconditions": [
-        "System is running",
-        "Store is available"
+        "System is initialized"
       ],
       "stimuli": [
-        "Duplicate pet information"
+        "Invalid tag (e.g. 'invalid_tag')"
       ],
       "expected_outputs": [
-        "Error message indicating duplicate entry"
+        "Error message: Invalid tag"
       ],
       "coverage_criterion": "Boundary condition",
       "priority": "medium",
       "source_req_ids": [
-        "The system shall add a new pet to the store with provided information."
+        "The system shall find pets by tags."
       ]
     },
     {
       "tr_id": "SWAGGE-FUNC-009",
       "preconditions": [
-        "System is running",
-        "Store is available"
+        "System is initialized"
       ],
       "stimuli": [
-        "Invalid pet information"
+        "No tag provided"
       ],
       "expected_outputs": [
-        "Error message indicating invalid format"
+        "Error message: Tag cannot be empty"
       ],
       "coverage_criterion": "Negative path",
       "priority": "low",
       "source_req_ids": [
-        "The system shall add a new pet to the store with provided information."
+        "The system shall find pets by tags."
       ]
     },
     {
       "tr_id": "SWAGGE-FUNC-010",
       "preconditions": [
-        "System is running",
-        "Store is available",
-        "Pet exists in store"
+        "System is initialized",
+        "Pet exists in the database"
       ],
       "stimuli": [
-        "Valid update information"
+        "Valid ID (e.g. '123')"
       ],
       "expected_outputs": [
-        "Pet is updated successfully"
+        "Pet with matching ID"
       ],
       "coverage_criterion": "Normal path",
       "priority": "high",
       "source_req_ids": [
-        "The system shall update an existing pet in the store with new information."
+        "The system shall find a pet by ID."
       ]
     },
     {
       "tr_id": "SWAGGE-FUNC-011",
       "preconditions": [
-        "System is running",
-        "Store is available",
-        "Pet exists in store"
+        "System is initialized"
       ],
       "stimuli": [
-        "Invalid update information"
+        "Invalid ID (e.g. 'invalid_id')"
       ],
       "expected_outputs": [
-        "Error message indicating invalid format"
+        "Error message: Invalid ID"
       ],
-      "coverage_criterion": "Negative path",
-      "priority": "low",
+      "coverage_criterion": "Boundary condition",
+      "priority": "medium",
       "source_req_ids": [
-        "The system shall update an existing pet in the store with new information."
+        "The system shall find a pet by ID."
       ]
     },
     {
       "tr_id": "SWAGGE-FUNC-012",
       "preconditions": [
-        "System is running",
-        "Store is available"
+        "System is initialized"
       ],
       "stimuli": [
-        "Valid status"
+        "No ID provided"
       ],
       "expected_outputs": [
-        "Pets are returned successfully"
+        "Error message: ID cannot be empty"
       ],
-      "coverage_criterion": "Normal path",
-      "priority": "high",
+      "coverage_criterion": "Negative path",
+      "priority": "low",
       "source_req_ids": [
-        "The system shall find and return pets by their status."
+        "The system shall find a pet by ID."
       ]
     },
     {
       "tr_id": "SWAGGE-FUNC-013",
       "preconditions": [
-        "System is running",
-        "Store is available"
+        "System is initialized",
+        "Pet exists in the database"
       ],
       "stimuli": [
-        "Invalid status"
+        "Valid form data (e.g. name, status)"
       ],
       "expected_outputs": [
-        "Error message indicating invalid format"
+        "Pet updated successfully"
       ],
-      "coverage_criterion": "Negative path",
-      "priority": "low",
+      "coverage_criterion": "Normal path",
+      "priority": "high",
       "source_req_ids": [
-        "The system shall find and return pets by their status."
+        "The system shall update a pet in the store with form data."
       ]
     },
     {
       "tr_id": "SWAGGE-FUNC-014",
       "preconditions": [
-        "System is running",
-        "Store is available"
+        "System is initialized"
       ],
       "stimuli": [
-        "Valid tag"
+        "Invalid form data (e.g. missing required fields)"
       ],
       "expected_outputs": [
-        "Pets are returned successfully"
+        "Error message: Invalid form data"
       ],
-      "coverage_criterion": "Normal path",
-      "priority": "high",
+      "coverage_criterion": "Boundary condition",
+      "priority": "medium",
       "source_req_ids": [
-        "The system shall find and return pets by their tags."
+        "The system shall update a pet in the store with form data."
       ]
     },
     {
       "tr_id": "SWAGGE-FUNC-015",
       "preconditions": [
-        "System is running",
-        "Store is available"
+        "System is initialized"
       ],
       "stimuli": [
-        "Invalid tag"
+        "No form data provided"
       ],
       "expected_outputs": [
-        "Error message indicating invalid format"
+        "Error message: Form data cannot be empty"
       ],
       "coverage_criterion": "Negative path",
       "priority": "low",
       "source_req_ids": [
-        "The system shall find and return pets by their tags."
+        "The system shall update a pet in the store with form data."
       ]
     },
     {
-      "tr_id": "SWAGGE-NFR_-016",
+      "tr_id": "SWAGGE-FUNC-016",
       "preconditions": [
-        "Valid API endpoint",
-        "Multiple status values"
+        "System is initialized",
+        "Pet exists in the database"
       ],
       "stimuli": [
-        "API request with multiple status values"
+        "Valid ID (e.g. '123')"
       ],
       "expected_outputs": [
-        "HTTP 200 OK",
-        "Valid response payload"
+        "Pet deleted successfully"
       ],
-      "coverage_criterion": "Constraint coverage",
+      "coverage_criterion": "Normal path",
       "priority": "high",
       "source_req_ids": [
-        "Multiple status values can be provided with comma separated strings"
+        "The system shall delete a pet."
       ]
     },
     {
-      "tr_id": "SWAGGE-NFR_-017",
+      "tr_id": "SWAGGE-FUNC-017",
       "preconditions": [
-        "Valid API endpoint",
-        "Multiple tags"
+        "System is initialized"
       ],
       "stimuli": [
-        "API request with multiple tags"
+        "Invalid ID (e.g. 'invalid_id')"
       ],
       "expected_outputs": [
-        "HTTP 200 OK",
-        "Valid response payload"
+        "Error message: Invalid ID"
       ],
-      "coverage_criterion": "Constraint coverage",
-      "priority": "high",
-      "source_req_ids": [
-        "Multiple tags can be provided with comma separated strings"
-      ]
-    },
-    {
-      "tr_id": "SWAGGE-NFR_-018",
-      "preconditions": [
-        "Valid API endpoint",
-        "Invalid ID"
-      ],
-      "stimuli": [
-        "API request with invalid ID"
-      ],
-      "expected_outputs": [
-        "HTTP 404 Not Found"
-      ],
-      "coverage_criterion": "Constraint coverage",
+      "coverage_criterion": "Boundary condition",
       "priority": "medium",
       "source_req_ids": [
-        "Invalid ID supplied"
+        "The system shall delete a pet."
       ]
     },
     {
-      "tr_id": "SWAGGE-NFR_-019",
+      "tr_id": "SWAGGE-FUNC-018",
       "preconditions": [
-        "Valid API endpoint",
-        "Invalid input"
+        "System is initialized"
       ],
       "stimuli": [
-        "API request with invalid input"
+        "No ID provided"
       ],
       "expected_outputs": [
-        "HTTP 400 Bad Request"
+        "Error message: ID cannot be empty"
       ],
-      "coverage_criterion": "Constraint coverage",
-      "priority": "medium",
+      "coverage_criterion": "Negative path",
+      "priority": "low",
       "source_req_ids": [
-        "Invalid input"
+        "The system shall delete a pet."
       ]
     },
     {
-      "tr_id": "SWAGGE-NFR_-020",
+      "tr_id": "SWAGGE-FUNC-019",
       "preconditions": [
-        "Valid API endpoint",
-        "Integer ID between 1 and 10"
+        "System is initialized",
+        "Purchase order exists in the database"
       ],
       "stimuli": [
-        "API request with integer ID between 1 and 10"
+        "Valid ID (e.g. '123')"
       ],
       "expected_outputs": [
-        "HTTP 200 OK",
-        "Valid response payload"
+        "Purchase order deleted successfully"
       ],
-      "coverage_criterion": "Constraint coverage",
+      "coverage_criterion": "Normal path",
       "priority": "high",
       "source_req_ids": [
-        "integer IDs with value >= 1 and <= 10"
+        "The system shall delete a purchase order."
       ]
     },
     {
-      "tr_id": "SWAGGE-NFR_-021",
+      "tr_id": "SWAGGE-FUNC-020",
       "preconditions": [
-        "Valid API endpoint",
-        "Positive integer ID"
+        "System is initialized"
       ],
       "stimuli": [
-        "API request with positive integer ID"
+        "Invalid ID (e.g. 'invalid_id')"
       ],
       "expected_outputs": [
-        "HTTP 200 OK",
-        "Valid response payload"
+        "Error message: Invalid ID"
       ],
-      "coverage_criterion": "Constraint coverage",
-      "priority": "high",
-      "source_req_ids": [
-        "integer IDs with positive integer value"
-      ]
-    },
-    {
-      "tr_id": "SWAGGE-NFR_-022",
-      "preconditions": [
-        "Valid API endpoint",
-        "Logged in user"
-      ],
-      "stimuli": [
-        "API request from logged in user"
-      ],
-      "expected_outputs": [
-        "HTTP 200 OK",
-        "Valid response payload"
-      ],
-      "coverage_criterion": "Constraint coverage",
-      "priority": "high",
-      "source_req_ids": [
-        "logged in user only"
-      ]
-    },
-    {
-      "tr_id": "SWAGGE-NFR_-023",
-      "preconditions": [
-        "Valid API endpoint",
-        "Non-integer ID"
-      ],
-      "stimuli": [
-        "API request with non-integer ID"
-      ],
-      "expected_outputs": [
-        "HTTP 400 Bad Request"
-      ],
-      "coverage_criterion": "Constraint coverage",
+      "coverage_criterion": "Boundary condition",
       "priority": "medium",
       "source_req_ids": [
-        "id is integer"
+        "The system shall delete a purchase order."
       ]
     },
     {
-      "tr_id": "SWAGGE-NFR_-024",
+      "tr_id": "SWAGGE-FUNC-021",
       "preconditions": [
-        "Valid API endpoint",
-        "Multiple status values without comma separation"
+        "System is initialized"
       ],
       "stimuli": [
-        "API request with multiple status values without comma separation"
+        "No ID provided"
       ],
       "expected_outputs": [
-        "HTTP 400 Bad Request"
+        "Error message: ID cannot be empty"
       ],
-      "coverage_criterion": "Constraint coverage",
+      "coverage_criterion": "Negative path",
+      "priority": "low",
+      "source_req_ids": [
+        "The system shall delete a purchase order."
+      ]
+    },
+    {
+      "tr_id": "SWAGGE-FUNC-022",
+      "preconditions": [
+        "System is initialized"
+      ],
+      "stimuli": [
+        "Valid username and password (e.g. 'john', 'password123')"
+      ],
+      "expected_outputs": [
+        "User authenticated successfully"
+      ],
+      "coverage_criterion": "Normal path",
+      "priority": "high",
+      "source_req_ids": [
+        "The system shall authenticate the user."
+      ]
+    },
+    {
+      "tr_id": "SWAGGE-FUNC-023",
+      "preconditions": [
+        "System is initialized"
+      ],
+      "stimuli": [
+        "Invalid username or password (e.g. 'invalid_user', 'wrong_password')"
+      ],
+      "expected_outputs": [
+        "Error message: Invalid username or password"
+      ],
+      "coverage_criterion": "Boundary condition",
       "priority": "medium",
       "source_req_ids": [
-        "Multiple status values can be provided with comma separated strings"
+        "The system shall authenticate the user."
+      ]
+    },
+    {
+      "tr_id": "SWAGGE-FUNC-024",
+      "preconditions": [
+        "System is initialized"
+      ],
+      "stimuli": [
+        "No username or password provided"
+      ],
+      "expected_outputs": [
+        "Error message: Username and password cannot be empty"
+      ],
+      "coverage_criterion": "Negative path",
+      "priority": "low",
+      "source_req_ids": [
+        "The system shall authenticate the user."
       ]
     },
     {
       "tr_id": "SWAGGE-NFR_-025",
       "preconditions": [
-        "Valid API endpoint",
-        "Multiple tags without comma separation"
+        "User is logged in"
       ],
       "stimuli": [
-        "API request with multiple tags without comma separation"
+        "GET /pets?status=available,sold"
       ],
       "expected_outputs": [
-        "HTTP 400 Bad Request"
+        "List of pets with available and sold status"
       ],
-      "coverage_criterion": "Constraint coverage",
+      "coverage_criterion": "Multiple status values",
+      "priority": "medium",
+      "source_req_ids": [
+        "Multiple status values can be provided with comma separated strings"
+      ]
+    },
+    {
+      "tr_id": "SWAGGE-NFR_-026",
+      "preconditions": [
+        "User is logged in"
+      ],
+      "stimuli": [
+        "GET /pets?tags=dog,cat"
+      ],
+      "expected_outputs": [
+        "List of pets with dog and cat tags"
+      ],
+      "coverage_criterion": "Multiple tags",
       "priority": "medium",
       "source_req_ids": [
         "Multiple tags can be provided with comma separated strings"
       ]
     },
     {
-      "tr_id": "SWAGGE-NFR_-026",
-      "preconditions": [
-        "Valid API endpoint",
-        "ID outside the range of 1 to 10"
-      ],
-      "stimuli": [
-        "API request with ID outside the range of 1 to 10"
-      ],
-      "expected_outputs": [
-        "HTTP 400 Bad Request"
-      ],
-      "coverage_criterion": "Constraint coverage",
-      "priority": "medium",
-      "source_req_ids": [
-        "integer IDs with value >= 1 and <= 10"
-      ]
-    },
-    {
       "tr_id": "SWAGGE-NFR_-027",
       "preconditions": [
-        "Valid API endpoint",
-        "Non-positive integer ID"
-      ],
-      "stimuli": [
-        "API request with non-positive integer ID"
-      ],
-      "expected_outputs": [
-        "HTTP 400 Bad Request"
-      ],
-      "coverage_criterion": "Constraint coverage",
-      "priority": "medium",
-      "source_req_ids": [
-        "integer IDs with positive integer value"
-      ]
-    },
-    {
-      "tr_id": "SWAGGE-RUNT-028",
-      "preconditions": [
-        "System is running",
         "User is logged in"
       ],
       "stimuli": [
-        "Invalid ID input"
+        "GET /pets/abc"
       ],
       "expected_outputs": [
-        "Error message indicating invalid ID"
+        "404 error response"
       ],
-      "coverage_criterion": "Invalid ID handling",
+      "coverage_criterion": "Invalid ID",
       "priority": "high",
       "source_req_ids": [
         "Invalid ID supplied"
       ]
     },
     {
-      "tr_id": "SWAGGE-RUNT-029",
+      "tr_id": "SWAGGE-NFR_-028",
       "preconditions": [
-        "System is running",
         "User is logged in"
       ],
       "stimuli": [
-        "Invalid input data"
+        "GET /pets/5"
       ],
       "expected_outputs": [
-        "Validation error message"
+        "Pet with ID 5"
       ],
-      "coverage_criterion": "Input validation",
-      "priority": "high",
-      "source_req_ids": [
-        "Invalid input"
-      ]
-    },
-    {
-      "tr_id": "SWAGGE-RUNT-030",
-      "preconditions": [
-        "System is running",
-        "User is logged in"
-      ],
-      "stimuli": [
-        "Valid integer ID within range"
-      ],
-      "expected_outputs": [
-        "Successful response"
-      ],
-      "coverage_criterion": "ID validation",
+      "coverage_criterion": "Integer IDs with value >= 1 and <= 10",
       "priority": "medium",
       "source_req_ids": [
         "integer IDs with value >= 1 and <= 10"
       ]
     },
     {
-      "tr_id": "SWAGGE-RUNT-031",
+      "tr_id": "SWAGGE-NFR_-029",
       "preconditions": [
-        "System is running",
         "User is logged in"
       ],
       "stimuli": [
-        "Valid positive integer ID"
+        "GET /pets/15"
       ],
       "expected_outputs": [
-        "Successful response"
+        "Pet with ID 15"
       ],
-      "coverage_criterion": "ID validation",
+      "coverage_criterion": "Integer IDs with positive integer value",
       "priority": "medium",
       "source_req_ids": [
         "integer IDs with positive integer value"
       ]
     },
     {
-      "tr_id": "SWAGGE-RUNT-032",
+      "tr_id": "SWAGGE-NFR_-030",
       "preconditions": [
-        "System is running",
-        "User has valid credentials"
+        "User is not logged in"
       ],
       "stimuli": [
-        "Valid login request"
+        "GET /pets"
       ],
       "expected_outputs": [
-        "Successful authentication response"
+        "401 error response"
       ],
-      "coverage_criterion": "Authentication",
+      "coverage_criterion": "Logged in user only",
       "priority": "high",
       "source_req_ids": [
         "logged in user only"
+      ]
+    },
+    {
+      "tr_id": "SWAGGE-NFR_-031",
+      "preconditions": [
+        "User is logged in"
+      ],
+      "stimuli": [
+        "GET /pets/abc"
+      ],
+      "expected_outputs": [
+        "400 error response"
+      ],
+      "coverage_criterion": "id is integer",
+      "priority": "high",
+      "source_req_ids": [
+        "id is integer"
+      ]
+    },
+    {
+      "tr_id": "SWAGGE-NFR_-032",
+      "preconditions": [
+        "User is logged in"
+      ],
+      "stimuli": [
+        "POST /pets with petId=abc"
+      ],
+      "expected_outputs": [
+        "400 error response"
+      ],
+      "coverage_criterion": "petId is integer",
+      "priority": "high",
+      "source_req_ids": [
+        "petId is integer"
       ]
     },
     {
@@ -650,15 +623,15 @@
         "User is logged in"
       ],
       "stimuli": [
-        "Invalid status value input"
+        "Invalid ID input"
       ],
       "expected_outputs": [
-        "Validation error message"
+        "Error response with status code 400"
       ],
-      "coverage_criterion": "Status validation",
-      "priority": "medium",
+      "coverage_criterion": "Runtime constraint",
+      "priority": "high",
       "source_req_ids": [
-        "Invalid status value"
+        "Invalid ID supplied"
       ]
     },
     {
@@ -668,15 +641,15 @@
         "User is logged in"
       ],
       "stimuli": [
-        "Pet ID input"
+        "Valid ID input within range"
       ],
       "expected_outputs": [
-        "Successful response or error message if not an integer"
+        "Successful response with status code 200"
       ],
-      "coverage_criterion": "Pet ID validation",
+      "coverage_criterion": "Runtime constraint",
       "priority": "medium",
       "source_req_ids": [
-        "petId is integer"
+        "integer IDs with value >= 1 and <= 10"
       ]
     },
     {
@@ -686,119 +659,172 @@
         "User is logged in"
       ],
       "stimuli": [
-        "Quantity input"
+        "Valid ID input with positive integer value"
       ],
       "expected_outputs": [
-        "Successful response or error message if not an integer"
+        "Successful response with status code 200"
       ],
-      "coverage_criterion": "Quantity validation",
+      "coverage_criterion": "Runtime constraint",
       "priority": "medium",
       "source_req_ids": [
-        "quantity is integer"
+        "integer IDs with positive integer value"
       ]
     },
     {
       "tr_id": "SWAGGE-RUNT-036",
       "preconditions": [
         "System is running",
-        "User is logged in"
+        "User has valid credentials"
       ],
       "stimuli": [
-        "Non-existent pet ID input"
+        "Valid login credentials input"
       ],
       "expected_outputs": [
-        "Error message indicating pet not found"
+        "Successful authentication and authorization response"
       ],
-      "coverage_criterion": "Pet existence check",
+      "coverage_criterion": "Runtime constraint",
       "priority": "high",
       "source_req_ids": [
-        "Pet not found"
+        "logged in user only"
       ]
     },
     {
       "tr_id": "SWAGGE-RUNT-037",
       "preconditions": [
-        "System is running"
-      ],
-      "stimuli": [
-        "Invalid username input"
-      ],
-      "expected_outputs": [
-        "Error message indicating user not found"
-      ],
-      "coverage_criterion": "Username validation",
-      "priority": "high",
-      "source_req_ids": [
-        "Invalid username supplied"
-      ]
-    },
-    {
-      "tr_id": "SWAGGE-INTE-038",
-      "preconditions": [
-        "User is logged in",
-        "Pet data is valid"
-      ],
-      "stimuli": [
-        "POST /pet with valid pet data"
-      ],
-      "expected_outputs": [
-        "201 Created response code",
-        "New pet resource created"
-      ],
-      "coverage_criterion": "Interface interaction",
-      "priority": "high",
-      "source_req_ids": [
-        "Add a new pet to the store"
-      ]
-    },
-    {
-      "tr_id": "SWAGGE-INTE-039",
-      "preconditions": [
+        "System is running",
         "User is logged in"
       ],
       "stimuli": [
-        "POST /pet with invalid pet data"
+        "Invalid input data"
       ],
       "expected_outputs": [
-        "400 Bad Request response code",
-        "Validation error message"
+        "Validation error response with status code 400"
       ],
-      "coverage_criterion": "Exception handling",
+      "coverage_criterion": "Exception condition",
       "priority": "high",
       "source_req_ids": [
         "Invalid input"
       ]
     },
     {
-      "tr_id": "SWAGGE-INTE-040",
+      "tr_id": "SWAGGE-RUNT-038",
       "preconditions": [
-        "User is logged in",
-        "Pet exists with given ID"
-      ],
-      "stimuli": [
-        "GET /pet/{id} with valid ID"
-      ],
-      "expected_outputs": [
-        "200 OK response code",
-        "Pet resource returned"
-      ],
-      "coverage_criterion": "Interface interaction",
-      "priority": "medium",
-      "source_req_ids": [
-        "Find a pet by ID"
-      ]
-    },
-    {
-      "tr_id": "SWAGGE-INTE-041",
-      "preconditions": [
+        "System is running",
         "User is logged in"
       ],
       "stimuli": [
-        "GET /pet/{id} with invalid ID"
+        "Non-integer pet ID input"
       ],
       "expected_outputs": [
-        "404 Not Found response code",
-        "Not found error message"
+        "Error response with status code 400"
+      ],
+      "coverage_criterion": "Runtime constraint",
+      "priority": "medium",
+      "source_req_ids": [
+        "petId is integer"
+      ]
+    },
+    {
+      "tr_id": "SWAGGE-RUNT-039",
+      "preconditions": [
+        "System is running",
+        "User is logged in"
+      ],
+      "stimuli": [
+        "Non-integer quantity input"
+      ],
+      "expected_outputs": [
+        "Error response with status code 400"
+      ],
+      "coverage_criterion": "Runtime constraint",
+      "priority": "medium",
+      "source_req_ids": [
+        "quantity is integer"
+      ]
+    },
+    {
+      "tr_id": "SWAGGE-RUNT-040",
+      "preconditions": [
+        "System is running",
+        "User is logged in"
+      ],
+      "stimuli": [
+        "Pet ID input that does not exist"
+      ],
+      "expected_outputs": [
+        "Error response with status code 404"
+      ],
+      "coverage_criterion": "Exception condition",
+      "priority": "medium",
+      "source_req_ids": [
+        "Pet not found"
+      ]
+    },
+    {
+      "tr_id": "SWAGGE-RUNT-041",
+      "preconditions": [
+        "System is running",
+        "User is logged in"
+      ],
+      "stimuli": [
+        "Invalid status input data"
+      ],
+      "expected_outputs": [
+        "Validation error response with status code 400"
+      ],
+      "coverage_criterion": "Exception condition",
+      "priority": "medium",
+      "source_req_ids": [
+        "Invalid status value"
+      ]
+    },
+    {
+      "tr_id": "SWAGGE-RUNT-042",
+      "preconditions": [
+        "System is running",
+        "User is logged in"
+      ],
+      "stimuli": [
+        "Invalid tag input data"
+      ],
+      "expected_outputs": [
+        "Validation error response with status code 400"
+      ],
+      "coverage_criterion": "Exception condition",
+      "priority": "medium",
+      "source_req_ids": [
+        "Invalid tag value"
+      ]
+    },
+    {
+      "tr_id": "SWAGGE-INTE-043",
+      "preconditions": [
+        "User is authenticated"
+      ],
+      "stimuli": [
+        "POST /pet with valid pet data"
+      ],
+      "expected_outputs": [
+        "201 Created",
+        "Pet ID in response body"
+      ],
+      "coverage_criterion": "Interface interaction",
+      "priority": "high",
+      "source_req_ids": [
+        "Create a new pet in the store"
+      ]
+    },
+    {
+      "tr_id": "SWAGGE-INTE-044",
+      "preconditions": [
+        "User is authenticated"
+      ],
+      "stimuli": [
+        "GET /pet/{invalid_id}"
+      ],
+      "expected_outputs": [
+        "404 Not Found",
+        "Error message in response body"
       ],
       "coverage_criterion": "Exception handling",
       "priority": "medium",
@@ -807,289 +833,327 @@
       ]
     },
     {
-      "tr_id": "SWAGGE-INTE-042",
-      "preconditions": [
-        "User is logged in",
-        "Pet exists with given ID"
-      ],
-      "stimuli": [
-        "PUT /pet/{id} with valid updated pet data"
-      ],
-      "expected_outputs": [
-        "200 OK response code",
-        "Updated pet resource returned"
-      ],
-      "coverage_criterion": "Interface interaction",
-      "priority": "medium",
-      "source_req_ids": [
-        "Update an existing pet"
-      ]
-    },
-    {
-      "tr_id": "SWAGGE-INTE-043",
-      "preconditions": [
-        "User is logged in"
-      ],
-      "stimuli": [
-        "PUT /pet/{id} with invalid updated pet data"
-      ],
-      "expected_outputs": [
-        "400 Bad Request response code",
-        "Validation error message"
-      ],
-      "coverage_criterion": "Exception handling",
-      "priority": "medium",
-      "source_req_ids": [
-        "Validation exception"
-      ]
-    },
-    {
-      "tr_id": "SWAGGE-INTE-044",
-      "preconditions": [
-        "User is logged in",
-        "Pet exists with given ID"
-      ],
-      "stimuli": [
-        "POST /order with valid order data"
-      ],
-      "expected_outputs": [
-        "201 Created response code",
-        "New order resource created"
-      ],
-      "coverage_criterion": "Interface interaction",
-      "priority": "medium",
-      "source_req_ids": [
-        "Place an order for a pet"
-      ]
-    },
-    {
       "tr_id": "SWAGGE-INTE-045",
       "preconditions": [
-        "User is logged in",
-        "Order exists with given ID"
+        "User is authenticated",
+        "Pet exists in store"
       ],
       "stimuli": [
-        "GET /order/{id} with valid ID"
+        "GET /pet/{valid_id}"
       ],
       "expected_outputs": [
-        "200 OK response code",
-        "Order resource returned"
+        "200 OK",
+        "Pet data in response body"
       ],
       "coverage_criterion": "Interface interaction",
-      "priority": "low",
+      "priority": "high",
       "source_req_ids": [
-        "Find purchase order by ID"
+        "Find a pet by ID"
       ]
     },
     {
       "tr_id": "SWAGGE-INTE-046",
       "preconditions": [
-        "User is logged in",
-        "Pet exists with given ID"
+        "User is authenticated"
       ],
       "stimuli": [
-        "DELETE /pet/{id} with valid ID"
+        "POST /pet with invalid data"
       ],
       "expected_outputs": [
-        "200 OK response code",
-        "Pet resource deleted"
+        "400 Bad Request",
+        "Error message in response body"
       ],
-      "coverage_criterion": "Interface interaction",
-      "priority": "low",
+      "coverage_criterion": "Exception handling",
+      "priority": "medium",
       "source_req_ids": [
-        "Delete a pet"
+        "Invalid input"
       ]
     },
     {
       "tr_id": "SWAGGE-INTE-047",
       "preconditions": [
-        "User is logged in"
+        "User is authenticated",
+        "Pet exists in store"
       ],
       "stimuli": [
-        "POST /pet with invalid status value"
+        "PUT /pet/{valid_id} with valid data"
       ],
       "expected_outputs": [
-        "400 Bad Request response code",
-        "Validation error message"
+        "200 OK",
+        "Updated pet data in response body"
       ],
-      "coverage_criterion": "Exception handling",
-      "priority": "low",
+      "coverage_criterion": "Interface interaction",
+      "priority": "high",
       "source_req_ids": [
-        "Invalid status value"
+        "Update an existing pet in the store"
       ]
     },
     {
       "tr_id": "SWAGGE-INTE-048",
       "preconditions": [
-        "User is logged in"
+        "User is authenticated"
       ],
       "stimuli": [
-        "POST /pet with invalid tag value"
+        "GET /pet/{non_existent_id}"
       ],
       "expected_outputs": [
-        "400 Bad Request response code",
-        "Validation error message"
+        "404 Not Found",
+        "Error message in response body"
       ],
       "coverage_criterion": "Exception handling",
-      "priority": "low",
+      "priority": "medium",
       "source_req_ids": [
-        "Invalid tag value"
+        "Pet not found"
       ]
     },
     {
       "tr_id": "SWAGGE-INTE-049",
       "preconditions": [
-        "User credentials are valid"
+        "User is authenticated",
+        "Pet exists in store"
       ],
       "stimuli": [
-        "POST /login with valid user credentials"
+        "DELETE /pet/{valid_id}"
       ],
       "expected_outputs": [
-        "200 OK response code",
-        "Valid session ID returned"
+        "200 OK",
+        "Deletion confirmation in response body"
       ],
       "coverage_criterion": "Interface interaction",
       "priority": "high",
       "source_req_ids": [
-        "Logs user into the system"
+        "Delete a pet from the store"
       ]
     },
     {
-      "tr_id": "SWAGGE-CONS-050",
+      "tr_id": "SWAGGE-INTE-050",
       "preconditions": [
-        "Multiple status values are available"
+        "User is authenticated"
       ],
       "stimuli": [
-        "Provide multiple status values with comma separated strings"
+        "POST /pet with invalid status value"
       ],
       "expected_outputs": [
-        "Pets matching all status values are returned"
+        "400 Bad Request",
+        "Error message in response body"
       ],
-      "coverage_criterion": "Combinatorial coverage",
+      "coverage_criterion": "Exception handling",
+      "priority": "medium",
+      "source_req_ids": [
+        "Invalid status value"
+      ]
+    },
+    {
+      "tr_id": "SWAGGE-INTE-051",
+      "preconditions": [
+        "User is authenticated",
+        "Pet exists in store"
+      ],
+      "stimuli": [
+        "POST /store/order with valid data"
+      ],
+      "expected_outputs": [
+        "200 OK",
+        "Order ID in response body"
+      ],
+      "coverage_criterion": "Interface interaction",
+      "priority": "high",
+      "source_req_ids": [
+        "Place an order for a pet"
+      ]
+    },
+    {
+      "tr_id": "SWAGGE-INTE-052",
+      "preconditions": [
+        "User is authenticated"
+      ],
+      "stimuli": [
+        "POST /pet with invalid tag value"
+      ],
+      "expected_outputs": [
+        "400 Bad Request",
+        "Error message in response body"
+      ],
+      "coverage_criterion": "Exception handling",
+      "priority": "medium",
+      "source_req_ids": [
+        "Invalid tag value"
+      ]
+    },
+    {
+      "tr_id": "SWAGGE-INTE-053",
+      "preconditions": [
+        "User is authenticated",
+        "Order exists in store"
+      ],
+      "stimuli": [
+        "GET /store/order/{valid_id}"
+      ],
+      "expected_outputs": [
+        "200 OK",
+        "Order data in response body"
+      ],
+      "coverage_criterion": "Interface interaction",
+      "priority": "high",
+      "source_req_ids": [
+        "Find purchase order by ID"
+      ]
+    },
+    {
+      "tr_id": "SWAGGE-INTE-054",
+      "preconditions": [
+        "User is authenticated"
+      ],
+      "stimuli": [
+        "GET /user/{invalid_username}"
+      ],
+      "expected_outputs": [
+        "404 Not Found",
+        "Error message in response body"
+      ],
+      "coverage_criterion": "Exception handling",
+      "priority": "medium",
+      "source_req_ids": [
+        "Invalid username supplied"
+      ]
+    },
+    {
+      "tr_id": "SWAGGE-CONS-055",
+      "preconditions": [
+        "Multiple status values are provided as comma-separated strings"
+      ],
+      "stimuli": [
+        "Search for pets by multiple statuses"
+      ],
+      "expected_outputs": [
+        "A list of pets with only one status value is returned"
+      ],
+      "coverage_criterion": "Status filtering",
       "priority": "high",
       "source_req_ids": [
         "[FR-1]"
       ]
     },
     {
-      "tr_id": "SWAGGE-CONS-051",
+      "tr_id": "SWAGGE-CONS-056",
       "preconditions": [
-        "User is logged in",
-        "Pet is available"
+        "A valid pet is selected",
+        "Order details are provided"
       ],
       "stimuli": [
-        "Submit order request with valid data"
+        "Place an order for a pet"
       ],
       "expected_outputs": [
-        "Order is successfully placed"
+        "A new order record is created"
       ],
-      "coverage_criterion": "State transition coverage",
+      "coverage_criterion": "Order creation",
       "priority": "high",
       "source_req_ids": [
         "[UC-1]"
       ]
     },
     {
-      "tr_id": "SWAGGE-CONS-052",
+      "tr_id": "SWAGGE-CONS-057",
       "preconditions": [
-        "Invalid username is provided"
+        "Invalid data is provided"
       ],
       "stimuli": [
-        "Submit login request with invalid username"
+        "Submit invalid data"
       ],
       "expected_outputs": [
-        "Error message indicating invalid username is returned"
+        "A validation exception is raised"
       ],
-      "coverage_criterion": "Error guessing",
-      "priority": "medium",
+      "coverage_criterion": "Validation",
+      "priority": "high",
       "source_req_ids": [
         "[EX-1]"
       ]
     },
     {
-      "tr_id": "SWAGGE-CONS-053",
+      "tr_id": "SWAGGE-CONS-058",
       "preconditions": [
-        "Pet exists in the store",
-        "Required form data is available"
+        "A valid pet is selected",
+        "Updated form data is provided"
       ],
       "stimuli": [
-        "Submit update request with valid form data"
+        "Update a pet in the store with form data"
       ],
       "expected_outputs": [
-        "Pet is successfully updated"
+        "All form data fields are updated"
       ],
-      "coverage_criterion": "Decision table coverage",
+      "coverage_criterion": "Pet updating",
       "priority": "medium",
       "source_req_ids": [
         "[FR-2]"
       ]
     },
     {
-      "tr_id": "SWAGGE-CONS-054",
+      "tr_id": "SWAGGE-CONS-059",
       "preconditions": [
-        "Pet inventory data is available"
+        "A valid pet is selected"
       ],
       "stimuli": [
-        "Submit request for pet inventories by status"
+        "Delete a pet"
       ],
       "expected_outputs": [
-        "Pet inventories matching the status are returned within 5 seconds"
+        "The pet record is removed within 1 second"
       ],
-      "coverage_criterion": "Performance coverage",
-      "priority": "low",
+      "coverage_criterion": "Pet deletion",
+      "priority": "medium",
       "source_req_ids": [
         "[FR-3]"
       ]
     },
     {
-      "tr_id": "SWAGGE-CONS-055",
+      "tr_id": "SWAGGE-CONS-060",
       "preconditions": [
-        "Order exists in the system"
+        "A valid username is provided"
       ],
       "stimuli": [
-        "Submit request for purchase order by ID"
+        "Get a user by username"
       ],
       "expected_outputs": [
-        "Purchase order matching the ID is returned"
+        "The user record is returned within 500ms"
       ],
-      "coverage_criterion": "State transition coverage",
-      "priority": "high",
+      "coverage_criterion": "User retrieval",
+      "priority": "medium",
       "source_req_ids": [
-        "[UC-2]"
+        "[FR-4]"
       ]
     },
     {
-      "tr_id": "SWAGGE-CONS-056",
+      "tr_id": "SWAGGE-CONS-061",
       "preconditions": [
-        "User account exists"
+        "A valid user is selected",
+        "Updated user data is provided"
       ],
       "stimuli": [
-        "Submit login request with valid credentials"
+        "Update an existing user"
       ],
       "expected_outputs": [
-        "User is successfully logged in"
+        "All user fields are updated within 2 seconds"
       ],
-      "coverage_criterion": "State transition coverage",
-      "priority": "high",
+      "coverage_criterion": "User updating",
+      "priority": "medium",
       "source_req_ids": [
-        "[UC-3]"
+        "[FR-5]"
       ]
     },
     {
-      "tr_id": "SWAGGE-CONS-057",
+      "tr_id": "SWAGGE-CONS-062",
       "preconditions": [
-        "User is logged in"
+        "A valid order ID is provided"
       ],
       "stimuli": [
-        "Submit logout request"
+        "Delete a purchase order by ID"
       ],
       "expected_outputs": [
-        "User session is successfully terminated"
+        "The order record is removed within 1 second"
       ],
-      "coverage_criterion": "State transition coverage",
-      "priority": "high",
+      "coverage_criterion": "Order deletion",
+      "priority": "medium",
       "source_req_ids": [
-        "[UC-4]"
+        "[FR-6]"
       ]
     }
   ],
@@ -1098,429 +1162,651 @@
       "tr_id": "SWAGGE-FUNC-001",
       "category": "functional",
       "source_id": "swagger_petstore",
-      "tr_h": "When a request is received, the system shall filter it using authorization filters.",
+      "tr_h": "When a valid input array is provided, the system shall create a list of users.",
       "tr_a": {
         "tr_id": "SWAGGE-FUNC-001",
         "preconditions": [
-          "System is running",
-          "Authorization filters are configured"
+          "System is initialized",
+          "Input array is not empty"
         ],
         "stimuli": [
-          "Incoming request with valid credentials"
+          "Valid input array"
         ],
         "expected_outputs": [
-          "Request is processed successfully"
+          "List of users created successfully"
         ],
         "coverage_criterion": "Normal path",
         "priority": "high",
         "source_req_ids": [
-          "The system shall filter incoming requests using authorization filters."
+          "The system shall create a list of users with the given input array."
         ]
       },
       "source_req_ids": [
-        "The system shall filter incoming requests using authorization filters."
+        "The system shall create a list of users with the given input array."
       ]
     },
     {
       "tr_id": "SWAGGE-FUNC-002",
       "category": "functional",
       "source_id": "swagger_petstore",
-      "tr_h": "When a request is received, the system shall not process it if authorization filters fail.",
+      "tr_h": "When an empty input array is provided, the system shall not create a list of users.",
       "tr_a": {
         "tr_id": "SWAGGE-FUNC-002",
         "preconditions": [
-          "System is running",
-          "Authorization filters are configured"
+          "System is initialized"
         ],
         "stimuli": [
-          "Incoming request with invalid credentials"
+          "Empty input array"
         ],
         "expected_outputs": [
-          "Request is rejected with error message"
+          "Error message: Input array cannot be empty"
         ],
         "coverage_criterion": "Boundary condition",
         "priority": "medium",
         "source_req_ids": [
-          "The system shall filter incoming requests using authorization filters."
+          "The system shall create a list of users with the given input array."
         ]
       },
       "source_req_ids": [
-        "The system shall filter incoming requests using authorization filters."
+        "The system shall create a list of users with the given input array."
       ]
     },
     {
       "tr_id": "SWAGGE-FUNC-003",
       "category": "functional",
       "source_id": "swagger_petstore",
-      "tr_h": "When a request is received, the system shall return an error if authorization filters are not configured.",
+      "tr_h": "When an invalid input array is provided, the system shall not create a list of users.",
       "tr_a": {
         "tr_id": "SWAGGE-FUNC-003",
         "preconditions": [
-          "System is running",
-          "Authorization filters are not configured"
+          "System is initialized"
         ],
         "stimuli": [
-          "Incoming request with valid credentials"
+          "Invalid input array (e.g. null or undefined)"
         ],
         "expected_outputs": [
-          "Error message indicating missing configuration"
+          "Error message: Invalid input array"
         ],
         "coverage_criterion": "Negative path",
         "priority": "low",
         "source_req_ids": [
-          "The system shall filter incoming requests using authorization filters."
+          "The system shall create a list of users with the given input array."
         ]
       },
       "source_req_ids": [
-        "The system shall filter incoming requests using authorization filters."
+        "The system shall create a list of users with the given input array."
       ]
     },
     {
       "tr_id": "SWAGGE-FUNC-004",
       "category": "functional",
       "source_id": "swagger_petstore",
-      "tr_h": "When a valid image is provided, the system shall upload it to the server.",
+      "tr_h": "When a valid status is provided, the system shall find pets by status.",
       "tr_a": {
         "tr_id": "SWAGGE-FUNC-004",
         "preconditions": [
-          "System is running",
-          "Server is available"
+          "System is initialized",
+          "Pets exist in the database"
         ],
         "stimuli": [
-          "Valid image file"
+          "Valid status (e.g. 'available')"
         ],
         "expected_outputs": [
-          "Image is uploaded successfully"
+          "List of pets with matching status"
         ],
         "coverage_criterion": "Normal path",
         "priority": "high",
         "source_req_ids": [
-          "The system shall upload an image to the server."
+          "The system shall find pets by status."
         ]
       },
       "source_req_ids": [
-        "The system shall upload an image to the server."
+        "The system shall find pets by status."
       ]
     },
     {
       "tr_id": "SWAGGE-FUNC-005",
       "category": "functional",
       "source_id": "swagger_petstore",
-      "tr_h": "When a large image is provided, the system shall not exceed the maximum allowed size.",
+      "tr_h": "When an invalid status is provided, the system shall not find pets.",
       "tr_a": {
         "tr_id": "SWAGGE-FUNC-005",
         "preconditions": [
-          "System is running",
-          "Server is available"
+          "System is initialized"
         ],
         "stimuli": [
-          "Image file larger than maximum allowed size"
+          "Invalid status (e.g. 'invalid_status')"
         ],
         "expected_outputs": [
-          "Error message indicating size limit exceeded"
+          "Error message: Invalid status"
         ],
         "coverage_criterion": "Boundary condition",
         "priority": "medium",
         "source_req_ids": [
-          "The system shall upload an image to the server."
+          "The system shall find pets by status."
         ]
       },
       "source_req_ids": [
-        "The system shall upload an image to the server."
+        "The system shall find pets by status."
       ]
     },
     {
       "tr_id": "SWAGGE-FUNC-006",
       "category": "functional",
       "source_id": "swagger_petstore",
-      "tr_h": "When an invalid image is provided, the system shall return an error.",
+      "tr_h": "When no status is provided, the system shall not find pets.",
       "tr_a": {
         "tr_id": "SWAGGE-FUNC-006",
         "preconditions": [
-          "System is running",
-          "Server is available"
+          "System is initialized"
         ],
         "stimuli": [
-          "Invalid image file"
+          "No status provided"
         ],
         "expected_outputs": [
-          "Error message indicating invalid format"
+          "Error message: Status cannot be empty"
         ],
         "coverage_criterion": "Negative path",
         "priority": "low",
         "source_req_ids": [
-          "The system shall upload an image to the server."
+          "The system shall find pets by status."
         ]
       },
       "source_req_ids": [
-        "The system shall upload an image to the server."
+        "The system shall find pets by status."
       ]
     },
     {
       "tr_id": "SWAGGE-FUNC-007",
       "category": "functional",
       "source_id": "swagger_petstore",
-      "tr_h": "When valid pet information is provided, the system shall add a new pet to the store.",
+      "tr_h": "When a valid tag is provided, the system shall find pets by tags.",
       "tr_a": {
         "tr_id": "SWAGGE-FUNC-007",
         "preconditions": [
-          "System is running",
-          "Store is available"
+          "System is initialized",
+          "Pets exist in the database"
         ],
         "stimuli": [
-          "Valid pet information"
+          "Valid tag (e.g. 'tag1')"
         ],
         "expected_outputs": [
-          "Pet is added successfully"
+          "List of pets with matching tag"
         ],
         "coverage_criterion": "Normal path",
         "priority": "high",
         "source_req_ids": [
-          "The system shall add a new pet to the store with provided information."
+          "The system shall find pets by tags."
         ]
       },
       "source_req_ids": [
-        "The system shall add a new pet to the store with provided information."
+        "The system shall find pets by tags."
       ]
     },
     {
       "tr_id": "SWAGGE-FUNC-008",
       "category": "functional",
       "source_id": "swagger_petstore",
-      "tr_h": "When duplicate pet information is provided, the system shall not add a new pet.",
+      "tr_h": "When an invalid tag is provided, the system shall not find pets.",
       "tr_a": {
         "tr_id": "SWAGGE-FUNC-008",
         "preconditions": [
-          "System is running",
-          "Store is available"
+          "System is initialized"
         ],
         "stimuli": [
-          "Duplicate pet information"
+          "Invalid tag (e.g. 'invalid_tag')"
         ],
         "expected_outputs": [
-          "Error message indicating duplicate entry"
+          "Error message: Invalid tag"
         ],
         "coverage_criterion": "Boundary condition",
         "priority": "medium",
         "source_req_ids": [
-          "The system shall add a new pet to the store with provided information."
+          "The system shall find pets by tags."
         ]
       },
       "source_req_ids": [
-        "The system shall add a new pet to the store with provided information."
+        "The system shall find pets by tags."
       ]
     },
     {
       "tr_id": "SWAGGE-FUNC-009",
       "category": "functional",
       "source_id": "swagger_petstore",
-      "tr_h": "When invalid pet information is provided, the system shall return an error.",
+      "tr_h": "When no tag is provided, the system shall not find pets.",
       "tr_a": {
         "tr_id": "SWAGGE-FUNC-009",
         "preconditions": [
-          "System is running",
-          "Store is available"
+          "System is initialized"
         ],
         "stimuli": [
-          "Invalid pet information"
+          "No tag provided"
         ],
         "expected_outputs": [
-          "Error message indicating invalid format"
+          "Error message: Tag cannot be empty"
         ],
         "coverage_criterion": "Negative path",
         "priority": "low",
         "source_req_ids": [
-          "The system shall add a new pet to the store with provided information."
+          "The system shall find pets by tags."
         ]
       },
       "source_req_ids": [
-        "The system shall add a new pet to the store with provided information."
+        "The system shall find pets by tags."
       ]
     },
     {
       "tr_id": "SWAGGE-FUNC-010",
       "category": "functional",
       "source_id": "swagger_petstore",
-      "tr_h": "When valid update information is provided, the system shall update an existing pet in the store.",
+      "tr_h": "When a valid ID is provided, the system shall find a pet by ID.",
       "tr_a": {
         "tr_id": "SWAGGE-FUNC-010",
         "preconditions": [
-          "System is running",
-          "Store is available",
-          "Pet exists in store"
+          "System is initialized",
+          "Pet exists in the database"
         ],
         "stimuli": [
-          "Valid update information"
+          "Valid ID (e.g. '123')"
         ],
         "expected_outputs": [
-          "Pet is updated successfully"
+          "Pet with matching ID"
         ],
         "coverage_criterion": "Normal path",
         "priority": "high",
         "source_req_ids": [
-          "The system shall update an existing pet in the store with new information."
+          "The system shall find a pet by ID."
         ]
       },
       "source_req_ids": [
-        "The system shall update an existing pet in the store with new information."
+        "The system shall find a pet by ID."
       ]
     },
     {
       "tr_id": "SWAGGE-FUNC-011",
       "category": "functional",
       "source_id": "swagger_petstore",
-      "tr_h": "When invalid update information is provided, the system shall return an error.",
+      "tr_h": "When an invalid ID is provided, the system shall not find a pet.",
       "tr_a": {
         "tr_id": "SWAGGE-FUNC-011",
         "preconditions": [
-          "System is running",
-          "Store is available",
-          "Pet exists in store"
+          "System is initialized"
         ],
         "stimuli": [
-          "Invalid update information"
+          "Invalid ID (e.g. 'invalid_id')"
         ],
         "expected_outputs": [
-          "Error message indicating invalid format"
+          "Error message: Invalid ID"
         ],
-        "coverage_criterion": "Negative path",
-        "priority": "low",
+        "coverage_criterion": "Boundary condition",
+        "priority": "medium",
         "source_req_ids": [
-          "The system shall update an existing pet in the store with new information."
+          "The system shall find a pet by ID."
         ]
       },
       "source_req_ids": [
-        "The system shall update an existing pet in the store with new information."
+        "The system shall find a pet by ID."
       ]
     },
     {
       "tr_id": "SWAGGE-FUNC-012",
       "category": "functional",
       "source_id": "swagger_petstore",
-      "tr_h": "When a valid status is provided, the system shall find and return pets by their status.",
+      "tr_h": "When no ID is provided, the system shall not find a pet.",
       "tr_a": {
         "tr_id": "SWAGGE-FUNC-012",
         "preconditions": [
-          "System is running",
-          "Store is available"
+          "System is initialized"
         ],
         "stimuli": [
-          "Valid status"
+          "No ID provided"
         ],
         "expected_outputs": [
-          "Pets are returned successfully"
+          "Error message: ID cannot be empty"
         ],
-        "coverage_criterion": "Normal path",
-        "priority": "high",
+        "coverage_criterion": "Negative path",
+        "priority": "low",
         "source_req_ids": [
-          "The system shall find and return pets by their status."
+          "The system shall find a pet by ID."
         ]
       },
       "source_req_ids": [
-        "The system shall find and return pets by their status."
+        "The system shall find a pet by ID."
       ]
     },
     {
       "tr_id": "SWAGGE-FUNC-013",
       "category": "functional",
       "source_id": "swagger_petstore",
-      "tr_h": "When an invalid status is provided, the system shall return an error.",
+      "tr_h": "When valid form data is provided, the system shall update a pet in the store.",
       "tr_a": {
         "tr_id": "SWAGGE-FUNC-013",
         "preconditions": [
-          "System is running",
-          "Store is available"
+          "System is initialized",
+          "Pet exists in the database"
         ],
         "stimuli": [
-          "Invalid status"
+          "Valid form data (e.g. name, status)"
         ],
         "expected_outputs": [
-          "Error message indicating invalid format"
+          "Pet updated successfully"
         ],
-        "coverage_criterion": "Negative path",
-        "priority": "low",
+        "coverage_criterion": "Normal path",
+        "priority": "high",
         "source_req_ids": [
-          "The system shall find and return pets by their status."
+          "The system shall update a pet in the store with form data."
         ]
       },
       "source_req_ids": [
-        "The system shall find and return pets by their status."
+        "The system shall update a pet in the store with form data."
       ]
     },
     {
       "tr_id": "SWAGGE-FUNC-014",
       "category": "functional",
       "source_id": "swagger_petstore",
-      "tr_h": "When a valid tag is provided, the system shall find and return pets by their tags.",
+      "tr_h": "When invalid form data is provided, the system shall not update a pet.",
       "tr_a": {
         "tr_id": "SWAGGE-FUNC-014",
         "preconditions": [
-          "System is running",
-          "Store is available"
+          "System is initialized"
         ],
         "stimuli": [
-          "Valid tag"
+          "Invalid form data (e.g. missing required fields)"
         ],
         "expected_outputs": [
-          "Pets are returned successfully"
+          "Error message: Invalid form data"
         ],
-        "coverage_criterion": "Normal path",
-        "priority": "high",
+        "coverage_criterion": "Boundary condition",
+        "priority": "medium",
         "source_req_ids": [
-          "The system shall find and return pets by their tags."
+          "The system shall update a pet in the store with form data."
         ]
       },
       "source_req_ids": [
-        "The system shall find and return pets by their tags."
+        "The system shall update a pet in the store with form data."
       ]
     },
     {
       "tr_id": "SWAGGE-FUNC-015",
       "category": "functional",
       "source_id": "swagger_petstore",
-      "tr_h": "When an invalid tag is provided, the system shall return an error.",
+      "tr_h": "When no form data is provided, the system shall not update a pet.",
       "tr_a": {
         "tr_id": "SWAGGE-FUNC-015",
         "preconditions": [
-          "System is running",
-          "Store is available"
+          "System is initialized"
         ],
         "stimuli": [
-          "Invalid tag"
+          "No form data provided"
         ],
         "expected_outputs": [
-          "Error message indicating invalid format"
+          "Error message: Form data cannot be empty"
         ],
         "coverage_criterion": "Negative path",
         "priority": "low",
         "source_req_ids": [
-          "The system shall find and return pets by their tags."
+          "The system shall update a pet in the store with form data."
         ]
       },
       "source_req_ids": [
-        "The system shall find and return pets by their tags."
+        "The system shall update a pet in the store with form data."
       ]
     },
     {
-      "tr_id": "SWAGGE-NFR_-016",
-      "category": "nfr_constraint",
+      "tr_id": "SWAGGE-FUNC-016",
+      "category": "functional",
       "source_id": "swagger_petstore",
-      "tr_h": "When multiple status values are provided with comma separated strings, the system shall return a valid response within 200ms.",
+      "tr_h": "When a valid ID is provided, the system shall delete a pet.",
       "tr_a": {
-        "tr_id": "SWAGGE-NFR_-016",
+        "tr_id": "SWAGGE-FUNC-016",
         "preconditions": [
-          "Valid API endpoint",
-          "Multiple status values"
+          "System is initialized",
+          "Pet exists in the database"
         ],
         "stimuli": [
-          "API request with multiple status values"
+          "Valid ID (e.g. '123')"
         ],
         "expected_outputs": [
-          "HTTP 200 OK",
-          "Valid response payload"
+          "Pet deleted successfully"
         ],
-        "coverage_criterion": "Constraint coverage",
+        "coverage_criterion": "Normal path",
         "priority": "high",
+        "source_req_ids": [
+          "The system shall delete a pet."
+        ]
+      },
+      "source_req_ids": [
+        "The system shall delete a pet."
+      ]
+    },
+    {
+      "tr_id": "SWAGGE-FUNC-017",
+      "category": "functional",
+      "source_id": "swagger_petstore",
+      "tr_h": "When an invalid ID is provided, the system shall not delete a pet.",
+      "tr_a": {
+        "tr_id": "SWAGGE-FUNC-017",
+        "preconditions": [
+          "System is initialized"
+        ],
+        "stimuli": [
+          "Invalid ID (e.g. 'invalid_id')"
+        ],
+        "expected_outputs": [
+          "Error message: Invalid ID"
+        ],
+        "coverage_criterion": "Boundary condition",
+        "priority": "medium",
+        "source_req_ids": [
+          "The system shall delete a pet."
+        ]
+      },
+      "source_req_ids": [
+        "The system shall delete a pet."
+      ]
+    },
+    {
+      "tr_id": "SWAGGE-FUNC-018",
+      "category": "functional",
+      "source_id": "swagger_petstore",
+      "tr_h": "When no ID is provided, the system shall not delete a pet.",
+      "tr_a": {
+        "tr_id": "SWAGGE-FUNC-018",
+        "preconditions": [
+          "System is initialized"
+        ],
+        "stimuli": [
+          "No ID provided"
+        ],
+        "expected_outputs": [
+          "Error message: ID cannot be empty"
+        ],
+        "coverage_criterion": "Negative path",
+        "priority": "low",
+        "source_req_ids": [
+          "The system shall delete a pet."
+        ]
+      },
+      "source_req_ids": [
+        "The system shall delete a pet."
+      ]
+    },
+    {
+      "tr_id": "SWAGGE-FUNC-019",
+      "category": "functional",
+      "source_id": "swagger_petstore",
+      "tr_h": "When a valid ID is provided, the system shall delete a purchase order.",
+      "tr_a": {
+        "tr_id": "SWAGGE-FUNC-019",
+        "preconditions": [
+          "System is initialized",
+          "Purchase order exists in the database"
+        ],
+        "stimuli": [
+          "Valid ID (e.g. '123')"
+        ],
+        "expected_outputs": [
+          "Purchase order deleted successfully"
+        ],
+        "coverage_criterion": "Normal path",
+        "priority": "high",
+        "source_req_ids": [
+          "The system shall delete a purchase order."
+        ]
+      },
+      "source_req_ids": [
+        "The system shall delete a purchase order."
+      ]
+    },
+    {
+      "tr_id": "SWAGGE-FUNC-020",
+      "category": "functional",
+      "source_id": "swagger_petstore",
+      "tr_h": "When an invalid ID is provided, the system shall not delete a purchase order.",
+      "tr_a": {
+        "tr_id": "SWAGGE-FUNC-020",
+        "preconditions": [
+          "System is initialized"
+        ],
+        "stimuli": [
+          "Invalid ID (e.g. 'invalid_id')"
+        ],
+        "expected_outputs": [
+          "Error message: Invalid ID"
+        ],
+        "coverage_criterion": "Boundary condition",
+        "priority": "medium",
+        "source_req_ids": [
+          "The system shall delete a purchase order."
+        ]
+      },
+      "source_req_ids": [
+        "The system shall delete a purchase order."
+      ]
+    },
+    {
+      "tr_id": "SWAGGE-FUNC-021",
+      "category": "functional",
+      "source_id": "swagger_petstore",
+      "tr_h": "When no ID is provided, the system shall not delete a purchase order.",
+      "tr_a": {
+        "tr_id": "SWAGGE-FUNC-021",
+        "preconditions": [
+          "System is initialized"
+        ],
+        "stimuli": [
+          "No ID provided"
+        ],
+        "expected_outputs": [
+          "Error message: ID cannot be empty"
+        ],
+        "coverage_criterion": "Negative path",
+        "priority": "low",
+        "source_req_ids": [
+          "The system shall delete a purchase order."
+        ]
+      },
+      "source_req_ids": [
+        "The system shall delete a purchase order."
+      ]
+    },
+    {
+      "tr_id": "SWAGGE-FUNC-022",
+      "category": "functional",
+      "source_id": "swagger_petstore",
+      "tr_h": "When valid user credentials are provided, the system shall authenticate the user.",
+      "tr_a": {
+        "tr_id": "SWAGGE-FUNC-022",
+        "preconditions": [
+          "System is initialized"
+        ],
+        "stimuli": [
+          "Valid username and password (e.g. 'john', 'password123')"
+        ],
+        "expected_outputs": [
+          "User authenticated successfully"
+        ],
+        "coverage_criterion": "Normal path",
+        "priority": "high",
+        "source_req_ids": [
+          "The system shall authenticate the user."
+        ]
+      },
+      "source_req_ids": [
+        "The system shall authenticate the user."
+      ]
+    },
+    {
+      "tr_id": "SWAGGE-FUNC-023",
+      "category": "functional",
+      "source_id": "swagger_petstore",
+      "tr_h": "When invalid user credentials are provided, the system shall not authenticate the user.",
+      "tr_a": {
+        "tr_id": "SWAGGE-FUNC-023",
+        "preconditions": [
+          "System is initialized"
+        ],
+        "stimuli": [
+          "Invalid username or password (e.g. 'invalid_user', 'wrong_password')"
+        ],
+        "expected_outputs": [
+          "Error message: Invalid username or password"
+        ],
+        "coverage_criterion": "Boundary condition",
+        "priority": "medium",
+        "source_req_ids": [
+          "The system shall authenticate the user."
+        ]
+      },
+      "source_req_ids": [
+        "The system shall authenticate the user."
+      ]
+    },
+    {
+      "tr_id": "SWAGGE-FUNC-024",
+      "category": "functional",
+      "source_id": "swagger_petstore",
+      "tr_h": "When no user credentials are provided, the system shall not authenticate the user.",
+      "tr_a": {
+        "tr_id": "SWAGGE-FUNC-024",
+        "preconditions": [
+          "System is initialized"
+        ],
+        "stimuli": [
+          "No username or password provided"
+        ],
+        "expected_outputs": [
+          "Error message: Username and password cannot be empty"
+        ],
+        "coverage_criterion": "Negative path",
+        "priority": "low",
+        "source_req_ids": [
+          "The system shall authenticate the user."
+        ]
+      },
+      "source_req_ids": [
+        "The system shall authenticate the user."
+      ]
+    },
+    {
+      "tr_id": "SWAGGE-NFR_-025",
+      "category": "nfr_constraint",
+      "source_id": "swagger_petstore",
+      "tr_h": "When multiple status values are provided with comma separated strings, the system shall return a list of pets within 200ms.",
+      "tr_a": {
+        "tr_id": "SWAGGE-NFR_-025",
+        "preconditions": [
+          "User is logged in"
+        ],
+        "stimuli": [
+          "GET /pets?status=available,sold"
+        ],
+        "expected_outputs": [
+          "List of pets with available and sold status"
+        ],
+        "coverage_criterion": "Multiple status values",
+        "priority": "medium",
         "source_req_ids": [
           "Multiple status values can be provided with comma separated strings"
         ]
@@ -1530,25 +1816,23 @@
       ]
     },
     {
-      "tr_id": "SWAGGE-NFR_-017",
+      "tr_id": "SWAGGE-NFR_-026",
       "category": "nfr_constraint",
       "source_id": "swagger_petstore",
-      "tr_h": "When multiple tags are provided with comma separated strings, the system shall return a valid response within 200ms.",
+      "tr_h": "When multiple tags are provided with comma separated strings, the system shall return a list of pets within 200ms.",
       "tr_a": {
-        "tr_id": "SWAGGE-NFR_-017",
+        "tr_id": "SWAGGE-NFR_-026",
         "preconditions": [
-          "Valid API endpoint",
-          "Multiple tags"
+          "User is logged in"
         ],
         "stimuli": [
-          "API request with multiple tags"
+          "GET /pets?tags=dog,cat"
         ],
         "expected_outputs": [
-          "HTTP 200 OK",
-          "Valid response payload"
+          "List of pets with dog and cat tags"
         ],
-        "coverage_criterion": "Constraint coverage",
-        "priority": "high",
+        "coverage_criterion": "Multiple tags",
+        "priority": "medium",
         "source_req_ids": [
           "Multiple tags can be provided with comma separated strings"
         ]
@@ -1558,24 +1842,23 @@
       ]
     },
     {
-      "tr_id": "SWAGGE-NFR_-018",
+      "tr_id": "SWAGGE-NFR_-027",
       "category": "nfr_constraint",
       "source_id": "swagger_petstore",
       "tr_h": "When an invalid ID is supplied, the system shall return a 404 error within 100ms.",
       "tr_a": {
-        "tr_id": "SWAGGE-NFR_-018",
+        "tr_id": "SWAGGE-NFR_-027",
         "preconditions": [
-          "Valid API endpoint",
-          "Invalid ID"
+          "User is logged in"
         ],
         "stimuli": [
-          "API request with invalid ID"
+          "GET /pets/abc"
         ],
         "expected_outputs": [
-          "HTTP 404 Not Found"
+          "404 error response"
         ],
-        "coverage_criterion": "Constraint coverage",
-        "priority": "medium",
+        "coverage_criterion": "Invalid ID",
+        "priority": "high",
         "source_req_ids": [
           "Invalid ID supplied"
         ]
@@ -1585,52 +1868,23 @@
       ]
     },
     {
-      "tr_id": "SWAGGE-NFR_-019",
+      "tr_id": "SWAGGE-NFR_-028",
       "category": "nfr_constraint",
       "source_id": "swagger_petstore",
-      "tr_h": "When an invalid input is provided, the system shall return a 400 error within 100ms.",
+      "tr_h": "When an integer ID with value >= 1 and <= 10 is provided, the system shall return a pet within 200ms.",
       "tr_a": {
-        "tr_id": "SWAGGE-NFR_-019",
+        "tr_id": "SWAGGE-NFR_-028",
         "preconditions": [
-          "Valid API endpoint",
-          "Invalid input"
+          "User is logged in"
         ],
         "stimuli": [
-          "API request with invalid input"
+          "GET /pets/5"
         ],
         "expected_outputs": [
-          "HTTP 400 Bad Request"
+          "Pet with ID 5"
         ],
-        "coverage_criterion": "Constraint coverage",
+        "coverage_criterion": "Integer IDs with value >= 1 and <= 10",
         "priority": "medium",
-        "source_req_ids": [
-          "Invalid input"
-        ]
-      },
-      "source_req_ids": [
-        "Invalid input"
-      ]
-    },
-    {
-      "tr_id": "SWAGGE-NFR_-020",
-      "category": "nfr_constraint",
-      "source_id": "swagger_petstore",
-      "tr_h": "When an integer ID with value >= 1 and <= 10 is provided, the system shall return a valid response within 200ms.",
-      "tr_a": {
-        "tr_id": "SWAGGE-NFR_-020",
-        "preconditions": [
-          "Valid API endpoint",
-          "Integer ID between 1 and 10"
-        ],
-        "stimuli": [
-          "API request with integer ID between 1 and 10"
-        ],
-        "expected_outputs": [
-          "HTTP 200 OK",
-          "Valid response payload"
-        ],
-        "coverage_criterion": "Constraint coverage",
-        "priority": "high",
         "source_req_ids": [
           "integer IDs with value >= 1 and <= 10"
         ]
@@ -1640,25 +1894,23 @@
       ]
     },
     {
-      "tr_id": "SWAGGE-NFR_-021",
+      "tr_id": "SWAGGE-NFR_-029",
       "category": "nfr_constraint",
       "source_id": "swagger_petstore",
-      "tr_h": "When an integer ID with positive integer value is provided, the system shall return a valid response within 200ms.",
+      "tr_h": "When an integer ID with positive integer value is provided, the system shall return a pet within 200ms.",
       "tr_a": {
-        "tr_id": "SWAGGE-NFR_-021",
+        "tr_id": "SWAGGE-NFR_-029",
         "preconditions": [
-          "Valid API endpoint",
-          "Positive integer ID"
+          "User is logged in"
         ],
         "stimuli": [
-          "API request with positive integer ID"
+          "GET /pets/15"
         ],
         "expected_outputs": [
-          "HTTP 200 OK",
-          "Valid response payload"
+          "Pet with ID 15"
         ],
-        "coverage_criterion": "Constraint coverage",
-        "priority": "high",
+        "coverage_criterion": "Integer IDs with positive integer value",
+        "priority": "medium",
         "source_req_ids": [
           "integer IDs with positive integer value"
         ]
@@ -1668,24 +1920,22 @@
       ]
     },
     {
-      "tr_id": "SWAGGE-NFR_-022",
+      "tr_id": "SWAGGE-NFR_-030",
       "category": "nfr_constraint",
       "source_id": "swagger_petstore",
-      "tr_h": "When a logged in user makes a request, the system shall return a valid response within 200ms.",
+      "tr_h": "When a request is made without logging in, the system shall return a 401 error within 100ms.",
       "tr_a": {
-        "tr_id": "SWAGGE-NFR_-022",
+        "tr_id": "SWAGGE-NFR_-030",
         "preconditions": [
-          "Valid API endpoint",
-          "Logged in user"
+          "User is not logged in"
         ],
         "stimuli": [
-          "API request from logged in user"
+          "GET /pets"
         ],
         "expected_outputs": [
-          "HTTP 200 OK",
-          "Valid response payload"
+          "401 error response"
         ],
-        "coverage_criterion": "Constraint coverage",
+        "coverage_criterion": "Logged in user only",
         "priority": "high",
         "source_req_ids": [
           "logged in user only"
@@ -1696,24 +1946,23 @@
       ]
     },
     {
-      "tr_id": "SWAGGE-NFR_-023",
+      "tr_id": "SWAGGE-NFR_-031",
       "category": "nfr_constraint",
       "source_id": "swagger_petstore",
       "tr_h": "When a non-integer ID is provided, the system shall return a 400 error within 100ms.",
       "tr_a": {
-        "tr_id": "SWAGGE-NFR_-023",
+        "tr_id": "SWAGGE-NFR_-031",
         "preconditions": [
-          "Valid API endpoint",
-          "Non-integer ID"
+          "User is logged in"
         ],
         "stimuli": [
-          "API request with non-integer ID"
+          "GET /pets/abc"
         ],
         "expected_outputs": [
-          "HTTP 400 Bad Request"
+          "400 error response"
         ],
-        "coverage_criterion": "Constraint coverage",
-        "priority": "medium",
+        "coverage_criterion": "id is integer",
+        "priority": "high",
         "source_req_ids": [
           "id is integer"
         ]
@@ -1723,120 +1972,38 @@
       ]
     },
     {
-      "tr_id": "SWAGGE-NFR_-024",
+      "tr_id": "SWAGGE-NFR_-032",
       "category": "nfr_constraint",
       "source_id": "swagger_petstore",
-      "tr_h": "When multiple status values are provided without comma separation, the system shall return a 400 error within 100ms.",
+      "tr_h": "When a non-integer petId is provided, the system shall return a 400 error within 100ms.",
       "tr_a": {
-        "tr_id": "SWAGGE-NFR_-024",
+        "tr_id": "SWAGGE-NFR_-032",
         "preconditions": [
-          "Valid API endpoint",
-          "Multiple status values without comma separation"
+          "User is logged in"
         ],
         "stimuli": [
-          "API request with multiple status values without comma separation"
+          "POST /pets with petId=abc"
         ],
         "expected_outputs": [
-          "HTTP 400 Bad Request"
+          "400 error response"
         ],
-        "coverage_criterion": "Constraint coverage",
-        "priority": "medium",
+        "coverage_criterion": "petId is integer",
+        "priority": "high",
         "source_req_ids": [
-          "Multiple status values can be provided with comma separated strings"
+          "petId is integer"
         ]
       },
       "source_req_ids": [
-        "Multiple status values can be provided with comma separated strings"
+        "petId is integer"
       ]
     },
     {
-      "tr_id": "SWAGGE-NFR_-025",
-      "category": "nfr_constraint",
-      "source_id": "swagger_petstore",
-      "tr_h": "When multiple tags are provided without comma separation, the system shall return a 400 error within 100ms.",
-      "tr_a": {
-        "tr_id": "SWAGGE-NFR_-025",
-        "preconditions": [
-          "Valid API endpoint",
-          "Multiple tags without comma separation"
-        ],
-        "stimuli": [
-          "API request with multiple tags without comma separation"
-        ],
-        "expected_outputs": [
-          "HTTP 400 Bad Request"
-        ],
-        "coverage_criterion": "Constraint coverage",
-        "priority": "medium",
-        "source_req_ids": [
-          "Multiple tags can be provided with comma separated strings"
-        ]
-      },
-      "source_req_ids": [
-        "Multiple tags can be provided with comma separated strings"
-      ]
-    },
-    {
-      "tr_id": "SWAGGE-NFR_-026",
-      "category": "nfr_constraint",
-      "source_id": "swagger_petstore",
-      "tr_h": "When an ID outside the range of 1 to 10 is provided, the system shall return a 400 error within 100ms.",
-      "tr_a": {
-        "tr_id": "SWAGGE-NFR_-026",
-        "preconditions": [
-          "Valid API endpoint",
-          "ID outside the range of 1 to 10"
-        ],
-        "stimuli": [
-          "API request with ID outside the range of 1 to 10"
-        ],
-        "expected_outputs": [
-          "HTTP 400 Bad Request"
-        ],
-        "coverage_criterion": "Constraint coverage",
-        "priority": "medium",
-        "source_req_ids": [
-          "integer IDs with value >= 1 and <= 10"
-        ]
-      },
-      "source_req_ids": [
-        "integer IDs with value >= 1 and <= 10"
-      ]
-    },
-    {
-      "tr_id": "SWAGGE-NFR_-027",
-      "category": "nfr_constraint",
-      "source_id": "swagger_petstore",
-      "tr_h": "When a non-positive integer ID is provided, the system shall return a 400 error within 100ms.",
-      "tr_a": {
-        "tr_id": "SWAGGE-NFR_-027",
-        "preconditions": [
-          "Valid API endpoint",
-          "Non-positive integer ID"
-        ],
-        "stimuli": [
-          "API request with non-positive integer ID"
-        ],
-        "expected_outputs": [
-          "HTTP 400 Bad Request"
-        ],
-        "coverage_criterion": "Constraint coverage",
-        "priority": "medium",
-        "source_req_ids": [
-          "integer IDs with positive integer value"
-        ]
-      },
-      "source_req_ids": [
-        "integer IDs with positive integer value"
-      ]
-    },
-    {
-      "tr_id": "SWAGGE-RUNT-028",
+      "tr_id": "SWAGGE-RUNT-033",
       "category": "runtime_environment",
       "source_id": "swagger_petstore",
       "tr_h": "When an invalid ID is supplied, the system shall return an error response.",
       "tr_a": {
-        "tr_id": "SWAGGE-RUNT-028",
+        "tr_id": "SWAGGE-RUNT-033",
         "preconditions": [
           "System is running",
           "User is logged in"
@@ -1845,9 +2012,9 @@
           "Invalid ID input"
         ],
         "expected_outputs": [
-          "Error message indicating invalid ID"
+          "Error response with status code 400"
         ],
-        "coverage_criterion": "Invalid ID handling",
+        "coverage_criterion": "Runtime constraint",
         "priority": "high",
         "source_req_ids": [
           "Invalid ID supplied"
@@ -1858,50 +2025,23 @@
       ]
     },
     {
-      "tr_id": "SWAGGE-RUNT-029",
+      "tr_id": "SWAGGE-RUNT-034",
       "category": "runtime_environment",
       "source_id": "swagger_petstore",
-      "tr_h": "When an invalid input is provided, the system shall return a validation error response.",
+      "tr_h": "When an integer ID with value >= 1 and <= 10 is supplied, the system shall process the request successfully.",
       "tr_a": {
-        "tr_id": "SWAGGE-RUNT-029",
+        "tr_id": "SWAGGE-RUNT-034",
         "preconditions": [
           "System is running",
           "User is logged in"
         ],
         "stimuli": [
-          "Invalid input data"
+          "Valid ID input within range"
         ],
         "expected_outputs": [
-          "Validation error message"
+          "Successful response with status code 200"
         ],
-        "coverage_criterion": "Input validation",
-        "priority": "high",
-        "source_req_ids": [
-          "Invalid input"
-        ]
-      },
-      "source_req_ids": [
-        "Invalid input"
-      ]
-    },
-    {
-      "tr_id": "SWAGGE-RUNT-030",
-      "category": "runtime_environment",
-      "source_id": "swagger_petstore",
-      "tr_h": "When an integer ID with value >= 1 and <= 10 is provided, the system shall process the request successfully.",
-      "tr_a": {
-        "tr_id": "SWAGGE-RUNT-030",
-        "preconditions": [
-          "System is running",
-          "User is logged in"
-        ],
-        "stimuli": [
-          "Valid integer ID within range"
-        ],
-        "expected_outputs": [
-          "Successful response"
-        ],
-        "coverage_criterion": "ID validation",
+        "coverage_criterion": "Runtime constraint",
         "priority": "medium",
         "source_req_ids": [
           "integer IDs with value >= 1 and <= 10"
@@ -1912,23 +2052,23 @@
       ]
     },
     {
-      "tr_id": "SWAGGE-RUNT-031",
+      "tr_id": "SWAGGE-RUNT-035",
       "category": "runtime_environment",
       "source_id": "swagger_petstore",
-      "tr_h": "When a positive integer ID is provided, the system shall process the request successfully.",
+      "tr_h": "When an integer ID with positive integer value is supplied, the system shall process the request successfully.",
       "tr_a": {
-        "tr_id": "SWAGGE-RUNT-031",
+        "tr_id": "SWAGGE-RUNT-035",
         "preconditions": [
           "System is running",
           "User is logged in"
         ],
         "stimuli": [
-          "Valid positive integer ID"
+          "Valid ID input with positive integer value"
         ],
         "expected_outputs": [
-          "Successful response"
+          "Successful response with status code 200"
         ],
-        "coverage_criterion": "ID validation",
+        "coverage_criterion": "Runtime constraint",
         "priority": "medium",
         "source_req_ids": [
           "integer IDs with positive integer value"
@@ -1939,23 +2079,23 @@
       ]
     },
     {
-      "tr_id": "SWAGGE-RUNT-032",
+      "tr_id": "SWAGGE-RUNT-036",
       "category": "runtime_environment",
       "source_id": "swagger_petstore",
-      "tr_h": "When a logged-in user makes a request, the system shall authenticate the user successfully.",
+      "tr_h": "When a logged in user only makes a request, the system shall authenticate and authorize the user successfully.",
       "tr_a": {
-        "tr_id": "SWAGGE-RUNT-032",
+        "tr_id": "SWAGGE-RUNT-036",
         "preconditions": [
           "System is running",
           "User has valid credentials"
         ],
         "stimuli": [
-          "Valid login request"
+          "Valid login credentials input"
         ],
         "expected_outputs": [
-          "Successful authentication response"
+          "Successful authentication and authorization response"
         ],
-        "coverage_criterion": "Authentication",
+        "coverage_criterion": "Runtime constraint",
         "priority": "high",
         "source_req_ids": [
           "logged in user only"
@@ -1966,50 +2106,50 @@
       ]
     },
     {
-      "tr_id": "SWAGGE-RUNT-033",
+      "tr_id": "SWAGGE-RUNT-037",
       "category": "runtime_environment",
       "source_id": "swagger_petstore",
-      "tr_h": "When an invalid status value is provided, the system shall return a validation error response.",
+      "tr_h": "When an invalid input is supplied, the system shall return a validation error response.",
       "tr_a": {
-        "tr_id": "SWAGGE-RUNT-033",
+        "tr_id": "SWAGGE-RUNT-037",
         "preconditions": [
           "System is running",
           "User is logged in"
         ],
         "stimuli": [
-          "Invalid status value input"
+          "Invalid input data"
         ],
         "expected_outputs": [
-          "Validation error message"
+          "Validation error response with status code 400"
         ],
-        "coverage_criterion": "Status validation",
-        "priority": "medium",
+        "coverage_criterion": "Exception condition",
+        "priority": "high",
         "source_req_ids": [
-          "Invalid status value"
+          "Invalid input"
         ]
       },
       "source_req_ids": [
-        "Invalid status value"
+        "Invalid input"
       ]
     },
     {
-      "tr_id": "SWAGGE-RUNT-034",
+      "tr_id": "SWAGGE-RUNT-038",
       "category": "runtime_environment",
       "source_id": "swagger_petstore",
-      "tr_h": "When a pet ID is provided, the system shall verify that it is an integer.",
+      "tr_h": "When a pet ID is not an integer, the system shall return an error response.",
       "tr_a": {
-        "tr_id": "SWAGGE-RUNT-034",
+        "tr_id": "SWAGGE-RUNT-038",
         "preconditions": [
           "System is running",
           "User is logged in"
         ],
         "stimuli": [
-          "Pet ID input"
+          "Non-integer pet ID input"
         ],
         "expected_outputs": [
-          "Successful response or error message if not an integer"
+          "Error response with status code 400"
         ],
-        "coverage_criterion": "Pet ID validation",
+        "coverage_criterion": "Runtime constraint",
         "priority": "medium",
         "source_req_ids": [
           "petId is integer"
@@ -2020,23 +2160,23 @@
       ]
     },
     {
-      "tr_id": "SWAGGE-RUNT-035",
+      "tr_id": "SWAGGE-RUNT-039",
       "category": "runtime_environment",
       "source_id": "swagger_petstore",
-      "tr_h": "When a quantity value is provided, the system shall verify that it is an integer.",
+      "tr_h": "When a quantity is not an integer, the system shall return an error response.",
       "tr_a": {
-        "tr_id": "SWAGGE-RUNT-035",
+        "tr_id": "SWAGGE-RUNT-039",
         "preconditions": [
           "System is running",
           "User is logged in"
         ],
         "stimuli": [
-          "Quantity input"
+          "Non-integer quantity input"
         ],
         "expected_outputs": [
-          "Successful response or error message if not an integer"
+          "Error response with status code 400"
         ],
-        "coverage_criterion": "Quantity validation",
+        "coverage_criterion": "Runtime constraint",
         "priority": "medium",
         "source_req_ids": [
           "quantity is integer"
@@ -2047,24 +2187,24 @@
       ]
     },
     {
-      "tr_id": "SWAGGE-RUNT-036",
+      "tr_id": "SWAGGE-RUNT-040",
       "category": "runtime_environment",
       "source_id": "swagger_petstore",
-      "tr_h": "When a pet is not found, the system shall return a 'Pet not found' error response.",
+      "tr_h": "When a pet not found error occurs, the system shall return an error response.",
       "tr_a": {
-        "tr_id": "SWAGGE-RUNT-036",
+        "tr_id": "SWAGGE-RUNT-040",
         "preconditions": [
           "System is running",
           "User is logged in"
         ],
         "stimuli": [
-          "Non-existent pet ID input"
+          "Pet ID input that does not exist"
         ],
         "expected_outputs": [
-          "Error message indicating pet not found"
+          "Error response with status code 404"
         ],
-        "coverage_criterion": "Pet existence check",
-        "priority": "high",
+        "coverage_criterion": "Exception condition",
+        "priority": "medium",
         "source_req_ids": [
           "Pet not found"
         ]
@@ -2074,130 +2214,102 @@
       ]
     },
     {
-      "tr_id": "SWAGGE-RUNT-037",
+      "tr_id": "SWAGGE-RUNT-041",
       "category": "runtime_environment",
       "source_id": "swagger_petstore",
-      "tr_h": "When an invalid username is supplied, the system shall return a 'User not found' error response.",
+      "tr_h": "When an invalid status value is supplied, the system shall return a validation error response.",
       "tr_a": {
-        "tr_id": "SWAGGE-RUNT-037",
+        "tr_id": "SWAGGE-RUNT-041",
         "preconditions": [
-          "System is running"
+          "System is running",
+          "User is logged in"
         ],
         "stimuli": [
-          "Invalid username input"
+          "Invalid status input data"
         ],
         "expected_outputs": [
-          "Error message indicating user not found"
+          "Validation error response with status code 400"
         ],
-        "coverage_criterion": "Username validation",
-        "priority": "high",
+        "coverage_criterion": "Exception condition",
+        "priority": "medium",
         "source_req_ids": [
-          "Invalid username supplied"
+          "Invalid status value"
         ]
       },
       "source_req_ids": [
-        "Invalid username supplied"
+        "Invalid status value"
       ]
     },
     {
-      "tr_id": "SWAGGE-INTE-038",
+      "tr_id": "SWAGGE-RUNT-042",
+      "category": "runtime_environment",
+      "source_id": "swagger_petstore",
+      "tr_h": "When an invalid tag value is supplied, the system shall return a validation error response.",
+      "tr_a": {
+        "tr_id": "SWAGGE-RUNT-042",
+        "preconditions": [
+          "System is running",
+          "User is logged in"
+        ],
+        "stimuli": [
+          "Invalid tag input data"
+        ],
+        "expected_outputs": [
+          "Validation error response with status code 400"
+        ],
+        "coverage_criterion": "Exception condition",
+        "priority": "medium",
+        "source_req_ids": [
+          "Invalid tag value"
+        ]
+      },
+      "source_req_ids": [
+        "Invalid tag value"
+      ]
+    },
+    {
+      "tr_id": "SWAGGE-INTE-043",
       "category": "interface_exception",
       "source_id": "swagger_petstore",
-      "tr_h": "When a user attempts to add a new pet, the Petstore API shall create a new pet resource.",
+      "tr_h": "When a user requests to create a new pet, the Petstore API shall return a successful creation response.",
       "tr_a": {
-        "tr_id": "SWAGGE-INTE-038",
+        "tr_id": "SWAGGE-INTE-043",
         "preconditions": [
-          "User is logged in",
-          "Pet data is valid"
+          "User is authenticated"
         ],
         "stimuli": [
           "POST /pet with valid pet data"
         ],
         "expected_outputs": [
-          "201 Created response code",
-          "New pet resource created"
+          "201 Created",
+          "Pet ID in response body"
         ],
         "coverage_criterion": "Interface interaction",
         "priority": "high",
         "source_req_ids": [
-          "Add a new pet to the store"
+          "Create a new pet in the store"
         ]
       },
       "source_req_ids": [
-        "Add a new pet to the store"
+        "Create a new pet in the store"
       ]
     },
     {
-      "tr_id": "SWAGGE-INTE-039",
+      "tr_id": "SWAGGE-INTE-044",
       "category": "interface_exception",
       "source_id": "swagger_petstore",
-      "tr_h": "When an invalid input is provided, the Petstore API shall return a validation exception.",
+      "tr_h": "When an invalid ID is supplied, the Petstore API shall return an error response.",
       "tr_a": {
-        "tr_id": "SWAGGE-INTE-039",
+        "tr_id": "SWAGGE-INTE-044",
         "preconditions": [
-          "User is logged in"
+          "User is authenticated"
         ],
         "stimuli": [
-          "POST /pet with invalid pet data"
+          "GET /pet/{invalid_id}"
         ],
         "expected_outputs": [
-          "400 Bad Request response code",
-          "Validation error message"
-        ],
-        "coverage_criterion": "Exception handling",
-        "priority": "high",
-        "source_req_ids": [
-          "Invalid input"
-        ]
-      },
-      "source_req_ids": [
-        "Invalid input"
-      ]
-    },
-    {
-      "tr_id": "SWAGGE-INTE-040",
-      "category": "interface_exception",
-      "source_id": "swagger_petstore",
-      "tr_h": "When a user attempts to find a pet by ID, the Petstore API shall return the corresponding pet resource.",
-      "tr_a": {
-        "tr_id": "SWAGGE-INTE-040",
-        "preconditions": [
-          "User is logged in",
-          "Pet exists with given ID"
-        ],
-        "stimuli": [
-          "GET /pet/{id} with valid ID"
-        ],
-        "expected_outputs": [
-          "200 OK response code",
-          "Pet resource returned"
-        ],
-        "coverage_criterion": "Interface interaction",
-        "priority": "medium",
-        "source_req_ids": [
-          "Find a pet by ID"
-        ]
-      },
-      "source_req_ids": [
-        "Find a pet by ID"
-      ]
-    },
-    {
-      "tr_id": "SWAGGE-INTE-041",
-      "category": "interface_exception",
-      "source_id": "swagger_petstore",
-      "tr_h": "When an invalid ID is supplied, the Petstore API shall return a not found exception.",
-      "tr_a": {
-        "tr_id": "SWAGGE-INTE-041",
-        "preconditions": [
-          "User is logged in"
-        ],
-        "stimuli": [
-          "GET /pet/{id} with invalid ID"
-        ],
-        "expected_outputs": [
-          "404 Not Found response code",
-          "Not found error message"
+          "404 Not Found",
+          "Error message in response body"
         ],
         "coverage_criterion": "Exception handling",
         "priority": "medium",
@@ -2210,163 +2322,162 @@
       ]
     },
     {
-      "tr_id": "SWAGGE-INTE-042",
-      "category": "interface_exception",
-      "source_id": "swagger_petstore",
-      "tr_h": "When a user attempts to update an existing pet, the Petstore API shall update the corresponding pet resource.",
-      "tr_a": {
-        "tr_id": "SWAGGE-INTE-042",
-        "preconditions": [
-          "User is logged in",
-          "Pet exists with given ID"
-        ],
-        "stimuli": [
-          "PUT /pet/{id} with valid updated pet data"
-        ],
-        "expected_outputs": [
-          "200 OK response code",
-          "Updated pet resource returned"
-        ],
-        "coverage_criterion": "Interface interaction",
-        "priority": "medium",
-        "source_req_ids": [
-          "Update an existing pet"
-        ]
-      },
-      "source_req_ids": [
-        "Update an existing pet"
-      ]
-    },
-    {
-      "tr_id": "SWAGGE-INTE-043",
-      "category": "interface_exception",
-      "source_id": "swagger_petstore",
-      "tr_h": "When a validation exception occurs, the Petstore API shall return a validation error message.",
-      "tr_a": {
-        "tr_id": "SWAGGE-INTE-043",
-        "preconditions": [
-          "User is logged in"
-        ],
-        "stimuli": [
-          "PUT /pet/{id} with invalid updated pet data"
-        ],
-        "expected_outputs": [
-          "400 Bad Request response code",
-          "Validation error message"
-        ],
-        "coverage_criterion": "Exception handling",
-        "priority": "medium",
-        "source_req_ids": [
-          "Validation exception"
-        ]
-      },
-      "source_req_ids": [
-        "Validation exception"
-      ]
-    },
-    {
-      "tr_id": "SWAGGE-INTE-044",
-      "category": "interface_exception",
-      "source_id": "swagger_petstore",
-      "tr_h": "When a user attempts to place an order for a pet, the Petstore API shall create a new order resource.",
-      "tr_a": {
-        "tr_id": "SWAGGE-INTE-044",
-        "preconditions": [
-          "User is logged in",
-          "Pet exists with given ID"
-        ],
-        "stimuli": [
-          "POST /order with valid order data"
-        ],
-        "expected_outputs": [
-          "201 Created response code",
-          "New order resource created"
-        ],
-        "coverage_criterion": "Interface interaction",
-        "priority": "medium",
-        "source_req_ids": [
-          "Place an order for a pet"
-        ]
-      },
-      "source_req_ids": [
-        "Place an order for a pet"
-      ]
-    },
-    {
       "tr_id": "SWAGGE-INTE-045",
       "category": "interface_exception",
       "source_id": "swagger_petstore",
-      "tr_h": "When a user attempts to find a purchase order by ID, the Petstore API shall return the corresponding order resource.",
+      "tr_h": "When a user requests to find a pet by ID, the Petstore API shall return the pet data.",
       "tr_a": {
         "tr_id": "SWAGGE-INTE-045",
         "preconditions": [
-          "User is logged in",
-          "Order exists with given ID"
+          "User is authenticated",
+          "Pet exists in store"
         ],
         "stimuli": [
-          "GET /order/{id} with valid ID"
+          "GET /pet/{valid_id}"
         ],
         "expected_outputs": [
-          "200 OK response code",
-          "Order resource returned"
+          "200 OK",
+          "Pet data in response body"
         ],
         "coverage_criterion": "Interface interaction",
-        "priority": "low",
+        "priority": "high",
         "source_req_ids": [
-          "Find purchase order by ID"
+          "Find a pet by ID"
         ]
       },
       "source_req_ids": [
-        "Find purchase order by ID"
+        "Find a pet by ID"
       ]
     },
     {
       "tr_id": "SWAGGE-INTE-046",
       "category": "interface_exception",
       "source_id": "swagger_petstore",
-      "tr_h": "When a user attempts to delete a pet, the Petstore API shall delete the corresponding pet resource.",
+      "tr_h": "When invalid input is supplied, the Petstore API shall return an error response.",
       "tr_a": {
         "tr_id": "SWAGGE-INTE-046",
         "preconditions": [
-          "User is logged in",
-          "Pet exists with given ID"
+          "User is authenticated"
         ],
         "stimuli": [
-          "DELETE /pet/{id} with valid ID"
+          "POST /pet with invalid data"
         ],
         "expected_outputs": [
-          "200 OK response code",
-          "Pet resource deleted"
+          "400 Bad Request",
+          "Error message in response body"
         ],
-        "coverage_criterion": "Interface interaction",
-        "priority": "low",
+        "coverage_criterion": "Exception handling",
+        "priority": "medium",
         "source_req_ids": [
-          "Delete a pet"
+          "Invalid input"
         ]
       },
       "source_req_ids": [
-        "Delete a pet"
+        "Invalid input"
       ]
     },
     {
       "tr_id": "SWAGGE-INTE-047",
       "category": "interface_exception",
       "source_id": "swagger_petstore",
-      "tr_h": "When an invalid status value is provided, the Petstore API shall return a validation error message.",
+      "tr_h": "When a user requests to update an existing pet, the Petstore API shall return a successful update response.",
       "tr_a": {
         "tr_id": "SWAGGE-INTE-047",
         "preconditions": [
-          "User is logged in"
+          "User is authenticated",
+          "Pet exists in store"
+        ],
+        "stimuli": [
+          "PUT /pet/{valid_id} with valid data"
+        ],
+        "expected_outputs": [
+          "200 OK",
+          "Updated pet data in response body"
+        ],
+        "coverage_criterion": "Interface interaction",
+        "priority": "high",
+        "source_req_ids": [
+          "Update an existing pet in the store"
+        ]
+      },
+      "source_req_ids": [
+        "Update an existing pet in the store"
+      ]
+    },
+    {
+      "tr_id": "SWAGGE-INTE-048",
+      "category": "interface_exception",
+      "source_id": "swagger_petstore",
+      "tr_h": "When a pet is not found, the Petstore API shall return an error response.",
+      "tr_a": {
+        "tr_id": "SWAGGE-INTE-048",
+        "preconditions": [
+          "User is authenticated"
+        ],
+        "stimuli": [
+          "GET /pet/{non_existent_id}"
+        ],
+        "expected_outputs": [
+          "404 Not Found",
+          "Error message in response body"
+        ],
+        "coverage_criterion": "Exception handling",
+        "priority": "medium",
+        "source_req_ids": [
+          "Pet not found"
+        ]
+      },
+      "source_req_ids": [
+        "Pet not found"
+      ]
+    },
+    {
+      "tr_id": "SWAGGE-INTE-049",
+      "category": "interface_exception",
+      "source_id": "swagger_petstore",
+      "tr_h": "When a user requests to delete a pet, the Petstore API shall return a successful deletion response.",
+      "tr_a": {
+        "tr_id": "SWAGGE-INTE-049",
+        "preconditions": [
+          "User is authenticated",
+          "Pet exists in store"
+        ],
+        "stimuli": [
+          "DELETE /pet/{valid_id}"
+        ],
+        "expected_outputs": [
+          "200 OK",
+          "Deletion confirmation in response body"
+        ],
+        "coverage_criterion": "Interface interaction",
+        "priority": "high",
+        "source_req_ids": [
+          "Delete a pet from the store"
+        ]
+      },
+      "source_req_ids": [
+        "Delete a pet from the store"
+      ]
+    },
+    {
+      "tr_id": "SWAGGE-INTE-050",
+      "category": "interface_exception",
+      "source_id": "swagger_petstore",
+      "tr_h": "When an invalid status value is supplied, the Petstore API shall return an error response.",
+      "tr_a": {
+        "tr_id": "SWAGGE-INTE-050",
+        "preconditions": [
+          "User is authenticated"
         ],
         "stimuli": [
           "POST /pet with invalid status value"
         ],
         "expected_outputs": [
-          "400 Bad Request response code",
-          "Validation error message"
+          "400 Bad Request",
+          "Error message in response body"
         ],
         "coverage_criterion": "Exception handling",
-        "priority": "low",
+        "priority": "medium",
         "source_req_ids": [
           "Invalid status value"
         ]
@@ -2376,24 +2487,52 @@
       ]
     },
     {
-      "tr_id": "SWAGGE-INTE-048",
+      "tr_id": "SWAGGE-INTE-051",
       "category": "interface_exception",
       "source_id": "swagger_petstore",
-      "tr_h": "When an invalid tag value is provided, the Petstore API shall return a validation error message.",
+      "tr_h": "When a user requests to place an order for a pet, the Petstore API shall return a successful order creation response.",
       "tr_a": {
-        "tr_id": "SWAGGE-INTE-048",
+        "tr_id": "SWAGGE-INTE-051",
         "preconditions": [
-          "User is logged in"
+          "User is authenticated",
+          "Pet exists in store"
+        ],
+        "stimuli": [
+          "POST /store/order with valid data"
+        ],
+        "expected_outputs": [
+          "200 OK",
+          "Order ID in response body"
+        ],
+        "coverage_criterion": "Interface interaction",
+        "priority": "high",
+        "source_req_ids": [
+          "Place an order for a pet"
+        ]
+      },
+      "source_req_ids": [
+        "Place an order for a pet"
+      ]
+    },
+    {
+      "tr_id": "SWAGGE-INTE-052",
+      "category": "interface_exception",
+      "source_id": "swagger_petstore",
+      "tr_h": "When an invalid tag value is supplied, the Petstore API shall return an error response.",
+      "tr_a": {
+        "tr_id": "SWAGGE-INTE-052",
+        "preconditions": [
+          "User is authenticated"
         ],
         "stimuli": [
           "POST /pet with invalid tag value"
         ],
         "expected_outputs": [
-          "400 Bad Request response code",
-          "Validation error message"
+          "400 Bad Request",
+          "Error message in response body"
         ],
         "coverage_criterion": "Exception handling",
-        "priority": "low",
+        "priority": "medium",
         "source_req_ids": [
           "Invalid tag value"
         ]
@@ -2403,49 +2542,77 @@
       ]
     },
     {
-      "tr_id": "SWAGGE-INTE-049",
+      "tr_id": "SWAGGE-INTE-053",
       "category": "interface_exception",
       "source_id": "swagger_petstore",
-      "tr_h": "When a user logs in, the Petstore API shall authenticate the user and return a valid session ID.",
+      "tr_h": "When a user requests to find purchase order by ID, the Petstore API shall return the order data.",
       "tr_a": {
-        "tr_id": "SWAGGE-INTE-049",
+        "tr_id": "SWAGGE-INTE-053",
         "preconditions": [
-          "User credentials are valid"
+          "User is authenticated",
+          "Order exists in store"
         ],
         "stimuli": [
-          "POST /login with valid user credentials"
+          "GET /store/order/{valid_id}"
         ],
         "expected_outputs": [
-          "200 OK response code",
-          "Valid session ID returned"
+          "200 OK",
+          "Order data in response body"
         ],
         "coverage_criterion": "Interface interaction",
         "priority": "high",
         "source_req_ids": [
-          "Logs user into the system"
+          "Find purchase order by ID"
         ]
       },
       "source_req_ids": [
-        "Logs user into the system"
+        "Find purchase order by ID"
       ]
     },
     {
-      "tr_id": "SWAGGE-CONS-050",
-      "category": "consistency_driven",
+      "tr_id": "SWAGGE-INTE-054",
+      "category": "interface_exception",
       "source_id": "swagger_petstore",
-      "tr_h": "When multiple status values are provided with comma separated strings, the system shall find and return pets by their status.",
+      "tr_h": "When an invalid username is supplied, the Petstore API shall return an error response.",
       "tr_a": {
-        "tr_id": "SWAGGE-CONS-050",
+        "tr_id": "SWAGGE-INTE-054",
         "preconditions": [
-          "Multiple status values are available"
+          "User is authenticated"
         ],
         "stimuli": [
-          "Provide multiple status values with comma separated strings"
+          "GET /user/{invalid_username}"
         ],
         "expected_outputs": [
-          "Pets matching all status values are returned"
+          "404 Not Found",
+          "Error message in response body"
         ],
-        "coverage_criterion": "Combinatorial coverage",
+        "coverage_criterion": "Exception handling",
+        "priority": "medium",
+        "source_req_ids": [
+          "Invalid username supplied"
+        ]
+      },
+      "source_req_ids": [
+        "Invalid username supplied"
+      ]
+    },
+    {
+      "tr_id": "SWAGGE-CONS-055",
+      "category": "consistency_driven",
+      "source_id": "swagger_petstore",
+      "tr_h": "When searching for pets by status, the system shall return a list of pets with only one status value.",
+      "tr_a": {
+        "tr_id": "SWAGGE-CONS-055",
+        "preconditions": [
+          "Multiple status values are provided as comma-separated strings"
+        ],
+        "stimuli": [
+          "Search for pets by multiple statuses"
+        ],
+        "expected_outputs": [
+          "A list of pets with only one status value is returned"
+        ],
+        "coverage_criterion": "Status filtering",
         "priority": "high",
         "source_req_ids": [
           "[FR-1]"
@@ -2456,23 +2623,23 @@
       ]
     },
     {
-      "tr_id": "SWAGGE-CONS-051",
+      "tr_id": "SWAGGE-CONS-056",
       "category": "consistency_driven",
       "source_id": "swagger_petstore",
-      "tr_h": "When a user attempts to place an order for a pet, the system shall process the order.",
+      "tr_h": "When placing an order for a pet, the system shall create a new order record.",
       "tr_a": {
-        "tr_id": "SWAGGE-CONS-051",
+        "tr_id": "SWAGGE-CONS-056",
         "preconditions": [
-          "User is logged in",
-          "Pet is available"
+          "A valid pet is selected",
+          "Order details are provided"
         ],
         "stimuli": [
-          "Submit order request with valid data"
+          "Place an order for a pet"
         ],
         "expected_outputs": [
-          "Order is successfully placed"
+          "A new order record is created"
         ],
-        "coverage_criterion": "State transition coverage",
+        "coverage_criterion": "Order creation",
         "priority": "high",
         "source_req_ids": [
           "[UC-1]"
@@ -2483,23 +2650,23 @@
       ]
     },
     {
-      "tr_id": "SWAGGE-CONS-052",
+      "tr_id": "SWAGGE-CONS-057",
       "category": "consistency_driven",
       "source_id": "swagger_petstore",
-      "tr_h": "When an invalid username is supplied, the system shall return an error message.",
+      "tr_h": "When invalid data is provided, the system shall raise a validation exception.",
       "tr_a": {
-        "tr_id": "SWAGGE-CONS-052",
+        "tr_id": "SWAGGE-CONS-057",
         "preconditions": [
-          "Invalid username is provided"
+          "Invalid data is provided"
         ],
         "stimuli": [
-          "Submit login request with invalid username"
+          "Submit invalid data"
         ],
         "expected_outputs": [
-          "Error message indicating invalid username is returned"
+          "A validation exception is raised"
         ],
-        "coverage_criterion": "Error guessing",
-        "priority": "medium",
+        "coverage_criterion": "Validation",
+        "priority": "high",
         "source_req_ids": [
           "[EX-1]"
         ]
@@ -2509,23 +2676,23 @@
       ]
     },
     {
-      "tr_id": "SWAGGE-CONS-053",
+      "tr_id": "SWAGGE-CONS-058",
       "category": "consistency_driven",
       "source_id": "swagger_petstore",
-      "tr_h": "When form data containing required fields is provided, the system shall update a pet in the store.",
+      "tr_h": "When updating a pet in the store, the system shall update all form data fields.",
       "tr_a": {
-        "tr_id": "SWAGGE-CONS-053",
+        "tr_id": "SWAGGE-CONS-058",
         "preconditions": [
-          "Pet exists in the store",
-          "Required form data is available"
+          "A valid pet is selected",
+          "Updated form data is provided"
         ],
         "stimuli": [
-          "Submit update request with valid form data"
+          "Update a pet in the store with form data"
         ],
         "expected_outputs": [
-          "Pet is successfully updated"
+          "All form data fields are updated"
         ],
-        "coverage_criterion": "Decision table coverage",
+        "coverage_criterion": "Pet updating",
         "priority": "medium",
         "source_req_ids": [
           "[FR-2]"
@@ -2536,23 +2703,23 @@
       ]
     },
     {
-      "tr_id": "SWAGGE-CONS-054",
+      "tr_id": "SWAGGE-CONS-059",
       "category": "consistency_driven",
       "source_id": "swagger_petstore",
-      "tr_h": "Within 5 seconds, the system shall return pet inventories by their status.",
+      "tr_h": "When deleting a pet, the system shall remove the pet record within 1 second.",
       "tr_a": {
-        "tr_id": "SWAGGE-CONS-054",
+        "tr_id": "SWAGGE-CONS-059",
         "preconditions": [
-          "Pet inventory data is available"
+          "A valid pet is selected"
         ],
         "stimuli": [
-          "Submit request for pet inventories by status"
+          "Delete a pet"
         ],
         "expected_outputs": [
-          "Pet inventories matching the status are returned within 5 seconds"
+          "The pet record is removed within 1 second"
         ],
-        "coverage_criterion": "Performance coverage",
-        "priority": "low",
+        "coverage_criterion": "Pet deletion",
+        "priority": "medium",
         "source_req_ids": [
           "[FR-3]"
         ]
@@ -2562,83 +2729,84 @@
       ]
     },
     {
-      "tr_id": "SWAGGE-CONS-055",
+      "tr_id": "SWAGGE-CONS-060",
       "category": "consistency_driven",
       "source_id": "swagger_petstore",
-      "tr_h": "When a valid order ID is provided, the system shall return the corresponding purchase order.",
+      "tr_h": "When getting a user by username, the system shall return the user record within 500ms.",
       "tr_a": {
-        "tr_id": "SWAGGE-CONS-055",
+        "tr_id": "SWAGGE-CONS-060",
         "preconditions": [
-          "Order exists in the system"
+          "A valid username is provided"
         ],
         "stimuli": [
-          "Submit request for purchase order by ID"
+          "Get a user by username"
         ],
         "expected_outputs": [
-          "Purchase order matching the ID is returned"
+          "The user record is returned within 500ms"
         ],
-        "coverage_criterion": "State transition coverage",
-        "priority": "high",
+        "coverage_criterion": "User retrieval",
+        "priority": "medium",
         "source_req_ids": [
-          "[UC-2]"
+          "[FR-4]"
         ]
       },
       "source_req_ids": [
-        "[UC-2]"
+        "[FR-4]"
       ]
     },
     {
-      "tr_id": "SWAGGE-CONS-056",
+      "tr_id": "SWAGGE-CONS-061",
       "category": "consistency_driven",
       "source_id": "swagger_petstore",
-      "tr_h": "When valid login credentials are provided, the system shall log the user into the system.",
+      "tr_h": "When updating an existing user, the system shall update all user fields within 2 seconds.",
       "tr_a": {
-        "tr_id": "SWAGGE-CONS-056",
+        "tr_id": "SWAGGE-CONS-061",
         "preconditions": [
-          "User account exists"
+          "A valid user is selected",
+          "Updated user data is provided"
         ],
         "stimuli": [
-          "Submit login request with valid credentials"
+          "Update an existing user"
         ],
         "expected_outputs": [
-          "User is successfully logged in"
+          "All user fields are updated within 2 seconds"
         ],
-        "coverage_criterion": "State transition coverage",
-        "priority": "high",
+        "coverage_criterion": "User updating",
+        "priority": "medium",
         "source_req_ids": [
-          "[UC-3]"
+          "[FR-5]"
         ]
       },
       "source_req_ids": [
-        "[UC-3]"
+        "[FR-5]"
       ]
     },
     {
-      "tr_id": "SWAGGE-CONS-057",
+      "tr_id": "SWAGGE-CONS-062",
       "category": "consistency_driven",
       "source_id": "swagger_petstore",
-      "tr_h": "When a logout request is submitted, the system shall log out the current user session.",
+      "tr_h": "When deleting a purchase order by ID, the system shall remove the order record within 1 second.",
       "tr_a": {
-        "tr_id": "SWAGGE-CONS-057",
+        "tr_id": "SWAGGE-CONS-062",
         "preconditions": [
-          "User is logged in"
+          "A valid order ID is provided"
         ],
         "stimuli": [
-          "Submit logout request"
+          "Delete a purchase order by ID"
         ],
         "expected_outputs": [
-          "User session is successfully terminated"
+          "The order record is removed within 1 second"
         ],
-        "coverage_criterion": "State transition coverage",
-        "priority": "high",
+        "coverage_criterion": "Order deletion",
+        "priority": "medium",
         "source_req_ids": [
-          "[UC-4]"
+          "[FR-6]"
         ]
       },
       "source_req_ids": [
-        "[UC-4]"
+        "[FR-6]"
       ]
     }
   ],
-  "total_count": 57
+  "total_count": 62
 }

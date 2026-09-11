@@ -1,93 +1,297 @@
 [
   {
-    "comparison_id": "intra_swagger_petstore",
-    "source_a": "swagger_petstore",
-    "source_b": "swagger_petstore",
+    "comparison_id": "srs_vs_manual",
+    "source_a": "auth_system_srs",
+    "source_b": "auth_system_manual",
     "issues": [
       {
-        "issue_id": "FR-1",
-        "issue_type": "conflict",
-        "source_a_id": "swagger_petstore",
-        "source_b_id": "swagger_petstore",
-        "description": "Functional requirement 'The system shall find and return pets by their status' may violate NFR constraint 'Multiple status values can be provided with comma separated strings' if it does not support multiple status values.",
+        "issue_id": "ISSUE-1",
+        "issue_type": "omission",
+        "source_a_id": "auth_system_srs",
+        "source_b_id": "auth_system_manual",
+        "description": "Password recovery via email is not mentioned in SOURCE A",
         "severity": "major",
         "affected_req_ids": [],
-        "suggested_fix": "Update functional requirement to explicitly state support for multiple status values."
+        "suggested_fix": "Add a requirement for password recovery via email to SOURCE A"
+      },
+      {
+        "issue_id": "ISSUE-2",
+        "issue_type": "omission",
+        "source_a_id": "auth_system_srs",
+        "source_b_id": "auth_system_manual",
+        "description": "Change password from Account Settings is not mentioned in SOURCE A",
+        "severity": "major",
+        "affected_req_ids": [],
+        "suggested_fix": "Add a requirement for changing passwords to SOURCE A"
+      },
+      {
+        "issue_id": "ISSUE-3",
+        "issue_type": "omission",
+        "source_a_id": "auth_system_srs",
+        "source_b_id": "auth_system_manual",
+        "description": "Manual sign out from account menu is not explicitly mentioned in SOURCE A, only logout/expiration",
+        "severity": "minor",
+        "affected_req_ids": [],
+        "suggested_fix": "Clarify the logout process in SOURCE A to include manual sign out"
+      },
+      {
+        "issue_id": "ISSUE-4",
+        "issue_type": "ambiguity",
+        "source_a_id": "auth_system_srs",
+        "source_b_id": "auth_system_manual",
+        "description": "SOURCE B mentions 'manual sign out from account menu', but it's unclear if this is a user-initiated action or automatic",
+        "severity": "minor",
+        "affected_req_ids": [],
+        "suggested_fix": "Clarify the manual sign out process in SOURCE B"
+      },
+      {
+        "issue_id": "ISSUE-5",
+        "issue_type": "omission",
+        "source_a_id": "auth_system_srs",
+        "source_b_id": "auth_system_manual",
+        "description": "SOURCE A mentions rate-limiting login attempts, but this is not mentioned in SOURCE B",
+        "severity": "major",
+        "affected_req_ids": [],
+        "suggested_fix": "Add a mention of rate-limiting to SOURCE B"
+      },
+      {
+        "issue_id": "ISSUE-6",
+        "issue_type": "omission",
+        "source_a_id": "auth_system_srs",
+        "source_b_id": "auth_system_manual",
+        "description": "SOURCE A mentions recording an audit log entry for each user authentication attempt, but this is not mentioned in SOURCE B",
+        "severity": "minor",
+        "affected_req_ids": [],
+        "suggested_fix": "Add a mention of audit logging to SOURCE B"
+      }
+    ],
+    "total_conflicts": 0,
+    "total_omissions": 5,
+    "total_ambiguities": 1,
+    "total_to_confirm": 0
+  },
+  {
+    "comparison_id": "runtime_vs_srs",
+    "source_a": "auth_system_runtime",
+    "source_b": "auth_system_srs",
+    "issues": [],
+    "total_conflicts": 0,
+    "total_omissions": 0,
+    "total_ambiguities": 0,
+    "total_to_confirm": 0
+  },
+  {
+    "comparison_id": "design_vs_srs",
+    "source_a": "auth_system_design",
+    "source_b": "auth_system_srs",
+    "issues": [],
+    "total_conflicts": 0,
+    "total_omissions": 0,
+    "total_ambiguities": 0,
+    "total_to_confirm": 0
+  },
+  {
+    "comparison_id": "intra_auth_system_design",
+    "source_a": "auth_system_design",
+    "source_b": "auth_system_design",
+    "issues": [
+      {
+        "issue_id": "REQ-001",
+        "issue_type": "to_confirm",
+        "source_a_id": "auth_system_design",
+        "source_b_id": "auth_system_design",
+        "description": "Functional requirement 'The system shall lock a user account after a specified number of failed login attempts' is missing measurable acceptance criteria for the number of failed attempts.",
+        "severity": "minor",
+        "affected_req_ids": [],
+        "suggested_fix": "Add specific number of failed attempts to the requirement."
+      },
+      {
+        "issue_id": "REQ-002",
+        "issue_type": "omission",
+        "source_a_id": "auth_system_design",
+        "source_b_id": "auth_system_design",
+        "description": "Use case goal 'Logout from the system' has no matching functional requirement.",
+        "severity": "major",
+        "affected_req_ids": [],
+        "suggested_fix": "Add a functional requirement to handle logout functionality."
+      },
+      {
+        "issue_id": "REQ-003",
+        "issue_type": "ambiguity",
+        "source_a_id": "auth_system_design",
+        "source_b_id": "auth_system_design",
+        "description": "Functional requirement 'The system shall validate user credentials' is ambiguous and does not specify what constitutes valid credentials.",
+        "severity": "minor",
+        "affected_req_ids": [],
+        "suggested_fix": "Clarify the validation criteria for user credentials."
+      },
+      {
+        "issue_id": "REQ-004",
+        "issue_type": "to_confirm",
+        "source_a_id": "auth_system_design",
+        "source_b_id": "auth_system_design",
+        "description": "Functional requirement 'The system shall return a LOGIN_SUCCESS event upon successful authentication' is missing measurable acceptance criteria for what constitutes a successful authentication.",
+        "severity": "minor",
+        "affected_req_ids": [],
+        "suggested_fix": "Add specific criteria for successful authentication to the requirement."
+      }
+    ],
+    "total_conflicts": 0,
+    "total_omissions": 1,
+    "total_ambiguities": 1,
+    "total_to_confirm": 2
+  },
+  {
+    "comparison_id": "intra_auth_system_srs",
+    "source_a": "auth_system_srs",
+    "source_b": "auth_system_srs",
+    "issues": [
+      {
+        "issue_id": "REQ-1",
+        "issue_type": "to_confirm",
+        "source_a_id": "auth_system_srs",
+        "source_b_id": "auth_system_srs",
+        "description": "The system shall lock a user account after a specified number of failed login attempts. (missing measurable acceptance criteria)",
+        "severity": "minor",
+        "affected_req_ids": [],
+        "suggested_fix": "Add specific threshold for failed login attempts"
+      },
+      {
+        "issue_id": "REQ-2",
+        "issue_type": "to_confirm",
+        "source_a_id": "auth_system_srs",
+        "source_b_id": "auth_system_srs",
+        "description": "The system shall automatically unlock a locked user account after a specified time period. (missing measurable acceptance criteria)",
+        "severity": "minor",
+        "affected_req_ids": [],
+        "suggested_fix": "Add specific time period for automatic unlocking"
+      },
+      {
+        "issue_id": "REQ-3",
+        "issue_type": "ambiguity",
+        "source_a_id": "auth_system_srs",
+        "source_b_id": "auth_system_srs",
+        "description": "The system shall rate-limit login attempts to prevent brute-force attacks. (ambiguous definition of rate limiting)",
+        "severity": "major",
+        "affected_req_ids": [],
+        "suggested_fix": "Define specific rate limiting rules and thresholds"
+      },
+      {
+        "issue_id": "REQ-4",
+        "issue_type": "omission",
+        "source_a_id": "auth_system_srs",
+        "source_b_id": "auth_system_srs",
+        "description": "No functional requirement for handling expired access tokens",
+        "severity": "major",
+        "affected_req_ids": [],
+        "suggested_fix": "Add functional requirement for handling expired access tokens"
+      }
+    ],
+    "total_conflicts": 0,
+    "total_omissions": 1,
+    "total_ambiguities": 1,
+    "total_to_confirm": 2
+  },
+  {
+    "comparison_id": "intra_auth_system_manual",
+    "source_a": "auth_system_manual",
+    "source_b": "auth_system_manual",
+    "issues": [
+      {
+        "issue_id": "REQ-1",
+        "issue_type": "to_confirm",
+        "source_a_id": "auth_system_manual",
+        "source_b_id": "auth_system_manual",
+        "description": "Functional requirement 'The system shall provide a multi-factor authentication mechanism to verify user identities' lacks measurable acceptance criteria.",
+        "severity": "major",
+        "affected_req_ids": [],
+        "suggested_fix": "Add specific details on the types of factors and verification methods."
+      },
+      {
+        "issue_id": "REQ-2",
+        "issue_type": "ambiguity",
+        "source_a_id": "auth_system_manual",
+        "source_b_id": "auth_system_manual",
+        "description": "Functional requirement 'The system shall allow users to recover their passwords via email notification' is ambiguous about the recovery process.",
+        "severity": "minor",
+        "affected_req_ids": [],
+        "suggested_fix": "Clarify the steps involved in password recovery."
       },
       {
         "issue_id": "UC-1",
         "issue_type": "omission",
-        "source_a_id": "swagger_petstore",
-        "source_b_id": "swagger_petstore",
-        "description": "Use case goal 'Place an order for a pet' has no matching functional requirement.",
-        "severity": "blocker",
+        "source_a_id": "auth_system_manual",
+        "source_b_id": "auth_system_manual",
+        "description": "Use case goal 'Change password from Account Settings' has no matching functional requirement.",
+        "severity": "major",
         "affected_req_ids": [],
-        "suggested_fix": "Add functional requirement to support placing orders for pets."
+        "suggested_fix": "Add a functional requirement to support this use case."
       },
       {
         "issue_id": "EX-1",
         "issue_type": "omission",
-        "source_a_id": "swagger_petstore",
-        "source_b_id": "swagger_petstore",
-        "description": "Exception condition 'Invalid username supplied' is not covered by any functional requirement.",
+        "source_a_id": "auth_system_manual",
+        "source_b_id": "auth_system_manual",
+        "description": "Exception condition 'account lock due to failed sign-in attempts' is not fully covered by any requirement.",
         "severity": "major",
         "affected_req_ids": [],
-        "suggested_fix": "Add functional requirement to handle invalid usernames."
-      },
-      {
-        "issue_id": "FR-2",
-        "issue_type": "ambiguity",
-        "source_a_id": "swagger_petstore",
-        "source_b_id": "swagger_petstore",
-        "description": "Functional requirement 'The system shall update a pet in the store using form data' is ambiguous and does not specify what form data is required.",
-        "severity": "minor",
-        "affected_req_ids": [],
-        "suggested_fix": "Update functional requirement to explicitly state what form data is required."
-      },
-      {
-        "issue_id": "FR-3",
-        "issue_type": "to_confirm",
-        "source_a_id": "swagger_petstore",
-        "source_b_id": "swagger_petstore",
-        "description": "Functional requirement 'The system shall return pet inventories by their status' is missing measurable acceptance criteria.",
-        "severity": "minor",
-        "affected_req_ids": [],
-        "suggested_fix": "Add measurable acceptance criteria to functional requirement."
-      },
-      {
-        "issue_id": "UC-2",
-        "issue_type": "omission",
-        "source_a_id": "swagger_petstore",
-        "source_b_id": "swagger_petstore",
-        "description": "Use case goal 'Find purchase order by ID' has no matching functional requirement.",
-        "severity": "blocker",
-        "affected_req_ids": [],
-        "suggested_fix": "Add functional requirement to support finding purchase orders by ID."
-      },
-      {
-        "issue_id": "UC-3",
-        "issue_type": "omission",
-        "source_a_id": "swagger_petstore",
-        "source_b_id": "swagger_petstore",
-        "description": "Use case goal 'Logs user into the system' has no matching functional requirement.",
-        "severity": "blocker",
-        "affected_req_ids": [],
-        "suggested_fix": "Add functional requirement to support logging users into the system."
-      },
-      {
-        "issue_id": "UC-4",
-        "issue_type": "omission",
-        "source_a_id": "swagger_petstore",
-        "source_b_id": "swagger_petstore",
-        "description": "Use case goal 'Logs out current logged in user session' has no matching functional requirement.",
-        "severity": "blocker",
-        "affected_req_ids": [],
-        "suggested_fix": "Add functional requirement to support logging out users."
+        "suggested_fix": "Add a functional requirement or clarify existing ones to address this scenario."
       }
     ],
-    "total_conflicts": 1,
-    "total_omissions": 5,
+    "total_conflicts": 0,
+    "total_omissions": 2,
     "total_ambiguities": 1,
     "total_to_confirm": 1
+  },
+  {
+    "comparison_id": "intra_auth_system_runtime",
+    "source_a": "auth_system_runtime",
+    "source_b": "auth_system_runtime",
+    "issues": [
+      {
+        "issue_id": "FR1",
+        "issue_type": "to_confirm",
+        "source_a_id": "auth_system_runtime",
+        "source_b_id": "auth_system_runtime",
+        "description": "The system shall authenticate a user using their credentials. Missing measurable acceptance criteria for successful authentication.",
+        "severity": "minor",
+        "affected_req_ids": [],
+        "suggested_fix": "Add specific criteria, e.g., 'within 2 seconds' or 'with a success rate of 99.9%'."
+      },
+      {
+        "issue_id": "FR5",
+        "issue_type": "to_confirm",
+        "source_a_id": "auth_system_runtime",
+        "source_b_id": "auth_system_runtime",
+        "description": "The system shall refresh an access token when the existing one is near expiration or has expired. Missing measurable acceptance criteria for 'near expiration'.",
+        "severity": "minor",
+        "affected_req_ids": [],
+        "suggested_fix": "Define a specific time threshold, e.g., 'within 5 minutes of expiration'."
+      },
+      {
+        "issue_id": "UC3",
+        "issue_type": "omission",
+        "source_a_id": "auth_system_runtime",
+        "source_b_id": "auth_system_runtime",
+        "description": "Terminate session use case goal has no matching functional requirement for session termination due to security policy violation.",
+        "severity": "major",
+        "affected_req_ids": [],
+        "suggested_fix": "Add a functional requirement, e.g., 'The system shall terminate the current session when a security policy is violated'."
+      },
+      {
+        "issue_id": "FR3",
+        "issue_type": "ambiguity",
+        "source_a_id": "auth_system_runtime",
+        "source_b_id": "auth_system_runtime",
+        "description": "The system shall terminate the current session when requested by the user or when a security policy is violated. Ambiguous definition of 'security policy violation'.",
+        "severity": "minor",
+        "affected_req_ids": [],
+        "suggested_fix": "Provide specific examples or criteria for what constitutes a security policy violation."
+      }
+    ],
+    "total_conflicts": 0,
+    "total_omissions": 1,
+    "total_ambiguities": 1,
+    "total_to_confirm": 2
   }
 ]

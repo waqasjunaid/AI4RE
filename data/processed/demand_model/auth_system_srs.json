@@ -1,0 +1,362 @@
+{
+  "source_id": "auth_system_srs",
+  "bundle_id": "auth_system",
+  "system_objectives": [
+    "user authentication",
+    "session management",
+    "token issuance",
+    "authenticate users via POST /auth/login",
+    "return HTTP 401 Unauthorized",
+    "require TOTP code for MFA authentication",
+    "issue access and refresh tokens",
+    "obtain new access token"
+  ],
+  "user_roles": [
+    "Registered User",
+    "Unauthenticated Client",
+    "API Gateway",
+    "Authentication Service",
+    "AuthController",
+    "TokenService",
+    "PasswordHasher",
+    "SessionManager",
+    "UserDB"
+  ],
+  "use_cases": [
+    {
+      "use_case_id": "UC-001",
+      "actor": "Unauthenticated Client",
+      "goal": "Authenticate and obtain access token",
+      "preconditions": [
+        "User has valid credentials"
+      ],
+      "steps": [
+        "Send POST /auth/login request with username and password",
+        "Authentication Service verifies credentials using PasswordHasher",
+        "TokenService issues access and refresh tokens"
+      ],
+      "postconditions": [
+        "Access token is returned",
+        "Session is created"
+      ],
+      "exceptions": [
+        "Invalid credentials",
+        "Rate limit exceeded"
+      ]
+    },
+    {
+      "use_case_id": "UC-002",
+      "actor": "Registered User",
+      "goal": "Obtain new access token using refresh token",
+      "preconditions": [
+        "Refresh token is valid"
+      ],
+      "steps": [
+        "Send request to obtain new access token",
+        "TokenService verifies refresh token",
+        "New access token is issued"
+      ],
+      "postconditions": [
+        "New access token is returned"
+      ],
+      "exceptions": [
+        "Invalid refresh token"
+      ]
+    },
+    {
+      "use_case_id": "UC-003",
+      "actor": "Registered User",
+      "goal": "Invalidate user session",
+      "preconditions": [
+        "User is authenticated"
+      ],
+      "steps": [
+        "Send request to invalidate session",
+        "SessionManager invalidates session"
+      ],
+      "postconditions": [
+        "Session is invalidated"
+      ],
+      "exceptions": []
+    },
+    {
+      "use_case_id": "UC-004",
+      "actor": "Unauthenticated Client",
+      "goal": "Authenticate with MFA",
+      "preconditions": [
+        "User has valid credentials and TOTP code"
+      ],
+      "steps": [
+        "Send POST /auth/login request with username, password, and TOTP code",
+        "Authentication Service verifies credentials using PasswordHasher and TOTP code"
+      ],
+      "postconditions": [
+        "Access token is returned",
+        "Session is created"
+      ],
+      "exceptions": [
+        "Invalid TOTP code"
+      ]
+    },
+    {
+      "use_case_id": "UC-005",
+      "actor": "API Gateway",
+      "goal": "Validate access token",
+      "preconditions": [
+        "Access token is provided"
+      ],
+      "steps": [
+        "Send request to validate access token",
+        "TokenService verifies access token"
+      ],
+      "postconditions": [
+        "Access token is valid or invalid"
+      ],
+      "exceptions": []
+    },
+    {
+      "use_case_id": "UC-006",
+      "actor": "AuthController",
+      "goal": "Record audit log entry",
+      "preconditions": [
+        "User action occurs"
+      ],
+      "steps": [
+        "Send request to record audit log entry"
+      ],
+      "postconditions": [
+        "Audit log entry is recorded"
+      ],
+      "exceptions": []
+    },
+    {
+      "use_case_id": "UC-007",
+      "actor": "Unauthenticated Client",
+      "goal": "Attempt login with invalid credentials",
+      "preconditions": [
+        "User has invalid credentials"
+      ],
+      "steps": [
+        "Send POST /auth/login request with username and password",
+        "Authentication Service verifies credentials using PasswordHasher"
+      ],
+      "postconditions": [
+        "HTTP 401 Unauthorized is returned"
+      ],
+      "exceptions": [
+        "Rate limit exceeded"
+      ]
+    },
+    {
+      "use_case_id": "UC-008",
+      "actor": "SessionManager",
+      "goal": "Lock user account after failed login attempts",
+      "preconditions": [
+        "Failed login attempts exceed threshold"
+      ],
+      "steps": [
+        "Lock user account"
+      ],
+      "postconditions": [
+        "User account is locked"
+      ],
+      "exceptions": []
+    },
+    {
+      "use_case_id": "UC-009",
+      "actor": "SessionManager",
+      "goal": "Automatically unlock locked account",
+      "preconditions": [
+        "Account lock timeout expires"
+      ],
+      "steps": [
+        "Unlock user account"
+      ],
+      "postconditions": [
+        "User account is unlocked"
+      ],
+      "exceptions": []
+    },
+    {
+      "use_case_id": "UC-010",
+      "actor": "API Gateway",
+      "goal": "Rate-limit login attempts",
+      "preconditions": [
+        "Login attempts exceed rate limit"
+      ],
+      "steps": [
+        "Return HTTP 429 Too Many Requests"
+      ],
+      "postconditions": [],
+      "exceptions": []
+    }
+  ],
+  "functional_reqs": [
+    {
+      "req_id": "FR-001",
+      "description": "The system shall authenticate users via a POST request to the /auth/login endpoint.",
+      "source_ids": [
+        "auth_system_srs"
+      ],
+      "priority": "high"
+    },
+    {
+      "req_id": "FR-002",
+      "description": "The system shall return an HTTP 401 Unauthorized response when authentication fails.",
+      "source_ids": [
+        "auth_system_srs"
+      ],
+      "priority": "medium"
+    },
+    {
+      "req_id": "FR-003",
+      "description": "The system shall require a valid TOTP code for multi-factor authentication (MFA).",
+      "source_ids": [
+        "auth_system_srs"
+      ],
+      "priority": "high"
+    },
+    {
+      "req_id": "FR-004",
+      "description": "The system shall issue access and refresh tokens upon successful user authentication.",
+      "source_ids": [
+        "auth_system_srs"
+      ],
+      "priority": "medium"
+    },
+    {
+      "req_id": "FR-005",
+      "description": "The system shall allow users to obtain a new access token using the refresh token.",
+      "source_ids": [
+        "auth_system_srs"
+      ],
+      "priority": "low"
+    },
+    {
+      "req_id": "FR-006",
+      "description": "The system shall invalidate a user's session upon logout or expiration.",
+      "source_ids": [
+        "auth_system_srs"
+      ],
+      "priority": "medium"
+    },
+    {
+      "req_id": "FR-007",
+      "description": "The system shall lock a user account after a specified number of failed login attempts.",
+      "source_ids": [
+        "auth_system_srs"
+      ],
+      "priority": "high"
+    },
+    {
+      "req_id": "FR-008",
+      "description": "The system shall automatically unlock a locked user account after a specified time period.",
+      "source_ids": [
+        "auth_system_srs"
+      ],
+      "priority": "low"
+    },
+    {
+      "req_id": "FR-009",
+      "description": "The system shall rate-limit login attempts to prevent brute-force attacks.",
+      "source_ids": [
+        "auth_system_srs"
+      ],
+      "priority": "high"
+    },
+    {
+      "req_id": "FR-010",
+      "description": "The system shall record an audit log entry for each user authentication attempt.",
+      "source_ids": [
+        "auth_system_srs"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "nfr_constraints": [
+    {
+      "constraint_id": "NFR-001",
+      "category": "security",
+      "description": "Access tokens must be signed using RS256 algorithm",
+      "threshold": null,
+      "source_ids": [
+        "auth_system_srs"
+      ]
+    },
+    {
+      "constraint_id": "NFR-002",
+      "category": "security",
+      "description": "User passwords must have a minimum of 12 characters with mixed case and symbols",
+      "threshold": null,
+      "source_ids": [
+        "auth_system_srs"
+      ]
+    },
+    {
+      "constraint_id": "NFR-003",
+      "category": "security",
+      "description": "Client-server communication must use TLS 1.2 or higher",
+      "threshold": null,
+      "source_ids": [
+        "auth_system_srs"
+      ]
+    }
+  ],
+  "runtime_constraints": [
+    {
+      "constraint_id": "RT-001",
+      "description": "Access tokens expire 15 minutes after issuance",
+      "affects_reqs": [
+        "token renewal"
+      ],
+      "source_ids": [
+        "auth_system_srs"
+      ]
+    },
+    {
+      "constraint_id": "RT-002",
+      "description": "Invalid submitted credentials",
+      "affects_reqs": [
+        "login",
+        "authentication"
+      ],
+      "source_ids": [
+        "auth_system_srs"
+      ]
+    },
+    {
+      "constraint_id": "RT-003",
+      "description": "5 consecutive failed login attempts",
+      "affects_reqs": [
+        "login",
+        "account locking"
+      ],
+      "source_ids": [
+        "auth_system_srs"
+      ]
+    },
+    {
+      "constraint_id": "RT-004",
+      "description": "15 minutes to unlock account",
+      "affects_reqs": [
+        "account unlocking"
+      ],
+      "source_ids": [
+        "auth_system_srs"
+      ]
+    },
+    {
+      "constraint_id": "RT-005",
+      "description": "10 requests per minute per client IP address",
+      "affects_reqs": [
+        "rate limiting",
+        "API usage"
+      ],
+      "source_ids": [
+        "auth_system_srs"
+      ]
+    }
+  ],
+  "glossary": {},
+  "exception_handlers": []
+}

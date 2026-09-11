@@ -1,396 +1,378 @@
 {
   "source_id": "auth_system_design",
   "tr_h_list": [
-    "When a user submits valid credentials, the system shall authenticate the user.",
-    "When a user submits invalid credentials, the system shall not authenticate the user.",
-    "When a user submits credentials with exactly the maximum allowed number of characters, the system shall authenticate the user.",
-    "When a user requests MFA, the system shall enable multi-factor authentication.",
-    "When a user requests MFA with an invalid phone number, the system shall not enable MFA.",
-    "When a user requests MFA with a phone number that is exactly the minimum required length, the system shall enable MFA.",
-    "When a user exceeds the maximum allowed number of failed login attempts, the system shall lock the user's account.",
-    "When a user exceeds the maximum allowed number of failed login attempts with an invalid username, the system shall not lock the account.",
-    "When a user exceeds the maximum allowed number of failed login attempts with exactly the threshold number of attempts, the system shall lock the user's account.",
-    "When a token or session has expired, the system shall require re-authentication.",
-    "When a user attempts to use an expired token, the system shall not authenticate the user.",
-    "When a user attempts to use a token that is exactly at the expiration threshold, the system shall require re-authentication.",
-    "When a user attempts to set a password, the system shall reject the password if it does not contain at least one uppercase letter, one lowercase letter, one digit, and one symbol.",
+    "When an AuthRequest is received, the system shall validate it to ensure conformance to expected format and content.",
+    "When an AuthRequest with invalid format is received, the system shall return a validation error.",
+    "When an AuthRequest with missing fields is received, the system shall return a validation error.",
+    "When a token or session is checked for expiration, the system shall determine if it has expired using the isExpired() function.",
+    "When a token or session with an invalid expiration date is checked, the system shall return an error.",
+    "When a non-existent token or session is checked for expiration, the system shall return an error.",
+    "When a refresh request for an existing token or session is received, the system shall refresh it using the refresh() function.",
+    "When a refresh request for a non-existent token or session is received, the system shall return an error.",
+    "When an invalidate request for a token or session is received, the system shall invalidate it using the invalidate() function.",
+    "When an invalidate request for a non-existent token or session is received, the system shall return an error.",
+    "When user credentials are submitted, the system shall validate them to ensure they match stored values.",
+    "When invalid user credentials are submitted, the system shall return a validation error.",
+    "When a request to enable MFA for a user account is received, the system shall enable it using the enableMFA function.",
+    "When a request to enable MFA for a non-existent user account is received, the system shall return an error.",
+    "When a specified number of failed login attempts is reached, the system shall lock the user account.",
+    "When a request to lock a non-existent user account is received, the system shall return an error.",
+    "When a successful login occurs, the system shall return a LOGIN_SUCCESS event.",
+    "When an unsuccessful login occurs, the system shall return a LOGIN_FAILURE event.",
+    "When a user attempts to create an account, the system shall reject the password if it does not contain at least one uppercase letter, one lowercase letter, one digit, and one symbol.",
     "When a token is generated, the system shall sign it with RS256 (asymmetric) algorithm.",
     "When a connection is established, the system shall use TLS 1.2 or higher protocol.",
-    "When a user attempts to log in, the system shall lock the account after 5 failed login attempts.",
-    "When an account is locked, the system shall unlock it after 30 minutes.",
-    "When a session is stored, the system shall set its TTL to be aligned with the refresh token TTL.",
-    "When a password change request is received, the system shall verify that the new password meets the password requirements.",
-    "When a token is verified, the system shall check that it was signed with RS256 (asymmetric) algorithm.",
-    "When a connection is established, the system shall negotiate TLS 1.2 or higher protocol.",
-    "When a user attempts to log in, the system shall increment the failed login attempt counter.",
-    "When an account is locked, the system shall display a message indicating the remaining lock duration.",
-    "When a session is stored, the system shall set its TTL to be aligned with the refresh token TTL.",
+    "When a user exceeds the maximum failed login attempts, the system shall lock the account within 5 attempts.",
+    "When an account is locked, the system shall unlock it within 30 minutes.",
+    "When a session store is created, the system shall set its TTL to be aligned with the refresh token TTL.",
     "When a user attempts to log in more than 5 times with incorrect credentials, the system shall lock the account.",
-    "When an account is locked, the system shall prevent login for 30 minutes.",
-    "When a session store TTL expires, the system shall remove the associated session data.",
-    "When a user attempts to log in after account lock duration has expired, the system shall allow login.",
-    "When a user logs in successfully, the system shall reset failed login attempt counter.",
-    "When User attempts to Login, the System shall authenticate credentials.",
-    "When User attempts to Change password, the System shall update password.",
-    "When Client requests Refresh token, the System shall issue new access token.",
-    "When Rate Limiter detects excessive login attempts, the System shall lock account.",
-    "When User enables MFA, the System shall configure MFA settings.",
-    "When Request Router receives AuthRequest, the System shall route to AuthController.",
-    "When User logs out, the System shall invalidate session.",
-    "When TokenService receives token, the System shall invalidate token.",
-    "The System shall authenticate user within 2 seconds.",
-    "The System shall update password within 1 second.",
-    "The System shall issue new access token within 1 second.",
-    "The System shall lock account within 1 second of excessive login attempts.",
-    "When a user attempts to log in with an incorrect password, the system shall lock their account after exactly three failed login attempts.",
-    "The system shall validate an authentication request to ensure it conforms to the OAuth 2.0 protocol and JSON Web Token (JWT) format.",
-    "When a user requests to change their password, the system shall prompt them to enter their current and new passwords.",
-    "The system shall handle a database connection error by displaying an error message to the user within five seconds.",
-    "When a user requests an authentication token refresh within one hour of the previous refresh, the system shall refresh their authentication token."
+    "When an account has been locked for 30 minutes, the system shall automatically unlock it.",
+    "When a session store TTL expires, the system shall remove the corresponding session data.",
+    "When user attempts to login, the system shall validate username and password.",
+    "When user requests password change, the system shall update user's password.",
+    "When client requests token refresh, the system shall generate new access token.",
+    "When user enables MFA, the system shall configure MFA settings.",
+    "When AuthController detects multiple login failures, the system shall lock user's account.",
+    "When user logs out, the system shall invalidate access token.",
+    "When AuthController receives AuthRequest, the system shall validate request.",
+    "When AuthService receives credentials, the system shall verify user's identity.",
+    "When system validates AuthRequest, the system shall check for valid username and password.",
+    "When system verifies user credentials, the system shall check for valid password.",
+    "When system locks account, the system shall prevent further login attempts.",
+    "When system logs out user, the system shall remove access token."
   ],
   "tr_a_list": [
     {
       "tr_id": "AUTH_S-FUNC-001",
       "preconditions": [
-        "User has a valid account",
-        "User is not locked out"
+        "System is online",
+        "AuthRequest is sent"
       ],
       "stimuli": [
-        "Valid username and password"
+        "Valid AuthRequest"
       ],
       "expected_outputs": [
-        "LOGIN_SUCCESS event",
-        "Authenticated session established"
+        "Validation success"
       ],
-      "coverage_criterion": "Normal-path",
+      "coverage_criterion": "Normal path",
       "priority": "high",
       "source_req_ids": [
-        "The system shall validate user credentials to ensure authenticity."
+        "The system shall validate the AuthRequest to ensure it conforms to the expected format and content."
       ]
     },
     {
       "tr_id": "AUTH_S-FUNC-002",
       "preconditions": [
-        "User has a valid account",
-        "User is not locked out"
+        "System is online",
+        "AuthRequest is sent"
       ],
       "stimuli": [
-        "Invalid username or password"
+        "Invalidly formatted AuthRequest"
       ],
       "expected_outputs": [
-        "LOGIN_FAILURE event",
-        "Authentication error message"
+        "Validation error"
       ],
-      "coverage_criterion": "Negative-path",
-      "priority": "high",
+      "coverage_criterion": "Boundary condition",
+      "priority": "medium",
       "source_req_ids": [
-        "The system shall validate user credentials to ensure authenticity."
+        "The system shall validate the AuthRequest to ensure it conforms to the expected format and content."
       ]
     },
     {
       "tr_id": "AUTH_S-FUNC-003",
       "preconditions": [
-        "User has a valid account",
-        "User is not locked out"
+        "System is online",
+        "AuthRequest is sent"
       ],
       "stimuli": [
-        "Username and password with maximum allowed characters"
+        "AuthRequest with missing fields"
       ],
       "expected_outputs": [
-        "LOGIN_SUCCESS event",
-        "Authenticated session established"
+        "Validation error"
       ],
-      "coverage_criterion": "Boundary-condition",
+      "coverage_criterion": "Negative path",
       "priority": "medium",
       "source_req_ids": [
-        "The system shall validate user credentials to ensure authenticity."
+        "The system shall validate the AuthRequest to ensure it conforms to the expected format and content."
       ]
     },
     {
       "tr_id": "AUTH_S-FUNC-004",
       "preconditions": [
-        "User has a valid account",
-        "MFA is not already enabled"
+        "Token or session exists",
+        "System is online"
       ],
       "stimuli": [
-        "MFA request from user"
+        "Check expiration request"
       ],
       "expected_outputs": [
-        "MFA enabled for user",
-        "MFA setup instructions provided"
+        "Expiration status"
       ],
-      "coverage_criterion": "Normal-path",
-      "priority": "medium",
+      "coverage_criterion": "Normal path",
+      "priority": "high",
       "source_req_ids": [
-        "The system shall enable multi-factor authentication (MFA) for users upon request."
+        "The system shall determine if a token or session has expired using the isExpired() function."
       ]
     },
     {
       "tr_id": "AUTH_S-FUNC-005",
       "preconditions": [
-        "User has a valid account",
-        "MFA is not already enabled"
+        "Token or session exists",
+        "System is online"
       ],
       "stimuli": [
-        "MFA request from user with invalid phone number"
+        "Check expiration request for invalid date"
       ],
       "expected_outputs": [
-        "Error message indicating invalid phone number"
+        "Error"
       ],
-      "coverage_criterion": "Negative-path",
+      "coverage_criterion": "Boundary condition",
       "priority": "medium",
       "source_req_ids": [
-        "The system shall enable multi-factor authentication (MFA) for users upon request."
+        "The system shall determine if a token or session has expired using the isExpired() function."
       ]
     },
     {
       "tr_id": "AUTH_S-FUNC-006",
       "preconditions": [
-        "User has a valid account",
-        "MFA is not already enabled"
+        "System is online"
       ],
       "stimuli": [
-        "MFA request from user with phone number of minimum required length"
+        "Check expiration request for non-existent token/session"
       ],
       "expected_outputs": [
-        "MFA enabled for user",
-        "MFA setup instructions provided"
+        "Error"
       ],
-      "coverage_criterion": "Boundary-condition",
-      "priority": "low",
+      "coverage_criterion": "Negative path",
+      "priority": "medium",
       "source_req_ids": [
-        "The system shall enable multi-factor authentication (MFA) for users upon request."
+        "The system shall determine if a token or session has expired using the isExpired() function."
       ]
     },
     {
       "tr_id": "AUTH_S-FUNC-007",
       "preconditions": [
-        "User has a valid account",
-        "Account is not already locked"
+        "Token or session exists",
+        "System is online"
       ],
       "stimuli": [
-        "Multiple consecutive invalid login attempts"
+        "Refresh request"
       ],
       "expected_outputs": [
-        "Account locked",
-        "Error message indicating account lock"
+        "Refreshed token/session"
       ],
-      "coverage_criterion": "Normal-path",
+      "coverage_criterion": "Normal path",
       "priority": "high",
       "source_req_ids": [
-        "The system shall lock a user's account after a specified number of failed login attempts."
+        "The system shall refresh an existing token or session when requested using the refresh() function."
       ]
     },
     {
       "tr_id": "AUTH_S-FUNC-008",
       "preconditions": [
-        "User has a valid account",
-        "Account is not already locked"
+        "System is online"
       ],
       "stimuli": [
-        "Multiple consecutive invalid login attempts with invalid username"
+        "Refresh request for non-existent token/session"
       ],
       "expected_outputs": [
-        "Error message indicating invalid username"
+        "Error"
       ],
-      "coverage_criterion": "Negative-path",
-      "priority": "high",
+      "coverage_criterion": "Negative path",
+      "priority": "medium",
       "source_req_ids": [
-        "The system shall lock a user's account after a specified number of failed login attempts."
+        "The system shall refresh an existing token or session when requested using the refresh() function."
       ]
     },
     {
       "tr_id": "AUTH_S-FUNC-009",
       "preconditions": [
-        "User has a valid account",
-        "Account is not already locked"
+        "Token or session exists",
+        "System is online"
       ],
       "stimuli": [
-        "Multiple consecutive invalid login attempts equal to the threshold"
+        "Invalidate request"
       ],
       "expected_outputs": [
-        "Account locked",
-        "Error message indicating account lock"
+        "Invalidated token/session"
       ],
-      "coverage_criterion": "Boundary-condition",
-      "priority": "medium",
+      "coverage_criterion": "Normal path",
+      "priority": "high",
       "source_req_ids": [
-        "The system shall lock a user's account after a specified number of failed login attempts."
+        "The system shall invalidate a token or session when requested using the invalidate() function."
       ]
     },
     {
       "tr_id": "AUTH_S-FUNC-010",
       "preconditions": [
-        "User has a valid account",
-        "Token or session is active"
+        "System is online"
       ],
       "stimuli": [
-        "Expired token or session"
+        "Invalidate request for non-existent token/session"
       ],
       "expected_outputs": [
-        "Re-authentication request",
-        "Error message indicating expiration"
+        "Error"
       ],
-      "coverage_criterion": "Normal-path",
-      "priority": "high",
+      "coverage_criterion": "Negative path",
+      "priority": "medium",
       "source_req_ids": [
-        "The system shall check if a token or session has expired and require re-authentication."
+        "The system shall invalidate a token or session when requested using the invalidate() function."
       ]
     },
     {
       "tr_id": "AUTH_S-FUNC-011",
       "preconditions": [
-        "User has a valid account",
-        "Token is active"
+        "User account exists",
+        "System is online"
       ],
       "stimuli": [
-        "Expired token"
+        "Valid user credentials"
       ],
       "expected_outputs": [
-        "Error message indicating expired token"
+        "Validation success"
       ],
-      "coverage_criterion": "Negative-path",
+      "coverage_criterion": "Normal path",
       "priority": "high",
       "source_req_ids": [
-        "The system shall check if a token or session has expired and require re-authentication."
+        "The system shall validate user credentials to ensure they match stored values."
       ]
     },
     {
       "tr_id": "AUTH_S-FUNC-012",
       "preconditions": [
-        "User has a valid account",
-        "Token is active"
+        "User account exists",
+        "System is online"
       ],
       "stimuli": [
-        "Token at expiration threshold"
+        "Invalid user credentials"
       ],
       "expected_outputs": [
-        "Re-authentication request",
-        "Error message indicating expiration"
+        "Validation error"
       ],
-      "coverage_criterion": "Boundary-condition",
+      "coverage_criterion": "Negative path",
       "priority": "medium",
       "source_req_ids": [
-        "The system shall check if a token or session has expired and require re-authentication."
+        "The system shall validate user credentials to ensure they match stored values."
       ]
     },
     {
-      "tr_id": "AUTH_S-NFR_-013",
+      "tr_id": "AUTH_S-FUNC-013",
       "preconditions": [
-        "User is logged in",
-        "Password change form is displayed"
+        "User account exists",
+        "System is online"
       ],
       "stimuli": [
-        "User submits password change request with invalid password"
+        "Enable MFA request"
       ],
       "expected_outputs": [
-        "Error message indicating password requirements"
+        "MFA enabled"
       ],
-      "coverage_criterion": "Constraint coverage",
+      "coverage_criterion": "Normal path",
       "priority": "high",
       "source_req_ids": [
-        "Password must contain uppercase, lowercase, digit, symbol"
+        "The system shall enable multi-factor authentication (MFA) for a user account when requested using the enableMFA function."
       ]
     },
     {
-      "tr_id": "AUTH_S-NFR_-014",
+      "tr_id": "AUTH_S-FUNC-014",
       "preconditions": [
-        "Token generation request is received"
+        "System is online"
       ],
       "stimuli": [
-        "Generate token request"
+        "Enable MFA request for non-existent user account"
       ],
       "expected_outputs": [
-        "Token signed with RS256 algorithm"
+        "Error"
       ],
-      "coverage_criterion": "Constraint coverage",
-      "priority": "high",
-      "source_req_ids": [
-        "All tokens must be signed with RS256 (asymmetric)"
-      ]
-    },
-    {
-      "tr_id": "AUTH_S-NFR_-015",
-      "preconditions": [
-        "Connection request is received"
-      ],
-      "stimuli": [
-        "Establish connection request"
-      ],
-      "expected_outputs": [
-        "TLS 1.2 or higher protocol used"
-      ],
-      "coverage_criterion": "Constraint coverage",
-      "priority": "high",
-      "source_req_ids": [
-        "TLS 1.2 minimum for all connections"
-      ]
-    },
-    {
-      "tr_id": "AUTH_S-NFR_-016",
-      "preconditions": [
-        "User is not logged in",
-        "Account is not locked"
-      ],
-      "stimuli": [
-        "5 consecutive failed login attempts"
-      ],
-      "expected_outputs": [
-        "Account locked message"
-      ],
-      "coverage_criterion": "Constraint coverage",
+      "coverage_criterion": "Negative path",
       "priority": "medium",
       "source_req_ids": [
-        "Max failed login attempts: 5 before lock"
+        "The system shall enable multi-factor authentication (MFA) for a user account when requested using the enableMFA function."
       ]
     },
     {
-      "tr_id": "AUTH_S-NFR_-017",
+      "tr_id": "AUTH_S-FUNC-015",
       "preconditions": [
-        "Account is locked"
+        "User account exists",
+        "System is online"
       ],
       "stimuli": [
-        "Wait for 30 minutes"
+        "Failed login attempt"
       ],
       "expected_outputs": [
-        "Account unlocked"
+        "Account locked"
       ],
-      "coverage_criterion": "Constraint coverage",
+      "coverage_criterion": "Normal path",
+      "priority": "high",
+      "source_req_ids": [
+        "The system shall lock a user account after a specified number of failed login attempts or when requested using the lockAccount function."
+      ]
+    },
+    {
+      "tr_id": "AUTH_S-FUNC-016",
+      "preconditions": [
+        "System is online"
+      ],
+      "stimuli": [
+        "Lock account request for non-existent user account"
+      ],
+      "expected_outputs": [
+        "Error"
+      ],
+      "coverage_criterion": "Negative path",
       "priority": "medium",
       "source_req_ids": [
-        "Account lock duration: 30 minutes"
+        "The system shall lock a user account after a specified number of failed login attempts or when requested using the lockAccount function."
       ]
     },
     {
-      "tr_id": "AUTH_S-NFR_-018",
+      "tr_id": "AUTH_S-FUNC-017",
       "preconditions": [
-        "Session store request is received"
+        "User account exists",
+        "System is online"
       ],
       "stimuli": [
-        "Store session request"
+        "Valid user credentials"
       ],
       "expected_outputs": [
-        "Session TTL aligned with refresh token TTL"
+        "LOGIN_SUCCESS event"
       ],
-      "coverage_criterion": "Constraint coverage",
-      "priority": "low",
+      "coverage_criterion": "Normal path",
+      "priority": "high",
       "source_req_ids": [
-        "Session store TTL: aligned with refresh token TTL"
+        "The system shall return a LOGIN_SUCCESS event when a successful login occurs."
+      ]
+    },
+    {
+      "tr_id": "AUTH_S-FUNC-018",
+      "preconditions": [
+        "User account exists",
+        "System is online"
+      ],
+      "stimuli": [
+        "Invalid user credentials"
+      ],
+      "expected_outputs": [
+        "LOGIN_FAILURE event"
+      ],
+      "coverage_criterion": "Normal path",
+      "priority": "high",
+      "source_req_ids": [
+        "The system shall return a LOGIN_FAILURE event when an unsuccessful login occurs."
       ]
     },
     {
       "tr_id": "AUTH_S-NFR_-019",
       "preconditions": [
-        "User is logged in",
-        "Password change form is displayed"
+        "User is creating a new account"
       ],
       "stimuli": [
-        "User submits password change request with valid password"
+        "Invalid password input"
       ],
       "expected_outputs": [
-        "Password changed successfully message"
+        "Error message indicating invalid password format"
       ],
-      "coverage_criterion": "Constraint coverage",
+      "coverage_criterion": "Password complexity",
       "priority": "high",
       "source_req_ids": [
         "Password must contain uppercase, lowercase, digit, symbol"
@@ -399,15 +381,15 @@
     {
       "tr_id": "AUTH_S-NFR_-020",
       "preconditions": [
-        "Token verification request is received"
+        "Token generation request"
       ],
       "stimuli": [
-        "Verify token request"
+        "Token signing process"
       ],
       "expected_outputs": [
-        "Token verification result indicating valid signature"
+        "Token signed with RS256 algorithm"
       ],
-      "coverage_criterion": "Constraint coverage",
+      "coverage_criterion": "Token signing",
       "priority": "high",
       "source_req_ids": [
         "All tokens must be signed with RS256 (asymmetric)"
@@ -416,15 +398,15 @@
     {
       "tr_id": "AUTH_S-NFR_-021",
       "preconditions": [
-        "Connection request is received"
+        "Connection establishment request"
       ],
       "stimuli": [
-        "Establish connection request"
+        "TLS handshake process"
       ],
       "expected_outputs": [
-        "TLS 1.2 or higher protocol negotiated"
+        "Successful connection using TLS 1.2 or higher"
       ],
-      "coverage_criterion": "Constraint coverage",
+      "coverage_criterion": "TLS version",
       "priority": "high",
       "source_req_ids": [
         "TLS 1.2 minimum for all connections"
@@ -433,16 +415,15 @@
     {
       "tr_id": "AUTH_S-NFR_-022",
       "preconditions": [
-        "User is not logged in",
-        "Account is not locked"
+        "User is attempting to log in"
       ],
       "stimuli": [
-        "Failed login attempt"
+        "Multiple invalid login attempts"
       ],
       "expected_outputs": [
-        "Failed login attempt counter incremented"
+        "Account locked after 5 failed attempts"
       ],
-      "coverage_criterion": "Constraint coverage",
+      "coverage_criterion": "Failed login attempts",
       "priority": "medium",
       "source_req_ids": [
         "Max failed login attempts: 5 before lock"
@@ -454,12 +435,12 @@
         "Account is locked"
       ],
       "stimuli": [
-        "User attempts to log in while account is locked"
+        "Time elapsed (30 minutes)"
       ],
       "expected_outputs": [
-        "Message indicating remaining lock duration"
+        "Account unlocked after 30 minutes"
       ],
-      "coverage_criterion": "Constraint coverage",
+      "coverage_criterion": "Account lock duration",
       "priority": "medium",
       "source_req_ids": [
         "Account lock duration: 30 minutes"
@@ -468,15 +449,15 @@
     {
       "tr_id": "AUTH_S-NFR_-024",
       "preconditions": [
-        "Session store request is received"
+        "Session store creation request"
       ],
       "stimuli": [
-        "Store session request with mismatched TTL"
+        "Session store creation process"
       ],
       "expected_outputs": [
-        "Error message indicating TTL mismatch"
+        "Session store TTL aligned with refresh token TTL"
       ],
-      "coverage_criterion": "Constraint coverage",
+      "coverage_criterion": "Session store TTL",
       "priority": "low",
       "source_req_ids": [
         "Session store TTL: aligned with refresh token TTL"
@@ -491,7 +472,7 @@
         "6th consecutive failed login attempt"
       ],
       "expected_outputs": [
-        "Account locked",
+        "Account is locked",
         "Error message indicating account lock"
       ],
       "coverage_criterion": "Runtime constraint",
@@ -503,17 +484,17 @@
     {
       "tr_id": "AUTH_S-RUNT-026",
       "preconditions": [
-        "Account has been locked due to excessive failed login attempts"
+        "Account is locked",
+        "30 minutes have passed since lock"
       ],
       "stimuli": [
-        "Login attempt within 30 minutes of account lock"
+        "Elapsed time exceeds 30 minutes"
       ],
       "expected_outputs": [
-        "Error message indicating account lock",
-        "Login attempt fails"
+        "Account is unlocked"
       ],
       "coverage_criterion": "Runtime constraint",
-      "priority": "high",
+      "priority": "medium",
       "source_req_ids": [
         "Account lock duration: 30 minutes"
       ]
@@ -521,69 +502,31 @@
     {
       "tr_id": "AUTH_S-RUNT-027",
       "preconditions": [
-        "Session store TTL has been set"
+        "Session store TTL is set",
+        "TTL has expired"
       ],
       "stimuli": [
-        "TTL expiration"
+        "Elapsed time exceeds TTL"
       ],
       "expected_outputs": [
-        "Session data removed",
-        "No active sessions for user"
+        "Session data is removed"
       ],
       "coverage_criterion": "Runtime constraint",
-      "priority": "medium",
+      "priority": "low",
       "source_req_ids": [
         "Session store TTL: aligned with refresh token TTL"
       ]
     },
     {
-      "tr_id": "AUTH_S-RUNT-028",
+      "tr_id": "AUTH_S-INTE-028",
       "preconditions": [
-        "Account has been locked due to excessive failed login attempts",
-        "30 minutes have passed since account lock"
+        "User has a valid account"
       ],
       "stimuli": [
-        "Login attempt after 30 minutes of account lock"
+        "User submits login request with credentials"
       ],
       "expected_outputs": [
-        "Successful login",
-        "No error messages indicating account lock"
-      ],
-      "coverage_criterion": "Runtime constraint",
-      "priority": "high",
-      "source_req_ids": [
-        "Account lock duration: 30 minutes"
-      ]
-    },
-    {
-      "tr_id": "AUTH_S-RUNT-029",
-      "preconditions": [
-        "User has previously exceeded max failed login attempts"
-      ],
-      "stimuli": [
-        "Successful login"
-      ],
-      "expected_outputs": [
-        "Failed login attempt counter reset",
-        "No account lock"
-      ],
-      "coverage_criterion": "Runtime constraint",
-      "priority": "medium",
-      "source_req_ids": [
-        "Max failed login attempts: 5 before lock"
-      ]
-    },
-    {
-      "tr_id": "AUTH_S-INTE-030",
-      "preconditions": [
-        "User has valid credentials"
-      ],
-      "stimuli": [
-        "User submits login request"
-      ],
-      "expected_outputs": [
-        "System authenticates user",
-        "Login successful response"
+        "Validation result (success or failure)"
       ],
       "coverage_criterion": "Interface interaction",
       "priority": "high",
@@ -592,17 +535,15 @@
       ]
     },
     {
-      "tr_id": "AUTH_S-INTE-031",
+      "tr_id": "AUTH_S-INTE-029",
       "preconditions": [
-        "User is logged in",
-        "New password meets complexity requirements"
+        "User is logged in"
       ],
       "stimuli": [
-        "User submits new password"
+        "User submits new password and confirmation"
       ],
       "expected_outputs": [
-        "System updates user password",
-        "Password updated response"
+        "Password update result (success or failure)"
       ],
       "coverage_criterion": "Interface interaction",
       "priority": "medium",
@@ -611,16 +552,15 @@
       ]
     },
     {
-      "tr_id": "AUTH_S-INTE-032",
+      "tr_id": "AUTH_S-INTE-030",
       "preconditions": [
-        "Client has valid refresh token"
+        "Client has a valid refresh token"
       ],
       "stimuli": [
         "Client submits refresh token request"
       ],
       "expected_outputs": [
-        "System issues new access token",
-        "New access token response"
+        "New access token"
       ],
       "coverage_criterion": "Interface interaction",
       "priority": "medium",
@@ -629,34 +569,15 @@
       ]
     },
     {
-      "tr_id": "AUTH_S-INTE-033",
-      "preconditions": [
-        "Excessive login attempts detected"
-      ],
-      "stimuli": [
-        "Rate Limiter triggers lock account event"
-      ],
-      "expected_outputs": [
-        "System locks user account",
-        "Account locked response"
-      ],
-      "coverage_criterion": "Interface interaction",
-      "priority": "high",
-      "source_req_ids": [
-        "Rate Limiter -> Lock account due to excessive login attempts"
-      ]
-    },
-    {
-      "tr_id": "AUTH_S-INTE-034",
+      "tr_id": "AUTH_S-INTE-031",
       "preconditions": [
         "User is logged in"
       ],
       "stimuli": [
-        "User submits MFA enable request"
+        "User submits MFA configuration request"
       ],
       "expected_outputs": [
-        "System configures MFA settings",
-        "MFA enabled response"
+        "MFA configuration result (success or failure)"
       ],
       "coverage_criterion": "Interface interaction",
       "priority": "medium",
@@ -665,25 +586,24 @@
       ]
     },
     {
-      "tr_id": "AUTH_S-INTE-035",
+      "tr_id": "AUTH_S-INTE-032",
       "preconditions": [
-        "AuthRequest received"
+        "Multiple login attempts with incorrect credentials"
       ],
       "stimuli": [
-        "Request Router processes AuthRequest"
+        "AuthController detects multiple login failures"
       ],
       "expected_outputs": [
-        "System routes request to AuthController",
-        "AuthController response"
+        "Account locked notification"
       ],
-      "coverage_criterion": "Interface interaction",
+      "coverage_criterion": "Process flow",
       "priority": "high",
       "source_req_ids": [
-        "Request Router -> Route AuthRequest to AuthController"
+        "AuthController -> Lock account after multiple login failures"
       ]
     },
     {
-      "tr_id": "AUTH_S-INTE-036",
+      "tr_id": "AUTH_S-INTE-033",
       "preconditions": [
         "User is logged in"
       ],
@@ -691,8 +611,7 @@
         "User submits logout request"
       ],
       "expected_outputs": [
-        "System invalidates user session",
-        "Logout successful response"
+        "Access token invalidation result (success or failure)"
       ],
       "coverage_criterion": "Interface interaction",
       "priority": "medium",
@@ -701,185 +620,105 @@
       ]
     },
     {
-      "tr_id": "AUTH_S-INTE-037",
+      "tr_id": "AUTH_S-INTE-034",
       "preconditions": [
-        "Token received"
+        "AuthRequest is received"
       ],
       "stimuli": [
-        "TokenService processes token"
+        "AuthController processes AuthRequest"
       ],
       "expected_outputs": [
-        "System invalidates token",
-        "Token invalidated response"
+        "Validation result (success or failure)"
       ],
-      "coverage_criterion": "Interface interaction",
-      "priority": "medium",
+      "coverage_criterion": "Process flow",
+      "priority": "high",
       "source_req_ids": [
-        "TokenService -> Invalidate token"
+        "AuthController -> Validate AuthRequest"
+      ]
+    },
+    {
+      "tr_id": "AUTH_S-INTE-035",
+      "preconditions": [
+        "Credentials are received"
+      ],
+      "stimuli": [
+        "AuthService processes credentials"
+      ],
+      "expected_outputs": [
+        "Verification result (success or failure)"
+      ],
+      "coverage_criterion": "Process flow",
+      "priority": "high",
+      "source_req_ids": [
+        "AuthService -> Verify user credentials"
+      ]
+    },
+    {
+      "tr_id": "AUTH_S-INTE-036",
+      "preconditions": [
+        "AuthRequest is received"
+      ],
+      "stimuli": [
+        "System processes AuthRequest"
+      ],
+      "expected_outputs": [
+        "Validation result (success or failure)"
+      ],
+      "coverage_criterion": "Process flow",
+      "priority": "high",
+      "source_req_ids": [
+        "AuthController -> Validate AuthRequest"
+      ]
+    },
+    {
+      "tr_id": "AUTH_S-INTE-037",
+      "preconditions": [
+        "Credentials are received"
+      ],
+      "stimuli": [
+        "System processes credentials"
+      ],
+      "expected_outputs": [
+        "Verification result (success or failure)"
+      ],
+      "coverage_criterion": "Process flow",
+      "priority": "high",
+      "source_req_ids": [
+        "AuthService -> Verify user credentials"
       ]
     },
     {
       "tr_id": "AUTH_S-INTE-038",
       "preconditions": [
-        "User has valid credentials"
+        "Multiple login failures detected"
       ],
       "stimuli": [
-        "User submits login request"
+        "System locks account"
       ],
       "expected_outputs": [
-        "System authenticates user",
-        "Login successful response"
+        "Account locked notification"
       ],
       "coverage_criterion": "Process flow",
       "priority": "high",
       "source_req_ids": [
-        "User -> Login to the system"
+        "AuthController -> Lock account after multiple login failures"
       ]
     },
     {
       "tr_id": "AUTH_S-INTE-039",
       "preconditions": [
-        "User is logged in",
-        "New password meets complexity requirements"
+        "User is logged in"
       ],
       "stimuli": [
-        "User submits new password"
+        "System processes logout request"
       ],
       "expected_outputs": [
-        "System updates user password",
-        "Password updated response"
+        "Access token removal result (success or failure)"
       ],
       "coverage_criterion": "Process flow",
       "priority": "medium",
       "source_req_ids": [
-        "User -> Change password"
-      ]
-    },
-    {
-      "tr_id": "AUTH_S-INTE-040",
-      "preconditions": [
-        "Client has valid refresh token"
-      ],
-      "stimuli": [
-        "Client submits refresh token request"
-      ],
-      "expected_outputs": [
-        "System issues new access token",
-        "New access token response"
-      ],
-      "coverage_criterion": "Process flow",
-      "priority": "medium",
-      "source_req_ids": [
-        "Client -> Refresh token"
-      ]
-    },
-    {
-      "tr_id": "AUTH_S-INTE-041",
-      "preconditions": [
-        "Excessive login attempts detected"
-      ],
-      "stimuli": [
-        "Rate Limiter triggers lock account event"
-      ],
-      "expected_outputs": [
-        "System locks user account",
-        "Account locked response"
-      ],
-      "coverage_criterion": "Process flow",
-      "priority": "high",
-      "source_req_ids": [
-        "Rate Limiter -> Lock account due to excessive login attempts"
-      ]
-    },
-    {
-      "tr_id": "AUTH_S-CONS-042",
-      "preconditions": [
-        "User has not exceeded the maximum number of allowed login attempts"
-      ],
-      "stimuli": [
-        "Incorrect password entered for the fourth time"
-      ],
-      "expected_outputs": [
-        "Account locked",
-        "Error message indicating account lock"
-      ],
-      "coverage_criterion": "Boundary value analysis",
-      "priority": "high",
-      "source_req_ids": [
-        "[REQ-1]"
-      ]
-    },
-    {
-      "tr_id": "AUTH_S-CONS-043",
-      "preconditions": [
-        "Authentication request received"
-      ],
-      "stimuli": [
-        "Malformed authentication request with invalid JWT token"
-      ],
-      "expected_outputs": [
-        "Error message indicating invalid request format",
-        "Request rejected"
-      ],
-      "coverage_criterion": "Equivalence partitioning",
-      "priority": "high",
-      "source_req_ids": [
-        "[REQ-2]"
-      ]
-    },
-    {
-      "tr_id": "AUTH_S-CONS-044",
-      "preconditions": [
-        "User is authenticated"
-      ],
-      "stimuli": [
-        "Change password request submitted"
-      ],
-      "expected_outputs": [
-        "Prompt for current and new passwords",
-        "Password update form displayed"
-      ],
-      "coverage_criterion": "Use case coverage",
-      "priority": "medium",
-      "source_req_ids": [
-        "[REQ-3]"
-      ]
-    },
-    {
-      "tr_id": "AUTH_S-CONS-045",
-      "preconditions": [
-        "Database connection issue simulated"
-      ],
-      "stimuli": [
-        "User attempts to log in"
-      ],
-      "expected_outputs": [
-        "Error message indicating database connection issue",
-        "Request rejected"
-      ],
-      "coverage_criterion": "Fault injection",
-      "priority": "high",
-      "source_req_ids": [
-        "[REQ-4]"
-      ]
-    },
-    {
-      "tr_id": "AUTH_S-CONS-046",
-      "preconditions": [
-        "User is authenticated",
-        "Previous token refresh was over an hour ago"
-      ],
-      "stimuli": [
-        "Token refresh request submitted"
-      ],
-      "expected_outputs": [
-        "New authentication token issued",
-        "Token refresh successful message"
-      ],
-      "coverage_criterion": "State transition testing",
-      "priority": "medium",
-      "source_req_ids": [
-        "[REQ-5]"
+        "User -> Logout from the system"
       ]
     }
   ],
@@ -888,511 +727,500 @@
       "tr_id": "AUTH_S-FUNC-001",
       "category": "functional",
       "source_id": "auth_system_design",
-      "tr_h": "When a user submits valid credentials, the system shall authenticate the user.",
+      "tr_h": "When an AuthRequest is received, the system shall validate it to ensure conformance to expected format and content.",
       "tr_a": {
         "tr_id": "AUTH_S-FUNC-001",
         "preconditions": [
-          "User has a valid account",
-          "User is not locked out"
+          "System is online",
+          "AuthRequest is sent"
         ],
         "stimuli": [
-          "Valid username and password"
+          "Valid AuthRequest"
         ],
         "expected_outputs": [
-          "LOGIN_SUCCESS event",
-          "Authenticated session established"
+          "Validation success"
         ],
-        "coverage_criterion": "Normal-path",
+        "coverage_criterion": "Normal path",
         "priority": "high",
         "source_req_ids": [
-          "The system shall validate user credentials to ensure authenticity."
+          "The system shall validate the AuthRequest to ensure it conforms to the expected format and content."
         ]
       },
       "source_req_ids": [
-        "The system shall validate user credentials to ensure authenticity."
+        "The system shall validate the AuthRequest to ensure it conforms to the expected format and content."
       ]
     },
     {
       "tr_id": "AUTH_S-FUNC-002",
       "category": "functional",
       "source_id": "auth_system_design",
-      "tr_h": "When a user submits invalid credentials, the system shall not authenticate the user.",
+      "tr_h": "When an AuthRequest with invalid format is received, the system shall return a validation error.",
       "tr_a": {
         "tr_id": "AUTH_S-FUNC-002",
         "preconditions": [
-          "User has a valid account",
-          "User is not locked out"
+          "System is online",
+          "AuthRequest is sent"
         ],
         "stimuli": [
-          "Invalid username or password"
+          "Invalidly formatted AuthRequest"
         ],
         "expected_outputs": [
-          "LOGIN_FAILURE event",
-          "Authentication error message"
+          "Validation error"
         ],
-        "coverage_criterion": "Negative-path",
-        "priority": "high",
+        "coverage_criterion": "Boundary condition",
+        "priority": "medium",
         "source_req_ids": [
-          "The system shall validate user credentials to ensure authenticity."
+          "The system shall validate the AuthRequest to ensure it conforms to the expected format and content."
         ]
       },
       "source_req_ids": [
-        "The system shall validate user credentials to ensure authenticity."
+        "The system shall validate the AuthRequest to ensure it conforms to the expected format and content."
       ]
     },
     {
       "tr_id": "AUTH_S-FUNC-003",
       "category": "functional",
       "source_id": "auth_system_design",
-      "tr_h": "When a user submits credentials with exactly the maximum allowed number of characters, the system shall authenticate the user.",
+      "tr_h": "When an AuthRequest with missing fields is received, the system shall return a validation error.",
       "tr_a": {
         "tr_id": "AUTH_S-FUNC-003",
         "preconditions": [
-          "User has a valid account",
-          "User is not locked out"
+          "System is online",
+          "AuthRequest is sent"
         ],
         "stimuli": [
-          "Username and password with maximum allowed characters"
+          "AuthRequest with missing fields"
         ],
         "expected_outputs": [
-          "LOGIN_SUCCESS event",
-          "Authenticated session established"
+          "Validation error"
         ],
-        "coverage_criterion": "Boundary-condition",
+        "coverage_criterion": "Negative path",
         "priority": "medium",
         "source_req_ids": [
-          "The system shall validate user credentials to ensure authenticity."
+          "The system shall validate the AuthRequest to ensure it conforms to the expected format and content."
         ]
       },
       "source_req_ids": [
-        "The system shall validate user credentials to ensure authenticity."
+        "The system shall validate the AuthRequest to ensure it conforms to the expected format and content."
       ]
     },
     {
       "tr_id": "AUTH_S-FUNC-004",
       "category": "functional",
       "source_id": "auth_system_design",
-      "tr_h": "When a user requests MFA, the system shall enable multi-factor authentication.",
+      "tr_h": "When a token or session is checked for expiration, the system shall determine if it has expired using the isExpired() function.",
       "tr_a": {
         "tr_id": "AUTH_S-FUNC-004",
         "preconditions": [
-          "User has a valid account",
-          "MFA is not already enabled"
+          "Token or session exists",
+          "System is online"
         ],
         "stimuli": [
-          "MFA request from user"
+          "Check expiration request"
         ],
         "expected_outputs": [
-          "MFA enabled for user",
-          "MFA setup instructions provided"
+          "Expiration status"
         ],
-        "coverage_criterion": "Normal-path",
-        "priority": "medium",
+        "coverage_criterion": "Normal path",
+        "priority": "high",
         "source_req_ids": [
-          "The system shall enable multi-factor authentication (MFA) for users upon request."
+          "The system shall determine if a token or session has expired using the isExpired() function."
         ]
       },
       "source_req_ids": [
-        "The system shall enable multi-factor authentication (MFA) for users upon request."
+        "The system shall determine if a token or session has expired using the isExpired() function."
       ]
     },
     {
       "tr_id": "AUTH_S-FUNC-005",
       "category": "functional",
       "source_id": "auth_system_design",
-      "tr_h": "When a user requests MFA with an invalid phone number, the system shall not enable MFA.",
+      "tr_h": "When a token or session with an invalid expiration date is checked, the system shall return an error.",
       "tr_a": {
         "tr_id": "AUTH_S-FUNC-005",
         "preconditions": [
-          "User has a valid account",
-          "MFA is not already enabled"
+          "Token or session exists",
+          "System is online"
         ],
         "stimuli": [
-          "MFA request from user with invalid phone number"
+          "Check expiration request for invalid date"
         ],
         "expected_outputs": [
-          "Error message indicating invalid phone number"
+          "Error"
         ],
-        "coverage_criterion": "Negative-path",
+        "coverage_criterion": "Boundary condition",
         "priority": "medium",
         "source_req_ids": [
-          "The system shall enable multi-factor authentication (MFA) for users upon request."
+          "The system shall determine if a token or session has expired using the isExpired() function."
         ]
       },
       "source_req_ids": [
-        "The system shall enable multi-factor authentication (MFA) for users upon request."
+        "The system shall determine if a token or session has expired using the isExpired() function."
       ]
     },
     {
       "tr_id": "AUTH_S-FUNC-006",
       "category": "functional",
       "source_id": "auth_system_design",
-      "tr_h": "When a user requests MFA with a phone number that is exactly the minimum required length, the system shall enable MFA.",
+      "tr_h": "When a non-existent token or session is checked for expiration, the system shall return an error.",
       "tr_a": {
         "tr_id": "AUTH_S-FUNC-006",
         "preconditions": [
-          "User has a valid account",
-          "MFA is not already enabled"
+          "System is online"
         ],
         "stimuli": [
-          "MFA request from user with phone number of minimum required length"
+          "Check expiration request for non-existent token/session"
         ],
         "expected_outputs": [
-          "MFA enabled for user",
-          "MFA setup instructions provided"
+          "Error"
         ],
-        "coverage_criterion": "Boundary-condition",
-        "priority": "low",
+        "coverage_criterion": "Negative path",
+        "priority": "medium",
         "source_req_ids": [
-          "The system shall enable multi-factor authentication (MFA) for users upon request."
+          "The system shall determine if a token or session has expired using the isExpired() function."
         ]
       },
       "source_req_ids": [
-        "The system shall enable multi-factor authentication (MFA) for users upon request."
+        "The system shall determine if a token or session has expired using the isExpired() function."
       ]
     },
     {
       "tr_id": "AUTH_S-FUNC-007",
       "category": "functional",
       "source_id": "auth_system_design",
-      "tr_h": "When a user exceeds the maximum allowed number of failed login attempts, the system shall lock the user's account.",
+      "tr_h": "When a refresh request for an existing token or session is received, the system shall refresh it using the refresh() function.",
       "tr_a": {
         "tr_id": "AUTH_S-FUNC-007",
         "preconditions": [
-          "User has a valid account",
-          "Account is not already locked"
+          "Token or session exists",
+          "System is online"
         ],
         "stimuli": [
-          "Multiple consecutive invalid login attempts"
+          "Refresh request"
         ],
         "expected_outputs": [
-          "Account locked",
-          "Error message indicating account lock"
+          "Refreshed token/session"
         ],
-        "coverage_criterion": "Normal-path",
+        "coverage_criterion": "Normal path",
         "priority": "high",
         "source_req_ids": [
-          "The system shall lock a user's account after a specified number of failed login attempts."
+          "The system shall refresh an existing token or session when requested using the refresh() function."
         ]
       },
       "source_req_ids": [
-        "The system shall lock a user's account after a specified number of failed login attempts."
+        "The system shall refresh an existing token or session when requested using the refresh() function."
       ]
     },
     {
       "tr_id": "AUTH_S-FUNC-008",
       "category": "functional",
       "source_id": "auth_system_design",
-      "tr_h": "When a user exceeds the maximum allowed number of failed login attempts with an invalid username, the system shall not lock the account.",
+      "tr_h": "When a refresh request for a non-existent token or session is received, the system shall return an error.",
       "tr_a": {
         "tr_id": "AUTH_S-FUNC-008",
         "preconditions": [
-          "User has a valid account",
-          "Account is not already locked"
+          "System is online"
         ],
         "stimuli": [
-          "Multiple consecutive invalid login attempts with invalid username"
+          "Refresh request for non-existent token/session"
         ],
         "expected_outputs": [
-          "Error message indicating invalid username"
+          "Error"
         ],
-        "coverage_criterion": "Negative-path",
-        "priority": "high",
+        "coverage_criterion": "Negative path",
+        "priority": "medium",
         "source_req_ids": [
-          "The system shall lock a user's account after a specified number of failed login attempts."
+          "The system shall refresh an existing token or session when requested using the refresh() function."
         ]
       },
       "source_req_ids": [
-        "The system shall lock a user's account after a specified number of failed login attempts."
+        "The system shall refresh an existing token or session when requested using the refresh() function."
       ]
     },
     {
       "tr_id": "AUTH_S-FUNC-009",
       "category": "functional",
       "source_id": "auth_system_design",
-      "tr_h": "When a user exceeds the maximum allowed number of failed login attempts with exactly the threshold number of attempts, the system shall lock the user's account.",
+      "tr_h": "When an invalidate request for a token or session is received, the system shall invalidate it using the invalidate() function.",
       "tr_a": {
         "tr_id": "AUTH_S-FUNC-009",
         "preconditions": [
-          "User has a valid account",
-          "Account is not already locked"
+          "Token or session exists",
+          "System is online"
         ],
         "stimuli": [
-          "Multiple consecutive invalid login attempts equal to the threshold"
+          "Invalidate request"
         ],
         "expected_outputs": [
-          "Account locked",
-          "Error message indicating account lock"
+          "Invalidated token/session"
         ],
-        "coverage_criterion": "Boundary-condition",
-        "priority": "medium",
+        "coverage_criterion": "Normal path",
+        "priority": "high",
         "source_req_ids": [
-          "The system shall lock a user's account after a specified number of failed login attempts."
+          "The system shall invalidate a token or session when requested using the invalidate() function."
         ]
       },
       "source_req_ids": [
-        "The system shall lock a user's account after a specified number of failed login attempts."
+        "The system shall invalidate a token or session when requested using the invalidate() function."
       ]
     },
     {
       "tr_id": "AUTH_S-FUNC-010",
       "category": "functional",
       "source_id": "auth_system_design",
-      "tr_h": "When a token or session has expired, the system shall require re-authentication.",
+      "tr_h": "When an invalidate request for a non-existent token or session is received, the system shall return an error.",
       "tr_a": {
         "tr_id": "AUTH_S-FUNC-010",
         "preconditions": [
-          "User has a valid account",
-          "Token or session is active"
+          "System is online"
         ],
         "stimuli": [
-          "Expired token or session"
+          "Invalidate request for non-existent token/session"
         ],
         "expected_outputs": [
-          "Re-authentication request",
-          "Error message indicating expiration"
+          "Error"
         ],
-        "coverage_criterion": "Normal-path",
-        "priority": "high",
+        "coverage_criterion": "Negative path",
+        "priority": "medium",
         "source_req_ids": [
-          "The system shall check if a token or session has expired and require re-authentication."
+          "The system shall invalidate a token or session when requested using the invalidate() function."
         ]
       },
       "source_req_ids": [
-        "The system shall check if a token or session has expired and require re-authentication."
+        "The system shall invalidate a token or session when requested using the invalidate() function."
       ]
     },
     {
       "tr_id": "AUTH_S-FUNC-011",
       "category": "functional",
       "source_id": "auth_system_design",
-      "tr_h": "When a user attempts to use an expired token, the system shall not authenticate the user.",
+      "tr_h": "When user credentials are submitted, the system shall validate them to ensure they match stored values.",
       "tr_a": {
         "tr_id": "AUTH_S-FUNC-011",
         "preconditions": [
-          "User has a valid account",
-          "Token is active"
+          "User account exists",
+          "System is online"
         ],
         "stimuli": [
-          "Expired token"
+          "Valid user credentials"
         ],
         "expected_outputs": [
-          "Error message indicating expired token"
+          "Validation success"
         ],
-        "coverage_criterion": "Negative-path",
+        "coverage_criterion": "Normal path",
         "priority": "high",
         "source_req_ids": [
-          "The system shall check if a token or session has expired and require re-authentication."
+          "The system shall validate user credentials to ensure they match stored values."
         ]
       },
       "source_req_ids": [
-        "The system shall check if a token or session has expired and require re-authentication."
+        "The system shall validate user credentials to ensure they match stored values."
       ]
     },
     {
       "tr_id": "AUTH_S-FUNC-012",
       "category": "functional",
       "source_id": "auth_system_design",
-      "tr_h": "When a user attempts to use a token that is exactly at the expiration threshold, the system shall require re-authentication.",
+      "tr_h": "When invalid user credentials are submitted, the system shall return a validation error.",
       "tr_a": {
         "tr_id": "AUTH_S-FUNC-012",
         "preconditions": [
-          "User has a valid account",
-          "Token is active"
+          "User account exists",
+          "System is online"
         ],
         "stimuli": [
-          "Token at expiration threshold"
+          "Invalid user credentials"
         ],
         "expected_outputs": [
-          "Re-authentication request",
-          "Error message indicating expiration"
+          "Validation error"
         ],
-        "coverage_criterion": "Boundary-condition",
+        "coverage_criterion": "Negative path",
         "priority": "medium",
         "source_req_ids": [
-          "The system shall check if a token or session has expired and require re-authentication."
+          "The system shall validate user credentials to ensure they match stored values."
         ]
       },
       "source_req_ids": [
-        "The system shall check if a token or session has expired and require re-authentication."
+        "The system shall validate user credentials to ensure they match stored values."
       ]
     },
     {
-      "tr_id": "AUTH_S-NFR_-013",
-      "category": "nfr_constraint",
+      "tr_id": "AUTH_S-FUNC-013",
+      "category": "functional",
       "source_id": "auth_system_design",
-      "tr_h": "When a user attempts to set a password, the system shall reject the password if it does not contain at least one uppercase letter, one lowercase letter, one digit, and one symbol.",
+      "tr_h": "When a request to enable MFA for a user account is received, the system shall enable it using the enableMFA function.",
       "tr_a": {
-        "tr_id": "AUTH_S-NFR_-013",
+        "tr_id": "AUTH_S-FUNC-013",
         "preconditions": [
-          "User is logged in",
-          "Password change form is displayed"
+          "User account exists",
+          "System is online"
         ],
         "stimuli": [
-          "User submits password change request with invalid password"
+          "Enable MFA request"
         ],
         "expected_outputs": [
-          "Error message indicating password requirements"
+          "MFA enabled"
         ],
-        "coverage_criterion": "Constraint coverage",
+        "coverage_criterion": "Normal path",
         "priority": "high",
         "source_req_ids": [
-          "Password must contain uppercase, lowercase, digit, symbol"
+          "The system shall enable multi-factor authentication (MFA) for a user account when requested using the enableMFA function."
         ]
       },
       "source_req_ids": [
-        "Password must contain uppercase, lowercase, digit, symbol"
+        "The system shall enable multi-factor authentication (MFA) for a user account when requested using the enableMFA function."
       ]
     },
     {
-      "tr_id": "AUTH_S-NFR_-014",
-      "category": "nfr_constraint",
+      "tr_id": "AUTH_S-FUNC-014",
+      "category": "functional",
       "source_id": "auth_system_design",
-      "tr_h": "When a token is generated, the system shall sign it with RS256 (asymmetric) algorithm.",
+      "tr_h": "When a request to enable MFA for a non-existent user account is received, the system shall return an error.",
       "tr_a": {
-        "tr_id": "AUTH_S-NFR_-014",
+        "tr_id": "AUTH_S-FUNC-014",
         "preconditions": [
-          "Token generation request is received"
+          "System is online"
         ],
         "stimuli": [
-          "Generate token request"
+          "Enable MFA request for non-existent user account"
         ],
         "expected_outputs": [
-          "Token signed with RS256 algorithm"
+          "Error"
         ],
-        "coverage_criterion": "Constraint coverage",
-        "priority": "high",
-        "source_req_ids": [
-          "All tokens must be signed with RS256 (asymmetric)"
-        ]
-      },
-      "source_req_ids": [
-        "All tokens must be signed with RS256 (asymmetric)"
-      ]
-    },
-    {
-      "tr_id": "AUTH_S-NFR_-015",
-      "category": "nfr_constraint",
-      "source_id": "auth_system_design",
-      "tr_h": "When a connection is established, the system shall use TLS 1.2 or higher protocol.",
-      "tr_a": {
-        "tr_id": "AUTH_S-NFR_-015",
-        "preconditions": [
-          "Connection request is received"
-        ],
-        "stimuli": [
-          "Establish connection request"
-        ],
-        "expected_outputs": [
-          "TLS 1.2 or higher protocol used"
-        ],
-        "coverage_criterion": "Constraint coverage",
-        "priority": "high",
-        "source_req_ids": [
-          "TLS 1.2 minimum for all connections"
-        ]
-      },
-      "source_req_ids": [
-        "TLS 1.2 minimum for all connections"
-      ]
-    },
-    {
-      "tr_id": "AUTH_S-NFR_-016",
-      "category": "nfr_constraint",
-      "source_id": "auth_system_design",
-      "tr_h": "When a user attempts to log in, the system shall lock the account after 5 failed login attempts.",
-      "tr_a": {
-        "tr_id": "AUTH_S-NFR_-016",
-        "preconditions": [
-          "User is not logged in",
-          "Account is not locked"
-        ],
-        "stimuli": [
-          "5 consecutive failed login attempts"
-        ],
-        "expected_outputs": [
-          "Account locked message"
-        ],
-        "coverage_criterion": "Constraint coverage",
+        "coverage_criterion": "Negative path",
         "priority": "medium",
         "source_req_ids": [
-          "Max failed login attempts: 5 before lock"
+          "The system shall enable multi-factor authentication (MFA) for a user account when requested using the enableMFA function."
         ]
       },
       "source_req_ids": [
-        "Max failed login attempts: 5 before lock"
+        "The system shall enable multi-factor authentication (MFA) for a user account when requested using the enableMFA function."
       ]
     },
     {
-      "tr_id": "AUTH_S-NFR_-017",
-      "category": "nfr_constraint",
+      "tr_id": "AUTH_S-FUNC-015",
+      "category": "functional",
       "source_id": "auth_system_design",
-      "tr_h": "When an account is locked, the system shall unlock it after 30 minutes.",
+      "tr_h": "When a specified number of failed login attempts is reached, the system shall lock the user account.",
       "tr_a": {
-        "tr_id": "AUTH_S-NFR_-017",
+        "tr_id": "AUTH_S-FUNC-015",
         "preconditions": [
-          "Account is locked"
+          "User account exists",
+          "System is online"
         ],
         "stimuli": [
-          "Wait for 30 minutes"
+          "Failed login attempt"
         ],
         "expected_outputs": [
-          "Account unlocked"
+          "Account locked"
         ],
-        "coverage_criterion": "Constraint coverage",
+        "coverage_criterion": "Normal path",
+        "priority": "high",
+        "source_req_ids": [
+          "The system shall lock a user account after a specified number of failed login attempts or when requested using the lockAccount function."
+        ]
+      },
+      "source_req_ids": [
+        "The system shall lock a user account after a specified number of failed login attempts or when requested using the lockAccount function."
+      ]
+    },
+    {
+      "tr_id": "AUTH_S-FUNC-016",
+      "category": "functional",
+      "source_id": "auth_system_design",
+      "tr_h": "When a request to lock a non-existent user account is received, the system shall return an error.",
+      "tr_a": {
+        "tr_id": "AUTH_S-FUNC-016",
+        "preconditions": [
+          "System is online"
+        ],
+        "stimuli": [
+          "Lock account request for non-existent user account"
+        ],
+        "expected_outputs": [
+          "Error"
+        ],
+        "coverage_criterion": "Negative path",
         "priority": "medium",
         "source_req_ids": [
-          "Account lock duration: 30 minutes"
+          "The system shall lock a user account after a specified number of failed login attempts or when requested using the lockAccount function."
         ]
       },
       "source_req_ids": [
-        "Account lock duration: 30 minutes"
+        "The system shall lock a user account after a specified number of failed login attempts or when requested using the lockAccount function."
       ]
     },
     {
-      "tr_id": "AUTH_S-NFR_-018",
-      "category": "nfr_constraint",
+      "tr_id": "AUTH_S-FUNC-017",
+      "category": "functional",
       "source_id": "auth_system_design",
-      "tr_h": "When a session is stored, the system shall set its TTL to be aligned with the refresh token TTL.",
+      "tr_h": "When a successful login occurs, the system shall return a LOGIN_SUCCESS event.",
       "tr_a": {
-        "tr_id": "AUTH_S-NFR_-018",
+        "tr_id": "AUTH_S-FUNC-017",
         "preconditions": [
-          "Session store request is received"
+          "User account exists",
+          "System is online"
         ],
         "stimuli": [
-          "Store session request"
+          "Valid user credentials"
         ],
         "expected_outputs": [
-          "Session TTL aligned with refresh token TTL"
+          "LOGIN_SUCCESS event"
         ],
-        "coverage_criterion": "Constraint coverage",
-        "priority": "low",
+        "coverage_criterion": "Normal path",
+        "priority": "high",
         "source_req_ids": [
-          "Session store TTL: aligned with refresh token TTL"
+          "The system shall return a LOGIN_SUCCESS event when a successful login occurs."
         ]
       },
       "source_req_ids": [
-        "Session store TTL: aligned with refresh token TTL"
+        "The system shall return a LOGIN_SUCCESS event when a successful login occurs."
+      ]
+    },
+    {
+      "tr_id": "AUTH_S-FUNC-018",
+      "category": "functional",
+      "source_id": "auth_system_design",
+      "tr_h": "When an unsuccessful login occurs, the system shall return a LOGIN_FAILURE event.",
+      "tr_a": {
+        "tr_id": "AUTH_S-FUNC-018",
+        "preconditions": [
+          "User account exists",
+          "System is online"
+        ],
+        "stimuli": [
+          "Invalid user credentials"
+        ],
+        "expected_outputs": [
+          "LOGIN_FAILURE event"
+        ],
+        "coverage_criterion": "Normal path",
+        "priority": "high",
+        "source_req_ids": [
+          "The system shall return a LOGIN_FAILURE event when an unsuccessful login occurs."
+        ]
+      },
+      "source_req_ids": [
+        "The system shall return a LOGIN_FAILURE event when an unsuccessful login occurs."
       ]
     },
     {
       "tr_id": "AUTH_S-NFR_-019",
       "category": "nfr_constraint",
       "source_id": "auth_system_design",
-      "tr_h": "When a password change request is received, the system shall verify that the new password meets the password requirements.",
+      "tr_h": "When a user attempts to create an account, the system shall reject the password if it does not contain at least one uppercase letter, one lowercase letter, one digit, and one symbol.",
       "tr_a": {
         "tr_id": "AUTH_S-NFR_-019",
         "preconditions": [
-          "User is logged in",
-          "Password change form is displayed"
+          "User is creating a new account"
         ],
         "stimuli": [
-          "User submits password change request with valid password"
+          "Invalid password input"
         ],
         "expected_outputs": [
-          "Password changed successfully message"
+          "Error message indicating invalid password format"
         ],
-        "coverage_criterion": "Constraint coverage",
+        "coverage_criterion": "Password complexity",
         "priority": "high",
         "source_req_ids": [
           "Password must contain uppercase, lowercase, digit, symbol"
@@ -1406,19 +1234,19 @@
       "tr_id": "AUTH_S-NFR_-020",
       "category": "nfr_constraint",
       "source_id": "auth_system_design",
-      "tr_h": "When a token is verified, the system shall check that it was signed with RS256 (asymmetric) algorithm.",
+      "tr_h": "When a token is generated, the system shall sign it with RS256 (asymmetric) algorithm.",
       "tr_a": {
         "tr_id": "AUTH_S-NFR_-020",
         "preconditions": [
-          "Token verification request is received"
+          "Token generation request"
         ],
         "stimuli": [
-          "Verify token request"
+          "Token signing process"
         ],
         "expected_outputs": [
-          "Token verification result indicating valid signature"
+          "Token signed with RS256 algorithm"
         ],
-        "coverage_criterion": "Constraint coverage",
+        "coverage_criterion": "Token signing",
         "priority": "high",
         "source_req_ids": [
           "All tokens must be signed with RS256 (asymmetric)"
@@ -1432,19 +1260,19 @@
       "tr_id": "AUTH_S-NFR_-021",
       "category": "nfr_constraint",
       "source_id": "auth_system_design",
-      "tr_h": "When a connection is established, the system shall negotiate TLS 1.2 or higher protocol.",
+      "tr_h": "When a connection is established, the system shall use TLS 1.2 or higher protocol.",
       "tr_a": {
         "tr_id": "AUTH_S-NFR_-021",
         "preconditions": [
-          "Connection request is received"
+          "Connection establishment request"
         ],
         "stimuli": [
-          "Establish connection request"
+          "TLS handshake process"
         ],
         "expected_outputs": [
-          "TLS 1.2 or higher protocol negotiated"
+          "Successful connection using TLS 1.2 or higher"
         ],
-        "coverage_criterion": "Constraint coverage",
+        "coverage_criterion": "TLS version",
         "priority": "high",
         "source_req_ids": [
           "TLS 1.2 minimum for all connections"
@@ -1458,20 +1286,19 @@
       "tr_id": "AUTH_S-NFR_-022",
       "category": "nfr_constraint",
       "source_id": "auth_system_design",
-      "tr_h": "When a user attempts to log in, the system shall increment the failed login attempt counter.",
+      "tr_h": "When a user exceeds the maximum failed login attempts, the system shall lock the account within 5 attempts.",
       "tr_a": {
         "tr_id": "AUTH_S-NFR_-022",
         "preconditions": [
-          "User is not logged in",
-          "Account is not locked"
+          "User is attempting to log in"
         ],
         "stimuli": [
-          "Failed login attempt"
+          "Multiple invalid login attempts"
         ],
         "expected_outputs": [
-          "Failed login attempt counter incremented"
+          "Account locked after 5 failed attempts"
         ],
-        "coverage_criterion": "Constraint coverage",
+        "coverage_criterion": "Failed login attempts",
         "priority": "medium",
         "source_req_ids": [
           "Max failed login attempts: 5 before lock"
@@ -1485,19 +1312,19 @@
       "tr_id": "AUTH_S-NFR_-023",
       "category": "nfr_constraint",
       "source_id": "auth_system_design",
-      "tr_h": "When an account is locked, the system shall display a message indicating the remaining lock duration.",
+      "tr_h": "When an account is locked, the system shall unlock it within 30 minutes.",
       "tr_a": {
         "tr_id": "AUTH_S-NFR_-023",
         "preconditions": [
           "Account is locked"
         ],
         "stimuli": [
-          "User attempts to log in while account is locked"
+          "Time elapsed (30 minutes)"
         ],
         "expected_outputs": [
-          "Message indicating remaining lock duration"
+          "Account unlocked after 30 minutes"
         ],
-        "coverage_criterion": "Constraint coverage",
+        "coverage_criterion": "Account lock duration",
         "priority": "medium",
         "source_req_ids": [
           "Account lock duration: 30 minutes"
@@ -1511,19 +1338,19 @@
       "tr_id": "AUTH_S-NFR_-024",
       "category": "nfr_constraint",
       "source_id": "auth_system_design",
-      "tr_h": "When a session is stored, the system shall set its TTL to be aligned with the refresh token TTL.",
+      "tr_h": "When a session store is created, the system shall set its TTL to be aligned with the refresh token TTL.",
       "tr_a": {
         "tr_id": "AUTH_S-NFR_-024",
         "preconditions": [
-          "Session store request is received"
+          "Session store creation request"
         ],
         "stimuli": [
-          "Store session request with mismatched TTL"
+          "Session store creation process"
         ],
         "expected_outputs": [
-          "Error message indicating TTL mismatch"
+          "Session store TTL aligned with refresh token TTL"
         ],
-        "coverage_criterion": "Constraint coverage",
+        "coverage_criterion": "Session store TTL",
         "priority": "low",
         "source_req_ids": [
           "Session store TTL: aligned with refresh token TTL"
@@ -1547,7 +1374,7 @@
           "6th consecutive failed login attempt"
         ],
         "expected_outputs": [
-          "Account locked",
+          "Account is locked",
           "Error message indicating account lock"
         ],
         "coverage_criterion": "Runtime constraint",
@@ -1564,21 +1391,21 @@
       "tr_id": "AUTH_S-RUNT-026",
       "category": "runtime_environment",
       "source_id": "auth_system_design",
-      "tr_h": "When an account is locked, the system shall prevent login for 30 minutes.",
+      "tr_h": "When an account has been locked for 30 minutes, the system shall automatically unlock it.",
       "tr_a": {
         "tr_id": "AUTH_S-RUNT-026",
         "preconditions": [
-          "Account has been locked due to excessive failed login attempts"
+          "Account is locked",
+          "30 minutes have passed since lock"
         ],
         "stimuli": [
-          "Login attempt within 30 minutes of account lock"
+          "Elapsed time exceeds 30 minutes"
         ],
         "expected_outputs": [
-          "Error message indicating account lock",
-          "Login attempt fails"
+          "Account is unlocked"
         ],
         "coverage_criterion": "Runtime constraint",
-        "priority": "high",
+        "priority": "medium",
         "source_req_ids": [
           "Account lock duration: 30 minutes"
         ]
@@ -1591,21 +1418,21 @@
       "tr_id": "AUTH_S-RUNT-027",
       "category": "runtime_environment",
       "source_id": "auth_system_design",
-      "tr_h": "When a session store TTL expires, the system shall remove the associated session data.",
+      "tr_h": "When a session store TTL expires, the system shall remove the corresponding session data.",
       "tr_a": {
         "tr_id": "AUTH_S-RUNT-027",
         "preconditions": [
-          "Session store TTL has been set"
+          "Session store TTL is set",
+          "TTL has expired"
         ],
         "stimuli": [
-          "TTL expiration"
+          "Elapsed time exceeds TTL"
         ],
         "expected_outputs": [
-          "Session data removed",
-          "No active sessions for user"
+          "Session data is removed"
         ],
         "coverage_criterion": "Runtime constraint",
-        "priority": "medium",
+        "priority": "low",
         "source_req_ids": [
           "Session store TTL: aligned with refresh token TTL"
         ]
@@ -1615,76 +1442,20 @@
       ]
     },
     {
-      "tr_id": "AUTH_S-RUNT-028",
-      "category": "runtime_environment",
-      "source_id": "auth_system_design",
-      "tr_h": "When a user attempts to log in after account lock duration has expired, the system shall allow login.",
-      "tr_a": {
-        "tr_id": "AUTH_S-RUNT-028",
-        "preconditions": [
-          "Account has been locked due to excessive failed login attempts",
-          "30 minutes have passed since account lock"
-        ],
-        "stimuli": [
-          "Login attempt after 30 minutes of account lock"
-        ],
-        "expected_outputs": [
-          "Successful login",
-          "No error messages indicating account lock"
-        ],
-        "coverage_criterion": "Runtime constraint",
-        "priority": "high",
-        "source_req_ids": [
-          "Account lock duration: 30 minutes"
-        ]
-      },
-      "source_req_ids": [
-        "Account lock duration: 30 minutes"
-      ]
-    },
-    {
-      "tr_id": "AUTH_S-RUNT-029",
-      "category": "runtime_environment",
-      "source_id": "auth_system_design",
-      "tr_h": "When a user logs in successfully, the system shall reset failed login attempt counter.",
-      "tr_a": {
-        "tr_id": "AUTH_S-RUNT-029",
-        "preconditions": [
-          "User has previously exceeded max failed login attempts"
-        ],
-        "stimuli": [
-          "Successful login"
-        ],
-        "expected_outputs": [
-          "Failed login attempt counter reset",
-          "No account lock"
-        ],
-        "coverage_criterion": "Runtime constraint",
-        "priority": "medium",
-        "source_req_ids": [
-          "Max failed login attempts: 5 before lock"
-        ]
-      },
-      "source_req_ids": [
-        "Max failed login attempts: 5 before lock"
-      ]
-    },
-    {
-      "tr_id": "AUTH_S-INTE-030",
+      "tr_id": "AUTH_S-INTE-028",
       "category": "interface_exception",
       "source_id": "auth_system_design",
-      "tr_h": "When User attempts to Login, the System shall authenticate credentials.",
+      "tr_h": "When user attempts to login, the system shall validate username and password.",
       "tr_a": {
-        "tr_id": "AUTH_S-INTE-030",
+        "tr_id": "AUTH_S-INTE-028",
         "preconditions": [
-          "User has valid credentials"
+          "User has a valid account"
         ],
         "stimuli": [
-          "User submits login request"
+          "User submits login request with credentials"
         ],
         "expected_outputs": [
-          "System authenticates user",
-          "Login successful response"
+          "Validation result (success or failure)"
         ],
         "coverage_criterion": "Interface interaction",
         "priority": "high",
@@ -1697,22 +1468,20 @@
       ]
     },
     {
-      "tr_id": "AUTH_S-INTE-031",
+      "tr_id": "AUTH_S-INTE-029",
       "category": "interface_exception",
       "source_id": "auth_system_design",
-      "tr_h": "When User attempts to Change password, the System shall update password.",
+      "tr_h": "When user requests password change, the system shall update user's password.",
       "tr_a": {
-        "tr_id": "AUTH_S-INTE-031",
+        "tr_id": "AUTH_S-INTE-029",
         "preconditions": [
-          "User is logged in",
-          "New password meets complexity requirements"
+          "User is logged in"
         ],
         "stimuli": [
-          "User submits new password"
+          "User submits new password and confirmation"
         ],
         "expected_outputs": [
-          "System updates user password",
-          "Password updated response"
+          "Password update result (success or failure)"
         ],
         "coverage_criterion": "Interface interaction",
         "priority": "medium",
@@ -1725,21 +1494,20 @@
       ]
     },
     {
-      "tr_id": "AUTH_S-INTE-032",
+      "tr_id": "AUTH_S-INTE-030",
       "category": "interface_exception",
       "source_id": "auth_system_design",
-      "tr_h": "When Client requests Refresh token, the System shall issue new access token.",
+      "tr_h": "When client requests token refresh, the system shall generate new access token.",
       "tr_a": {
-        "tr_id": "AUTH_S-INTE-032",
+        "tr_id": "AUTH_S-INTE-030",
         "preconditions": [
-          "Client has valid refresh token"
+          "Client has a valid refresh token"
         ],
         "stimuli": [
           "Client submits refresh token request"
         ],
         "expected_outputs": [
-          "System issues new access token",
-          "New access token response"
+          "New access token"
         ],
         "coverage_criterion": "Interface interaction",
         "priority": "medium",
@@ -1752,48 +1520,20 @@
       ]
     },
     {
-      "tr_id": "AUTH_S-INTE-033",
+      "tr_id": "AUTH_S-INTE-031",
       "category": "interface_exception",
       "source_id": "auth_system_design",
-      "tr_h": "When Rate Limiter detects excessive login attempts, the System shall lock account.",
+      "tr_h": "When user enables MFA, the system shall configure MFA settings.",
       "tr_a": {
-        "tr_id": "AUTH_S-INTE-033",
-        "preconditions": [
-          "Excessive login attempts detected"
-        ],
-        "stimuli": [
-          "Rate Limiter triggers lock account event"
-        ],
-        "expected_outputs": [
-          "System locks user account",
-          "Account locked response"
-        ],
-        "coverage_criterion": "Interface interaction",
-        "priority": "high",
-        "source_req_ids": [
-          "Rate Limiter -> Lock account due to excessive login attempts"
-        ]
-      },
-      "source_req_ids": [
-        "Rate Limiter -> Lock account due to excessive login attempts"
-      ]
-    },
-    {
-      "tr_id": "AUTH_S-INTE-034",
-      "category": "interface_exception",
-      "source_id": "auth_system_design",
-      "tr_h": "When User enables MFA, the System shall configure MFA settings.",
-      "tr_a": {
-        "tr_id": "AUTH_S-INTE-034",
+        "tr_id": "AUTH_S-INTE-031",
         "preconditions": [
           "User is logged in"
         ],
         "stimuli": [
-          "User submits MFA enable request"
+          "User submits MFA configuration request"
         ],
         "expected_outputs": [
-          "System configures MFA settings",
-          "MFA enabled response"
+          "MFA configuration result (success or failure)"
         ],
         "coverage_criterion": "Interface interaction",
         "priority": "medium",
@@ -1806,39 +1546,38 @@
       ]
     },
     {
-      "tr_id": "AUTH_S-INTE-035",
+      "tr_id": "AUTH_S-INTE-032",
       "category": "interface_exception",
       "source_id": "auth_system_design",
-      "tr_h": "When Request Router receives AuthRequest, the System shall route to AuthController.",
+      "tr_h": "When AuthController detects multiple login failures, the system shall lock user's account.",
       "tr_a": {
-        "tr_id": "AUTH_S-INTE-035",
+        "tr_id": "AUTH_S-INTE-032",
         "preconditions": [
-          "AuthRequest received"
+          "Multiple login attempts with incorrect credentials"
         ],
         "stimuli": [
-          "Request Router processes AuthRequest"
+          "AuthController detects multiple login failures"
         ],
         "expected_outputs": [
-          "System routes request to AuthController",
-          "AuthController response"
+          "Account locked notification"
         ],
-        "coverage_criterion": "Interface interaction",
+        "coverage_criterion": "Process flow",
         "priority": "high",
         "source_req_ids": [
-          "Request Router -> Route AuthRequest to AuthController"
+          "AuthController -> Lock account after multiple login failures"
         ]
       },
       "source_req_ids": [
-        "Request Router -> Route AuthRequest to AuthController"
+        "AuthController -> Lock account after multiple login failures"
       ]
     },
     {
-      "tr_id": "AUTH_S-INTE-036",
+      "tr_id": "AUTH_S-INTE-033",
       "category": "interface_exception",
       "source_id": "auth_system_design",
-      "tr_h": "When User logs out, the System shall invalidate session.",
+      "tr_h": "When user logs out, the system shall invalidate access token.",
       "tr_a": {
-        "tr_id": "AUTH_S-INTE-036",
+        "tr_id": "AUTH_S-INTE-033",
         "preconditions": [
           "User is logged in"
         ],
@@ -1846,8 +1585,7 @@
           "User submits logout request"
         ],
         "expected_outputs": [
-          "System invalidates user session",
-          "Logout successful response"
+          "Access token invalidation result (success or failure)"
         ],
         "coverage_criterion": "Interface interaction",
         "priority": "medium",
@@ -1860,277 +1598,161 @@
       ]
     },
     {
-      "tr_id": "AUTH_S-INTE-037",
+      "tr_id": "AUTH_S-INTE-034",
       "category": "interface_exception",
       "source_id": "auth_system_design",
-      "tr_h": "When TokenService receives token, the System shall invalidate token.",
+      "tr_h": "When AuthController receives AuthRequest, the system shall validate request.",
       "tr_a": {
-        "tr_id": "AUTH_S-INTE-037",
+        "tr_id": "AUTH_S-INTE-034",
         "preconditions": [
-          "Token received"
+          "AuthRequest is received"
         ],
         "stimuli": [
-          "TokenService processes token"
+          "AuthController processes AuthRequest"
         ],
         "expected_outputs": [
-          "System invalidates token",
-          "Token invalidated response"
+          "Validation result (success or failure)"
         ],
-        "coverage_criterion": "Interface interaction",
-        "priority": "medium",
+        "coverage_criterion": "Process flow",
+        "priority": "high",
         "source_req_ids": [
-          "TokenService -> Invalidate token"
+          "AuthController -> Validate AuthRequest"
         ]
       },
       "source_req_ids": [
-        "TokenService -> Invalidate token"
+        "AuthController -> Validate AuthRequest"
+      ]
+    },
+    {
+      "tr_id": "AUTH_S-INTE-035",
+      "category": "interface_exception",
+      "source_id": "auth_system_design",
+      "tr_h": "When AuthService receives credentials, the system shall verify user's identity.",
+      "tr_a": {
+        "tr_id": "AUTH_S-INTE-035",
+        "preconditions": [
+          "Credentials are received"
+        ],
+        "stimuli": [
+          "AuthService processes credentials"
+        ],
+        "expected_outputs": [
+          "Verification result (success or failure)"
+        ],
+        "coverage_criterion": "Process flow",
+        "priority": "high",
+        "source_req_ids": [
+          "AuthService -> Verify user credentials"
+        ]
+      },
+      "source_req_ids": [
+        "AuthService -> Verify user credentials"
+      ]
+    },
+    {
+      "tr_id": "AUTH_S-INTE-036",
+      "category": "interface_exception",
+      "source_id": "auth_system_design",
+      "tr_h": "When system validates AuthRequest, the system shall check for valid username and password.",
+      "tr_a": {
+        "tr_id": "AUTH_S-INTE-036",
+        "preconditions": [
+          "AuthRequest is received"
+        ],
+        "stimuli": [
+          "System processes AuthRequest"
+        ],
+        "expected_outputs": [
+          "Validation result (success or failure)"
+        ],
+        "coverage_criterion": "Process flow",
+        "priority": "high",
+        "source_req_ids": [
+          "AuthController -> Validate AuthRequest"
+        ]
+      },
+      "source_req_ids": [
+        "AuthController -> Validate AuthRequest"
+      ]
+    },
+    {
+      "tr_id": "AUTH_S-INTE-037",
+      "category": "interface_exception",
+      "source_id": "auth_system_design",
+      "tr_h": "When system verifies user credentials, the system shall check for valid password.",
+      "tr_a": {
+        "tr_id": "AUTH_S-INTE-037",
+        "preconditions": [
+          "Credentials are received"
+        ],
+        "stimuli": [
+          "System processes credentials"
+        ],
+        "expected_outputs": [
+          "Verification result (success or failure)"
+        ],
+        "coverage_criterion": "Process flow",
+        "priority": "high",
+        "source_req_ids": [
+          "AuthService -> Verify user credentials"
+        ]
+      },
+      "source_req_ids": [
+        "AuthService -> Verify user credentials"
       ]
     },
     {
       "tr_id": "AUTH_S-INTE-038",
       "category": "interface_exception",
       "source_id": "auth_system_design",
-      "tr_h": "The System shall authenticate user within 2 seconds.",
+      "tr_h": "When system locks account, the system shall prevent further login attempts.",
       "tr_a": {
         "tr_id": "AUTH_S-INTE-038",
         "preconditions": [
-          "User has valid credentials"
+          "Multiple login failures detected"
         ],
         "stimuli": [
-          "User submits login request"
+          "System locks account"
         ],
         "expected_outputs": [
-          "System authenticates user",
-          "Login successful response"
+          "Account locked notification"
         ],
         "coverage_criterion": "Process flow",
         "priority": "high",
         "source_req_ids": [
-          "User -> Login to the system"
+          "AuthController -> Lock account after multiple login failures"
         ]
       },
       "source_req_ids": [
-        "User -> Login to the system"
+        "AuthController -> Lock account after multiple login failures"
       ]
     },
     {
       "tr_id": "AUTH_S-INTE-039",
       "category": "interface_exception",
       "source_id": "auth_system_design",
-      "tr_h": "The System shall update password within 1 second.",
+      "tr_h": "When system logs out user, the system shall remove access token.",
       "tr_a": {
         "tr_id": "AUTH_S-INTE-039",
         "preconditions": [
-          "User is logged in",
-          "New password meets complexity requirements"
+          "User is logged in"
         ],
         "stimuli": [
-          "User submits new password"
+          "System processes logout request"
         ],
         "expected_outputs": [
-          "System updates user password",
-          "Password updated response"
+          "Access token removal result (success or failure)"
         ],
         "coverage_criterion": "Process flow",
         "priority": "medium",
         "source_req_ids": [
-          "User -> Change password"
+          "User -> Logout from the system"
         ]
       },
       "source_req_ids": [
-        "User -> Change password"
-      ]
-    },
-    {
-      "tr_id": "AUTH_S-INTE-040",
-      "category": "interface_exception",
-      "source_id": "auth_system_design",
-      "tr_h": "The System shall issue new access token within 1 second.",
-      "tr_a": {
-        "tr_id": "AUTH_S-INTE-040",
-        "preconditions": [
-          "Client has valid refresh token"
-        ],
-        "stimuli": [
-          "Client submits refresh token request"
-        ],
-        "expected_outputs": [
-          "System issues new access token",
-          "New access token response"
-        ],
-        "coverage_criterion": "Process flow",
-        "priority": "medium",
-        "source_req_ids": [
-          "Client -> Refresh token"
-        ]
-      },
-      "source_req_ids": [
-        "Client -> Refresh token"
-      ]
-    },
-    {
-      "tr_id": "AUTH_S-INTE-041",
-      "category": "interface_exception",
-      "source_id": "auth_system_design",
-      "tr_h": "The System shall lock account within 1 second of excessive login attempts.",
-      "tr_a": {
-        "tr_id": "AUTH_S-INTE-041",
-        "preconditions": [
-          "Excessive login attempts detected"
-        ],
-        "stimuli": [
-          "Rate Limiter triggers lock account event"
-        ],
-        "expected_outputs": [
-          "System locks user account",
-          "Account locked response"
-        ],
-        "coverage_criterion": "Process flow",
-        "priority": "high",
-        "source_req_ids": [
-          "Rate Limiter -> Lock account due to excessive login attempts"
-        ]
-      },
-      "source_req_ids": [
-        "Rate Limiter -> Lock account due to excessive login attempts"
-      ]
-    },
-    {
-      "tr_id": "AUTH_S-CONS-042",
-      "category": "consistency_driven",
-      "source_id": "auth_system_design",
-      "tr_h": "When a user attempts to log in with an incorrect password, the system shall lock their account after exactly three failed login attempts.",
-      "tr_a": {
-        "tr_id": "AUTH_S-CONS-042",
-        "preconditions": [
-          "User has not exceeded the maximum number of allowed login attempts"
-        ],
-        "stimuli": [
-          "Incorrect password entered for the fourth time"
-        ],
-        "expected_outputs": [
-          "Account locked",
-          "Error message indicating account lock"
-        ],
-        "coverage_criterion": "Boundary value analysis",
-        "priority": "high",
-        "source_req_ids": [
-          "[REQ-1]"
-        ]
-      },
-      "source_req_ids": [
-        "[REQ-1]"
-      ]
-    },
-    {
-      "tr_id": "AUTH_S-CONS-043",
-      "category": "consistency_driven",
-      "source_id": "auth_system_design",
-      "tr_h": "The system shall validate an authentication request to ensure it conforms to the OAuth 2.0 protocol and JSON Web Token (JWT) format.",
-      "tr_a": {
-        "tr_id": "AUTH_S-CONS-043",
-        "preconditions": [
-          "Authentication request received"
-        ],
-        "stimuli": [
-          "Malformed authentication request with invalid JWT token"
-        ],
-        "expected_outputs": [
-          "Error message indicating invalid request format",
-          "Request rejected"
-        ],
-        "coverage_criterion": "Equivalence partitioning",
-        "priority": "high",
-        "source_req_ids": [
-          "[REQ-2]"
-        ]
-      },
-      "source_req_ids": [
-        "[REQ-2]"
-      ]
-    },
-    {
-      "tr_id": "AUTH_S-CONS-044",
-      "category": "consistency_driven",
-      "source_id": "auth_system_design",
-      "tr_h": "When a user requests to change their password, the system shall prompt them to enter their current and new passwords.",
-      "tr_a": {
-        "tr_id": "AUTH_S-CONS-044",
-        "preconditions": [
-          "User is authenticated"
-        ],
-        "stimuli": [
-          "Change password request submitted"
-        ],
-        "expected_outputs": [
-          "Prompt for current and new passwords",
-          "Password update form displayed"
-        ],
-        "coverage_criterion": "Use case coverage",
-        "priority": "medium",
-        "source_req_ids": [
-          "[REQ-3]"
-        ]
-      },
-      "source_req_ids": [
-        "[REQ-3]"
-      ]
-    },
-    {
-      "tr_id": "AUTH_S-CONS-045",
-      "category": "consistency_driven",
-      "source_id": "auth_system_design",
-      "tr_h": "The system shall handle a database connection error by displaying an error message to the user within five seconds.",
-      "tr_a": {
-        "tr_id": "AUTH_S-CONS-045",
-        "preconditions": [
-          "Database connection issue simulated"
-        ],
-        "stimuli": [
-          "User attempts to log in"
-        ],
-        "expected_outputs": [
-          "Error message indicating database connection issue",
-          "Request rejected"
-        ],
-        "coverage_criterion": "Fault injection",
-        "priority": "high",
-        "source_req_ids": [
-          "[REQ-4]"
-        ]
-      },
-      "source_req_ids": [
-        "[REQ-4]"
-      ]
-    },
-    {
-      "tr_id": "AUTH_S-CONS-046",
-      "category": "consistency_driven",
-      "source_id": "auth_system_design",
-      "tr_h": "When a user requests an authentication token refresh within one hour of the previous refresh, the system shall refresh their authentication token.",
-      "tr_a": {
-        "tr_id": "AUTH_S-CONS-046",
-        "preconditions": [
-          "User is authenticated",
-          "Previous token refresh was over an hour ago"
-        ],
-        "stimuli": [
-          "Token refresh request submitted"
-        ],
-        "expected_outputs": [
-          "New authentication token issued",
-          "Token refresh successful message"
-        ],
-        "coverage_criterion": "State transition testing",
-        "priority": "medium",
-        "source_req_ids": [
-          "[REQ-5]"
-        ]
-      },
-      "source_req_ids": [
-        "[REQ-5]"
+        "User -> Logout from the system"
       ]
     }
   ],
-  "total_count": 46
+  "total_count": 39
 }

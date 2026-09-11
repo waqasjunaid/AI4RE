@@ -93,7 +93,7 @@
     "entity_type": "interface_name",
     "content": "/pet/findByStatus",
     "page_ref": "openapi:path:/pet/findByStatus",
-    "confidence_score": 0.9
+    "confidence_score": 1.0
   },
   {
     "source_id": "swagger_petstore",
@@ -101,7 +101,7 @@
     "entity_type": "function_point",
     "content": "Finds Pets by status",
     "page_ref": "openapi:path:/pet/findByStatus",
-    "confidence_score": 0.8
+    "confidence_score": 0.9
   },
   {
     "source_id": "swagger_petstore",
@@ -109,7 +109,7 @@
     "entity_type": "constraint",
     "content": "Multiple status values can be provided with comma separated strings",
     "page_ref": "openapi:path:/pet/findByStatus",
-    "confidence_score": 0.7
+    "confidence_score": 0.8
   },
   {
     "source_id": "swagger_petstore",
@@ -117,7 +117,7 @@
     "entity_type": "exception_condition",
     "content": "Invalid status value",
     "page_ref": "openapi:path:/pet/findByStatus",
-    "confidence_score": 0.8
+    "confidence_score": 0.9
   },
   {
     "source_id": "swagger_petstore",
@@ -194,10 +194,10 @@
   {
     "source_id": "swagger_petstore",
     "artifact_type": "runtime",
-    "entity_type": "constraint",
+    "entity_type": "exception_condition",
     "content": "Invalid input",
     "page_ref": "openapi:path:/pet/{petId}",
-    "confidence_score": 0.8
+    "confidence_score": 0.7
   },
   {
     "source_id": "swagger_petstore",

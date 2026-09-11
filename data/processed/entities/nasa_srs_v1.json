@@ -35,7 +35,7 @@
     "source_id": "nasa_srs_v1",
     "artifact_type": "srs",
     "entity_type": "constraint",
-    "content": "RFCs use consistent language",
+    "content": "RFCs use same language",
     "page_ref": "page 3",
     "confidence_score": 0.8
   },
@@ -43,15 +43,15 @@
     "source_id": "nasa_srs_v1",
     "artifact_type": "srs",
     "entity_type": "function_point",
-    "content": "CCSDS reports cross-reference RFC sections correctly",
+    "content": "CCSDS reports cross-reference correctly",
     "page_ref": "page 3",
     "confidence_score": 0.7
   },
   {
     "source_id": "nasa_srs_v1",
     "artifact_type": "srs",
-    "entity_type": "actor_role",
-    "content": "CCSDS documents",
+    "entity_type": "constraint",
+    "content": "Requirements are specific and singular",
     "page_ref": "page 3",
     "confidence_score": 0.9
   },
@@ -266,10 +266,10 @@
   {
     "source_id": "nasa_srs_v1",
     "artifact_type": "srs",
-    "entity_type": "actor_role",
+    "entity_type": "interface_name",
     "content": "HDTN GUI",
     "page_ref": "page 5",
-    "confidence_score": 0.7
+    "confidence_score": 0.9
   },
   {
     "source_id": "nasa_srs_v1",

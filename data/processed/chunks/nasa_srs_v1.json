@@ -8,7 +8,7 @@
     "metadata": {
       "section_id": 1,
       "chunk_index": 1,
-      "token_count": 52,
+      "token_count": 27,
       "overlap": false
     }
   },
@@ -21,7 +21,7 @@
     "metadata": {
       "section_id": 2,
       "chunk_index": 1,
-      "token_count": 37,
+      "token_count": 26,
       "overlap": false
     }
   },
@@ -34,7 +34,7 @@
     "metadata": {
       "section_id": 3,
       "chunk_index": 1,
-      "token_count": 102,
+      "token_count": 72,
       "overlap": false
     }
   },
@@ -47,7 +47,7 @@
     "metadata": {
       "section_id": 4,
       "chunk_index": 1,
-      "token_count": 108,
+      "token_count": 69,
       "overlap": false
     }
   },
@@ -60,7 +60,7 @@
     "metadata": {
       "section_id": 5,
       "chunk_index": 1,
-      "token_count": 222,
+      "token_count": 108,
       "overlap": false
     }
   },
@@ -73,7 +73,7 @@
     "metadata": {
       "section_id": 6,
       "chunk_index": 1,
-      "token_count": 161,
+      "token_count": 107,
       "overlap": false
     }
   },
@@ -86,7 +86,7 @@
     "metadata": {
       "section_id": 7,
       "chunk_index": 1,
-      "token_count": 3,
+      "token_count": 2,
       "overlap": false
     }
   },
@@ -99,7 +99,7 @@
     "metadata": {
       "section_id": 8,
       "chunk_index": 1,
-      "token_count": 71,
+      "token_count": 46,
       "overlap": false
     }
   },
@@ -112,7 +112,7 @@
     "metadata": {
       "section_id": 9,
       "chunk_index": 1,
-      "token_count": 69,
+      "token_count": 47,
       "overlap": false
     }
   },
@@ -125,7 +125,7 @@
     "metadata": {
       "section_id": 10,
       "chunk_index": 1,
-      "token_count": 194,
+      "token_count": 107,
       "overlap": false
     }
   },
@@ -138,7 +138,7 @@
     "metadata": {
       "section_id": 11,
       "chunk_index": 1,
-      "token_count": 302,
+      "token_count": 132,
       "overlap": false
     }
   },
@@ -151,7 +151,7 @@
     "metadata": {
       "section_id": 12,
       "chunk_index": 1,
-      "token_count": 98,
+      "token_count": 64,
       "overlap": false
     }
   },
@@ -164,7 +164,7 @@
     "metadata": {
       "section_id": 13,
       "chunk_index": 1,
-      "token_count": 56,
+      "token_count": 32,
       "overlap": false
     }
   },
@@ -177,7 +177,7 @@
     "metadata": {
       "section_id": 14,
       "chunk_index": 1,
-      "token_count": 92,
+      "token_count": 41,
       "overlap": false
     }
   }

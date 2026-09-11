@@ -1,5 +1,6 @@
 {
   "source_id": "nasa_srs_v1",
+  "bundle_id": "nasa_srs_v1",
   "system_objectives": [
     "sort through each requirement sentence",
     "contain design, functionality, and other information",
@@ -12,15 +13,14 @@
   ],
   "user_roles": [
     "Developer",
-    "HDTN GUI",
+    "Maintainer",
     "CCSDS",
-    "BPv6",
-    "BPv7",
-    "BPSec",
+    "PICS",
     "HDTN API",
-    "Unit Under Test",
-    "Implementations",
-    "NASA Programs"
+    "HDTN GUI",
+    "BPGen",
+    "BPSec",
+    "NASA Programs and Projects"
   ],
   "use_cases": [
     {
@@ -29,16 +29,16 @@
       "goal": "Develop candidate requirements for HDTN project",
       "preconditions": [
         "HDTN project is initiated",
-        "Requirements gathering process is started"
+        "Requirements template is available"
       ],
       "steps": [
         "Derive requirements from each specification",
-        "Sort through each requirement sentence",
-        "Refine language"
+        "Refine language of derived requirements",
+        "Streamline development process and implementation"
       ],
       "postconditions": [
         "Candidate requirements are developed",
-        "Requirements are documented"
+        "Requirements are documented in SRS"
       ],
       "exceptions": [
         "Inconsistent requirements",
@@ -47,202 +47,231 @@
     },
     {
       "use_case_id": "UC-002",
-      "actor": "CCSDS",
-      "goal": "Ensure CCSDS reports cross-reference RFC sections correctly",
+      "actor": "Maintainer",
+      "goal": "Verify an implementation of HDTN software",
       "preconditions": [
-        "CCSDS report is being written",
-        "RFC sections are available"
+        "HDTN software is implemented",
+        "SRS is available"
       ],
       "steps": [
-        "Review CCSDS report for accuracy",
-        "Verify cross-references to RFC sections"
+        "Review SRS for completeness and accuracy",
+        "Compare implementation with SRS",
+        "Identify discrepancies"
       ],
       "postconditions": [
-        "CCSDS report accurately cross-references RFC sections"
+        "Implementation is verified",
+        "Discrepancies are identified"
       ],
       "exceptions": [
-        "Inaccurate cross-references"
+        "Inconsistent implementation",
+        "Missing documentation"
       ]
     },
     {
       "use_case_id": "UC-003",
-      "actor": "HDTN GUI",
-      "goal": "Provide information for developers and maintainers about software high level architecture",
+      "actor": "CCSDS",
+      "goal": "Generate test data for protocol interoperability",
       "preconditions": [
-        "Software design is complete",
-        "Documentation is available"
+        "BPv6, BPv7, LTP, and TCPCL protocols are defined",
+        "Test data template is available"
       ],
       "steps": [
-        "Access software documentation",
-        "Review high level architecture"
+        "Generate test data using BPGen tool",
+        "Review generated test data for accuracy",
+        "Refine test data as needed"
       ],
       "postconditions": [
-        "Developer has understanding of software architecture"
+        "Test data is generated",
+        "Protocol interoperability is supported"
       ],
       "exceptions": [
-        "Outdated documentation"
+        "Inconsistent protocol definitions",
+        "Invalid test data"
       ]
     },
     {
       "use_case_id": "UC-004",
-      "actor": "BPv6",
-      "goal": "Generate test data for BPv6 protocol",
+      "actor": "PICS",
+      "goal": "Facilitate technology transfer for HDTN project",
       "preconditions": [
-        "Test environment is set up",
-        "Protocol specifications are available"
+        "HDTN project is initiated",
+        "Technology transfer plan is available"
       ],
       "steps": [
-        "Review protocol specifications",
-        "Generate test data"
+        "Identify technology transfer requirements",
+        "Develop technology transfer plan",
+        "Implement technology transfer plan"
       ],
       "postconditions": [
-        "Test data is generated for BPv6 protocol"
+        "Technology transfer is facilitated",
+        "Project goals are supported"
       ],
       "exceptions": [
-        "Invalid test data"
+        "Inconsistent technology transfer plan",
+        "Missing resources"
       ]
     },
     {
       "use_case_id": "UC-005",
       "actor": "HDTN API",
-      "goal": "Support Bundle Protocol functionality",
+      "goal": "Provide information for developers and maintainers about software high level architecture",
       "preconditions": [
-        "Bundle Protocol is implemented",
-        "API is integrated"
+        "Software design is documented",
+        "API documentation template is available"
       ],
       "steps": [
-        "Invoke Bundle Protocol functions through API"
+        "Develop API documentation",
+        "Review API documentation for accuracy",
+        "Refine API documentation as needed"
       ],
       "postconditions": [
-        "Bundle Protocol functionality is supported"
+        "API documentation is provided",
+        "Software high level architecture is understood"
       ],
       "exceptions": [
-        "API errors"
+        "Inconsistent software design",
+        "Invalid API documentation"
       ]
     },
     {
       "use_case_id": "UC-006",
-      "actor": "Unit Under Test",
-      "goal": "Verify implementation of HDTN requirements",
+      "actor": "HDTN GUI",
+      "goal": "Support NASA programs in accomplishing planned goals",
       "preconditions": [
-        "Implementation is complete",
-        "Test environment is set up"
+        "NASA program requirements are defined",
+        "GUI design is documented"
       ],
       "steps": [
-        "Run tests against implementation",
-        "Verify test results"
+        "Develop GUI to support NASA program requirements",
+        "Review GUI for usability and accuracy",
+        "Refine GUI as needed"
       ],
       "postconditions": [
-        "Implementation is verified to meet HDTN requirements"
+        "GUI supports NASA program requirements",
+        "Planned goals are accomplished"
       ],
       "exceptions": [
-        "Test failures"
+        "Inconsistent NASA program requirements",
+        "Invalid GUI design"
       ]
     },
     {
       "use_case_id": "UC-007",
-      "actor": "Developer",
-      "goal": "Streamline development process and implementation",
+      "actor": "BPGen",
+      "goal": "Generate BPv6, BPv7, LTP, and TCPCL test data",
       "preconditions": [
-        "Development process is initiated",
-        "Implementation plan is available"
+        "Protocols are defined",
+        "Test data template is available"
       ],
       "steps": [
-        "Review development process",
-        "Identify areas for improvement"
+        "Generate test data using BPGen tool",
+        "Review generated test data for accuracy",
+        "Refine test data as needed"
       ],
       "postconditions": [
-        "Development process is streamlined"
+        "Test data is generated",
+        "Protocol interoperability is supported"
       ],
       "exceptions": [
-        "Inefficient processes"
+        "Inconsistent protocol definitions",
+        "Invalid test data"
       ]
     },
     {
       "use_case_id": "UC-008",
-      "actor": "CCSDS",
-      "goal": "Conduct formal review of completed draft SRS",
-      "preconditions": [
-        "Draft SRS is complete",
-        "Review team is assembled"
-      ],
-      "steps": [
-        "Distribute draft SRS to review team",
-        "Collect feedback from review team"
-      ],
-      "postconditions": [
-        "Formal review of draft SRS is conducted"
-      ],
-      "exceptions": [
-        "Insufficient feedback"
-      ]
-    },
-    {
-      "use_case_id": "UC-009",
-      "actor": "BPv7",
-      "goal": "Facilitate technology transfer for BPv7 protocol",
-      "preconditions": [
-        "Protocol specifications are available",
-        "Technology transfer process is initiated"
-      ],
-      "steps": [
-        "Review protocol specifications",
-        "Transfer technology to recipient"
-      ],
-      "postconditions": [
-        "Technology transfer is facilitated for BPv7 protocol"
-      ],
-      "exceptions": [
-        "Incomplete technology transfer"
-      ]
-    },
-    {
-      "use_case_id": "UC-010",
       "actor": "BPSec",
       "goal": "Provide a set of requirements for software acquisition",
       "preconditions": [
         "Software acquisition process is initiated",
-        "Requirements are available"
+        "Requirements template is available"
       ],
       "steps": [
-        "Review requirements for software acquisition"
+        "Derive requirements from each specification",
+        "Refine language of derived requirements",
+        "Streamline development process and implementation"
       ],
       "postconditions": [
-        "Set of requirements is provided for software acquisition"
+        "Candidate requirements are developed",
+        "Requirements are documented in SRS"
       ],
       "exceptions": [
-        "Inadequate requirements"
+        "Inconsistent requirements",
+        "Missing information"
+      ]
+    },
+    {
+      "use_case_id": "UC-009",
+      "actor": "CCSDS",
+      "goal": "Conduct formal review of completed draft SRS",
+      "preconditions": [
+        "Draft SRS is available",
+        "Review team is identified"
+      ],
+      "steps": [
+        "Review draft SRS for completeness and accuracy",
+        "Identify discrepancies",
+        "Refine SRS as needed"
+      ],
+      "postconditions": [
+        "SRS is reviewed",
+        "Discrepancies are identified"
+      ],
+      "exceptions": [
+        "Inconsistent SRS",
+        "Missing documentation"
+      ]
+    },
+    {
+      "use_case_id": "UC-010",
+      "actor": "Developer",
+      "goal": "Describe software design and implementation for HDTN project",
+      "preconditions": [
+        "Software design is documented",
+        "Implementation plan is available"
+      ],
+      "steps": [
+        "Develop software design documentation",
+        "Review software design documentation for accuracy",
+        "Refine software design as needed"
+      ],
+      "postconditions": [
+        "Software design is described",
+        "Implementation plan is supported"
+      ],
+      "exceptions": [
+        "Inconsistent software design",
+        "Invalid implementation plan"
       ]
     }
   ],
   "functional_reqs": [
     {
       "req_id": "FR-001",
-      "description": "The system shall support protocol interoperability to ensure seamless communication between different systems.",
-      "source_ids": [
-        "nasa_srs_v1"
-      ],
-      "priority": "high"
-    },
-    {
-      "req_id": "FR-002",
-      "description": "The system shall provide a clear and concise structure to facilitate easier verification of implementation.",
+      "description": "The system shall sort through each requirement sentence to extract relevant information.",
       "source_ids": [
         "nasa_srs_v1"
       ],
       "priority": "medium"
     },
     {
-      "req_id": "FR-003",
-      "description": "The system shall enable technology transfer by providing accessible documentation and resources.",
+      "req_id": "FR-002",
+      "description": "The system shall contain design, functionality, and other information necessary for software development.",
       "source_ids": [
         "nasa_srs_v1"
       ],
-      "priority": "low"
+      "priority": "high"
+    },
+    {
+      "req_id": "FR-003",
+      "description": "The system shall support Local Bundle Delivery as part of its functionality.",
+      "source_ids": [
+        "nasa_srs_v1"
+      ],
+      "priority": "medium"
     },
     {
       "req_id": "FR-004",
-      "description": "The system shall ensure that CCSDS reports correctly cross-reference RFC sections.",
+      "description": "The system shall generate test data for BPv6, BPv7, LTP, and TCPCL protocols.",
       "source_ids": [
         "nasa_srs_v1"
       ],
@@ -250,31 +279,31 @@
     },
     {
       "req_id": "FR-005",
-      "description": "The system shall provide a set of requirements for software acquisition to guide procurement decisions.",
-      "source_ids": [
-        "nasa_srs_v1"
-      ],
-      "priority": "medium"
-    },
-    {
-      "req_id": "FR-006",
-      "description": "The system shall support NASA programs in accomplishing their planned goals by providing necessary tools and resources.",
+      "description": "The system shall support protocol interoperability to ensure seamless communication between different systems.",
       "source_ids": [
         "nasa_srs_v1"
       ],
       "priority": "high"
     },
     {
-      "req_id": "FR-007",
-      "description": "The system shall implement the Bundle Protocol to facilitate data transfer between systems.",
+      "req_id": "FR-006",
+      "description": "The system shall provide features that make it easier to verify an implementation against the requirements.",
       "source_ids": [
         "nasa_srs_v1"
       ],
       "priority": "medium"
     },
     {
+      "req_id": "FR-007",
+      "description": "The system shall provide a set of requirements for software acquisition to guide the procurement process.",
+      "source_ids": [
+        "nasa_srs_v1"
+      ],
+      "priority": "low"
+    },
+    {
       "req_id": "FR-008",
-      "description": "The system shall provide a Convergence Layer to enable communication between different networks.",
+      "description": "The system shall support NASA programs in accomplishing their planned goals by providing necessary tools and information.",
       "source_ids": [
         "nasa_srs_v1"
       ],
@@ -282,7 +311,7 @@
     },
     {
       "req_id": "FR-009",
-      "description": "The system shall define Application Requirements to guide software development and implementation.",
+      "description": "The system shall implement the Bundle Protocol as part of its functionality.",
       "source_ids": [
         "nasa_srs_v1"
       ],
@@ -290,7 +319,7 @@
     },
     {
       "req_id": "FR-010",
-      "description": "The system shall describe the structure and content of HDTN data elements to ensure consistency and accuracy.",
+      "description": "The system shall support Convergence Layer to enable communication between different networks.",
       "source_ids": [
         "nasa_srs_v1"
       ],
@@ -301,7 +330,7 @@
     {
       "constraint_id": "NFR-001",
       "category": "usability",
-      "description": "RFCs use consistent language",
+      "description": "Requirements are specific and singular",
       "threshold": null,
       "source_ids": [
         "nasa_srs_v1"
@@ -309,15 +338,24 @@
     },
     {
       "constraint_id": "NFR-002",
-      "category": "reliability",
-      "description": "Level of compliance and rigor is associated with software class",
+      "category": "compatibility",
+      "description": "RFCs use same language",
       "threshold": null,
       "source_ids": [
         "nasa_srs_v1"
       ]
     }
   ],
-  "runtime_constraints": [],
+  "runtime_constraints": [
+    {
+      "constraint_id": "RT-001",
+      "description": "Level of compliance and rigor is associated with software class",
+      "affects_reqs": [],
+      "source_ids": [
+        "nasa_srs_v1"
+      ]
+    }
+  ],
   "glossary": {},
   "exception_handlers": []
 }

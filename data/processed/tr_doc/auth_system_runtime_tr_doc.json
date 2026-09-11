@@ -1,0 +1,1676 @@
+{
+  "source_id": "auth_system_runtime",
+  "tr_h_list": [
+    "When a user submits valid credentials, the system shall authenticate the user.",
+    "When a user submits invalid credentials, the system shall not authenticate the user.",
+    "When a user submits credentials with an expired password, the system shall prompt for a password update.",
+    "When an MFA verification code is submitted, the system shall complete the authentication process.",
+    "When an invalid MFA verification code is submitted, the system shall not complete the authentication process.",
+    "When a user requests session termination, the system shall terminate the current session.",
+    "When a security policy is violated, the system shall terminate the current session.",
+    "When an access token is near expiration, the system shall refresh the access token.",
+    "When an access token has expired, the system shall not use it for authentication.",
+    "When a user is successfully authenticated, the system shall issue a new access token.",
+    "When an access token is refreshed, the system shall issue a new access token.",
+    "When an invalid access token is used for authentication, the system shall not authenticate the user.",
+    "When an expired access token is used for authentication, the system shall not authenticate the user.",
+    "When a user attempts to log in, the system shall authenticate using multi-factor authentication within 2 seconds.",
+    "When multi-factor authentication is enabled, the system shall request a valid MFA code.",
+    "When an invalid or expired MFA code is entered, the system shall display an error message.",
+    "When multi-factor authentication is enabled, the system shall allow access within 5 minutes of a valid MFA code being entered.",
+    "When an invalid or expired MFA code is entered, the system shall not allow access.",
+    "When multi-factor authentication is enabled, the system shall request a new MFA code after 3 failed login attempts.",
+    "When an invalid or expired MFA code is entered, the system shall not request a new MFA code.",
+    "When multi-factor authentication is enabled, the system shall allow a maximum of 5 login attempts within 1 hour.",
+    "When an invalid or expired MFA code is entered, the system shall log the event.",
+    "When multi-factor authentication is enabled, the system shall display instructions for obtaining a valid MFA code.",
+    "When an invalid or expired MFA code is entered, the system shall not display instructions for obtaining a valid MFA code.",
+    "When user submits valid credentials, the system shall authenticate successfully.",
+    "When user requests access token refresh, the system shall issue a new access token.",
+    "When user terminates the session, the system shall invalidate the access token.",
+    "When authentication service receives a valid authentication request, the system shall issue an access token.",
+    "When user submits a valid MFA verification code, the system shall authenticate successfully.",
+    "When user submits an invalid or expired MFA code, the system shall return an error response.",
+    "When user submits an invalid or expired MFA code, the system shall not authenticate the user.",
+    "When user submits a valid authentication request, the system shall authenticate successfully within 2 seconds.",
+    "When user requests access token refresh, the system shall issue a new access token within 1 second.",
+    "When user terminates the session, the system shall invalidate the access token within 1 second.",
+    "When authentication service receives a valid authentication request, the system shall issue an access token within 2 seconds.",
+    "When user submits a valid MFA verification code, the system shall authenticate successfully within 2 seconds."
+  ],
+  "tr_a_list": [
+    {
+      "tr_id": "AUTH_S-FUNC-001",
+      "preconditions": [
+        "User has a valid account"
+      ],
+      "stimuli": [
+        "Valid username and password"
+      ],
+      "expected_outputs": [
+        "User is authenticated",
+        "Session created"
+      ],
+      "coverage_criterion": "Normal path",
+      "priority": "high",
+      "source_req_ids": [
+        "The system shall authenticate a user using their credentials."
+      ]
+    },
+    {
+      "tr_id": "AUTH_S-FUNC-002",
+      "preconditions": [
+        "User has an account"
+      ],
+      "stimuli": [
+        "Invalid username or password"
+      ],
+      "expected_outputs": [
+        "Error message displayed",
+        "User is not authenticated"
+      ],
+      "coverage_criterion": "Negative path",
+      "priority": "high",
+      "source_req_ids": [
+        "The system shall authenticate a user using their credentials."
+      ]
+    },
+    {
+      "tr_id": "AUTH_S-FUNC-003",
+      "preconditions": [
+        "User has an account",
+        "Password is expired"
+      ],
+      "stimuli": [
+        "Valid username and expired password"
+      ],
+      "expected_outputs": [
+        "Password update prompt displayed"
+      ],
+      "coverage_criterion": "Boundary condition",
+      "priority": "medium",
+      "source_req_ids": [
+        "The system shall authenticate a user using their credentials."
+      ]
+    },
+    {
+      "tr_id": "AUTH_S-FUNC-004",
+      "preconditions": [
+        "User has a valid account",
+        "MFA is enabled"
+      ],
+      "stimuli": [
+        "Valid MFA verification code"
+      ],
+      "expected_outputs": [
+        "User is authenticated",
+        "Session created"
+      ],
+      "coverage_criterion": "Normal path",
+      "priority": "high",
+      "source_req_ids": [
+        "The system shall allow the submission of an MFA verification code to complete the authentication process."
+      ]
+    },
+    {
+      "tr_id": "AUTH_S-FUNC-005",
+      "preconditions": [
+        "User has a valid account",
+        "MFA is enabled"
+      ],
+      "stimuli": [
+        "Invalid MFA verification code"
+      ],
+      "expected_outputs": [
+        "Error message displayed",
+        "User is not authenticated"
+      ],
+      "coverage_criterion": "Negative path",
+      "priority": "high",
+      "source_req_ids": [
+        "The system shall allow the submission of an MFA verification code to complete the authentication process."
+      ]
+    },
+    {
+      "tr_id": "AUTH_S-FUNC-006",
+      "preconditions": [
+        "User is authenticated"
+      ],
+      "stimuli": [
+        "Session termination request"
+      ],
+      "expected_outputs": [
+        "Session terminated",
+        "User logged out"
+      ],
+      "coverage_criterion": "Normal path",
+      "priority": "high",
+      "source_req_ids": [
+        "The system shall terminate the current session when requested by the user or when a security policy is violated."
+      ]
+    },
+    {
+      "tr_id": "AUTH_S-FUNC-007",
+      "preconditions": [
+        "User is authenticated"
+      ],
+      "stimuli": [
+        "Security policy violation"
+      ],
+      "expected_outputs": [
+        "Session terminated",
+        "User logged out"
+      ],
+      "coverage_criterion": "Normal path",
+      "priority": "high",
+      "source_req_ids": [
+        "The system shall terminate the current session when requested by the user or when a security policy is violated."
+      ]
+    },
+    {
+      "tr_id": "AUTH_S-FUNC-008",
+      "preconditions": [
+        "User has a valid access token"
+      ],
+      "stimuli": [
+        "Access token near expiration"
+      ],
+      "expected_outputs": [
+        "New access token issued"
+      ],
+      "coverage_criterion": "Normal path",
+      "priority": "high",
+      "source_req_ids": [
+        "The system shall refresh an access token when the existing one is near expiration or has expired."
+      ]
+    },
+    {
+      "tr_id": "AUTH_S-FUNC-009",
+      "preconditions": [
+        "User has an expired access token"
+      ],
+      "stimuli": [
+        "Expired access token"
+      ],
+      "expected_outputs": [
+        "Error message displayed",
+        "Access denied"
+      ],
+      "coverage_criterion": "Negative path",
+      "priority": "high",
+      "source_req_ids": [
+        "The system shall refresh an access token when the existing one is near expiration or has expired."
+      ]
+    },
+    {
+      "tr_id": "AUTH_S-FUNC-010",
+      "preconditions": [
+        "User has a valid account"
+      ],
+      "stimuli": [
+        "Successful authentication"
+      ],
+      "expected_outputs": [
+        "New access token issued"
+      ],
+      "coverage_criterion": "Normal path",
+      "priority": "high",
+      "source_req_ids": [
+        "The system shall issue a new access token upon successful authentication or token refresh."
+      ]
+    },
+    {
+      "tr_id": "AUTH_S-FUNC-011",
+      "preconditions": [
+        "User has a valid access token"
+      ],
+      "stimuli": [
+        "Access token refresh request"
+      ],
+      "expected_outputs": [
+        "New access token issued"
+      ],
+      "coverage_criterion": "Normal path",
+      "priority": "high",
+      "source_req_ids": [
+        "The system shall issue a new access token upon successful authentication or token refresh."
+      ]
+    },
+    {
+      "tr_id": "AUTH_S-FUNC-012",
+      "preconditions": [
+        "User has an invalid access token"
+      ],
+      "stimuli": [
+        "Invalid access token"
+      ],
+      "expected_outputs": [
+        "Error message displayed",
+        "Access denied"
+      ],
+      "coverage_criterion": "Negative path",
+      "priority": "high",
+      "source_req_ids": [
+        "The system shall issue a new access token upon successful authentication or token refresh."
+      ]
+    },
+    {
+      "tr_id": "AUTH_S-FUNC-013",
+      "preconditions": [
+        "User has an expired access token"
+      ],
+      "stimuli": [
+        "Expired access token"
+      ],
+      "expected_outputs": [
+        "Error message displayed",
+        "Access denied"
+      ],
+      "coverage_criterion": "Negative path",
+      "priority": "high",
+      "source_req_ids": [
+        "The system shall issue a new access token upon successful authentication or token refresh."
+      ]
+    },
+    {
+      "tr_id": "AUTH_S-NFR_-014",
+      "preconditions": [
+        "User has valid credentials",
+        "Multi-factor authentication is enabled"
+      ],
+      "stimuli": [
+        "User submits login request"
+      ],
+      "expected_outputs": [
+        "System prompts for second factor",
+        "System authenticates user successfully"
+      ],
+      "coverage_criterion": "Constraint coverage",
+      "priority": "high",
+      "source_req_ids": [
+        "Multi-factor authentication enabled"
+      ]
+    },
+    {
+      "tr_id": "AUTH_S-RUNT-015",
+      "preconditions": [
+        "User attempts to log in",
+        "MFA is enabled"
+      ],
+      "stimuli": [
+        "Invalid username or password",
+        "Valid MFA code not provided"
+      ],
+      "expected_outputs": [
+        "Error message: 'Invalid MFA code'",
+        "Login attempt fails"
+      ],
+      "coverage_criterion": "Runtime constraint",
+      "priority": "high",
+      "source_req_ids": [
+        "Multi-factor authentication enabled"
+      ]
+    },
+    {
+      "tr_id": "AUTH_S-RUNT-016",
+      "preconditions": [
+        "User attempts to log in",
+        "MFA is enabled"
+      ],
+      "stimuli": [
+        "Invalid MFA code entered",
+        "Expired MFA code entered"
+      ],
+      "expected_outputs": [
+        "Error message: 'Invalid MFA code'",
+        "Login attempt fails"
+      ],
+      "coverage_criterion": "Exception condition",
+      "priority": "high",
+      "source_req_ids": [
+        "Invalid or expired MFA code"
+      ]
+    },
+    {
+      "tr_id": "AUTH_S-RUNT-017",
+      "preconditions": [
+        "User attempts to log in",
+        "MFA is enabled"
+      ],
+      "stimuli": [
+        "Valid username and password",
+        "Valid MFA code entered"
+      ],
+      "expected_outputs": [
+        "Login successful",
+        "Access granted within 5 minutes"
+      ],
+      "coverage_criterion": "Runtime constraint",
+      "priority": "medium",
+      "source_req_ids": [
+        "Multi-factor authentication enabled"
+      ]
+    },
+    {
+      "tr_id": "AUTH_S-RUNT-018",
+      "preconditions": [
+        "User attempts to log in",
+        "MFA is enabled"
+      ],
+      "stimuli": [
+        "Invalid MFA code entered",
+        "Expired MFA code entered"
+      ],
+      "expected_outputs": [
+        "Error message: 'Invalid MFA code'",
+        "Login attempt fails"
+      ],
+      "coverage_criterion": "Exception condition",
+      "priority": "high",
+      "source_req_ids": [
+        "Invalid or expired MFA code"
+      ]
+    },
+    {
+      "tr_id": "AUTH_S-RUNT-019",
+      "preconditions": [
+        "User attempts to log in",
+        "MFA is enabled"
+      ],
+      "stimuli": [
+        "3 consecutive invalid login attempts"
+      ],
+      "expected_outputs": [
+        "Request for new MFA code",
+        "Login attempt fails"
+      ],
+      "coverage_criterion": "Runtime constraint",
+      "priority": "medium",
+      "source_req_ids": [
+        "Multi-factor authentication enabled"
+      ]
+    },
+    {
+      "tr_id": "AUTH_S-RUNT-020",
+      "preconditions": [
+        "User attempts to log in",
+        "MFA is enabled"
+      ],
+      "stimuli": [
+        "Invalid MFA code entered",
+        "Expired MFA code entered"
+      ],
+      "expected_outputs": [
+        "Error message: 'Invalid MFA code'",
+        "Login attempt fails"
+      ],
+      "coverage_criterion": "Exception condition",
+      "priority": "low",
+      "source_req_ids": [
+        "Invalid or expired MFA code"
+      ]
+    },
+    {
+      "tr_id": "AUTH_S-RUNT-021",
+      "preconditions": [
+        "User attempts to log in",
+        "MFA is enabled"
+      ],
+      "stimuli": [
+        "Multiple login attempts within 1 hour"
+      ],
+      "expected_outputs": [
+        "Login attempt successful or failed",
+        "Maximum attempts not exceeded"
+      ],
+      "coverage_criterion": "Runtime constraint",
+      "priority": "medium",
+      "source_req_ids": [
+        "Multi-factor authentication enabled"
+      ]
+    },
+    {
+      "tr_id": "AUTH_S-RUNT-022",
+      "preconditions": [
+        "User attempts to log in",
+        "MFA is enabled"
+      ],
+      "stimuli": [
+        "Invalid MFA code entered",
+        "Expired MFA code entered"
+      ],
+      "expected_outputs": [
+        "Event logged: 'Invalid MFA code'",
+        "Login attempt fails"
+      ],
+      "coverage_criterion": "Exception condition",
+      "priority": "low",
+      "source_req_ids": [
+        "Invalid or expired MFA code"
+      ]
+    },
+    {
+      "tr_id": "AUTH_S-RUNT-023",
+      "preconditions": [
+        "User attempts to log in",
+        "MFA is enabled"
+      ],
+      "stimuli": [
+        "User requests help with MFA code"
+      ],
+      "expected_outputs": [
+        "Instructions displayed: 'Obtaining a valid MFA code'",
+        "Help provided"
+      ],
+      "coverage_criterion": "Runtime constraint",
+      "priority": "low",
+      "source_req_ids": [
+        "Multi-factor authentication enabled"
+      ]
+    },
+    {
+      "tr_id": "AUTH_S-RUNT-024",
+      "preconditions": [
+        "User attempts to log in",
+        "MFA is enabled"
+      ],
+      "stimuli": [
+        "Invalid MFA code entered",
+        "Expired MFA code entered"
+      ],
+      "expected_outputs": [
+        "Error message: 'Invalid MFA code'",
+        "Login attempt fails"
+      ],
+      "coverage_criterion": "Exception condition",
+      "priority": "low",
+      "source_req_ids": [
+        "Invalid or expired MFA code"
+      ]
+    },
+    {
+      "tr_id": "AUTH_S-INTE-025",
+      "preconditions": [
+        "User has a valid account"
+      ],
+      "stimuli": [
+        "Valid username and password"
+      ],
+      "expected_outputs": [
+        "Authentication success response"
+      ],
+      "coverage_criterion": "Interface interaction",
+      "priority": "high",
+      "source_req_ids": [
+        "User -> Authenticate successfully"
+      ]
+    },
+    {
+      "tr_id": "AUTH_S-INTE-026",
+      "preconditions": [
+        "User has a valid session"
+      ],
+      "stimuli": [
+        "Refresh token request"
+      ],
+      "expected_outputs": [
+        "New access token response"
+      ],
+      "coverage_criterion": "Interface interaction",
+      "priority": "medium",
+      "source_req_ids": [
+        "User -> Refresh access token"
+      ]
+    },
+    {
+      "tr_id": "AUTH_S-INTE-027",
+      "preconditions": [
+        "User has a valid session"
+      ],
+      "stimuli": [
+        "Session termination request"
+      ],
+      "expected_outputs": [
+        "Access token invalidation response"
+      ],
+      "coverage_criterion": "Interface interaction",
+      "priority": "medium",
+      "source_req_ids": [
+        "User -> Terminate session"
+      ]
+    },
+    {
+      "tr_id": "AUTH_S-INTE-028",
+      "preconditions": [
+        "Valid authentication request"
+      ],
+      "stimuli": [
+        "Authentication request"
+      ],
+      "expected_outputs": [
+        "Access token response"
+      ],
+      "coverage_criterion": "Interface interaction",
+      "priority": "high",
+      "source_req_ids": [
+        "Authentication Service -> Issue access token after successful authentication"
+      ]
+    },
+    {
+      "tr_id": "AUTH_S-INTE-029",
+      "preconditions": [
+        "User has a valid account and MFA is enabled"
+      ],
+      "stimuli": [
+        "Valid MFA verification code"
+      ],
+      "expected_outputs": [
+        "Authentication success response"
+      ],
+      "coverage_criterion": "Interface interaction",
+      "priority": "high",
+      "source_req_ids": [
+        "User -> Submit MFA verification code"
+      ]
+    },
+    {
+      "tr_id": "AUTH_S-INTE-030",
+      "preconditions": [
+        "User has a valid account and MFA is enabled"
+      ],
+      "stimuli": [
+        "Invalid or expired MFA verification code"
+      ],
+      "expected_outputs": [
+        "Error response"
+      ],
+      "coverage_criterion": "Exception handling",
+      "priority": "high",
+      "source_req_ids": [
+        "Invalid or expired MFA code"
+      ]
+    },
+    {
+      "tr_id": "AUTH_S-INTE-031",
+      "preconditions": [
+        "User has a valid account and MFA is enabled"
+      ],
+      "stimuli": [
+        "Invalid or expired MFA verification code"
+      ],
+      "expected_outputs": [
+        "No authentication success response"
+      ],
+      "coverage_criterion": "Exception handling",
+      "priority": "high",
+      "source_req_ids": [
+        "Invalid or expired MFA code"
+      ]
+    },
+    {
+      "tr_id": "AUTH_S-INTE-032",
+      "preconditions": [
+        "User has a valid account"
+      ],
+      "stimuli": [
+        "Valid username and password"
+      ],
+      "expected_outputs": [
+        "Authentication success response"
+      ],
+      "coverage_criterion": "Process flow verification",
+      "priority": "medium",
+      "source_req_ids": [
+        "User -> Authenticate successfully"
+      ]
+    },
+    {
+      "tr_id": "AUTH_S-INTE-033",
+      "preconditions": [
+        "User has a valid session"
+      ],
+      "stimuli": [
+        "Refresh token request"
+      ],
+      "expected_outputs": [
+        "New access token response"
+      ],
+      "coverage_criterion": "Process flow verification",
+      "priority": "medium",
+      "source_req_ids": [
+        "User -> Refresh access token"
+      ]
+    },
+    {
+      "tr_id": "AUTH_S-INTE-034",
+      "preconditions": [
+        "User has a valid session"
+      ],
+      "stimuli": [
+        "Session termination request"
+      ],
+      "expected_outputs": [
+        "Access token invalidation response"
+      ],
+      "coverage_criterion": "Process flow verification",
+      "priority": "medium",
+      "source_req_ids": [
+        "User -> Terminate session"
+      ]
+    },
+    {
+      "tr_id": "AUTH_S-INTE-035",
+      "preconditions": [
+        "Valid authentication request"
+      ],
+      "stimuli": [
+        "Authentication request"
+      ],
+      "expected_outputs": [
+        "Access token response"
+      ],
+      "coverage_criterion": "Process flow verification",
+      "priority": "medium",
+      "source_req_ids": [
+        "Authentication Service -> Issue access token after successful authentication"
+      ]
+    },
+    {
+      "tr_id": "AUTH_S-INTE-036",
+      "preconditions": [
+        "User has a valid account and MFA is enabled"
+      ],
+      "stimuli": [
+        "Valid MFA verification code"
+      ],
+      "expected_outputs": [
+        "Authentication success response"
+      ],
+      "coverage_criterion": "Process flow verification",
+      "priority": "medium",
+      "source_req_ids": [
+        "User -> Submit MFA verification code"
+      ]
+    }
+  ],
+  "trs": [
+    {
+      "tr_id": "AUTH_S-FUNC-001",
+      "category": "functional",
+      "source_id": "auth_system_runtime",
+      "tr_h": "When a user submits valid credentials, the system shall authenticate the user.",
+      "tr_a": {
+        "tr_id": "AUTH_S-FUNC-001",
+        "preconditions": [
+          "User has a valid account"
+        ],
+        "stimuli": [
+          "Valid username and password"
+        ],
+        "expected_outputs": [
+          "User is authenticated",
+          "Session created"
+        ],
+        "coverage_criterion": "Normal path",
+        "priority": "high",
+        "source_req_ids": [
+          "The system shall authenticate a user using their credentials."
+        ]
+      },
+      "source_req_ids": [
+        "The system shall authenticate a user using their credentials."
+      ]
+    },
+    {
+      "tr_id": "AUTH_S-FUNC-002",
+      "category": "functional",
+      "source_id": "auth_system_runtime",
+      "tr_h": "When a user submits invalid credentials, the system shall not authenticate the user.",
+      "tr_a": {
+        "tr_id": "AUTH_S-FUNC-002",
+        "preconditions": [
+          "User has an account"
+        ],
+        "stimuli": [
+          "Invalid username or password"
+        ],
+        "expected_outputs": [
+          "Error message displayed",
+          "User is not authenticated"
+        ],
+        "coverage_criterion": "Negative path",
+        "priority": "high",
+        "source_req_ids": [
+          "The system shall authenticate a user using their credentials."
+        ]
+      },
+      "source_req_ids": [
+        "The system shall authenticate a user using their credentials."
+      ]
+    },
+    {
+      "tr_id": "AUTH_S-FUNC-003",
+      "category": "functional",
+      "source_id": "auth_system_runtime",
+      "tr_h": "When a user submits credentials with an expired password, the system shall prompt for a password update.",
+      "tr_a": {
+        "tr_id": "AUTH_S-FUNC-003",
+        "preconditions": [
+          "User has an account",
+          "Password is expired"
+        ],
+        "stimuli": [
+          "Valid username and expired password"
+        ],
+        "expected_outputs": [
+          "Password update prompt displayed"
+        ],
+        "coverage_criterion": "Boundary condition",
+        "priority": "medium",
+        "source_req_ids": [
+          "The system shall authenticate a user using their credentials."
+        ]
+      },
+      "source_req_ids": [
+        "The system shall authenticate a user using their credentials."
+      ]
+    },
+    {
+      "tr_id": "AUTH_S-FUNC-004",
+      "category": "functional",
+      "source_id": "auth_system_runtime",
+      "tr_h": "When an MFA verification code is submitted, the system shall complete the authentication process.",
+      "tr_a": {
+        "tr_id": "AUTH_S-FUNC-004",
+        "preconditions": [
+          "User has a valid account",
+          "MFA is enabled"
+        ],
+        "stimuli": [
+          "Valid MFA verification code"
+        ],
+        "expected_outputs": [
+          "User is authenticated",
+          "Session created"
+        ],
+        "coverage_criterion": "Normal path",
+        "priority": "high",
+        "source_req_ids": [
+          "The system shall allow the submission of an MFA verification code to complete the authentication process."
+        ]
+      },
+      "source_req_ids": [
+        "The system shall allow the submission of an MFA verification code to complete the authentication process."
+      ]
+    },
+    {
+      "tr_id": "AUTH_S-FUNC-005",
+      "category": "functional",
+      "source_id": "auth_system_runtime",
+      "tr_h": "When an invalid MFA verification code is submitted, the system shall not complete the authentication process.",
+      "tr_a": {
+        "tr_id": "AUTH_S-FUNC-005",
+        "preconditions": [
+          "User has a valid account",
+          "MFA is enabled"
+        ],
+        "stimuli": [
+          "Invalid MFA verification code"
+        ],
+        "expected_outputs": [
+          "Error message displayed",
+          "User is not authenticated"
+        ],
+        "coverage_criterion": "Negative path",
+        "priority": "high",
+        "source_req_ids": [
+          "The system shall allow the submission of an MFA verification code to complete the authentication process."
+        ]
+      },
+      "source_req_ids": [
+        "The system shall allow the submission of an MFA verification code to complete the authentication process."
+      ]
+    },
+    {
+      "tr_id": "AUTH_S-FUNC-006",
+      "category": "functional",
+      "source_id": "auth_system_runtime",
+      "tr_h": "When a user requests session termination, the system shall terminate the current session.",
+      "tr_a": {
+        "tr_id": "AUTH_S-FUNC-006",
+        "preconditions": [
+          "User is authenticated"
+        ],
+        "stimuli": [
+          "Session termination request"
+        ],
+        "expected_outputs": [
+          "Session terminated",
+          "User logged out"
+        ],
+        "coverage_criterion": "Normal path",
+        "priority": "high",
+        "source_req_ids": [
+          "The system shall terminate the current session when requested by the user or when a security policy is violated."
+        ]
+      },
+      "source_req_ids": [
+        "The system shall terminate the current session when requested by the user or when a security policy is violated."
+      ]
+    },
+    {
+      "tr_id": "AUTH_S-FUNC-007",
+      "category": "functional",
+      "source_id": "auth_system_runtime",
+      "tr_h": "When a security policy is violated, the system shall terminate the current session.",
+      "tr_a": {
+        "tr_id": "AUTH_S-FUNC-007",
+        "preconditions": [
+          "User is authenticated"
+        ],
+        "stimuli": [
+          "Security policy violation"
+        ],
+        "expected_outputs": [
+          "Session terminated",
+          "User logged out"
+        ],
+        "coverage_criterion": "Normal path",
+        "priority": "high",
+        "source_req_ids": [
+          "The system shall terminate the current session when requested by the user or when a security policy is violated."
+        ]
+      },
+      "source_req_ids": [
+        "The system shall terminate the current session when requested by the user or when a security policy is violated."
+      ]
+    },
+    {
+      "tr_id": "AUTH_S-FUNC-008",
+      "category": "functional",
+      "source_id": "auth_system_runtime",
+      "tr_h": "When an access token is near expiration, the system shall refresh the access token.",
+      "tr_a": {
+        "tr_id": "AUTH_S-FUNC-008",
+        "preconditions": [
+          "User has a valid access token"
+        ],
+        "stimuli": [
+          "Access token near expiration"
+        ],
+        "expected_outputs": [
+          "New access token issued"
+        ],
+        "coverage_criterion": "Normal path",
+        "priority": "high",
+        "source_req_ids": [
+          "The system shall refresh an access token when the existing one is near expiration or has expired."
+        ]
+      },
+      "source_req_ids": [
+        "The system shall refresh an access token when the existing one is near expiration or has expired."
+      ]
+    },
+    {
+      "tr_id": "AUTH_S-FUNC-009",
+      "category": "functional",
+      "source_id": "auth_system_runtime",
+      "tr_h": "When an access token has expired, the system shall not use it for authentication.",
+      "tr_a": {
+        "tr_id": "AUTH_S-FUNC-009",
+        "preconditions": [
+          "User has an expired access token"
+        ],
+        "stimuli": [
+          "Expired access token"
+        ],
+        "expected_outputs": [
+          "Error message displayed",
+          "Access denied"
+        ],
+        "coverage_criterion": "Negative path",
+        "priority": "high",
+        "source_req_ids": [
+          "The system shall refresh an access token when the existing one is near expiration or has expired."
+        ]
+      },
+      "source_req_ids": [
+        "The system shall refresh an access token when the existing one is near expiration or has expired."
+      ]
+    },
+    {
+      "tr_id": "AUTH_S-FUNC-010",
+      "category": "functional",
+      "source_id": "auth_system_runtime",
+      "tr_h": "When a user is successfully authenticated, the system shall issue a new access token.",
+      "tr_a": {
+        "tr_id": "AUTH_S-FUNC-010",
+        "preconditions": [
+          "User has a valid account"
+        ],
+        "stimuli": [
+          "Successful authentication"
+        ],
+        "expected_outputs": [
+          "New access token issued"
+        ],
+        "coverage_criterion": "Normal path",
+        "priority": "high",
+        "source_req_ids": [
+          "The system shall issue a new access token upon successful authentication or token refresh."
+        ]
+      },
+      "source_req_ids": [
+        "The system shall issue a new access token upon successful authentication or token refresh."
+      ]
+    },
+    {
+      "tr_id": "AUTH_S-FUNC-011",
+      "category": "functional",
+      "source_id": "auth_system_runtime",
+      "tr_h": "When an access token is refreshed, the system shall issue a new access token.",
+      "tr_a": {
+        "tr_id": "AUTH_S-FUNC-011",
+        "preconditions": [
+          "User has a valid access token"
+        ],
+        "stimuli": [
+          "Access token refresh request"
+        ],
+        "expected_outputs": [
+          "New access token issued"
+        ],
+        "coverage_criterion": "Normal path",
+        "priority": "high",
+        "source_req_ids": [
+          "The system shall issue a new access token upon successful authentication or token refresh."
+        ]
+      },
+      "source_req_ids": [
+        "The system shall issue a new access token upon successful authentication or token refresh."
+      ]
+    },
+    {
+      "tr_id": "AUTH_S-FUNC-012",
+      "category": "functional",
+      "source_id": "auth_system_runtime",
+      "tr_h": "When an invalid access token is used for authentication, the system shall not authenticate the user.",
+      "tr_a": {
+        "tr_id": "AUTH_S-FUNC-012",
+        "preconditions": [
+          "User has an invalid access token"
+        ],
+        "stimuli": [
+          "Invalid access token"
+        ],
+        "expected_outputs": [
+          "Error message displayed",
+          "Access denied"
+        ],
+        "coverage_criterion": "Negative path",
+        "priority": "high",
+        "source_req_ids": [
+          "The system shall issue a new access token upon successful authentication or token refresh."
+        ]
+      },
+      "source_req_ids": [
+        "The system shall issue a new access token upon successful authentication or token refresh."
+      ]
+    },
+    {
+      "tr_id": "AUTH_S-FUNC-013",
+      "category": "functional",
+      "source_id": "auth_system_runtime",
+      "tr_h": "When an expired access token is used for authentication, the system shall not authenticate the user.",
+      "tr_a": {
+        "tr_id": "AUTH_S-FUNC-013",
+        "preconditions": [
+          "User has an expired access token"
+        ],
+        "stimuli": [
+          "Expired access token"
+        ],
+        "expected_outputs": [
+          "Error message displayed",
+          "Access denied"
+        ],
+        "coverage_criterion": "Negative path",
+        "priority": "high",
+        "source_req_ids": [
+          "The system shall issue a new access token upon successful authentication or token refresh."
+        ]
+      },
+      "source_req_ids": [
+        "The system shall issue a new access token upon successful authentication or token refresh."
+      ]
+    },
+    {
+      "tr_id": "AUTH_S-NFR_-014",
+      "category": "nfr_constraint",
+      "source_id": "auth_system_runtime",
+      "tr_h": "When a user attempts to log in, the system shall authenticate using multi-factor authentication within 2 seconds.",
+      "tr_a": {
+        "tr_id": "AUTH_S-NFR_-014",
+        "preconditions": [
+          "User has valid credentials",
+          "Multi-factor authentication is enabled"
+        ],
+        "stimuli": [
+          "User submits login request"
+        ],
+        "expected_outputs": [
+          "System prompts for second factor",
+          "System authenticates user successfully"
+        ],
+        "coverage_criterion": "Constraint coverage",
+        "priority": "high",
+        "source_req_ids": [
+          "Multi-factor authentication enabled"
+        ]
+      },
+      "source_req_ids": [
+        "Multi-factor authentication enabled"
+      ]
+    },
+    {
+      "tr_id": "AUTH_S-RUNT-015",
+      "category": "runtime_environment",
+      "source_id": "auth_system_runtime",
+      "tr_h": "When multi-factor authentication is enabled, the system shall request a valid MFA code.",
+      "tr_a": {
+        "tr_id": "AUTH_S-RUNT-015",
+        "preconditions": [
+          "User attempts to log in",
+          "MFA is enabled"
+        ],
+        "stimuli": [
+          "Invalid username or password",
+          "Valid MFA code not provided"
+        ],
+        "expected_outputs": [
+          "Error message: 'Invalid MFA code'",
+          "Login attempt fails"
+        ],
+        "coverage_criterion": "Runtime constraint",
+        "priority": "high",
+        "source_req_ids": [
+          "Multi-factor authentication enabled"
+        ]
+      },
+      "source_req_ids": [
+        "Multi-factor authentication enabled"
+      ]
+    },
+    {
+      "tr_id": "AUTH_S-RUNT-016",
+      "category": "runtime_environment",
+      "source_id": "auth_system_runtime",
+      "tr_h": "When an invalid or expired MFA code is entered, the system shall display an error message.",
+      "tr_a": {
+        "tr_id": "AUTH_S-RUNT-016",
+        "preconditions": [
+          "User attempts to log in",
+          "MFA is enabled"
+        ],
+        "stimuli": [
+          "Invalid MFA code entered",
+          "Expired MFA code entered"
+        ],
+        "expected_outputs": [
+          "Error message: 'Invalid MFA code'",
+          "Login attempt fails"
+        ],
+        "coverage_criterion": "Exception condition",
+        "priority": "high",
+        "source_req_ids": [
+          "Invalid or expired MFA code"
+        ]
+      },
+      "source_req_ids": [
+        "Invalid or expired MFA code"
+      ]
+    },
+    {
+      "tr_id": "AUTH_S-RUNT-017",
+      "category": "runtime_environment",
+      "source_id": "auth_system_runtime",
+      "tr_h": "When multi-factor authentication is enabled, the system shall allow access within 5 minutes of a valid MFA code being entered.",
+      "tr_a": {
+        "tr_id": "AUTH_S-RUNT-017",
+        "preconditions": [
+          "User attempts to log in",
+          "MFA is enabled"
+        ],
+        "stimuli": [
+          "Valid username and password",
+          "Valid MFA code entered"
+        ],
+        "expected_outputs": [
+          "Login successful",
+          "Access granted within 5 minutes"
+        ],
+        "coverage_criterion": "Runtime constraint",
+        "priority": "medium",
+        "source_req_ids": [
+          "Multi-factor authentication enabled"
+        ]
+      },
+      "source_req_ids": [
+        "Multi-factor authentication enabled"
+      ]
+    },
+    {
+      "tr_id": "AUTH_S-RUNT-018",
+      "category": "runtime_environment",
+      "source_id": "auth_system_runtime",
+      "tr_h": "When an invalid or expired MFA code is entered, the system shall not allow access.",
+      "tr_a": {
+        "tr_id": "AUTH_S-RUNT-018",
+        "preconditions": [
+          "User attempts to log in",
+          "MFA is enabled"
+        ],
+        "stimuli": [
+          "Invalid MFA code entered",
+          "Expired MFA code entered"
+        ],
+        "expected_outputs": [
+          "Error message: 'Invalid MFA code'",
+          "Login attempt fails"
+        ],
+        "coverage_criterion": "Exception condition",
+        "priority": "high",
+        "source_req_ids": [
+          "Invalid or expired MFA code"
+        ]
+      },
+      "source_req_ids": [
+        "Invalid or expired MFA code"
+      ]
+    },
+    {
+      "tr_id": "AUTH_S-RUNT-019",
+      "category": "runtime_environment",
+      "source_id": "auth_system_runtime",
+      "tr_h": "When multi-factor authentication is enabled, the system shall request a new MFA code after 3 failed login attempts.",
+      "tr_a": {
+        "tr_id": "AUTH_S-RUNT-019",
+        "preconditions": [
+          "User attempts to log in",
+          "MFA is enabled"
+        ],
+        "stimuli": [
+          "3 consecutive invalid login attempts"
+        ],
+        "expected_outputs": [
+          "Request for new MFA code",
+          "Login attempt fails"
+        ],
+        "coverage_criterion": "Runtime constraint",
+        "priority": "medium",
+        "source_req_ids": [
+          "Multi-factor authentication enabled"
+        ]
+      },
+      "source_req_ids": [
+        "Multi-factor authentication enabled"
+      ]
+    },
+    {
+      "tr_id": "AUTH_S-RUNT-020",
+      "category": "runtime_environment",
+      "source_id": "auth_system_runtime",
+      "tr_h": "When an invalid or expired MFA code is entered, the system shall not request a new MFA code.",
+      "tr_a": {
+        "tr_id": "AUTH_S-RUNT-020",
+        "preconditions": [
+          "User attempts to log in",
+          "MFA is enabled"
+        ],
+        "stimuli": [
+          "Invalid MFA code entered",
+          "Expired MFA code entered"
+        ],
+        "expected_outputs": [
+          "Error message: 'Invalid MFA code'",
+          "Login attempt fails"
+        ],
+        "coverage_criterion": "Exception condition",
+        "priority": "low",
+        "source_req_ids": [
+          "Invalid or expired MFA code"
+        ]
+      },
+      "source_req_ids": [
+        "Invalid or expired MFA code"
+      ]
+    },
+    {
+      "tr_id": "AUTH_S-RUNT-021",
+      "category": "runtime_environment",
+      "source_id": "auth_system_runtime",
+      "tr_h": "When multi-factor authentication is enabled, the system shall allow a maximum of 5 login attempts within 1 hour.",
+      "tr_a": {
+        "tr_id": "AUTH_S-RUNT-021",
+        "preconditions": [
+          "User attempts to log in",
+          "MFA is enabled"
+        ],
+        "stimuli": [
+          "Multiple login attempts within 1 hour"
+        ],
+        "expected_outputs": [
+          "Login attempt successful or failed",
+          "Maximum attempts not exceeded"
+        ],
+        "coverage_criterion": "Runtime constraint",
+        "priority": "medium",
+        "source_req_ids": [
+          "Multi-factor authentication enabled"
+        ]
+      },
+      "source_req_ids": [
+        "Multi-factor authentication enabled"
+      ]
+    },
+    {
+      "tr_id": "AUTH_S-RUNT-022",
+      "category": "runtime_environment",
+      "source_id": "auth_system_runtime",
+      "tr_h": "When an invalid or expired MFA code is entered, the system shall log the event.",
+      "tr_a": {
+        "tr_id": "AUTH_S-RUNT-022",
+        "preconditions": [
+          "User attempts to log in",
+          "MFA is enabled"
+        ],
+        "stimuli": [
+          "Invalid MFA code entered",
+          "Expired MFA code entered"
+        ],
+        "expected_outputs": [
+          "Event logged: 'Invalid MFA code'",
+          "Login attempt fails"
+        ],
+        "coverage_criterion": "Exception condition",
+        "priority": "low",
+        "source_req_ids": [
+          "Invalid or expired MFA code"
+        ]
+      },
+      "source_req_ids": [
+        "Invalid or expired MFA code"
+      ]
+    },
+    {
+      "tr_id": "AUTH_S-RUNT-023",
+      "category": "runtime_environment",
+      "source_id": "auth_system_runtime",
+      "tr_h": "When multi-factor authentication is enabled, the system shall display instructions for obtaining a valid MFA code.",
+      "tr_a": {
+        "tr_id": "AUTH_S-RUNT-023",
+        "preconditions": [
+          "User attempts to log in",
+          "MFA is enabled"
+        ],
+        "stimuli": [
+          "User requests help with MFA code"
+        ],
+        "expected_outputs": [
+          "Instructions displayed: 'Obtaining a valid MFA code'",
+          "Help provided"
+        ],
+        "coverage_criterion": "Runtime constraint",
+        "priority": "low",
+        "source_req_ids": [
+          "Multi-factor authentication enabled"
+        ]
+      },
+      "source_req_ids": [
+        "Multi-factor authentication enabled"
+      ]
+    },
+    {
+      "tr_id": "AUTH_S-RUNT-024",
+      "category": "runtime_environment",
+      "source_id": "auth_system_runtime",
+      "tr_h": "When an invalid or expired MFA code is entered, the system shall not display instructions for obtaining a valid MFA code.",
+      "tr_a": {
+        "tr_id": "AUTH_S-RUNT-024",
+        "preconditions": [
+          "User attempts to log in",
+          "MFA is enabled"
+        ],
+        "stimuli": [
+          "Invalid MFA code entered",
+          "Expired MFA code entered"
+        ],
+        "expected_outputs": [
+          "Error message: 'Invalid MFA code'",
+          "Login attempt fails"
+        ],
+        "coverage_criterion": "Exception condition",
+        "priority": "low",
+        "source_req_ids": [
+          "Invalid or expired MFA code"
+        ]
+      },
+      "source_req_ids": [
+        "Invalid or expired MFA code"
+      ]
+    },
+    {
+      "tr_id": "AUTH_S-INTE-025",
+      "category": "interface_exception",
+      "source_id": "auth_system_runtime",
+      "tr_h": "When user submits valid credentials, the system shall authenticate successfully.",
+      "tr_a": {
+        "tr_id": "AUTH_S-INTE-025",
+        "preconditions": [
+          "User has a valid account"
+        ],
+        "stimuli": [
+          "Valid username and password"
+        ],
+        "expected_outputs": [
+          "Authentication success response"
+        ],
+        "coverage_criterion": "Interface interaction",
+        "priority": "high",
+        "source_req_ids": [
+          "User -> Authenticate successfully"
+        ]
+      },
+      "source_req_ids": [
+        "User -> Authenticate successfully"
+      ]
+    },
+    {
+      "tr_id": "AUTH_S-INTE-026",
+      "category": "interface_exception",
+      "source_id": "auth_system_runtime",
+      "tr_h": "When user requests access token refresh, the system shall issue a new access token.",
+      "tr_a": {
+        "tr_id": "AUTH_S-INTE-026",
+        "preconditions": [
+          "User has a valid session"
+        ],
+        "stimuli": [
+          "Refresh token request"
+        ],
+        "expected_outputs": [
+          "New access token response"
+        ],
+        "coverage_criterion": "Interface interaction",
+        "priority": "medium",
+        "source_req_ids": [
+          "User -> Refresh access token"
+        ]
+      },
+      "source_req_ids": [
+        "User -> Refresh access token"
+      ]
+    },
+    {
+      "tr_id": "AUTH_S-INTE-027",
+      "category": "interface_exception",
+      "source_id": "auth_system_runtime",
+      "tr_h": "When user terminates the session, the system shall invalidate the access token.",
+      "tr_a": {
+        "tr_id": "AUTH_S-INTE-027",
+        "preconditions": [
+          "User has a valid session"
+        ],
+        "stimuli": [
+          "Session termination request"
+        ],
+        "expected_outputs": [
+          "Access token invalidation response"
+        ],
+        "coverage_criterion": "Interface interaction",
+        "priority": "medium",
+        "source_req_ids": [
+          "User -> Terminate session"
+        ]
+      },
+      "source_req_ids": [
+        "User -> Terminate session"
+      ]
+    },
+    {
+      "tr_id": "AUTH_S-INTE-028",
+      "category": "interface_exception",
+      "source_id": "auth_system_runtime",
+      "tr_h": "When authentication service receives a valid authentication request, the system shall issue an access token.",
+      "tr_a": {
+        "tr_id": "AUTH_S-INTE-028",
+        "preconditions": [
+          "Valid authentication request"
+        ],
+        "stimuli": [
+          "Authentication request"
+        ],
+        "expected_outputs": [
+          "Access token response"
+        ],
+        "coverage_criterion": "Interface interaction",
+        "priority": "high",
+        "source_req_ids": [
+          "Authentication Service -> Issue access token after successful authentication"
+        ]
+      },
+      "source_req_ids": [
+        "Authentication Service -> Issue access token after successful authentication"
+      ]
+    },
+    {
+      "tr_id": "AUTH_S-INTE-029",
+      "category": "interface_exception",
+      "source_id": "auth_system_runtime",
+      "tr_h": "When user submits a valid MFA verification code, the system shall authenticate successfully.",
+      "tr_a": {
+        "tr_id": "AUTH_S-INTE-029",
+        "preconditions": [
+          "User has a valid account and MFA is enabled"
+        ],
+        "stimuli": [
+          "Valid MFA verification code"
+        ],
+        "expected_outputs": [
+          "Authentication success response"
+        ],
+        "coverage_criterion": "Interface interaction",
+        "priority": "high",
+        "source_req_ids": [
+          "User -> Submit MFA verification code"
+        ]
+      },
+      "source_req_ids": [
+        "User -> Submit MFA verification code"
+      ]
+    },
+    {
+      "tr_id": "AUTH_S-INTE-030",
+      "category": "interface_exception",
+      "source_id": "auth_system_runtime",
+      "tr_h": "When user submits an invalid or expired MFA code, the system shall return an error response.",
+      "tr_a": {
+        "tr_id": "AUTH_S-INTE-030",
+        "preconditions": [
+          "User has a valid account and MFA is enabled"
+        ],
+        "stimuli": [
+          "Invalid or expired MFA verification code"
+        ],
+        "expected_outputs": [
+          "Error response"
+        ],
+        "coverage_criterion": "Exception handling",
+        "priority": "high",
+        "source_req_ids": [
+          "Invalid or expired MFA code"
+        ]
+      },
+      "source_req_ids": [
+        "Invalid or expired MFA code"
+      ]
+    },
+    {
+      "tr_id": "AUTH_S-INTE-031",
+      "category": "interface_exception",
+      "source_id": "auth_system_runtime",
+      "tr_h": "When user submits an invalid or expired MFA code, the system shall not authenticate the user.",
+      "tr_a": {
+        "tr_id": "AUTH_S-INTE-031",
+        "preconditions": [
+          "User has a valid account and MFA is enabled"
+        ],
+        "stimuli": [
+          "Invalid or expired MFA verification code"
+        ],
+        "expected_outputs": [
+          "No authentication success response"
+        ],
+        "coverage_criterion": "Exception handling",
+        "priority": "high",
+        "source_req_ids": [
+          "Invalid or expired MFA code"
+        ]
+      },
+      "source_req_ids": [
+        "Invalid or expired MFA code"
+      ]
+    },
+    {
+      "tr_id": "AUTH_S-INTE-032",
+      "category": "interface_exception",
+      "source_id": "auth_system_runtime",
+      "tr_h": "When user submits a valid authentication request, the system shall authenticate successfully within 2 seconds.",
+      "tr_a": {
+        "tr_id": "AUTH_S-INTE-032",
+        "preconditions": [
+          "User has a valid account"
+        ],
+        "stimuli": [
+          "Valid username and password"
+        ],
+        "expected_outputs": [
+          "Authentication success response"
+        ],
+        "coverage_criterion": "Process flow verification",
+        "priority": "medium",
+        "source_req_ids": [
+          "User -> Authenticate successfully"
+        ]
+      },
+      "source_req_ids": [
+        "User -> Authenticate successfully"
+      ]
+    },
+    {
+      "tr_id": "AUTH_S-INTE-033",
+      "category": "interface_exception",
+      "source_id": "auth_system_runtime",
+      "tr_h": "When user requests access token refresh, the system shall issue a new access token within 1 second.",
+      "tr_a": {
+        "tr_id": "AUTH_S-INTE-033",
+        "preconditions": [
+          "User has a valid session"
+        ],
+        "stimuli": [
+          "Refresh token request"
+        ],
+        "expected_outputs": [
+          "New access token response"
+        ],
+        "coverage_criterion": "Process flow verification",
+        "priority": "medium",
+        "source_req_ids": [
+          "User -> Refresh access token"
+        ]
+      },
+      "source_req_ids": [
+        "User -> Refresh access token"
+      ]
+    },
+    {
+      "tr_id": "AUTH_S-INTE-034",
+      "category": "interface_exception",
+      "source_id": "auth_system_runtime",
+      "tr_h": "When user terminates the session, the system shall invalidate the access token within 1 second.",
+      "tr_a": {
+        "tr_id": "AUTH_S-INTE-034",
+        "preconditions": [
+          "User has a valid session"
+        ],
+        "stimuli": [
+          "Session termination request"
+        ],
+        "expected_outputs": [
+          "Access token invalidation response"
+        ],
+        "coverage_criterion": "Process flow verification",
+        "priority": "medium",
+        "source_req_ids": [
+          "User -> Terminate session"
+        ]
+      },
+      "source_req_ids": [
+        "User -> Terminate session"
+      ]
+    },
+    {
+      "tr_id": "AUTH_S-INTE-035",
+      "category": "interface_exception",
+      "source_id": "auth_system_runtime",
+      "tr_h": "When authentication service receives a valid authentication request, the system shall issue an access token within 2 seconds.",
+      "tr_a": {
+        "tr_id": "AUTH_S-INTE-035",
+        "preconditions": [
+          "Valid authentication request"
+        ],
+        "stimuli": [
+          "Authentication request"
+        ],
+        "expected_outputs": [
+          "Access token response"
+        ],
+        "coverage_criterion": "Process flow verification",
+        "priority": "medium",
+        "source_req_ids": [
+          "Authentication Service -> Issue access token after successful authentication"
+        ]
+      },
+      "source_req_ids": [
+        "Authentication Service -> Issue access token after successful authentication"
+      ]
+    },
+    {
+      "tr_id": "AUTH_S-INTE-036",
+      "category": "interface_exception",
+      "source_id": "auth_system_runtime",
+      "tr_h": "When user submits a valid MFA verification code, the system shall authenticate successfully within 2 seconds.",
+      "tr_a": {
+        "tr_id": "AUTH_S-INTE-036",
+        "preconditions": [
+          "User has a valid account and MFA is enabled"
+        ],
+        "stimuli": [
+          "Valid MFA verification code"
+        ],
+        "expected_outputs": [
+          "Authentication success response"
+        ],
+        "coverage_criterion": "Process flow verification",
+        "priority": "medium",
+        "source_req_ids": [
+          "User -> Submit MFA verification code"
+        ]
+      },
+      "source_req_ids": [
+        "User -> Submit MFA verification code"
+      ]
+    }
+  ],
+  "total_count": 36
+}

@@ -1,0 +1,122 @@
+[
+  {
+    "source_id": "auth_system_runtime",
+    "artifact_type": "runtime",
+    "entity_type": "interface_name",
+    "content": "Authentication Service API",
+    "page_ref": "openapi:info",
+    "confidence_score": 0.9
+  },
+  {
+    "source_id": "auth_system_runtime",
+    "artifact_type": "runtime",
+    "entity_type": "function_point",
+    "content": "user authentication, session management, and token issuance",
+    "page_ref": "openapi:info",
+    "confidence_score": 0.8
+  },
+  {
+    "source_id": "auth_system_runtime",
+    "artifact_type": "runtime",
+    "entity_type": "interface_name",
+    "content": "/auth/login",
+    "page_ref": "openapi:path:/auth/login",
+    "confidence_score": 1.0
+  },
+  {
+    "source_id": "auth_system_runtime",
+    "artifact_type": "runtime",
+    "entity_type": "function_point",
+    "content": "Authenticate a user",
+    "page_ref": "openapi:path:/auth/login",
+    "confidence_score": 1.0
+  },
+  {
+    "source_id": "auth_system_runtime",
+    "artifact_type": "runtime",
+    "entity_type": "constraint",
+    "content": "rate limit of 8 requests per minute per client IP",
+    "page_ref": "openapi:path:/auth/login",
+    "confidence_score": 1.0
+  },
+  {
+    "source_id": "auth_system_runtime",
+    "artifact_type": "runtime",
+    "entity_type": "interface_name",
+    "content": "/auth/mfa",
+    "page_ref": "openapi:path:/auth/mfa",
+    "confidence_score": 1.0
+  },
+  {
+    "source_id": "auth_system_runtime",
+    "artifact_type": "runtime",
+    "entity_type": "function_point",
+    "content": "Submit MFA verification code",
+    "page_ref": "openapi:path:/auth/mfa",
+    "confidence_score": 1.0
+  },
+  {
+    "source_id": "auth_system_runtime",
+    "artifact_type": "runtime",
+    "entity_type": "constraint",
+    "content": "multi-factor authentication enabled",
+    "page_ref": "openapi:path:/auth/mfa",
+    "confidence_score": 0.8
+  },
+  {
+    "source_id": "auth_system_runtime",
+    "artifact_type": "runtime",
+    "entity_type": "exception_condition",
+    "content": "Invalid or expired MFA code",
+    "page_ref": "openapi:path:/auth/mfa",
+    "confidence_score": 1.0
+  },
+  {
+    "source_id": "auth_system_runtime",
+    "artifact_type": "runtime",
+    "entity_type": "interface_name",
+    "content": "/auth/refresh",
+    "page_ref": "openapi:path:/auth/refresh",
+    "confidence_score": 0.9
+  },
+  {
+    "source_id": "auth_system_runtime",
+    "artifact_type": "runtime",
+    "entity_type": "function_point",
+    "content": "Refresh an access token",
+    "page_ref": "openapi:path:/auth/refresh",
+    "confidence_score": 0.8
+  },
+  {
+    "source_id": "auth_system_runtime",
+    "artifact_type": "runtime",
+    "entity_type": "interface_name",
+    "content": "/auth/logout",
+    "page_ref": "openapi:path:/auth/logout",
+    "confidence_score": 1.0
+  },
+  {
+    "source_id": "auth_system_runtime",
+    "artifact_type": "runtime",
+    "entity_type": "function_point",
+    "content": "Terminate the current session",
+    "page_ref": "openapi:path:/auth/logout",
+    "confidence_score": 0.9
+  },
+  {
+    "source_id": "auth_system_runtime",
+    "artifact_type": "runtime",
+    "entity_type": "interface_name",
+    "content": "AuthResponse",
+    "page_ref": "openapi:schema:AuthResponse",
+    "confidence_score": 0.9
+  },
+  {
+    "source_id": "auth_system_runtime",
+    "artifact_type": "runtime",
+    "entity_type": "function_point",
+    "content": "successful authentication or token refresh",
+    "page_ref": "openapi:schema:AuthResponse",
+    "confidence_score": 0.8
+  }
+]

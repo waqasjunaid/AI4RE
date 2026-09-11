@@ -8,7 +8,7 @@
     "metadata": {
       "section_id": 1,
       "chunk_index": 1,
-      "token_count": 6,
+      "token_count": 2,
       "overlap": false
     }
   },
@@ -21,7 +21,7 @@
     "metadata": {
       "section_id": 2,
       "chunk_index": 1,
-      "token_count": 43,
+      "token_count": 22,
       "overlap": false
     }
   },
@@ -34,7 +34,7 @@
     "metadata": {
       "section_id": 3,
       "chunk_index": 1,
-      "token_count": 28,
+      "token_count": 17,
       "overlap": false
     }
   },
@@ -47,7 +47,7 @@
     "metadata": {
       "section_id": 4,
       "chunk_index": 1,
-      "token_count": 38,
+      "token_count": 20,
       "overlap": false
     }
   },
@@ -60,7 +60,7 @@
     "metadata": {
       "section_id": 5,
       "chunk_index": 1,
-      "token_count": 58,
+      "token_count": 26,
       "overlap": false
     }
   },
@@ -73,7 +73,7 @@
     "metadata": {
       "section_id": 6,
       "chunk_index": 1,
-      "token_count": 46,
+      "token_count": 17,
       "overlap": false
     }
   },
@@ -86,7 +86,7 @@
     "metadata": {
       "section_id": 7,
       "chunk_index": 1,
-      "token_count": 133,
+      "token_count": 63,
       "overlap": false
     }
   },
@@ -99,7 +99,7 @@
     "metadata": {
       "section_id": 8,
       "chunk_index": 1,
-      "token_count": 84,
+      "token_count": 38,
       "overlap": false
     }
   },
@@ -112,7 +112,7 @@
     "metadata": {
       "section_id": 9,
       "chunk_index": 1,
-      "token_count": 66,
+      "token_count": 34,
       "overlap": false
     }
   },
@@ -125,7 +125,7 @@
     "metadata": {
       "section_id": 10,
       "chunk_index": 1,
-      "token_count": 39,
+      "token_count": 19,
       "overlap": false
     }
   },
@@ -138,7 +138,7 @@
     "metadata": {
       "section_id": 11,
       "chunk_index": 1,
-      "token_count": 30,
+      "token_count": 16,
       "overlap": false
     }
   },
@@ -151,7 +151,7 @@
     "metadata": {
       "section_id": 12,
       "chunk_index": 1,
-      "token_count": 49,
+      "token_count": 25,
       "overlap": false
     }
   },
@@ -164,7 +164,7 @@
     "metadata": {
       "section_id": 13,
       "chunk_index": 1,
-      "token_count": 23,
+      "token_count": 8,
       "overlap": false
     }
   },
@@ -177,7 +177,7 @@
     "metadata": {
       "section_id": 14,
       "chunk_index": 1,
-      "token_count": 95,
+      "token_count": 44,
       "overlap": false
     }
   },
@@ -190,7 +190,7 @@
     "metadata": {
       "section_id": 15,
       "chunk_index": 1,
-      "token_count": 3,
+      "token_count": 2,
       "overlap": false
     }
   },
@@ -203,7 +203,7 @@
     "metadata": {
       "section_id": 16,
       "chunk_index": 1,
-      "token_count": 313,
+      "token_count": 148,
       "overlap": false
     }
   },
@@ -216,7 +216,7 @@
     "metadata": {
       "section_id": 17,
       "chunk_index": 1,
-      "token_count": 142,
+      "token_count": 89,
       "overlap": false
     }
   }

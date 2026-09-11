@@ -1,0 +1,32 @@
+[
+  {
+    "comparison_id": "srs_vs_manual",
+    "source_a": "nasa_srs_v1",
+    "source_b": "bash_user_manual",
+    "issues": [],
+    "total_conflicts": 0,
+    "total_omissions": 0,
+    "total_ambiguities": 0,
+    "total_to_confirm": 0
+  },
+  {
+    "comparison_id": "runtime_vs_srs",
+    "source_a": "swagger_petstore",
+    "source_b": "nasa_srs_v1",
+    "issues": [],
+    "total_conflicts": 0,
+    "total_omissions": 0,
+    "total_ambiguities": 0,
+    "total_to_confirm": 0
+  },
+  {
+    "comparison_id": "design_vs_srs",
+    "source_a": "auth_system_design",
+    "source_b": "nasa_srs_v1",
+    "issues": [],
+    "total_conflicts": 0,
+    "total_omissions": 0,
+    "total_ambiguities": 0,
+    "total_to_confirm": 0
+  }
+]

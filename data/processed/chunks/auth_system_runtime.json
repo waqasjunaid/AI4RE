@@ -1,0 +1,80 @@
+[
+  {
+    "chunk_id": "auth_system_runtime__s0001__c0001",
+    "source_id": "auth_system_runtime",
+    "artifact_type": "runtime",
+    "content": "API: Authentication Service API\nVersion: 1.0.0\nDescription: REST API for user authentication, session management, and token issuance.\nBase path: /auth\nHost:",
+    "page_ref": "openapi:info",
+    "metadata": {
+      "section_id": 1,
+      "chunk_index": 1,
+      "token_count": 21,
+      "overlap": false
+    }
+  },
+  {
+    "chunk_id": "auth_system_runtime__s0002__c0001",
+    "source_id": "auth_system_runtime",
+    "artifact_type": "runtime",
+    "content": "Endpoint: /auth/login\n  Method: POST\n  Summary: Authenticate a user\n  Description: Authenticates a user with email and password. Returns an access token and refresh token pair on success. Enforces a rate limit of 8 requests per minute per client IP.\n  Tags: Authentication\n  Parameters:\n    - email (body, string, required=True)\n    - password (body, string, required=True)\n  Responses:\n    - 200: Authentication successful; returns AuthResponse\n    - 401: Invalid email or password\n    - 423: Account locked due to repeated failed attempts\n    - 429: Rate limit exceeded: maximum 8 login requests per minute per client IP",
+    "page_ref": "openapi:path:/auth/login",
+    "metadata": {
+      "section_id": 2,
+      "chunk_index": 1,
+      "token_count": 87,
+      "overlap": false
+    }
+  },
+  {
+    "chunk_id": "auth_system_runtime__s0003__c0001",
+    "source_id": "auth_system_runtime",
+    "artifact_type": "runtime",
+    "content": "Endpoint: /auth/mfa\n  Method: POST\n  Summary: Submit MFA verification code\n  Description: Completes authentication for accounts with multi-factor authentication enabled by submitting a time-based one-time password (TOTP) code.\n  Tags: Authentication\n  Parameters:\n    - mfaCode (body, string, required=True)\n  Responses:\n    - 200: MFA verified; returns AuthResponse\n    - 401: Invalid or expired MFA code",
+    "page_ref": "openapi:path:/auth/mfa",
+    "metadata": {
+      "section_id": 3,
+      "chunk_index": 1,
+      "token_count": 48,
+      "overlap": false
+    }
+  },
+  {
+    "chunk_id": "auth_system_runtime__s0004__c0001",
+    "source_id": "auth_system_runtime",
+    "artifact_type": "runtime",
+    "content": "Endpoint: /auth/refresh\n  Method: POST\n  Summary: Refresh an access token\n  Description: Issues a new access token using a valid, non-expired refresh token.\n  Tags: Token Management\n  Responses:\n    - 200: New access token issued\n    - 401: Refresh token invalid or expired",
+    "page_ref": "openapi:path:/auth/refresh",
+    "metadata": {
+      "section_id": 4,
+      "chunk_index": 1,
+      "token_count": 38,
+      "overlap": false
+    }
+  },
+  {
+    "chunk_id": "auth_system_runtime__s0005__c0001",
+    "source_id": "auth_system_runtime",
+    "artifact_type": "runtime",
+    "content": "Endpoint: /auth/logout\n  Method: POST\n  Summary: Terminate the current session\n  Description: Invalidates the caller's active session and associated tokens.\n  Tags: Session Management\n  Responses:\n    - 200: Session terminated",
+    "page_ref": "openapi:path:/auth/logout",
+    "metadata": {
+      "section_id": 5,
+      "chunk_index": 1,
+      "token_count": 26,
+      "overlap": false
+    }
+  },
+  {
+    "chunk_id": "auth_system_runtime__s0006__c0001",
+    "source_id": "auth_system_runtime",
+    "artifact_type": "runtime",
+    "content": "Schema: AuthResponse\nDescription: Returned on successful authentication or token refresh.\n  - accessToken (string): Short-lived JWT signed with RS256\n  - refreshToken (string): Long-lived opaque token\n  - expiresIn (integer): Access token lifetime in seconds\n  - tokenType (string): Always 'Bearer'",
+    "page_ref": "openapi:schema:AuthResponse",
+    "metadata": {
+      "section_id": 6,
+      "chunk_index": 1,
+      "token_count": 37,
+      "overlap": false
+    }
+  }
+]

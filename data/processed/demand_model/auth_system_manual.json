@@ -1,0 +1,129 @@
+{
+  "source_id": "auth_system_manual",
+  "bundle_id": "auth_system",
+  "system_objectives": [
+    "multi-factor authentication (MFA)",
+    "password recovery via email",
+    "manual sign out from account menu"
+  ],
+  "user_roles": [
+    "User"
+  ],
+  "use_cases": [
+    {
+      "use_case_id": "UC-001",
+      "actor": "User",
+      "goal": "Sign in to the system",
+      "preconditions": [
+        "User has a valid account",
+        "MFA is enabled"
+      ],
+      "steps": [
+        "Enter username and password",
+        "Complete MFA challenge",
+        "System authenticates user"
+      ],
+      "postconditions": [
+        "User is signed in",
+        "Session is established"
+      ],
+      "exceptions": [
+        "Invalid credentials",
+        "MFA failure"
+      ]
+    },
+    {
+      "use_case_id": "UC-002",
+      "actor": "User",
+      "goal": "Recover password via email",
+      "preconditions": [
+        "User has a valid account",
+        "Email address is associated with the account"
+      ],
+      "steps": [
+        "Click Forgot password? link",
+        "Enter username or email address",
+        "System sends recovery email"
+      ],
+      "postconditions": [
+        "Password recovery email is sent to user's email address"
+      ],
+      "exceptions": [
+        "Invalid username or email address"
+      ]
+    },
+    {
+      "use_case_id": "UC-003",
+      "actor": "User",
+      "goal": "Change password from Account Settings",
+      "preconditions": [
+        "User is signed in",
+        "Account Settings page is accessible"
+      ],
+      "steps": [
+        "Navigate to Account Settings page",
+        "Enter new password and confirm",
+        "System updates password"
+      ],
+      "postconditions": [
+        "Password is changed successfully"
+      ],
+      "exceptions": [
+        "New password does not meet requirements"
+      ]
+    },
+    {
+      "use_case_id": "UC-004",
+      "actor": "User",
+      "goal": "Sign out from account menu",
+      "preconditions": [
+        "User is signed in",
+        "Account menu is accessible"
+      ],
+      "steps": [
+        "Click sign out link from account menu",
+        "System terminates session"
+      ],
+      "postconditions": [
+        "User is signed out",
+        "Session is terminated"
+      ],
+      "exceptions": []
+    }
+  ],
+  "functional_reqs": [
+    {
+      "req_id": "FR-001",
+      "description": "The system shall provide a multi-factor authentication mechanism to verify user identities.",
+      "source_ids": [
+        "auth_system_manual"
+      ],
+      "priority": "high"
+    },
+    {
+      "req_id": "FR-002",
+      "description": "The system shall allow users to recover their passwords via email notification.",
+      "source_ids": [
+        "auth_system_manual"
+      ],
+      "priority": "medium"
+    },
+    {
+      "req_id": "FR-003",
+      "description": "The system shall provide a manual sign-out option accessible from the account menu.",
+      "source_ids": [
+        "auth_system_manual"
+      ],
+      "priority": "low"
+    }
+  ],
+  "nfr_constraints": [],
+  "runtime_constraints": [],
+  "glossary": {
+    "lockout period": "lockout period"
+  },
+  "exception_handlers": [
+    "account lock due to failed sign-in attempts",
+    "incorrect password entered five times"
+  ]
+}

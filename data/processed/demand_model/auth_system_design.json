@@ -1,26 +1,27 @@
 {
   "source_id": "auth_system_design",
+  "bundle_id": "auth_system",
   "system_objectives": [
-    "POST /auth/login",
-    "findByEmail(email)",
-    "validate(AuthRequest)",
     "isExpired()",
     "refresh()",
     "invalidate()",
     "validateCredentials",
-    "enableMFA"
+    "enableMFA",
+    "lockAccount",
+    "validate AuthRequest",
+    "LOGIN_SUCCESS"
   ],
   "user_roles": [
     "User",
     "Client",
-    "Rate Limiter",
-    "Request Router",
     "AuthController",
     "TokenService",
-    "PasswordHasher",
-    "SessionManager",
-    "Authentication API",
-    "EmailService"
+    "AuditLog",
+    "SessionStore",
+    "UserDB",
+    "AuthService",
+    "AuditDB",
+    "Browser"
   ],
   "use_cases": [
     {
@@ -31,13 +32,13 @@
         "User has a valid email and password"
       ],
       "steps": [
-        "User sends AuthRequest to Request Router",
-        "AuthController calls validateCredentials()",
-        "TokenService generates token if credentials are valid"
+        "User sends AuthRequest to AuthController",
+        "AuthController validates AuthRequest",
+        "AuthService verifies user credentials"
       ],
       "postconditions": [
         "User is logged in",
-        "Token is generated"
+        "SessionStore contains user session"
       ],
       "exceptions": [
         "LOGIN_FAILURE"
@@ -52,11 +53,12 @@
       ],
       "steps": [
         "User sends new password to AuthController",
-        "PasswordHasher hashes the new password",
-        "AuthController updates user's password"
+        "AuthService verifies old password",
+        "AuthService updates user password"
       ],
       "postconditions": [
-        "User's password is updated"
+        "User password is updated",
+        "AuditLog records PASSWORD_CHANGE event"
       ],
       "exceptions": []
     },
@@ -65,127 +67,127 @@
       "actor": "Client",
       "goal": "Refresh token",
       "preconditions": [
-        "Token is expired"
+        "Client has a valid refresh token"
       ],
       "steps": [
-        "Client sends refresh request to Request Router",
-        "AuthController calls refresh()",
-        "TokenService generates new token"
+        "Client sends refresh token to TokenService",
+        "TokenService verifies refresh token",
+        "TokenService generates new token pair"
       ],
       "postconditions": [
-        "New token is generated"
+        "Client receives new token pair",
+        "AuditLog records TOKEN_REFRESH event"
       ],
       "exceptions": []
     },
     {
       "use_case_id": "UC-004",
-      "actor": "Rate Limiter",
-      "goal": "Lock account due to excessive login attempts",
-      "preconditions": [
-        "Multiple failed login attempts"
-      ],
-      "steps": [
-        "Rate Limiter detects excessive attempts",
-        "AuthController calls lockAccount()"
-      ],
-      "postconditions": [
-        "User's account is locked"
-      ],
-      "exceptions": []
-    },
-    {
-      "use_case_id": "UC-005",
       "actor": "User",
       "goal": "Enable MFA",
       "preconditions": [
         "User is logged in"
       ],
       "steps": [
-        "User sends request to enable MFA",
-        "AuthController calls enableMFA()"
+        "User sends request to enable MFA to AuthController",
+        "AuthService enables MFA for user"
       ],
       "postconditions": [
-        "MFA is enabled for user"
+        "MFA is enabled for user",
+        "AuditLog records MFA_ENABLED event"
+      ],
+      "exceptions": []
+    },
+    {
+      "use_case_id": "UC-005",
+      "actor": "AuthController",
+      "goal": "Lock account after multiple login failures",
+      "preconditions": [
+        "Multiple LOGIN_FAILURE events occur"
+      ],
+      "steps": [
+        "AuthController detects multiple login failures",
+        "AuthService locks user account"
+      ],
+      "postconditions": [
+        "User account is locked",
+        "AuditLog records ACCOUNT_LOCKED event"
       ],
       "exceptions": []
     },
     {
       "use_case_id": "UC-006",
-      "actor": "Request Router",
-      "goal": "Route AuthRequest to AuthController",
-      "preconditions": [
-        "AuthRequest received"
-      ],
-      "steps": [
-        "Request Router receives AuthRequest",
-        "Request Router routes request to AuthController"
-      ],
-      "postconditions": [
-        "AuthRequest is routed to AuthController"
-      ],
-      "exceptions": []
-    },
-    {
-      "use_case_id": "UC-007",
       "actor": "User",
       "goal": "Logout from the system",
       "preconditions": [
         "User is logged in"
       ],
       "steps": [
-        "User sends logout request to Request Router",
-        "AuthController calls invalidate()"
+        "User sends logout request to AuthController",
+        "AuthService invalidates user session"
       ],
       "postconditions": [
-        "User's session is invalidated"
+        "User is logged out",
+        "AuditLog records LOGOUT event"
+      ],
+      "exceptions": []
+    },
+    {
+      "use_case_id": "UC-007",
+      "actor": "AuthController",
+      "goal": "Validate AuthRequest",
+      "preconditions": [
+        "AuthRequest is received"
+      ],
+      "steps": [
+        "AuthController validates AuthRequest"
+      ],
+      "postconditions": [
+        "AuthRequest is valid or invalid"
       ],
       "exceptions": []
     },
     {
       "use_case_id": "UC-008",
-      "actor": "TokenService",
-      "goal": "Invalidate token",
+      "actor": "AuthService",
+      "goal": "Verify user credentials",
       "preconditions": [
-        "Token is no longer valid"
+        "User credentials are provided"
       ],
       "steps": [
-        "TokenService receives invalidate request",
-        "TokenService invalidates token"
+        "AuthService verifies user password"
       ],
       "postconditions": [
-        "Token is invalidated"
+        "User credentials are valid or invalid"
       ],
       "exceptions": []
     },
     {
       "use_case_id": "UC-009",
-      "actor": "AuthController",
-      "goal": "Validate AuthRequest",
+      "actor": "TokenService",
+      "goal": "Generate token pair for user",
       "preconditions": [
-        "AuthRequest received"
+        "User ID is provided"
       ],
       "steps": [
-        "AuthController receives AuthRequest",
-        "AuthController calls validate(AuthRequest)"
+        "TokenService generates token pair"
       ],
       "postconditions": [
-        "AuthRequest is validated"
+        "Token pair is generated"
       ],
       "exceptions": []
     },
     {
       "use_case_id": "UC-010",
-      "actor": "SessionManager",
-      "goal": "Find user by email",
+      "actor": "AuditLog",
+      "goal": "Record event",
       "preconditions": [
-        "Email address provided"
+        "Event ID is provided"
       ],
       "steps": [
-        "SessionManager receives email address",
-        "SessionManager calls findByEmail(email)"
+        "AuditLog records event"
       ],
       "postconditions": [
-        "User is found by email"
+        "Event is recorded"
       ],
       "exceptions": []
     }
@@ -193,7 +195,7 @@
   "functional_reqs": [
     {
       "req_id": "FR-001",
-      "description": "The system shall validate user credentials to ensure authenticity.",
+      "description": "The system shall validate the AuthRequest to ensure it conforms to the expected format and content.",
       "source_ids": [
         "auth_system_design"
       ],
@@ -201,7 +203,7 @@
     },
     {
       "req_id": "FR-002",
-      "description": "The system shall enable multi-factor authentication (MFA) for users upon request.",
+      "description": "The system shall determine if a token or session has expired using the isExpired() function.",
       "source_ids": [
         "auth_system_design"
       ],
@@ -209,7 +211,7 @@
     },
     {
       "req_id": "FR-003",
-      "description": "The system shall lock a user's account after a specified number of failed login attempts.",
+      "description": "The system shall refresh an existing token or session when requested using the refresh() function.",
       "source_ids": [
         "auth_system_design"
       ],
@@ -217,7 +219,7 @@
     },
     {
       "req_id": "FR-004",
-      "description": "The system shall check if a token or session has expired and require re-authentication.",
+      "description": "The system shall invalidate a token or session when requested using the invalidate() function.",
       "source_ids": [
         "auth_system_design"
       ],
@@ -225,15 +227,15 @@
     },
     {
       "req_id": "FR-005",
-      "description": "The system shall refresh a user's authentication token upon request.",
+      "description": "The system shall validate user credentials to ensure they match stored values.",
       "source_ids": [
         "auth_system_design"
       ],
-      "priority": "low"
+      "priority": "high"
     },
     {
       "req_id": "FR-006",
-      "description": "The system shall invalidate a user's authentication token when the user logs out or the session expires.",
+      "description": "The system shall enable multi-factor authentication (MFA) for a user account when requested using the enableMFA function.",
       "source_ids": [
         "auth_system_design"
       ],
@@ -241,7 +243,7 @@
     },
     {
       "req_id": "FR-007",
-      "description": "The system shall validate an authentication request to ensure it conforms to expected formats and protocols.",
+      "description": "The system shall lock a user account after a specified number of failed login attempts or when requested using the lockAccount function.",
       "source_ids": [
         "auth_system_design"
       ],
@@ -249,15 +251,15 @@
     },
     {
       "req_id": "FR-008",
-      "description": "The system shall generate a unique event ID for each login attempt.",
+      "description": "The system shall return a LOGIN_SUCCESS event upon successful authentication.",
       "source_ids": [
         "auth_system_design"
       ],
-      "priority": "low"
+      "priority": "medium"
     },
     {
       "req_id": "FR-009",
-      "description": "The system shall return a 'LOGIN_SUCCESS' event upon successful user authentication.",
+      "description": "The system shall return a LOGIN_FAILURE event upon failed authentication.",
       "source_ids": [
         "auth_system_design"
       ],
@@ -265,11 +267,11 @@
     },
     {
       "req_id": "FR-010",
-      "description": "The system shall return a 'LOGIN_FAILURE' event upon failed user authentication.",
+      "description": "The system shall generate a PASSWORD_CHANGE event when a user's password is changed.",
       "source_ids": [
         "auth_system_design"
       ],
-      "priority": "medium"
+      "priority": "low"
     }
   ],
   "nfr_constraints": [
@@ -335,18 +337,17 @@
     }
   ],
   "glossary": {
+    "EventType": "EventType",
+    "AccountStatus": "AccountStatus",
     "accessToken": "accessToken",
     "refreshToken": "refreshToken",
     "expiresIn": "expiresIn",
     "tokenType": "tokenType",
-    "AccountStatus": "AccountStatus",
     "ACTIVE": "ACTIVE",
     "LOCKED": "LOCKED",
     "SUSPENDED": "SUSPENDED",
     "PENDING_VERIFICATION": "PENDING_VERIFICATION",
-    "EventType": "EventType",
-    "LoginFlow": "LoginFlow",
-    "AuthRequest": "AuthRequest"
+    "LoginFlow": "LoginFlow"
   },
   "exception_handlers": []
 }

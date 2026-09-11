@@ -11,7 +11,7 @@
     "source_id": "auth_system_design",
     "artifact_type": "design",
     "entity_type": "interface_name",
-    "content": "Authentication API",
+    "content": "Auth API",
     "page_ref": "puml:@startuml AuthSystemDesign",
     "confidence_score": 0.8
   },
@@ -155,9 +155,17 @@
     "source_id": "auth_system_design",
     "artifact_type": "design",
     "entity_type": "interface_name",
-    "content": "RestAPI",
+    "content": "Router",
     "page_ref": "puml:package \"External Services\" {",
     "confidence_score": 0.8
+  },
+  {
+    "source_id": "auth_system_design",
+    "artifact_type": "design",
+    "entity_type": "interface_name",
+    "content": "RestAPI",
+    "page_ref": "puml:package \"External Services\" {",
+    "confidence_score": 0.9
   },
   {
     "source_id": "auth_system_design",
@@ -171,17 +179,33 @@
     "source_id": "auth_system_design",
     "artifact_type": "design",
     "entity_type": "interface_name",
-    "content": "EmailService (SMTP)",
+    "content": "SessionMgr",
     "page_ref": "puml:package \"External Services\" {",
     "confidence_score": 0.8
   },
   {
     "source_id": "auth_system_design",
     "artifact_type": "design",
+    "entity_type": "actor_role",
+    "content": "Hasher",
+    "page_ref": "puml:package \"External Services\" {",
+    "confidence_score": 0.9
+  },
+  {
+    "source_id": "auth_system_design",
+    "artifact_type": "design",
     "entity_type": "interface_name",
-    "content": "OTPProvider (TOTP)",
+    "content": "SessionStore",
     "page_ref": "puml:package \"External Services\" {",
     "confidence_score": 0.8
+  },
+  {
+    "source_id": "auth_system_design",
+    "artifact_type": "design",
+    "entity_type": "actor_role",
+    "content": "UserDB",
+    "page_ref": "puml:package \"External Services\" {",
+    "confidence_score": 0.9
   },
   {
     "source_id": "auth_system_design",
@@ -306,16 +330,8 @@
   {
     "source_id": "auth_system_design",
     "artifact_type": "design",
-    "entity_type": "interface_name",
-    "content": "AuditEvent",
-    "page_ref": "puml:class AuditEvent {",
-    "confidence_score": 0.9
-  },
-  {
-    "source_id": "auth_system_design",
-    "artifact_type": "design",
     "entity_type": "actor_role",
-    "content": "userId",
+    "content": "AuditEvent",
     "page_ref": "puml:class AuditEvent {",
     "confidence_score": 0.8
   },
@@ -325,7 +341,23 @@
     "entity_type": "function_point",
     "content": "eventId",
     "page_ref": "puml:class AuditEvent {",
-    "confidence_score": 0.7
+    "confidence_score": 0.6
+  },
+  {
+    "source_id": "auth_system_design",
+    "artifact_type": "design",
+    "entity_type": "glossary_term",
+    "content": "EventType",
+    "page_ref": "puml:class AuditEvent {",
+    "confidence_score": 0.9
+  },
+  {
+    "source_id": "auth_system_design",
+    "artifact_type": "design",
+    "entity_type": "interface_name",
+    "content": "timestamp",
+    "page_ref": "puml:class AuditEvent {",
+    "confidence_score": 0.4
   },
   {
     "source_id": "auth_system_design",
@@ -491,7 +523,7 @@
     "source_id": "auth_system_design",
     "artifact_type": "design",
     "entity_type": "interface_name",
-    "content": "AuthController",
+    "content": "/auth/login",
     "page_ref": "puml:actor Client",
     "confidence_score": 1.0
   },
@@ -499,15 +531,15 @@
     "source_id": "auth_system_design",
     "artifact_type": "design",
     "entity_type": "function_point",
-    "content": "POST /auth/login",
+    "content": "validate AuthRequest",
     "page_ref": "puml:actor Client",
-    "confidence_score": 1.0
+    "confidence_score": 0.8
   },
   {
     "source_id": "auth_system_design",
     "artifact_type": "design",
     "entity_type": "actor_role",
-    "content": "PasswordHasher",
+    "content": "AuthController",
     "page_ref": "puml:actor Client",
     "confidence_score": 1.0
   },
@@ -523,7 +555,31 @@
     "source_id": "auth_system_design",
     "artifact_type": "design",
     "entity_type": "function_point",
-    "content": "findByEmail(email)",
+    "content": "findByEmail email",
+    "page_ref": "puml:actor Client",
+    "confidence_score": 0.8
+  },
+  {
+    "source_id": "auth_system_design",
+    "artifact_type": "design",
+    "entity_type": "actor_role",
+    "content": "PasswordHasher",
+    "page_ref": "puml:actor Client",
+    "confidence_score": 1.0
+  },
+  {
+    "source_id": "auth_system_design",
+    "artifact_type": "design",
+    "entity_type": "function_point",
+    "content": "verify password user.passwordHash",
+    "page_ref": "puml:actor Client",
+    "confidence_score": 0.8
+  },
+  {
+    "source_id": "auth_system_design",
+    "artifact_type": "design",
+    "entity_type": "interface_name",
+    "content": "/auth/mfa",
     "page_ref": "puml:actor Client",
     "confidence_score": 1.0
   },
@@ -538,6 +594,14 @@
   {
     "source_id": "auth_system_design",
     "artifact_type": "design",
+    "entity_type": "function_point",
+    "content": "generateTokenPair userId",
+    "page_ref": "puml:actor Client",
+    "confidence_score": 0.8
+  },
+  {
+    "source_id": "auth_system_design",
+    "artifact_type": "design",
     "entity_type": "interface_name",
     "content": "SessionStore",
     "page_ref": "puml:actor Client",
@@ -546,18 +610,10 @@
   {
     "source_id": "auth_system_design",
     "artifact_type": "design",
-    "entity_type": "function_point",
-    "content": "validate(AuthRequest)",
+    "entity_type": "actor_role",
+    "content": "AuditLog",
     "page_ref": "puml:actor Client",
     "confidence_score": 1.0
-  },
-  {
-    "source_id": "auth_system_design",
-    "artifact_type": "design",
-    "entity_type": "glossary_term",
-    "content": "AuthRequest",
-    "page_ref": "puml:actor Client",
-    "confidence_score": 0.8
   },
   {
     "source_id": "auth_system_design",

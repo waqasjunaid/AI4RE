@@ -1,0 +1,330 @@
+[
+  {
+    "source_id": "auth_system_srs",
+    "artifact_type": "srs",
+    "entity_type": "interface_name",
+    "content": "Authentication Service",
+    "page_ref": "Preamble",
+    "confidence_score": 0.9
+  },
+  {
+    "source_id": "auth_system_srs",
+    "artifact_type": "srs",
+    "entity_type": "function_point",
+    "content": "user authentication",
+    "page_ref": "H1: 1. Introduction",
+    "confidence_score": 0.9
+  },
+  {
+    "source_id": "auth_system_srs",
+    "artifact_type": "srs",
+    "entity_type": "function_point",
+    "content": "session management",
+    "page_ref": "H1: 1. Introduction",
+    "confidence_score": 0.9
+  },
+  {
+    "source_id": "auth_system_srs",
+    "artifact_type": "srs",
+    "entity_type": "function_point",
+    "content": "token issuance",
+    "page_ref": "H1: 1. Introduction",
+    "confidence_score": 0.9
+  },
+  {
+    "source_id": "auth_system_srs",
+    "artifact_type": "srs",
+    "entity_type": "actor_role",
+    "content": "client applications",
+    "page_ref": "H1: 1. Introduction",
+    "confidence_score": 0.8
+  },
+  {
+    "source_id": "auth_system_srs",
+    "artifact_type": "srs",
+    "entity_type": "interface_name",
+    "content": "API Gateway",
+    "page_ref": "H1: 1. Introduction",
+    "confidence_score": 0.95
+  },
+  {
+    "source_id": "auth_system_srs",
+    "artifact_type": "srs",
+    "entity_type": "interface_name",
+    "content": "AuthController",
+    "page_ref": "H1: 2. System Overview",
+    "confidence_score": 0.9
+  },
+  {
+    "source_id": "auth_system_srs",
+    "artifact_type": "srs",
+    "entity_type": "interface_name",
+    "content": "TokenService",
+    "page_ref": "H1: 2. System Overview",
+    "confidence_score": 0.9
+  },
+  {
+    "source_id": "auth_system_srs",
+    "artifact_type": "srs",
+    "entity_type": "interface_name",
+    "content": "PasswordHasher",
+    "page_ref": "H1: 2. System Overview",
+    "confidence_score": 0.9
+  },
+  {
+    "source_id": "auth_system_srs",
+    "artifact_type": "srs",
+    "entity_type": "interface_name",
+    "content": "SessionManager",
+    "page_ref": "H1: 2. System Overview",
+    "confidence_score": 0.9
+  },
+  {
+    "source_id": "auth_system_srs",
+    "artifact_type": "srs",
+    "entity_type": "interface_name",
+    "content": "Rate Limiter",
+    "page_ref": "H1: 2. System Overview",
+    "confidence_score": 0.8
+  },
+  {
+    "source_id": "auth_system_srs",
+    "artifact_type": "srs",
+    "entity_type": "interface_name",
+    "content": "Request Router",
+    "page_ref": "H1: 2. System Overview",
+    "confidence_score": 0.8
+  },
+  {
+    "source_id": "auth_system_srs",
+    "artifact_type": "srs",
+    "entity_type": "interface_name",
+    "content": "API Gateway layer",
+    "page_ref": "H1: 2. System Overview",
+    "confidence_score": 0.7
+  },
+  {
+    "source_id": "auth_system_srs",
+    "artifact_type": "srs",
+    "entity_type": "interface_name",
+    "content": "UserDB",
+    "page_ref": "H1: 2. System Overview",
+    "confidence_score": 0.9
+  },
+  {
+    "source_id": "auth_system_srs",
+    "artifact_type": "srs",
+    "entity_type": "interface_name",
+    "content": "SessionStore",
+    "page_ref": "H1: 2. System Overview",
+    "confidence_score": 0.9
+  },
+  {
+    "source_id": "auth_system_srs",
+    "artifact_type": "srs",
+    "entity_type": "interface_name",
+    "content": "AuditDB",
+    "page_ref": "H1: 2. System Overview",
+    "confidence_score": 0.9
+  },
+  {
+    "source_id": "auth_system_srs",
+    "artifact_type": "srs",
+    "entity_type": "function_point",
+    "content": "authenticate users via POST /auth/login",
+    "page_ref": "H2: 3.1 User Authentication",
+    "confidence_score": 0.9
+  },
+  {
+    "source_id": "auth_system_srs",
+    "artifact_type": "srs",
+    "entity_type": "interface_name",
+    "content": "/auth/login",
+    "page_ref": "H2: 3.1 User Authentication",
+    "confidence_score": 1.0
+  },
+  {
+    "source_id": "auth_system_srs",
+    "artifact_type": "srs",
+    "entity_type": "function_point",
+    "content": "return HTTP 401 Unauthorized",
+    "page_ref": "H2: 3.1 User Authentication",
+    "confidence_score": 0.9
+  },
+  {
+    "source_id": "auth_system_srs",
+    "artifact_type": "srs",
+    "entity_type": "constraint",
+    "content": "invalid submitted credentials",
+    "page_ref": "H2: 3.1 User Authentication",
+    "confidence_score": 0.8
+  },
+  {
+    "source_id": "auth_system_srs",
+    "artifact_type": "srs",
+    "entity_type": "function_point",
+    "content": "require TOTP code for MFA authentication",
+    "page_ref": "H2: 3.1 User Authentication",
+    "confidence_score": 0.9
+  },
+  {
+    "source_id": "auth_system_srs",
+    "artifact_type": "srs",
+    "entity_type": "function_point",
+    "content": "issue access and refresh tokens",
+    "page_ref": "H2: 3.2 Session and Token Management",
+    "confidence_score": 0.9
+  },
+  {
+    "source_id": "auth_system_srs",
+    "artifact_type": "srs",
+    "entity_type": "interface_name",
+    "content": "/auth/refresh",
+    "page_ref": "H2: 3.2 Session and Token Management",
+    "confidence_score": 1.0
+  },
+  {
+    "source_id": "auth_system_srs",
+    "artifact_type": "srs",
+    "entity_type": "function_point",
+    "content": "obtain new access token",
+    "page_ref": "H2: 3.2 Session and Token Management",
+    "confidence_score": 0.9
+  },
+  {
+    "source_id": "auth_system_srs",
+    "artifact_type": "srs",
+    "entity_type": "interface_name",
+    "content": "/auth/logout",
+    "page_ref": "H2: 3.2 Session and Token Management",
+    "confidence_score": 1.0
+  },
+  {
+    "source_id": "auth_system_srs",
+    "artifact_type": "srs",
+    "entity_type": "function_point",
+    "content": "invalidate user session",
+    "page_ref": "H2: 3.2 Session and Token Management",
+    "confidence_score": 0.9
+  },
+  {
+    "source_id": "auth_system_srs",
+    "artifact_type": "srs",
+    "entity_type": "function_point",
+    "content": "lock user account after failed login attempts",
+    "page_ref": "H2: 3.3 Account Protection",
+    "confidence_score": 0.9
+  },
+  {
+    "source_id": "auth_system_srs",
+    "artifact_type": "srs",
+    "entity_type": "constraint",
+    "content": "5 consecutive failed login attempts",
+    "page_ref": "H2: 3.3 Account Protection",
+    "confidence_score": 0.8
+  },
+  {
+    "source_id": "auth_system_srs",
+    "artifact_type": "srs",
+    "entity_type": "function_point",
+    "content": "automatically unlock locked account",
+    "page_ref": "H2: 3.3 Account Protection",
+    "confidence_score": 0.9
+  },
+  {
+    "source_id": "auth_system_srs",
+    "artifact_type": "srs",
+    "entity_type": "constraint",
+    "content": "15 minutes to unlock account",
+    "page_ref": "H2: 3.3 Account Protection",
+    "confidence_score": 0.8
+  },
+  {
+    "source_id": "auth_system_srs",
+    "artifact_type": "srs",
+    "entity_type": "function_point",
+    "content": "rate-limit login attempts",
+    "page_ref": "H2: 3.3 Account Protection",
+    "confidence_score": 0.9
+  },
+  {
+    "source_id": "auth_system_srs",
+    "artifact_type": "srs",
+    "entity_type": "constraint",
+    "content": "10 requests per minute per client IP address",
+    "page_ref": "H2: 3.3 Account Protection",
+    "confidence_score": 0.8
+  },
+  {
+    "source_id": "auth_system_srs",
+    "artifact_type": "srs",
+    "entity_type": "function_point",
+    "content": "record an audit log entry",
+    "page_ref": "H2: 3.4 Audit Logging",
+    "confidence_score": 0.9
+  },
+  {
+    "source_id": "auth_system_srs",
+    "artifact_type": "srs",
+    "entity_type": "actor_role",
+    "content": "system",
+    "page_ref": "H2: 3.4 Audit Logging",
+    "confidence_score": 0.8
+  },
+  {
+    "source_id": "auth_system_srs",
+    "artifact_type": "srs",
+    "entity_type": "constraint",
+    "content": "client-server communication use TLS 1.2 or higher",
+    "page_ref": "H1: 4. Non-Functional Requirements",
+    "confidence_score": 0.9
+  },
+  {
+    "source_id": "auth_system_srs",
+    "artifact_type": "srs",
+    "entity_type": "constraint",
+    "content": "access tokens signed using RS256 algorithm",
+    "page_ref": "H1: 4. Non-Functional Requirements",
+    "confidence_score": 0.95
+  },
+  {
+    "source_id": "auth_system_srs",
+    "artifact_type": "srs",
+    "entity_type": "constraint",
+    "content": "access tokens expire 15 minutes after issuance",
+    "page_ref": "H1: 4. Non-Functional Requirements",
+    "confidence_score": 0.9
+  },
+  {
+    "source_id": "auth_system_srs",
+    "artifact_type": "srs",
+    "entity_type": "constraint",
+    "content": "user passwords minimum 12 characters with mixed case and symbols",
+    "page_ref": "H1: 4. Non-Functional Requirements",
+    "confidence_score": 0.95
+  },
+  {
+    "source_id": "auth_system_srs",
+    "artifact_type": "srs",
+    "entity_type": "constraint",
+    "content": "audit log records retained for 90 days",
+    "page_ref": "H1: 4. Non-Functional Requirements",
+    "confidence_score": 0.9
+  },
+  {
+    "source_id": "auth_system_srs",
+    "artifact_type": "srs",
+    "entity_type": "actor_role",
+    "content": "Registered User",
+    "page_ref": "H1: 5. User Roles",
+    "confidence_score": 0.9
+  },
+  {
+    "source_id": "auth_system_srs",
+    "artifact_type": "srs",
+    "entity_type": "actor_role",
+    "content": "Unauthenticated Client",
+    "page_ref": "H1: 5. User Roles",
+    "confidence_score": 0.9
+  }
+]
