@@ -11,7 +11,7 @@ OLLAMA_HOST = "http://127.0.0.1:11434"
 MODEL_NAME  = "llama3.1:70b"
 TEMPERATURE = 0.0
 MAX_TOKENS  = 1200
-TIMEOUT     = 600
+TIMEOUT     = 1200
 
 TARGET_Q_H          = 0.78
 TARGET_Q_A          = 0.85
